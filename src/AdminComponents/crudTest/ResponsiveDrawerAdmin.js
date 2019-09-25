@@ -89,7 +89,7 @@ const listStyle={
   listStyle: 'none',
   color: 'none'
 }
-const ResponsiveDrawer = (props) => {
+const ResponsiveDrawerAdmin = (props) => {
   const { container } = props;
   const classes = useStyles();
   const theme = useTheme();
@@ -231,11 +231,11 @@ const ResponsiveDrawer = (props) => {
   );
 }
 
-ResponsiveDrawer.propTypes = {
+ResponsiveDrawerAdmin.propTypes = {
   container: PropTypes.instanceOf(typeof Element === 'undefined' ? Object : Element),
 };
 
-export default ResponsiveDrawer;
+export default ResponsiveDrawerAdmin;
 
 
 
