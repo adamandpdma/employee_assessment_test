@@ -8,7 +8,6 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
-import Axios from 'axios';
 
 import Typography from '@material-ui/core/Typography';
 
@@ -36,34 +35,103 @@ export default class TestDetails extends Component {
         open: false,
         termsAndConditionsError: "",
         time: '',
-        attemptsData: "",
+        attemptsData: '',
         testSubtype: "",
         noOfQnsData: "",
         resultId: '',
-        settingsId: []
+        settingsId: [],
+        i: 0 ,
+        dataTest: '',
+        attemptsDataTest: [],
+
+        
+        
   }
-  this.attemptsDataHandler = this.attemptsDataHandler.bind(this)
+  //this.attemptsDataHandler = this.attemptsDataHandler.bind(this)
 }
 
   componentDidMount() 
   {
     console.log(this.state.category)
 
-  // axios.get('http://localhost:5000/Test/')
   axios.get('http://192.168.200.200:8080/backendapi/admin/test-detail/type/'+ this.state.category)
         .then(res => {
             this.setState (
                 {
                     data: res.data
-                }
+                },
              )
+             console.log(res.data)
+            // console.log(this.state.data.map(setId => { return(setId.settingsId)}))
              this.setState(
               {
                 data: this.state.data.filter(el => el.isHidden === false),
+                settingsId: this.state.data.map(setId => { return(setId.settingsId)})
               }
           )
+          
+
+    //  for (let j = 0; j<this.state.settingsId.length; j++) {
+    //   //console.log(this.state.settingsId[j])
+    //   this.fetchData(this.state.settingsId[j])
+      
+    //  }
+    this.fetchData(this.state.settingsId)
+
+    // Promise.all(this.state.attemptsData).then(responses => responses.forEach(res => console.log(res)))
+
+    })
+    
+            
+  }
+
+
+    async fetchData(i) {
+
+      for (let j = 0; j<i.length; j++) {
+       
+        await axios.get('http://192.168.200.200:8080/backendapi/employee/10/tests/'+i[j]+'/attempts')
+        .then( res => { 
+        this.setState({
+          //attemptsData: res.data
+          attemptsData: this.state.attemptsData.concat(res.data)
+        //attemptsDataTest: this.state.attemptsData.prototype.concat(res.data)
+          
         })
-    }
+  
+        console.log(i)
+        //Promise.all(this.state.attemptsData).then(responses => responses.forEach(res => console.log(res)))
+        
+        }
+        )
+        
+       }
+      
+
+  }
+  
+ 
+ 
+
+    // componentDidUpdate=() => {
+         
+//       fetchData = (id) =>{
+//             axios.get('http://192.168.200.200:8080/backendapi/employee/10/tests/'+id+'/attempts')
+//               .then( res => { 
+//                 this.setState({
+//                   attemptsData: res.data
+//                   //attemptsData: this.state.attemptsData.concat(res.data)
+//                 })
+//               }
+//               )       
+//      return(<TableCell>{this.state.attemptsData}/2</TableCell>)
+//     //  console.log(this.state.attemptsData)
+ 
+// }
+    // }
+
+
+
     handleClickOpen = (testSubtypeName, timeValue, noOfQnsValue) => {
       this.setState(
           {
@@ -83,20 +151,10 @@ export default class TestDetails extends Component {
         }
       )
     }
-
-    attemptsDataHandler = (id) => {
-          axios.get('http://192.168.200.200:8080/backendapi/employee/10/tests/'+id+'/attempts')
-            .then( res => { 
-              this.setState({
-                attemptsData: res.data
-              })
-            }
-            )       
-     return(<TableCell>{this.state.attemptsData}/2</TableCell>)
-     
-    }   
+   
   
    render() {
+  
     const options = {
         selectableRows: false,
         filterType: "dropdown",
@@ -186,15 +244,22 @@ export default class TestDetails extends Component {
 
     <MUIDataTable 
         title={"Test Details"}
-        data={this.state.data.map(currentemp => {
+        data={this.state.data.map((currentemp, i) => {
             return [
                currentemp.testSubtype,
                currentemp.noOfQns,
                currentemp.timeLimit + "  "+ 'minutes',
-               this.attemptsDataHandler(currentemp.settingsId),
+               
+              // this.attemptsDataHandler(currentemp.settingsId),
                <TableCell>
                  <Button variant='contained' style={style} onClick={() => this.handleClickOpen(currentemp.testSubtype, currentemp.timeLimit, currentemp.noOfQns)}>Start</Button>
-                 </TableCell>
+                 </TableCell>,
+            this.state.attemptsData[i]
+
+            
+
+          
+               
                
             ]})}
 
@@ -207,3 +272,49 @@ export default class TestDetails extends Component {
   }
 }
 
+
+
+//attempts values 
+// do{
+//   console.log(this.state.settingsId[this.state.i])
+//       axios.get('http://192.168.200.200:8080/backendapi/employee/10/tests/'+this.state.settingsId[this.state.i]+'/attempts')
+//       .then( res => { 
+//       this.setState({
+//         //attemptsData: res.data
+//         attemptsData: this.state.attemptsData.concat(res.data)
+//        //attemptsDataTest: this.state.attemptsData.prototype.concat(res.data),
+       
+        
+//       })
+
+//       console.log(this.state.attemptsData)
+      
+//       }
+//       )
+//       this.state.i++
+//       }
+      
+//       while(this.state.i<this.state.settingsId.length)
+
+
+//async function
+// async fetchData(i) {
+//   //console.log(i)
+//   await axios.get('http://192.168.200.200:8080/backendapi/employee/10/tests/'+i+'/attempts')
+//   .then( res => { 
+//   this.setState({
+//     //attemptsData: res.data
+//     attemptsData: this.state.attemptsData.concat(res.data)
+//   //attemptsDataTest: this.state.attemptsData.prototype.concat(res.data)
+    
+//   })
+
+//   console.log(this.state.attemptsData,i)
+//   //Promise.all(this.state.attemptsData).then(responses => responses.forEach(res => console.log(res)))
+  
+//   }
+//   )
+
+// }
+
+  
