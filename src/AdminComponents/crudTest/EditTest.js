@@ -12,7 +12,6 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
   const fieldStyle = {
-    // marginLeft: "300px",
     width: "250px",
     display: 'flex',
           flexWrap: 'wrap'
@@ -54,7 +53,7 @@ class EditTest extends Component
      this.onSubmitHandler=this.onSubmitHandler.bind(this);
 
      this.state = {
-        //   testCat: this.props.location.aboutprops,
+ 
           testCat: '',
           testType:'',
           testSubtype:'',
@@ -73,8 +72,7 @@ class EditTest extends Component
      }
  }
 
-//  this.props.match.params.id
- componentDidMount() //loads right before anything loads on the page
+ componentDidMount() 
  {
         axios.get('http://192.168.200.200:8080/backendapi/admin/test-detail/id/'+this.state.id)
         .then(testByID => {
@@ -156,7 +154,7 @@ class EditTest extends Component
     axios.post("http://192.168.200.200:8080/backendapi/admin/test-detail/update",values)
     .then((res) => console.log(res.data))
     .then(this.handleClickOpen())
-    // window.location = '/viewTest';
+
 
  }
 }
@@ -183,7 +181,7 @@ class EditTest extends Component
       {
           return(
             <Grid>
-            <NavLink to='/Technical'><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 18 18">
+            <NavLink to='/admin/Technical'><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 18 18">
             <path d="M15 8.25H5.87l4.19-4.19L9 3 3 9l6 6 1.06-1.06-4.19-4.19H15v-1.5z"/></svg></NavLink><h3 style={textStyle}>EDIT TEST</h3>			
             </Grid>
           )
@@ -191,7 +189,7 @@ class EditTest extends Component
       else{
           return(
             <Grid>
-            <NavLink to='/NonTechnical'><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 18 18">
+            <NavLink to='/admin/NonTechnical'><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 18 18">
             <path d="M15 8.25H5.87l4.19-4.19L9 3 3 9l6 6 1.06-1.06-4.19-4.19H15v-1.5z"/></svg></NavLink><h3 style={textStyle}>EDIT TEST</h3>			
             </Grid>
           )
@@ -203,7 +201,7 @@ class EditTest extends Component
       {
           return(
             <Grid>
-            <NavLink to='/Technical'  style={buttonStyle}>
+            <NavLink to='/admin/Technical'  style={buttonStyle}>
             <Button onClick={this.handleClose} color="primary" autoFocus>
          OKAY
         </Button>
@@ -215,7 +213,7 @@ class EditTest extends Component
         {
             return(
                 <Grid>
-                <NavLink to='/NonTechnical'  style={buttonStyle}>
+                <NavLink to='/admin/NonTechnical'  style={buttonStyle}>
                 <Button onClick={this.handleClose} color="primary" autoFocus>
              OKAY
             </Button>
