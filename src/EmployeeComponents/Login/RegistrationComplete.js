@@ -5,7 +5,7 @@ import Button from "@material-ui/core/Button";
 import {Link} from 'react-router-dom';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import Logo from './OptimumLogo.jpeg'
+import Logo from '../../OptimumLogo.jpeg'
 import Emplogin from './EmployeeLogin'
 
 const useStyles = makeStyles(theme => ({

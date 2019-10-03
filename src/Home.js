@@ -132,7 +132,7 @@ const Home = () => {
     </svg>
     </footer>
 
-      </React.Fragment>
+      </React.Fragment> 
 
         
     )

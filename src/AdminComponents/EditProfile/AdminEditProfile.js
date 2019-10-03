@@ -22,6 +22,7 @@ import ChangePasswordInput from './AdminChangePassword'
 import Profile from './AdminProfile.js'
 import ChangeNameInput from './AdminChangeName'
 import { Button } from '@material-ui/core';
+import auth from "../../auth"
 
 
 const drawerWidth = 300;
@@ -93,10 +94,10 @@ const ResponsiveDrawer = (props) => {
     setMobileOpen(!mobileOpen);
   }
 
-  const handleLogout = () => {
-    localStorage.clear()
-    history.push('/')          
-  }
+  // const handleLogout = () => {
+  //   localStorage.clear()
+  //   history.push('/')          
+  // }
 
 //   window.addEventListener('beforeunload', (event) => {
 //     localStorage.clear()
@@ -176,7 +177,12 @@ const ResponsiveDrawer = (props) => {
         <Button
         color="inherit"
         type="submit"
-        onClick={handleLogout}
+        onClick={() => {
+          auth.logout(() => {
+            history.push("./")
+          })
+          localStorage.clear()
+        }}
         style={style}
         >
         <ExitToAppIcon />Log Out
