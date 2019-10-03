@@ -7,7 +7,7 @@ import { TextField, Typography } from '@material-ui/core';
 import '../../Form.css'
 import Popup from './HrForgotPassword'
 import withStyles from "@material-ui/core/styles/withStyles";
-import {Link} from 'react-router-dom';
+import {Link,NavLink} from 'react-router-dom';
 import auth from '../../auth'
 import Logo from '../../OptimumLogo.jpeg'
 
@@ -173,7 +173,8 @@ const form = withStyles(styles)(props => {
       margin="normal"
       fullWidth
       className = {classes.switch}>      
-     <Link to={`/`}>Switch User</Link>
+     <NavLink to={`/`}style={{color: 'lightBlue', textDecoration: 'none'}} activeStyle={{color: '#3f51b5', textDecoration: 'none'}}>
+       Switch User</NavLink>
       </Button>  
       </div>
       </Container>

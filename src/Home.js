@@ -6,6 +6,7 @@ import Popper from '@material-ui/core/Popper';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {Link} from 'react-router-dom';
 import Logo from './OptimumLogo.jpeg'
+import { NavLink } from 'react-router-dom'
 
 
 const useStyles = makeStyles(theme => ({
@@ -90,7 +91,8 @@ const Home = () => {
             variant="contained"
             className={classes.button}>
 
-        <LockOutlinedIcon /> <Link to={`./AdminLogin`}>Admin</Link> 
+        <LockOutlinedIcon /> <NavLink to={`./AdminLogin`} style={{color: 'black', textDecoration: 'none'}} activeStyle={{color: 'red', textDecoration: 'none'}}>
+          Admin</NavLink> 
         </Fab>   
 
         <Fab
@@ -100,7 +102,8 @@ const Home = () => {
             className={classes.button1}
             position="absolute"
           >
-        <LockOutlinedIcon /> <Link to={`./HrLogin`}>HR</Link> 
+        <LockOutlinedIcon /> <NavLink to={`./HrLogin`} style={{color: 'black', textDecoration: 'none'}} activeStyle={{color: 'red', textDecoration: 'none'}}>
+          HR</NavLink> 
         </Fab>   
         
         <Fab
@@ -109,7 +112,8 @@ const Home = () => {
             variant="contained"
             className={classes.button2}
             >
-        <LockOutlinedIcon /> <Link to={`./GuestLogin`}>Guest</Link> 
+        <LockOutlinedIcon /> <NavLink to={`./GuestLogin`} style={{color: 'black', textDecoration: 'none'}} activeStyle={{color: 'red', textDecoration: 'none'}}>
+          Guest</NavLink> 
         </Fab>   
         
         <Fab
@@ -117,7 +121,8 @@ const Home = () => {
             margin="normal"
             variant="contained"
             className={classes.button2}>
-        <LockOutlinedIcon /> <Link to={`./EmployeeLogin`}>Employee</Link> 
+        <LockOutlinedIcon /> <NavLink to={`./EmployeeLogin`}style={{color: 'black', textDecoration: 'none'}} activeStyle={{color: 'red', textDecoration: 'none'}}>
+          Employee</NavLink> 
         </Fab> 
       </Popper>
       </Container>

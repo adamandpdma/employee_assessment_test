@@ -78,8 +78,7 @@ class TestRows extends React.Component {
             count: 0
         }
     }
-
-   
+  
 rows = () => 
 {
     let rows = [];
