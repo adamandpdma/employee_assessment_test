@@ -7,8 +7,8 @@ import { TextField, Typography } from '@material-ui/core';
 import '../../Form.css'
 import withStyles from "@material-ui/core/styles/withStyles";
 import {Link} from 'react-router-dom';
-import auth from './auth'
-import Logo from './OptimumLogo.jpeg'
+import auth from '../../auth'
+import Logo from '../../OptimumLogo.jpeg'
 
 
 const styles = theme => ({

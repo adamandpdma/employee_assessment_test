@@ -6,14 +6,14 @@ import LockIcon from "@material-ui/icons/Lock";
 import Container from '@material-ui/core/Container';
 import { TextField, Typography } from '@material-ui/core';
 import '../../Form.css'
-import Logo from './OptimumLogo.jpeg'
+import Logo from '../../OptimumLogo.jpeg'
 import withStyles from "@material-ui/core/styles/withStyles";
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import {Link} from 'react-router-dom';
-import auth from './auth'
+import auth from '../../auth'
 
 
 

@@ -18,6 +18,7 @@ import Collapse from '@material-ui/core/Collapse';
 import {Link} from 'react-router-dom';
 import { Button } from '@material-ui/core';
 import GuestRegister from './GuestRegister'
+import auth from "../../auth"
 
 const drawerWidth = 300;
 
@@ -135,7 +136,12 @@ const ResponsiveDrawer = (props) => {
         <Button
         color="inherit"
         type="submit"
-        onClick={handleLogout}
+        onClick={() => {
+          auth.logout(() => {
+            history.push("./")
+          })
+          localStorage.clear()
+        }}
         style={style}
         >
         <ExitToAppIcon />Log Out

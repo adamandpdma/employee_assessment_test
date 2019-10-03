@@ -23,7 +23,7 @@ import { Typography, Button } from '@material-ui/core';
 import ChangePasswordInput from './HrChangePassword'
 import ChangeNameInput from './HrChangeName'
 import { useBeforeunload } from 'react-beforeunload';
-import auth from './auth';
+import auth from '../../auth'
 
 const drawerWidth = 300;
 
@@ -179,6 +179,7 @@ const ResponsiveDrawer = (props) => {
           auth.logout(() => {
             history.push("./")
           })
+          localStorage.clear()
         }}
         style={style}
         >
