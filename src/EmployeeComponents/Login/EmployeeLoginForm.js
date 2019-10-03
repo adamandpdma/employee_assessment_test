@@ -88,7 +88,7 @@ const employeeForm = withStyles(styles)(props => {
       <img src = {Logo}
       width="280" height="72"/>
 
-      <Link to={`./EmployeeRegisterInput`} 
+      <Link to={`./EmployeeRegister`} 
       style={{"position":"absolute","right":"0","paddingTop":"20px", "paddingRight":"40px", "color":"#65D2B5"}}>Register</Link> 
 
     {/* </svg> */}

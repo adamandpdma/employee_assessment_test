@@ -81,7 +81,7 @@ const useStyles = makeStyles(theme => ({
 }));
 const style = {
   //paddingLeft: "730px"
-  left:640
+  left:700
 }
 
 const ResponsiveDrawer = (props) => {
