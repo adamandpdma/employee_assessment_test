@@ -3,7 +3,6 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import axios from 'axios';
 import EmployeeLoginForm from "./EmployeeLoginForm";
-import './Home.css'
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 

@@ -10,6 +10,11 @@ class Auth {
         this.authenticated = true;
     }
 
+    // register() {
+       
+    //     this.authenticated = true;
+    // }
+
     logout(cb) {
         this.authenticated = false;
         localStorage.clear()

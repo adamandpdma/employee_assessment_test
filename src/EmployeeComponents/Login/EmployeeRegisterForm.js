@@ -5,10 +5,9 @@ import NameIcon from "@material-ui/icons/SupervisorAccount";
 import LockIcon from "@material-ui/icons/Lock";
 import Container from '@material-ui/core/Container';
 import { TextField, Typography } from '@material-ui/core';
-import './Form.css'
+import '../../Form.css'
 import Logo from './OptimumLogo.jpeg'
 import withStyles from "@material-ui/core/styles/withStyles";
-import './Home.css'
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';

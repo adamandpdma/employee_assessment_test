@@ -4,7 +4,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import LockIcon from "@material-ui/icons/Lock";
 import Container from '@material-ui/core/Container';
 import { TextField, Typography } from '@material-ui/core';
-import './Form.css'
+import '../../Form.css'
 import Popup from './HrForgotPassword'
 import withStyles from "@material-ui/core/styles/withStyles";
 import {Link} from 'react-router-dom';

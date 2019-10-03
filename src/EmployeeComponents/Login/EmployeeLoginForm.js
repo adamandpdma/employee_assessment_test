@@ -5,13 +5,13 @@ import NameIcon from "@material-ui/icons/SupervisorAccount";
 import LockIcon from "@material-ui/icons/Lock";
 import Container from '@material-ui/core/Container';
 import { TextField, Typography } from '@material-ui/core';
-import './Form.css'
+import '../../AdminComponents/Login/'
 import Popup from './EmployeeForgotPassword'
 import withStyles from "@material-ui/core/styles/withStyles";
 import {Link} from 'react-router-dom';
 import auth from './auth'
-import './Home.css'
 import Logo from './OptimumLogo.jpeg'
+import '../../Form.css'
 
 
 const styles = theme => ({
