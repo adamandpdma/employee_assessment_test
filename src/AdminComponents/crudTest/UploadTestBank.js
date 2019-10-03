@@ -143,7 +143,8 @@ class UploadTestBank extends Component
                   style={fieldStyle}
                   required 
                   onChange={this.categoryOnChangeHandler} 
-                  value={this.state.category}>
+                  value={this.state.category}
+                  >
               </TextField><br/>
               </FormControl><br/>
            
