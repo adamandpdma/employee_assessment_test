@@ -4,8 +4,8 @@ import * as Yup from "yup";
 import axios from 'axios';
 import EmployeeRegisterForm from './EmployeeRegisterForm'
 import './Home.css'
-import background from './OptimumBackground.png'
-
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 
 const emailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
@@ -60,10 +60,15 @@ submitValues = ({employeeid, email, employeeName, mobile, department}) => {
             this.props.history.push('./RegistrationComplete')          
           )}
       else{
-        alert('Invalid Details')
+        this.setState({open:true})
       }}
 );
 }
+
+handleClose = () => {
+  this.setState({open:false})
+}
+
 
   render() {
     const { employeeid } = this.state;
@@ -83,13 +88,21 @@ submitValues = ({employeeid, email, employeeName, mobile, department}) => {
 
     return (
       <React.Fragment>
-            <div><img className='bg' src={background} /></div>
             <Formik
               render={props => <EmployeeRegisterForm {...props} />}
               initialValues={values}
               validationSchema={validationSchema}
               onSubmit={this.submitValues}
             />
+            <Dialog
+            open={this.state.open}
+            onClose={this.handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+            >
+            <DialogTitle id="alert-dialog-title">{"Invalid Credentials, Please try again"}</DialogTitle>
+            </Dialog>
+
       </React.Fragment>
     );
   }

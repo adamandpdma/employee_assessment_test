@@ -1,21 +1,14 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
 import InputAdornment from "@material-ui/core/InputAdornment";
-import NameIcon from "@material-ui/icons/SupervisorAccount";
 import LockIcon from "@material-ui/icons/Lock";
 import Container from '@material-ui/core/Container';
 import { TextField, Typography } from '@material-ui/core';
 import './Form.css'
-import Logo from './OptimumLogo.jpeg'
 import withStyles from "@material-ui/core/styles/withStyles";
-import './Home.css'
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
 import {Link} from 'react-router-dom';
 import auth from './auth'
-
+import Logo from './OptimumLogo.jpeg'
 
 
 const styles = theme => ({
@@ -26,9 +19,7 @@ const styles = theme => ({
   button: {
     background: '#03f0fc',
     color: 'white',
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(2),
-
+    marginTop: theme.spacing(2),
   },
   typhography: {
     background: '#03f0fc',
@@ -44,36 +35,32 @@ const styles = theme => ({
      background: '#FFFFFF',
   },  
   container: {
-    // marginTop: theme.spacing(4),
+    marginTop: theme.spacing(4),
     background: '#FFFFFF',
     paddingLeft:"0px",
     paddingRight:"0px"
   },
+  switch:{
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2)
 
-  selectbox:{
-    backgroundColor: theme.palette.background.paper,
-    border: '1px solid #ced4da',
-    borderRadius: 4,
-  },
-  input:{
-    padding: "5px",
-  },
+  }
+
+
 });
-
-const bgStyle = {
+ const bgStyle = {
    
-  backgroundImage: "url('https://media.glassdoor.com/l/e6/d0/ec/63/reception.jpg')",
-  backgroundSize: "cover",
-  backgroundRepeat: "no-repeat",
-  width: window.innerWidth,
-  height: window.innerHeight,
-  paddingTop:"10px"
-}
+     backgroundImage: "url('https://media.glassdoor.com/l/e6/d0/ec/63/reception.jpg')",
+     backgroundSize: "cover",
+     backgroundRepeat: "no-repeat",
+     width: window.innerWidth,
+     height: window.innerHeight,
+     paddingTop:"20px"
+ }
 
-
-const employeeForm = withStyles(styles)(props => {
+const form = withStyles(styles)(props => {
   const {
-    values: { employeeid, email, employeeName, mobile, department},
+    values: { employeeid, Password, },
     errors,
     touched,
     handleSubmit,
@@ -82,22 +69,10 @@ const employeeForm = withStyles(styles)(props => {
     classes
   } = props;
 
-  const [open, setOpen] = React.useState(false);
-
-  const handleClose= () => {
-    setOpen(false);
-  }
-
-  const handleOpen = () => {
-    setOpen(true);
-  }
-
-const change = (name, e) => {
+  const change = (name, e) => {
     handleChange(e);
     setFieldTouched(name, true, false);
   };
-
-
 
 
   return (
@@ -109,59 +84,32 @@ const change = (name, e) => {
       <img src = {Logo}
       width="280" height="72"/>
 
-      <Link to={`./EmployeeLogin`} 
-      style={{"position":"absolute","right":"0","paddingTop":"20px", "paddingRight":"40px", "color":"#65D2B5"}}>Back to Login</Link> 
 
     {/* </svg> */}
     </header>
     <Container style={bgStyle}>
-    <form onSubmit={handleSubmit}>
 
+
+    {/* <Box
+        position="absolute"
+        top = {-5}
+        right="3%"    > 
+    <Link to={`./EmployeeRegisterInput`}>Register</Link> 
+    </Box>    */}
+    <form onSubmit={handleSubmit}>
     <Container
     style={{borderRadius: '10px'}}
     className = {classes.container}
     component="main" 
     maxWidth="xs"
     borderRadius={16}>
-
       <div>
       <Typography variant = "h4"
       className = {classes.typhography}>            
-      Employee Register Page
+      Guest Sign In
       </Typography>
       </div>
-
       <Container>
-      <div>
-      <FormControl
-              variant="outlined"
-              margin="normal"
-              fullWidth
-              className={classes.selectbox}
-      >
-        <InputLabel >Department</InputLabel>
-        <Select
-        className= {classes.input}
-          open={open}
-          onClose={handleClose}
-          onOpen={handleOpen}
-          value={department}
-          helperText={touched.department ? errors.department : ""}
-          error={touched.department && Boolean(errors.department)}  
-          onChange={change.bind(null, "department")}
-          name= 'department'
-          id= 'department'
-        >
-          <MenuItem value="">
-            <em>None</em>
-          </MenuItem>
-          <MenuItem value={"HR"}>HR</MenuItem>
-          <MenuItem value={"Developer"}>Developer</MenuItem>
-          <MenuItem value={"Manager"}>Manager</MenuItem>
-        </Select>
-      </FormControl>
-      </div>
-
       <div>
       <TextField
       input type = "number"
@@ -180,54 +128,25 @@ const change = (name, e) => {
 
       <div>
       <TextField
-        id="employeeName"
-        name="employeeName"
-        helperText={touched.employeeName ? errors.employeeName : ""}
-        error={touched.employeeName && Boolean(errors.employeeName)}
-        label="Full Name"
-        value={employeeName}
-        onChange={change.bind(null, "employeeName")}
+        id="Password"
+        name="Password"
+        helperText={touched.Password ? errors.Password : ""}
+        error={touched.Password && Boolean(errors.Password)}
+        label="Password"
         variant="outlined"
         margin="normal"
         fullWidth
-      />
-      </div>
+        type="Password"
+        value={Password}
+        onChange={change.bind(null, "Password")}
 
-
-      <div>
-      <TextField
-        id="email"
-        name="email"
-        helperText={touched.email ? errors.email : ""}
-        error={touched.email && Boolean(errors.email)}
-        label="Email"
-        variant="outlined"
-        margin="normal"
-        fullWidth
-        type="email"
-        value={email}
-        onChange={change.bind(null, "email")}
       />
       </div>
 
       <div>
-      <TextField
-      input type = "number"
-        id="mobile"
-        name="mobile"
-        helperText={touched.mobile ? errors.mobile : ""}
-        error={touched.mobile && Boolean(errors.mobile)}
-        label="Mobile"
-        value={mobile}
-        onChange={change.bind(null, "mobile")}
-        variant="outlined"
-        margin="normal"
-        fullWidth
-      />
-      </div>
-
-      <div>
-      <Button
+      <Button onClick={() => {
+        auth.login()
+      }}
         id = "Button"
         type="submit"
         margin="normal"
@@ -235,12 +154,25 @@ const change = (name, e) => {
         variant="contained"
         className = {classes.button}
       >
-        <LockIcon /> Register
+    <LockIcon />  Sign In
       </Button>
+      </div>
+
+      <div>
+    
+      </div>
+      
+      <div>
+      <Button
+      margin="normal"
+      fullWidth
+      className = {classes.switch}>      
+     <Link to={`/`}>Switch User</Link>
+      </Button>  
       </div>
       </Container>
       </Container>
-    </form>   
+    </form>
     </Container>
     <footer style={{"backgroundColor": "black"}}>
       <svg xmlns="http://www.w3.org/2000/svg" width= 'window.innerWidth' height="72" viewBox="0 0 515.456 72">
@@ -251,9 +183,9 @@ const change = (name, e) => {
       </g>
     </svg>
     </footer>
-
     </React.Fragment>
   );
 })
 
-export default employeeForm
+
+export default form

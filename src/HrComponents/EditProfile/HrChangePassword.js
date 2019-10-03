@@ -1,8 +1,11 @@
 import React, { useContext, Component } from "react";
 import { Formik } from "formik";
-import  ChangePassword  from "./ChangePassword";
+import  ChangePassword  from "../../AdminComponents/EditProfile/ChangePasswordForm";
 import * as Yup from "yup";
 import axios from "axios";
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
 
 const alphanumeric = /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1}).*$/
 
@@ -27,13 +30,16 @@ class InputForm extends Component {
     super(props);
     this.state = {
       Password: "",
-      newPassword: ""
+      newPassword: "",
+      message:false,
+      errorMessage:false
+
   };
   }
  
   submitValues = ({Password,newPassword,retypePassword}) => {
 
-    const empid = localStorage.getItem('employeeid')
+    const hrId = localStorage.getItem('employeeid')
     const postData = {
       
     }
@@ -46,18 +52,25 @@ class InputForm extends Component {
     console.log(postValue)
 
 
-    axios.post('http://192.168.200.200:8080/backendapi/employee/'+empid+'/update-profile-password', postData, postValue)
+    axios.post('http://192.168.200.200:8080/backendapi/human-resources/'+hrId+'/profile-password', postData, postValue)
     .then((res => {
       console.log(res.data)
      { if (res.data === true) {
         return (
-        alert('Password has been changed')      
-        )}
+          this.setState({message:true})
+          )}
       else{
-        alert('Current Password is invalid')
+        this.setState({errorMessage:true})
       }}
     }))    
   }
+
+  handleClose = () => {
+    this.setState({message:false})
+    this.setState({errorMessage:false})
+
+  }
+
 
   render() {
     const values = {
@@ -65,6 +78,10 @@ class InputForm extends Component {
       newPassword: "",
       retypePassword: "",
     };
+    const handleClose = this.handleClose
+    const message = this.state.message
+    const errorMessage = this.state.errorMessage
+
 
     return (
       <React.Fragment>        
@@ -74,6 +91,24 @@ class InputForm extends Component {
               validationSchema={validationSchema}
               onSubmit={this.submitValues}
             />
+            <Dialog
+            open={message}
+            onClose={handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+            >
+            <DialogTitle id="alert-dialog-title">{"Password has been changed"}</DialogTitle>
+      </Dialog>
+      
+      <Dialog
+            open={errorMessage}
+            onClose={handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+            >
+            <DialogTitle id="alert-dialog-title">{"Current password is invalid!"}</DialogTitle>
+      </Dialog>
+
       </React.Fragment>
     );
   }

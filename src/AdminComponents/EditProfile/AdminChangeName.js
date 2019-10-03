@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import { Formik } from "formik";
-import  ChangeName  from "./ChangeName";
+import  ChangeName  from "./ChangeNameForm";
 import * as Yup from "yup";
 import axios from 'axios';
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
 
 const validationSchema = Yup.object({
     name: Yup.string("")
@@ -15,6 +18,8 @@ class InputForm extends Component {
     super(props);
     this.state = {
         name: "",
+        message:false,
+        errorMessage:false
     };
   }
 
@@ -32,17 +37,26 @@ class InputForm extends Component {
         console.log(res.data)
        { if (res.data === true) {
           return (
-            alert('Name has been changed')      
-          )}}
+            this.setState({message:true})
+            )}}
       }))
     }
     else{
-      alert("Name same as current name")
+      this.setState({errorMessage:true})
     }
   };
   
+  handleClose = () => {
+    this.setState({message:false})
+    this.setState({errorMessage:false})
+
+  }
+
   render() {
     const classes = this.props;
+    const handleClose = this.handleClose
+    const message = this.state.message
+    const errorMessage = this.state.errorMessage
     const values = {
       name: "",
     };
@@ -55,6 +69,24 @@ class InputForm extends Component {
               validationSchema={validationSchema}
               onSubmit={this.submitValues}
             />
+            <Dialog
+            open={message}
+            onClose={handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+            >
+            <DialogTitle id="alert-dialog-title">{"Name has been changed"}</DialogTitle>
+      </Dialog>
+      
+      <Dialog
+            open={errorMessage}
+            onClose={handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+            >
+            <DialogTitle id="alert-dialog-title">{"Name is same as current name!"}</DialogTitle>
+      </Dialog>
+
       </React.Fragment>
     );
   }

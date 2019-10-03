@@ -18,12 +18,11 @@ import Collapse from '@material-ui/core/Collapse';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import {Link} from 'react-router-dom';
-import Profile from './ProfileEmployee'
+import Profile from './HrProfile'
 import { Typography, Button } from '@material-ui/core';
-import ChangePasswordInput from './ChangePasswordInputEmployee'
-import ChangeNameInput from './ChangeNameInputEmployee'
+import ChangePasswordInput from './HrChangePassword'
+import ChangeNameInput from './HrChangeName'
 import { useBeforeunload } from 'react-beforeunload';
-import EmployeeQuiz from './EmployeeQuiz'
 import auth from './auth';
 
 const drawerWidth = 300;
@@ -82,7 +81,7 @@ const useStyles = makeStyles(theme => ({
 }));
 const style = {
   //paddingLeft: "730px"
-  left:730
+  left:680
 }
 const ResponsiveDrawer = (props) => {
   const { container,history } = props;
@@ -228,7 +227,6 @@ const ResponsiveDrawer = (props) => {
         <Grid container spacing={3}>
         <Grid item xs={6}>  
         <ChangePasswordInput/> 
-        {/* {/* <EmployeeQuiz/> */}
         </Grid>
         <Grid item xs={6}>
         <ChangeNameInput/>

@@ -6,6 +6,9 @@ import Link from '@material-ui/core/Link';
 import { TextField } from "@material-ui/core";
 import Modal from '@material-ui/core/Modal';
 import axios from 'axios'
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -37,7 +40,8 @@ const Popup = () => {
 const classes = useStyles();
 
 const [open, setOpen] = useState(false);
-const [Message, setMessage] = useState(false);
+const [message, setMessage] = useState(false);
+const [errorMessage, setErrorMessage] = useState(false);
 const [email, setEmail] = useState("");
 
 const handleOpen = () => {
@@ -47,26 +51,36 @@ const handleOpen = () => {
 const handleClose = () => {
     setOpen(false);
     setMessage(false);
+    setErrorMessage(false);
   }
 
 const handleUserInput = (e) => {
     setEmail(e.target.value)
   }
 
-const handleSubmit = (event,email) =>{
+const handleSubmit = (e) =>{
 
-  const postValue ={
-    email:email
-    }
+  console.log(email)
+  const postValue = {
+    department: "",
+    email: email,
+    humanResourceId: "",
+    isActive: true,
+    isApproved: true,
+    mobileNo: "",
+    name: "",
+    password: "",
+    profileImg: ""
+  }
 
-    axios.post('http://192.168.200.200:8080/backendapi/employee/forgot-password', postValue)
+    axios.post('http://192.168.200.200:8080/backendapi/human-resources/forgot-password', postValue)
     .then((res => {
       console.log(res.data)
      { if (res.data === true) {
       setMessage(true);
     }
       else{
-        alert('Invalid Email')
+      setErrorMessage(true);
       }}
     }))    
   }
@@ -112,18 +126,25 @@ const handleSubmit = (event,email) =>{
       </Modal>
       </div>  
 
-    <div>
-      <Modal
-      open = {Message}
-      onClose={handleClose}
-      className={classes.modal}>
-        <Typography
-        fullWidth
-        className={classes.paper}>
-          An email has been sent you!
-        </Typography>
-      </Modal>
-      </div>
+    
+      <Dialog
+            open={message}
+            onClose={handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+            >
+            <DialogTitle id="alert-dialog-title">{"An email has been send to you!"}</DialogTitle>
+      </Dialog>
+      
+      <Dialog
+            open={errorMessage}
+            onClose={handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+            >
+            <DialogTitle id="alert-dialog-title">{"Invalid Email, Please try again"}</DialogTitle>
+      </Dialog>
+  
 </React.Fragment>
   );
 }

@@ -18,12 +18,10 @@ import Collapse from '@material-ui/core/Collapse';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import {Link} from 'react-router-dom';
-import ChangePasswordInput from './ChangePasswordInput'
-import Profile from './Profile.js'
-import ChangeNameInput from './ChangeNameInput'
-import UploadTest from './UploadTest'
-import { Typography, Button } from '@material-ui/core';
-import {ProtectedRoute} from "./Protected.Route";
+import ChangePasswordInput from './AdminChangePassword'
+import Profile from './AdminProfile.js'
+import ChangeNameInput from './AdminChangeName'
+import { Button } from '@material-ui/core';
 
 
 const drawerWidth = 300;

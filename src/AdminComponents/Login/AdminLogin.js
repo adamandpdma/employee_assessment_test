@@ -1,11 +1,10 @@
 import React, {createContext, Component } from "react";
 import { Formik } from "formik";
-import withStyles from "@material-ui/core/styles/withStyles";
-import  Form  from "./Form";
+import  AdminLoginForm  from "./AdminLoginForm";
 import * as Yup from "yup";
 import axios from 'axios';
-import './Home.css'
-import background from './OptimumBackground.png'
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 const validationSchema = Yup.object({
   employeeid: Yup.string("Enter your Id")
@@ -21,7 +20,7 @@ class InputForm extends Component {
     super(props);
     this.state = {
       Id: "",
-      auth:false
+      open:false
     };
   }
 
@@ -44,11 +43,11 @@ const adminId = employeeid;
           return (
             localStorage.setItem('employeeid', employeeid),
             localStorage.setItem('password', Password),
-            this.props.history.push('./EditProfile')          
+            this.props.history.push('./AdminEditProfile')          
           )}
       else{
-        alert("Invalid")
-
+        return(
+        this.setState({open:true}))
     }}
     }))
 
@@ -61,8 +60,11 @@ const adminId = employeeid;
 //           return (this.props.history.push("./EditProfile"))
 //         }}
 // );
+ 
+}
 
-
+handleClose = () => {
+  this.setState({open:false})
 }
 
   render() {
@@ -76,13 +78,20 @@ const adminId = employeeid;
 
     return (
       <React.Fragment>
-                    <div><img className='bg' src={background} /></div>
             <Formik
-              render={props => <Form {...props} />}
+              render={props => <AdminLoginForm {...props} />}
               initialValues={values}
               validationSchema={validationSchema}
               onSubmit={this.submitValues}
             />
+            <Dialog
+            open={this.state.open}
+            onClose={this.handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+            >
+            <DialogTitle id="alert-dialog-title">{"Invalid Credentials, Please try again"}</DialogTitle>
+            </Dialog>
       </React.Fragment>
     );
   }

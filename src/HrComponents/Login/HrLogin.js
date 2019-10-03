@@ -1,11 +1,11 @@
 import React, {createContext, Component } from "react";
 import { Formik } from "formik";
+import  HrLoginForm  from "./HrLoginForm";
 import * as Yup from "yup";
 import axios from 'axios';
-import EmployeeLoginForm from "./EmployeeLoginForm";
-import './Home.css'
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
+
 
 const validationSchema = Yup.object({
   employeeid: Yup.string("Enter your Id")
@@ -16,7 +16,7 @@ const validationSchema = Yup.object({
     .required("Enter your password"),
 });
 
-class employeeLogin extends Component {
+class InputForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,36 +27,49 @@ class employeeLogin extends Component {
 
 
   
-  submitValues = ({employeeid,Password,event}) => {
+submitValues = ({employeeid,Password,}) => {
 
 
-    const postValue ={
-      employeeId: employeeid,
-      password: Password
-    }
-  
-  const empid = employeeid;
-  
-    axios.post('http://192.168.200.200:8080/backendapi/employee/' + empid + "/login", postValue)
-        .then(res =>
-         { if (res.data === true) {
-            return (
-              localStorage.setItem('employeeid', employeeid),
-              localStorage.setItem('password', Password),
-              this.props.history.push('./EmployeeEditProfile')          
-            )}
-        else{
-          console.log(postValue)
-          console.log(res.data)
-          this.setState({open:true})
-        }}
-  );
+  const postValue ={
+    hrId: employeeid,
+    password: Password
   }
 
-  handleClose = () => {
-    this.setState({open:false})
-  }
-  
+const hrId = employeeid;
+
+  axios.post('http://192.168.200.200:8080/backendapi/human-resources/' + hrId + "/login", postValue)
+      .then((res => {
+        console.log(res.data)
+       { if (res.data === true) {
+          return (
+            localStorage.setItem('employeeid', employeeid),
+            localStorage.setItem('password', Password),
+            this.props.history.push('./HrEditProfile')          
+          )}
+      else{
+        this.setState({open:true})
+
+    }}
+    }))
+
+// const admin_id = employeeid;
+
+
+//   axios.post('http://192.168.200.200:8080/backendapi/admin/' + admin_id + "/login")
+//       .then(res => 
+//         {if (res = true) {
+//           return (this.props.history.push("./EditProfile"))
+//         }}
+// );
+
+
+}
+
+handleClose = () => {
+  this.setState({open:false})
+}
+
+
   render() {
     const { employeeid } = this.state;
     const { Password } = this.state;
@@ -69,7 +82,7 @@ class employeeLogin extends Component {
     return (
       <React.Fragment>
             <Formik
-              render={props => <EmployeeLoginForm {...props} />}
+              render={props => <HrLoginForm {...props} />}
               initialValues={values}
               validationSchema={validationSchema}
               onSubmit={this.submitValues}
@@ -88,4 +101,4 @@ class employeeLogin extends Component {
   }
 }
 
-export default employeeLogin;
+export default InputForm;

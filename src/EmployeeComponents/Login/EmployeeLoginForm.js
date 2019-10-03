@@ -6,12 +6,9 @@ import LockIcon from "@material-ui/icons/Lock";
 import Container from '@material-ui/core/Container';
 import { TextField, Typography } from '@material-ui/core';
 import './Form.css'
-import Popup from './ForgotPassword'
+import Popup from './EmployeeForgotPassword'
 import withStyles from "@material-ui/core/styles/withStyles";
 import {Link} from 'react-router-dom';
-import EmployeeRegisterInput from './EmployeeRegisterInput'
-import Box from '@material-ui/core/Box';
-import './Home.css'
 import auth from './auth'
 import './Home.css'
 import Logo from './OptimumLogo.jpeg'
@@ -24,14 +21,17 @@ const styles = theme => ({
   }, 
   button: {
     background: '#03f0fc',
+    color: 'white',
+    marginTop: theme.spacing(2),
   },
   typhography: {
     background: '#03f0fc',
-    borderRadius: 10,
     textAlign: "center",
-    // padding: "0px 10px 0px 10px",
-    wdith: '100%'
-    
+    wdith: '100%',
+    color: 'white',
+    paddingTop:"24px",
+    paddingBottom:"24px",
+    marginBottom: theme.spacing(1),
 
     },
   navbar:{
@@ -40,6 +40,13 @@ const styles = theme => ({
   container: {
     marginTop: theme.spacing(4),
     background: '#FFFFFF',
+    paddingLeft:"0px",
+    paddingRight:"0px"
+  },
+  switch:{
+    marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2)
+
   },
   register: {
     left:640
@@ -53,7 +60,7 @@ const styles = theme => ({
      backgroundRepeat: "no-repeat",
      width: window.innerWidth,
      height: window.innerHeight,
-     paddingTop:"100px"
+     paddingTop:"20px"
  }
 
 const employeeForm = withStyles(styles)(props => {
@@ -106,9 +113,10 @@ const employeeForm = withStyles(styles)(props => {
       <div>
       <Typography variant = "h4"
       className = {classes.typhography}>            
-      Employee Login Page
+      Employee Sign In
       </Typography>
       </div>
+      <Container>
       <div>
       <TextField
       input type = "number"
@@ -122,13 +130,6 @@ const employeeForm = withStyles(styles)(props => {
         variant="outlined"
         margin="normal"
         fullWidth
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <NameIcon />
-            </InputAdornment>
-          )
-        }}
       />
       </div>
 
@@ -145,13 +146,7 @@ const employeeForm = withStyles(styles)(props => {
         type="Password"
         value={Password}
         onChange={change.bind(null, "Password")}
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <LockIcon />
-            </InputAdornment>
-          )
-        }}
+
       />
       </div>
 
@@ -170,25 +165,24 @@ const employeeForm = withStyles(styles)(props => {
         fullWidth
         variant="contained"
         className = {classes.button}
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position="start">
-              <LockIcon />
-            </InputAdornment>
-          )
-        }}
       >
-        Login
+    <LockIcon />  Sign In
       </Button>
+      </div>
+
+      <div>
+    
       </div>
       
       <div>
       <Button
       margin="normal"
-      fullWidth>      
+      fullWidth
+      className = {classes.switch}>      
      <Link to={`/`}>Switch User</Link>
       </Button>  
       </div>
+      </Container>
       </Container>
     </form>
     </Container>
