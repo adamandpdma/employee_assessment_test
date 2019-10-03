@@ -5,7 +5,6 @@ import Container from '@material-ui/core/Container';
 import Popper from '@material-ui/core/Popper';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {Link} from 'react-router-dom';
-import './Home.css'
 import Logo from './OptimumLogo.jpeg'
 
 
