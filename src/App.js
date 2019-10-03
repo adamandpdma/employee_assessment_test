@@ -1,17 +1,17 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import AdminLogin from './AdminLogin'
-import HrLogin from './HrLogin'
-import EmployeeLogin from './EmployeeLogin'
-import GuestLogin from './GuestLogin'
-import GuestDashboard from './GuestDashboard'
-import AdminEditProfile from './AdminEditProfile'
-import EmployeeRegister from './EmployeeRegister'
-import RegistrationComplete from './RegistrationComplete'
-import EmployeeEditProfile from './EmployeeEditProfile'
+import AdminLogin from './AdminComponents/Login/AdminLogin'
+import HrLogin from './HrComponents/Login/HrLogin'
+import EmployeeLogin from './EmployeeComponents/Login/EmployeeLogin'
+import GuestLogin from './GuestComponents/Login/GuestLogin'
+import GuestDashboard from './GuestComponents/Register/GuestDashboard'
+import AdminEditProfile from './AdminComponents/EditProfile/AdminEditProfile'
+import EmployeeRegister from './EmployeeComponents/Login/EmployeeRegister'
+import RegistrationComplete from './EmployeeComponents/Login/RegistrationComplete'
+import EmployeeEditProfile from './EmployeeComponents/EditProfile/EmployeeEditProfile'
 import {ProtectedRoute} from "./Protected.Route"
-import HrEditProfile from './HrEditProfile'
+import HrEditProfile from './HrComponents/EditProfile/HrEditProfile'
 import Home from './Home'
 
 
