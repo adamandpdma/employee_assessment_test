@@ -7,14 +7,17 @@ import {NavLink} from 'react-router-dom';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Grid from '@material-ui/core/Grid';
 import DialogContent from '@material-ui/core/DialogContent';
-import Axios from 'axios';
+
 import Typography from '@material-ui/core/Typography';
+import Start from '../start.png'
+
 
 
 const style ={
     textDecoration: "none",
-    width: "50px",
+    width: "100px",
     margin: '10px',
     borderRadius: "30px",
     fontSize: "10px"
@@ -23,7 +26,7 @@ const navStyle = {
   textDecoration: "none",
 }
 
-export default class TestDetails extends Component {
+export default class ViewTestDetails extends Component {
   constructor(props) {
     super(props);
 
@@ -35,52 +38,68 @@ export default class TestDetails extends Component {
         open: false,
         termsAndConditionsError: "",
         time: '',
-        attemptsData: "",
+        attemptsData: '',
         testSubtype: "",
         noOfQnsData: "",
         resultId: '',
         settingsId: [],
-        openStart: false,
+        i: 0 ,
+        dataTest: '',
+        attemptsDataTest: [],
+        openStart: false
+
+        
+        
   }
-  this.handleClickOpen = this.handleClickOpen.bind(this)
 }
 
   componentDidMount() 
   {
-    console.log(this.state.category)
-
+  console.log(this.state.category)
   axios.get('http://192.168.200.200:8080/backendapi/admin/test-detail/category/Non-Technical')
         .then(res => {
             this.setState (
                 {
                     data: res.data
-                }
+                },
              )
+             console.log(res.data)
              this.setState(
               {
                 data: this.state.data.filter(el => el.isHidden === false),
               }
-          )
-        })
-    }
-    toggle (element){
-      sessionStorage.setItem(element.target.id,JSON.stringify(true))
-    }
-    handleClickOpen = (testSubtypeName, timeValue, noOfQnsValue, element) => {
-      this.setState(
-          {
-              open: true,
-              testSubtype: testSubtypeName,
-              time: timeValue,
-              noOfQnsData: noOfQnsValue,
-          }
-      )
-      console.log(this.state.settingsId)
+          )    
+   }
+   ) 
+  }
 
-    sessionStorage.setItem(element.target.id,JSON.stringify(true))
+  
+ 
+    handleClickOpen = (testSubtypeName, timeValue, noOfQnsValue,element) => {
+     
+     axios.get('http://192.168.200.200:8080/backendapi/guest/368/tests/'+testSubtypeName.replace(" ", "%20"))
+     .then(res => { 
+       console.log(res.data)
+     this.setState(
+       {
+         resultId: res.data.resultId,
+         correctAns: res.data.correctAns,
+         employeeId: res.data.employeeId,
+         guestId: res.data.guestId,
+         score: res.data.score,
+         settingsId: res.data.settingsId,
+         userQnsIds: res.data.userQnsIds,
+         open: true,
+         testSubtype: testSubtypeName,
+         time: timeValue,
+         noOfQnsData: noOfQnsValue     
+       }
+     )
+     console.log(this.state.resultId+"RESULT ID GUEST")})
+
+     sessionStorage.setItem(element.target.id,JSON.stringify(true))
     }
-
-
+ 
     handleClose = () => {
       this.setState(
         {
@@ -88,21 +107,30 @@ export default class TestDetails extends Component {
         }
       )
     }
-    checkedHandler = () => {
+
+   checkedHandler = () => {
       this.setState(
         {
           openStart: true
         }
       )
    }
+
    startTest = () => {
      if(this.state.openStart === true)
      {
       return(
-        <NavLink to={{pathname: '/guest/takeTest', 
-        testSubtypeData: this.state.testSubtype, 
-        timeData: this.state.time,
-        buttonDisable:this.state.buttonDisable }}  style={navStyle}>
+        <NavLink to={{pathname: '/takeTest', 
+        testSubtypeData: this.state.testSubtype,
+         timeData: this.state.time,
+         resultId: this.state.resultId,
+         correctAns: this.state.correctAns,
+         employeeId: this.state.employeeId,
+         guestId: this.state.guestId,
+         score: this.state.score,
+         settingsId: this.state.settingsId,
+         userQnsIds: this.state.userQnsIds
+          }}  style={navStyle}>
           <Button variant="contained" color="#707070">
          START TEST
        </Button>
@@ -110,28 +138,30 @@ export default class TestDetails extends Component {
        )
      }
    }
-
    displayButtons = (id,testSubtype, 
     timeLimit, noOfQns) => {
     if (sessionStorage.getItem(id)) {
         return (
-            <Button className="btn"  id={id}  
+            <img src={Start} className="btn"  id={id}  
             onClick={(element) => this.handleClickOpen(testSubtype, 
               timeLimit, noOfQns,element)} 
-               variant="contained" disabled={true}>START</Button>
+               variant="contained" 
+               disabled={true}
+               style={{"height": "35px"}}></img>
         
         )
     } else {
         return (
-            <Button className="btn"  id={id}  
+            <img  src={Start}  className="btn"  id={id}  
             onClick={(element) => this.handleClickOpen(testSubtype, 
               timeLimit, noOfQns,element)} 
-           variant="contained">START</Button>
+           variant="contained" style={{"height": "35px"}}></img>
         
         )
     }
 }
    render() {
+  
     const options = {
         selectableRows: false,
         filterType: "dropdown",
@@ -145,27 +175,34 @@ export default class TestDetails extends Component {
         
       const columns = [
           {
-          name: "Test Name",
+          name: "Test Type",
           options: {
               filter: true,
           }
         },
         {
-          name: "Number of Questions",
+          name: "Test SubType",
           options: {
             filter: false,
           
           }
         },
         {
-          name: "Time Limit",   
+          name: "No of Questions",   
+          options: {
+            filter: false,
+           
+          }
+        },
+        {
+          name: "Time Limit",
           options: {
             filter: false,
            
           }
         },
       {
-        name: "Result",
+        name: "",
         options: {
           filter: false,
     
@@ -202,26 +239,26 @@ export default class TestDetails extends Component {
             
           </Typography>
         </DialogContent>
-        <DialogActions>
-        {this.startTest()}
+        <DialogActions>  
+          {this.startTest()}      
         </DialogActions>
       </Dialog>
 
     <MUIDataTable 
         title={"Test Details"}
-        data={this.state.data.map(currentemp => {
+        data={this.state.data.map((currentemp, i) => {
             return [
+               currentemp.testType,
                currentemp.testSubtype,
                currentemp.noOfQns,
                currentemp.timeLimit + "  "+ 'minutes',
                <TableCell>
-                {this.displayButtons(currentemp.settingsId,
-                currentemp.testSubtype, 
-              currentemp.timeLimit,
-               currentemp.noOfQns)}
-                 </TableCell>
-               
-            ]})}
+              {this.displayButtons(currentemp.settingsId,
+              currentemp.testSubtype, 
+            currentemp.timeLimit,
+             currentemp.noOfQns)}
+               </TableCell>
+                     ]})}
 
         columns={columns}
         options={options}

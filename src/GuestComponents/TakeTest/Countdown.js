@@ -61,6 +61,7 @@ class Countdown extends Component
            if(this.state.counter === -1)
            {
                alert("Time out")
+               window.location='/guest/ViewTestDetails'
            }
         }, 1000);
     }

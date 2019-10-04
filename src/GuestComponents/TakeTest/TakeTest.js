@@ -7,6 +7,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
+import '../App.css';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import { createMuiTheme } from "@material-ui/core";
@@ -15,6 +16,7 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import {NavLink} from 'react-router-dom';
+import Grid from '@material-ui/core/Grid';
 
 
 
@@ -60,8 +62,7 @@ class TakeTest extends React.Component {
     userAns: '',
     correctAnswer: '',
     qnsId: [],
-    testSubtypeValue: this.props.testSubtypeValue.replace(" ", "%20"),
-    resultId: 0,
+    resultId: this.props.resultId,
     employeeId: 0,
     guestId: 0,
     score: 0,
@@ -70,31 +71,14 @@ class TakeTest extends React.Component {
     correctAns: '',
     disabled: true,
     alignment: '',
-    buttonDisable: true
   };
 
 
 
   loadQuizData = () => {
-   console.log(this.state.testSubtypeValue)
-     Axios.get('http://192.168.200.200:8080/backendapi/guest/'+localStorage.getItem("GuestId")+'/tests/'+this.state.testSubtypeValue)
-    .then(res => { 
-      console.log(res.data)
-    this.setState(
-      {
-        resultId: res.data.resultId,
-        correctAns: res.data.correctAns,
-        employeeId: res.data.employeeId,
-        guestId: res.data.guestId,
-        score: res.data.score,
-        settingsId: res.data.settingsId,
-        userQnsIds: res.data.userQnsIds,
-     
-      }
-    )
-    console.log(this.state.resultId)
-    Axios.get('http://192.168.200.200:8080/backendapi/guest/'+localStorage.getItem("GuestId")+'/tests/'+this.state.resultId+'/question-list')
-    // Axios.get('http://192.168.200.200:8080/backendapi/employee/1111/tests/81/question-list')
+
+    console.log(this.state.resultId + "guest enter Id")
+    Axios.get('http://192.168.200.200:8080/backendapi/guest/368/tests/'+this.state.resultId+'/question-list')
     .then(res => { 
       this.setState(() => {
             return {
@@ -107,21 +91,18 @@ class TakeTest extends React.Component {
           console.log(this.state.resultId)
     })
     .catch(res => { 
-      alert("NO TESTS AVAILABLE")
-      window.location='/guest/ViewTestDetails'
-    });
-    })
-   
+      alert("NO TESTS AVAILABLE !")
+      window.location='/ViewTestDetails'
+    }); 
   };
   
-
   componentDidMount() {
     this.loadQuizData();
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state.currentQuestion !== prevState.currentQuestion) {
-    Axios.get('http://192.168.200.200:8080/backendapi/guest/'+localStorage.getItem("GuestId")+'/tests/'+this.state.resultId+'/question-list')
+    Axios.get('http://192.168.200.200:8080/backendapi/employee/368/guest/'+this.state.resultId+'/question-list')
     .then(res => { console.log(res.data)
         this.setState(() => {
             return {
@@ -133,8 +114,7 @@ class TakeTest extends React.Component {
     })
   }
 }
- 
- 
+
 nextQuestionHandler = () => {
   const { myAnswer, answer, testscore } = this.state;
 
@@ -153,17 +133,17 @@ nextQuestionHandler = () => {
 
 finishHandler = () => {
  const values =  {
-        correctAns: this.state.correctAns,
-        employeeId: this.state.employeeId,
-        guestId: this.state.guestId,
-        resultId: this.state.resultId,
-        score: this.state.score,
-        settingsId: this.state.settingsId,
+        correctAns: this.props.correctAns,
+        employeeId: this.props.employeeId,
+        guestId: this.props.guestId,
+        resultId: this.props.resultId,
+        score: this.props.score,
+        settingsId: this.props.settingsId,
         userAns: this.state.alignment.toString()+',',
-        userQnsIds: this.state.userQnsIds
+        userQnsIds: this.props.userQnsIds
       }
       console.log(values)
-  Axios.post('http://192.168.200.200:8080/backendapi/guest/'+localStorage.getItem("GuestId")+'/tests/'+this.state.resultId+'/submit', values)
+  Axios.post('http://192.168.200.200:8080/backendapi/guest/368/tests/'+this.state.resultId+'/submit', values)
   .then(res => console.log(res.data))
 
     if (this.state.currentQuestion === this.state.data.length - 1) {
@@ -188,41 +168,70 @@ handleChange = (index, newAlignment) => {
 };
 
 children = [
-  <ToggleButton key={1} value="A" aria-label="left aligned">
+  <ToggleButton key={1} value="A" aria-label="left aligned" placeholder="A">
   </ToggleButton>,
-  <ToggleButton  key={2} value="B">
-  </ToggleButton>, 
+  <ToggleButton  key={2} value="B" placeholder="B">
+  </ToggleButton>,
   <ToggleButton  key={3} value="C">
   </ToggleButton>,
   <ToggleButton key={4} value="D">
   </ToggleButton>,
-  <ToggleButton key={5} value="E">
- </ToggleButton>,
+    <ToggleButton key={5} value="E">
+  </ToggleButton>,
 ];
-okayStart = () => {
-  return(
-    <NavLink to={{pathname: '/guest/ViewTestDetails'}} style={{"textDecoration": "none"}}><Button>okay</Button></NavLink>
-  )
-}
+
+popOverPkay = () => 
+  {
+          return(
+            <Grid>
+            <NavLink to='/Test'  style={buttonStyle}>
+            <Button onClick={this.handleClose} color="primary" autoFocus>
+         OKAY
+        </Button>
+            </NavLink>
+        </Grid>
+          )
+      }
+  handleClickOpen = () => {
+        this.setState(
+            {
+                open: true
+            }
+        )
+      }
+    
+  handleClose = () => {
+       this.setState(
+           {
+               open: false
+           },
+           
+  this.setState(
+            {
+            testCat: '',
+            testType: '',
+            testSubtype: '',
+            noOfQns: '',
+            timeLimit: '',
+            open: false
+            }
+        )
+       )
+      }
+
   render() {
     const { options, myAnswer, currentQuestion, isEnd } = this.state;
 
     if (isEnd) {
       return (
-        <Dialog
-        open={true}
-        onClose={this.handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">{"Thanks for taking the Test! Your test is submitted."}</DialogTitle>
-
-        <DialogActions>
-          {this.okayStart()}
-        </DialogActions>
-      </Dialog>
+        // this.handleClickOpen();
+        <div className="result">
+          <h3> Thanks for taking the Test, Your test is submitted.</h3>
+          <NavLink to='/ViewTestDetails' style={{"textDecoration": "none"}}><Button variant="contained">Back to DashBoard</Button></NavLink>
+        </div>
       );
-    } else {
+    }
+     else {
       return (
         <div className="App">
           <h3>{this.props.functionCountdown}</h3>
@@ -243,14 +252,13 @@ okayStart = () => {
               <ThemeProvider theme={theme}>
               <ToggleButtonGroup 
          value={this.state.alignment[this.state.currentQuestion]} key={this.state.currentQuestion}
-         exclusive 
-         onChange={(e) => this.handleChange(this.state.currentQuestion, e.target.value)} 
+         exclusive onChange={(e) => this.handleChange(this.state.currentQuestion, e.target.value)} 
          aria-label="text alignment"
          onClick={this.checkAnswer}
          style={theme}
          >
-             {this.children} 
-            </ToggleButtonGroup><br/>
+             {this.children}
+            </ToggleButtonGroup>
             <div style={{"float": "left", "paddingRight": "45px"}}>
             <p  style={{"float": "left", "paddingRight": "45px"}}>A</p>
             <p  style={{"float": "left", "paddingRight": "45px"}}>B</p>
@@ -258,7 +266,7 @@ okayStart = () => {
             <p  style={{"float": "left", "paddingRight": "45px"}}>D</p>
             <p  style={{"float": "left", "paddingRight": "45px"}}>E</p>
             </div>
-           </ThemeProvider>
+            </ThemeProvider>
          </TableCell>
               </TableRow>
             </TableBody>
@@ -283,6 +291,19 @@ okayStart = () => {
               Finish
             </button>
           )}
+
+       <Dialog
+        open={this.state.open}
+        onClose={this.handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{" You can review your Test!!"}</DialogTitle>
+
+        <DialogActions>
+          {this.popOverPkay()}
+        </DialogActions>
+      </Dialog>
         </div>
       );
     }
@@ -290,3 +311,14 @@ okayStart = () => {
 }
 
 export default TakeTest;
+
+
+
+
+
+
+
+
+
+
+
