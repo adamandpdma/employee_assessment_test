@@ -98,8 +98,10 @@ const listStyle={
   textDecoration: "none",
   listStyle: 'none',
   color: 'none'}
+  
 const style = {
-  left:680
+  left:850,
+  position:'absolute'
 }
 const ResponsiveDrawerGuest = (props) => {
   const { container } = props;
@@ -192,6 +194,7 @@ const ResponsiveDrawerGuest = (props) => {
           </IconButton>
 
         <Button
+        style={style}
         color="inherit"
         type="submit"
         onClick={() => {
@@ -199,8 +202,9 @@ const ResponsiveDrawerGuest = (props) => {
             window.location = "/"
           })
           localStorage.clear()
+          sessionStorage.clear()
         }}
-        style={style}
+        
         >
         <ExitToAppIcon />Log Out
         </Button>
