@@ -13,6 +13,7 @@ class Countdown extends Component
         this.state={
             counter: this.props.location.timeData * 60,
             testSubtypeData: this.props.location.testSubtypeData,
+            resultId: this.props.location.resultId
         }
     }
     convertSeconds = (s) => 
@@ -72,7 +73,8 @@ class Countdown extends Component
             <div>
           <TakeTest 
           functionCountdown ={this.convertSeconds(this.state.counter)} 
-          testSubtypeValue={this.state.testSubtypeData}/>
+          testSubtypeValue={this.state.testSubtypeData}
+          resultId={this.state.resultId}/>
             </div>
         )
     }

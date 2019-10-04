@@ -11,7 +11,7 @@ import Grid from '@material-ui/core/Grid';
 import DialogContent from '@material-ui/core/DialogContent';
 
 import Typography from '@material-ui/core/Typography';
-import Start from '../start.png'
+import Start from '../../start.png'
 
 
 
@@ -77,7 +77,7 @@ export default class ViewTestDetails extends Component {
  
     handleClickOpen = (testSubtypeName, timeValue, noOfQnsValue,element) => {
      
-     axios.get('http://192.168.200.200:8080/backendapi/guest/368/tests/'+testSubtypeName.replace(" ", "%20"))
+     axios.get('http://192.168.200.200:8080/backendapi/guest/'+localStorage.getItem("GuestId")+'/tests/'+testSubtypeName.replace(" ", "%20"))
      .then(res => { 
        console.log(res.data)
      this.setState(
@@ -120,7 +120,7 @@ export default class ViewTestDetails extends Component {
      if(this.state.openStart === true)
      {
       return(
-        <NavLink to={{pathname: '/takeTest', 
+        <NavLink to={{pathname: '/guest/takeTest', 
         testSubtypeData: this.state.testSubtype,
          timeData: this.state.time,
          resultId: this.state.resultId,

@@ -7,7 +7,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
-import '../App.css';
+import '../../App.css';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import { createMuiTheme } from "@material-ui/core";
@@ -78,7 +78,7 @@ class TakeTest extends React.Component {
   loadQuizData = () => {
 
     console.log(this.state.resultId + "guest enter Id")
-    Axios.get('http://192.168.200.200:8080/backendapi/guest/368/tests/'+this.state.resultId+'/question-list')
+    Axios.get('http://192.168.200.200:8080/backendapi/guest/'+ localStorage.getItem("GuestId")+'/tests/'+this.state.resultId+'/question-list')
     .then(res => { 
       this.setState(() => {
             return {
@@ -92,7 +92,7 @@ class TakeTest extends React.Component {
     })
     .catch(res => { 
       alert("NO TESTS AVAILABLE !")
-      window.location='/ViewTestDetails'
+      window.location='/guest/ViewTestDetails'
     }); 
   };
   
@@ -102,7 +102,7 @@ class TakeTest extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state.currentQuestion !== prevState.currentQuestion) {
-    Axios.get('http://192.168.200.200:8080/backendapi/employee/368/guest/'+this.state.resultId+'/question-list')
+    Axios.get('http://192.168.200.200:8080/backendapi/employee/'+ localStorage.getItem("GuestId")+'/guest/'+this.state.resultId+'/question-list')
     .then(res => { console.log(res.data)
         this.setState(() => {
             return {
@@ -143,7 +143,7 @@ finishHandler = () => {
         userQnsIds: this.props.userQnsIds
       }
       console.log(values)
-  Axios.post('http://192.168.200.200:8080/backendapi/guest/368/tests/'+this.state.resultId+'/submit', values)
+  Axios.post('http://192.168.200.200:8080/backendapi/guest//te'+ localStorage.getItem("GuestId")+'sts/'+this.state.resultId+'/submit', values)
   .then(res => console.log(res.data))
 
     if (this.state.currentQuestion === this.state.data.length - 1) {
@@ -227,7 +227,7 @@ popOverPkay = () =>
         // this.handleClickOpen();
         <div className="result">
           <h3> Thanks for taking the Test, Your test is submitted.</h3>
-          <NavLink to='/ViewTestDetails' style={{"textDecoration": "none"}}><Button variant="contained">Back to DashBoard</Button></NavLink>
+          <NavLink to='/guest/ViewTestDetails' style={{"textDecoration": "none"}}><Button variant="contained">Back to DashBoard</Button></NavLink>
         </div>
       );
     }
