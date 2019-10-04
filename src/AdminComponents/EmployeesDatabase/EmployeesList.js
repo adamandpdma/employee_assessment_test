@@ -34,7 +34,6 @@ export default class EmployeesList1 extends Component {
           root: {
             "font-size": 15,
             "font-weight": "bold"
-            // "text-align": "center"
           },
           },
     }
@@ -153,7 +152,7 @@ export default class EmployeesList1 extends Component {
               currentemp.department,
               currentemp.isActive,
               
-              <Link to={"/admin/employees/"+ currentemp.employeeId}>
+              <Link to={"/admin/employees/"+ currentemp.employeeId} style={{"textDecoration": "none"}}>
               <Fab variant="contained" style={{width: "120px", height:"60px", "text-transform": "none", padding: "5px"}}>
                 Manage Account
               </Fab>

@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
-//dialog imports
-import {FormActivateDialog, FormDeactivateDialog} from "./ConfirmationDialogs";
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -15,6 +13,32 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import { NavLink } from "react-router-dom";
+import IconButton from '@material-ui/core/IconButton';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
+import { Container } from '@material-ui/core';
+
+
+const theme = createMuiTheme({
+  overrides: {
+    MuiInputLabel: {
+      root: {
+        color: "red",
+        
+        },
+        focused: true
+       
+        
+      },
+  
+    },
+});
+
+
 
 export default class EditEmployees extends Component {
   constructor(props) {
@@ -34,7 +58,9 @@ export default class EditEmployees extends Component {
       open: false,
       adminPassword: '',
       error: '',
-      isActive: ''
+      isActive: '',
+      dialogTitle: '',
+      showPassword: false,
     }
   }
 
@@ -57,6 +83,18 @@ export default class EditEmployees extends Component {
       })
   }
 
+
+
+  handleClickShowPassword = () => {
+    this.setState({
+      showPassword : !this.state.showPassword
+    })
+   
+  };
+
+  handleMouseDownPassword = event => {
+    event.preventDefault();
+  };
 
   onChangeUserID(e) {
     this.setState({
@@ -92,11 +130,11 @@ export default class EditEmployees extends Component {
       e.preventDefault();
 
       if (this.state.adminPassword !== localStorage.getItem('password')) {
-        return this.setState({ error: 'Incorret password. Please try again.' });
+        return this.setState({ error: 'Incorrect password. Please try again.' });
       }
 
       this.handleOnSubmit();
-  
+      this.resetStates();
       this.handleClose();
     }
 
@@ -106,7 +144,6 @@ export default class EditEmployees extends Component {
       status: "Active"
       
     })
-
   }
 
   onChangeDeactivate() {
@@ -117,20 +154,20 @@ export default class EditEmployees extends Component {
   } 
 
   onClickBackBtn() {
-    window.location="/admin/employees";
+    this.props.history.push("/admin/employees")
   }
 
    handleClickOpen = () => {
     this.setState({
       open: true
     })
-
   }
 
    handleClose = () => {
     this.setState({
       open: false
     })
+    this.resetStates();
   } 
 
   handleOnSubmit = () => {
@@ -154,7 +191,6 @@ export default class EditEmployees extends Component {
         .then(res => console.log(res.data));
       })
 
-     
     }
 
     if(this.state.isActive === false){
@@ -165,7 +201,6 @@ export default class EditEmployees extends Component {
         .then(res => console.log(res.data));
       })
 
-      
     }
   }
 
@@ -180,30 +215,38 @@ export default class EditEmployees extends Component {
       );
     }
 
+    
   handlePassChange = (evt) => {
     this.setState({
       adminPassword: evt.target.value,
     });
   }
-  
+
+  resetStates = () => {
+    this.setState({
+      adminPassword: '',
+      error: '',
+      password: ''
+    })
+  }
+
   render() {
 
-    const status = this.state.status;
     let activatebtn, deactivatebtn;
     const imageData = this.state.image
 
   if(this.state.isActive === true) {
-      activatebtn = <Button id="activate" onClick={this.handleClickOpen} disabled={true}  style={{"text-transform": "none", "color": 'grey'}}variant="contained">Activate Account</Button>
-      deactivatebtn = <Button id="deactivate" onClick={this.handleClickOpen} disabled={false}  style={{"text-transform": "none", "color": '#8b0000'}}variant="contained">Deactivate Account</Button>
+      activatebtn = <Button id="activate" onClick={this.handleClickOpen} disabled={true}  style={{"text-transform": "none", "color": 'grey', "width":"180px"}}variant="contained">Activate Account</Button>
+      deactivatebtn = <Button id="deactivate" onClick={() =>{this.handleClickOpen(); this.setState({dialogTitle: "Deactivate"})}}  disabled={false}  style={{"text-transform": "none", "color": '#8b0000', "width":"180px"}}variant="contained">Deactivate Account</Button>
    } 
    else {
-    activatebtn = <Button id="activate" onClick={this.handleClickOpen} disabled={false}  style={{"text-transform": "none", "color": 'green'}}variant="contained">Activate Account</Button>
-    deactivatebtn = <Button id="deactivate" onClick={this.handleClickOpen} disabled={true}  style={{"text-transform": "none", "color": 'grey'}}variant="contained">Deactivate Account</Button>
+    activatebtn = <Button id="activate" onClick={() =>{this.handleClickOpen(); this.setState({dialogTitle: "Activate"})}}  disabled={false}  style={{"text-transform": "none", "color": 'green', "width":"180px"}}variant="contained">Activate Account</Button>
+    deactivatebtn = <Button id="deactivate" onClick={this.handleClickOpen} disabled={true}  style={{"text-transform": "none", "color": 'grey', "width":"180px"}}variant="contained">Deactivate Account</Button>
   }
 
     return (
     <div>
-      <h4>Manage Employee Account</h4>
+      <h2 style={{"font-weight": "normal"}}>Manage Employee Account</h2>
       <Box display="flex" p={1} >
       <Table rowHeight={10} style={{ width: "auto"}}>
         <TableBody>
@@ -217,9 +260,6 @@ export default class EditEmployees extends Component {
           </TableCell>
           <TableCell >
             {this.state.employeeId}
-          </TableCell>
-          <TableCell style={{"borderBottom": "none"}}>
-
           </TableCell>
           </TableRow>
           
@@ -252,7 +292,9 @@ export default class EditEmployees extends Component {
 
           <TableRow >
           <TableCell style={{"borderBottom":"none"}}>
-          <Button variant="contained" style={{"text-transform": "none"}} onClick={this.onClickBackBtn}>Back</Button>
+            <NavLink style={{ textDecoration: 'none' }} to="/admin/employees">
+          <Button variant="contained" style={{"text-transform": "none"}} >Back</Button>
+          </NavLink>
           </TableCell>
           <TableCell style={{"borderBottom":"none"}}>
             Status:
@@ -267,25 +309,48 @@ export default class EditEmployees extends Component {
      
       <Box p={1} order={3} bgcolor="">
       {activatebtn}
-
+      <br />
+      <br />
+      {deactivatebtn} 
       </Box>
       <Box p={1} order={3} bgcolor="">
-      {deactivatebtn}
+      
       </Box>
-      <Dialog open={this.state.open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
+      <Dialog open={this.state.open} aria-labelledby="form-dialog-title">
         <form className="mui-form" onSubmit={this.onSubmit}>
-          <DialogTitle id="form-dialog-title">Activate/Deactivate Employee Account</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-             Please provide administrator password to confirm changes
+          <DialogTitle align="center" id="form-dialog-title">{this.state.dialogTitle} Employee Account</DialogTitle>
+          <DialogContent align="center" >
+            <DialogContentText style={{"font-size":"12px", "color":"black"}}>
+             Please provide administrator password to proceed with the request.
+             
             </DialogContentText>
-            <TextField helperText={this.state.error} value={this.state.adminPassword} onChange={this.handlePassChange} autoFocus margin="dense" id="name" label="Password" type="password"/>
+          
+            <TextField  disableAnimation={true} type={this.state.showPassword ? 'text' : 'password'} variant="outlined" value={this.state.adminPassword} onChange={this.handlePassChange} autoFocus margin="dense" id="name" label="Password"  
+            InputProps={{
+              style: { textAlign: "center" },
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    edge="end"
+                    aria-label="toggle password visibility"
+                    onClick={this.handleClickShowPassword}
+                    onMouseDown={this.handleMouseDownPassword}
+                  >
+                    {this.state.showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
+            
+            />
+           
+            <FormHelperText style={{"textAlign":"center"}} error >{this.state.error}</FormHelperText>
           </DialogContent>
-          <DialogActions> 
+          <DialogActions > 
             <Button onClick={this.handleClose} variant="contained">
               Cancel
             </Button>
-            <Button type="submit" >Confirm</Button>
+            <Button type="submit">Confirm</Button>
           </DialogActions> 
           </form>
         </Dialog>
