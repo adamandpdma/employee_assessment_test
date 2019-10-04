@@ -5,6 +5,8 @@ import * as Yup from "yup";
 import axios from 'axios';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Button from "@material-ui/core/Button";
+import {NavLink} from 'react-router-dom';
 
 
 const validationSchema = Yup.object({
@@ -75,7 +77,15 @@ class InputForm extends Component {
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
             >
-            <DialogTitle id="alert-dialog-title">{"Name has been changed"}</DialogTitle>
+            <DialogTitle id="alert-dialog-title">{"Name has been changed. Please log out to see changes"}</DialogTitle>
+            <Button
+          margin="normal"
+          fullWidth
+          variant="contained"
+          >
+      <NavLink to={'/admin'}>Okay</NavLink>
+      </Button>
+
       </Dialog>
       
       <Dialog

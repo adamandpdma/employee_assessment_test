@@ -87,7 +87,7 @@ class ReviewAllTests extends React.Component {
 
            currentemp.testType,
            currentemp.testSubtype, 
-        <NavLink to={{pathname: '/review', 
+        <NavLink to={{pathname: '/employee/review', 
         testDetailID: currentemp.resultId, testName: currentemp.testSubtype}} style={{"textDecoration": "none"}} >
           <Button style={{"text-transform": "none"}} variant= "contained">
          Review

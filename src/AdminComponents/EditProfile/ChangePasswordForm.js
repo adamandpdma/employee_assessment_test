@@ -140,10 +140,7 @@ textfield:{
       />
       </div>
 
-      <div>
-      <Link>
-      Back
-      </Link>  
+      <div> 
       <Button
       id = "Button"
         type="submit"

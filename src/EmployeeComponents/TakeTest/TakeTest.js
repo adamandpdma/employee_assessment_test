@@ -92,7 +92,7 @@ class TakeTest extends React.Component {
     })
     .catch(res => { 
       alert("NO TESTS AVAILABLE !")
-      window.location='/DashBoardEmployee'
+      window.location='/employee/DashBoardEmployee'
     }); 
   };
   
@@ -184,7 +184,7 @@ popOverPkay = () =>
   {
           return(
             <Grid>
-            <NavLink to='/Test'  style={buttonStyle}>
+            <NavLink to='/employee/Test'  style={buttonStyle}>
             <Button onClick={this.handleClose} color="primary" autoFocus>
          OKAY
         </Button>

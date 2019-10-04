@@ -43,7 +43,7 @@ class Agile extends Component
             </Grid>
     
                     <Grid item xs={12} style={style}>
-           <NavLink to={{pathname: '/Test', 
+           <NavLink to={{pathname: '/employee/Test', 
            category: 'Agile'}} style={buttonStyle}>
                <Button variant="contained" style={buttonStyle}>AGILE</Button>
            </NavLink> 

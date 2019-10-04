@@ -3,6 +3,12 @@ import { Formik } from "formik";
 import  ChangePassword  from "../../AdminComponents/EditProfile/ChangePasswordForm";
 import * as Yup from "yup";
 import axios from "axios";
+import Button from "@material-ui/core/Button";
+import {NavLink} from 'react-router-dom';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Dialog from '@material-ui/core/Dialog';
+
+
 
 const alphanumeric = /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1}).*$/
 
@@ -11,7 +17,7 @@ const validationSchema = Yup.object({
     .min(6, "Password must contain at least 6 characters")
     .required("Enter your password"),
   newPassword: Yup.string("")
-    .matches(alphanumeric, "Password must be alphanumeric")
+    // .matches(alphanumeric, "Password must be alphanumeric")
     .min(6,"Password must contain at least 6 characters")
     .max(12,"Password cannot have more then 12 characters")
     .notOneOf([Yup.ref("Password")],"Cannot be same as Current Password")
@@ -27,7 +33,10 @@ class InputForm extends Component {
     super(props);
     this.state = {
       Password: "",
-      newPassword: ""
+      newPassword: "",
+      message:false,
+      errorMessage:false
+
   };
   }
  
@@ -51,12 +60,18 @@ class InputForm extends Component {
       console.log(res.data)
      { if (res.data === true) {
         return (
-        alert('Password has been changed')      
-        )}
+          this.setState({message:true})
+          )}
       else{
-        alert('Current Password is invalid')
+        this.setState({errorMessage:true})
       }}
     }))    
+  }
+
+  handleClose = () => {
+    this.setState({message:false})
+    this.setState({errorMessage:false})
+
   }
 
   render() {
@@ -65,6 +80,10 @@ class InputForm extends Component {
       newPassword: "",
       retypePassword: "",
     };
+    const handleClose = this.handleClose
+    const message = this.state.message
+    const errorMessage = this.state.errorMessage
+
 
     return (
       <React.Fragment>        
@@ -74,9 +93,37 @@ class InputForm extends Component {
               validationSchema={validationSchema}
               onSubmit={this.submitValues}
             />
+          <Dialog
+            open={message}
+            onClose={handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+            >
+            <DialogTitle id="alert-dialog-title">{"Password has been changed"}</DialogTitle>
+      <Button
+          margin="normal"
+          fullWidth
+          variant="contained"
+          >
+      <NavLink to={'/employee'}>Okay</NavLink>
+      </Button>
+
+      </Dialog>
+      
+      <Dialog
+            open={errorMessage}
+            onClose={handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+            >
+            <DialogTitle id="alert-dialog-title">{"Current password is invalid!"}</DialogTitle>
+      </Dialog>
+
+
       </React.Fragment>
     );
   }
 }
 
 export default InputForm;
+ 

@@ -8,7 +8,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 const validationSchema = Yup.object({
   employeeid: Yup.string("Enter your Id")
-  .min(2, "Id must contain at least 2 Digits")
+  .min(1, "Id must contain at least 2 Digits")
   .required("Id is required"),
   Password: Yup.string("")
     .min(8, "Password must contain at least 8 characters")
@@ -42,7 +42,7 @@ class employeeLogin extends Component {
             return (
               localStorage.setItem('employeeid', employeeid),
               localStorage.setItem('password', Password),
-              this.props.history.push('./EmployeeEditProfile')          
+              this.props.history.push('./employee')          
             )}
         else{
           console.log(postValue)

@@ -10,7 +10,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import {Link} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import axios from "axios";
 import FittedImage from 'react-fitted-image'
 import PropTypes from 'prop-types';
@@ -21,7 +21,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 const styles = theme => ({ 
 modal : {
         display: 'flex',
-        alignItems: 'center',
+        alignItems: 'center', 
         justifyContent: 'center',
         padding: "0"
       },
@@ -113,7 +113,7 @@ class Profile extends Component {
 
     console.log(values)
 
-    axios.post("http://192.168.200.200:8080/backendapi/employee/"+ empId + "/profile-image", values)
+    axios.post("http://192.168.200.200:8080/backendapi/employee/"+ empId + "/update-profile-image", values)
     .then((res => {
       console.log(res.data)
      { if (res.data === true) {
@@ -289,13 +289,12 @@ render(){
 
       <CardActions>
       <Button
-          margin="normal"
           fullWidth
-          variant="contained"
           className={classes.button}
-          onClick={handleOnclick}
           >
+      <NavLink to='/employee/editProfile'>     
       Edit Profile
+      </NavLink>
       </Button> 
       {/* </Link> */}
 
@@ -309,6 +308,15 @@ render(){
             aria-describedby="alert-dialog-description"
             >
             <DialogTitle id="alert-dialog-title">{"Profile Picture has been changed"}</DialogTitle>
+            <Button
+          margin="normal"
+          fullWidth
+          variant="contained"
+          className={classes.button}
+          >
+      <NavLink to={'/employee'}>Okay</NavLink>
+      </Button>
+
       </Dialog>
       </div>
 

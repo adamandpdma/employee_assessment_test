@@ -27,6 +27,11 @@ import DevOps from './DevOps';
 import Countdown from './Countdown';
 import EmployeeReviewTest from '../ReviewTest/EmployeeReviewTest'
 import ReviewAllTests from '../ReviewTest/ReviewAllTests'
+import Profile from '../EditProfile/EmployeeProfile'
+import { Button } from '@material-ui/core';
+import auth from "../../auth"
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import EmployeeEditProfile from '../EditProfile/EmployeeEditProfile'
 
 
 const drawerWidth = 300;
@@ -55,12 +60,12 @@ const useStyles = makeStyles(theme => ({
     
     },
   },
-  menuButton: {
-    marginRight: theme.spacing(2),
-    [theme.breakpoints.up('sm')]: {
-      display: 'none',
-    },
-  },
+  // // menuButton: {
+  // //   marginRight: theme.spacing(2),
+  // //   [theme.breakpoints.up('sm')]: {
+  // //     display: 'none',
+  // //   },
+  // },
   toolbar:theme.mixins.toolbar,
   drawerPaper: {
     width: drawerWidth,
@@ -94,6 +99,10 @@ const useStyles = makeStyles(theme => ({
   //   padding: theme.spacing(0)
   // }
 }));
+const style = {
+  //paddingLeft: "730px"
+  left:640
+}
 const listStyle={
   textDecoration: "none",
   listStyle: 'none',
@@ -137,7 +146,7 @@ const ResponsiveDrawerEmployee = (props) => {
 </svg>
   }
 </ListItemIcon>
-    {<NavLink to='/DashBoardEmployee' 
+    {<NavLink to='/employee/DashBoardEmployee' 
        style={{color: 'white', textDecoration: 'none'}}
        activeStyle={{color: 'white', textDecoration: 'none'}}
      className="NavLink"><ListItemText primary="DASHBOARD"/></NavLink> 
@@ -158,17 +167,17 @@ const ResponsiveDrawerEmployee = (props) => {
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
     <ListItem button className={classes.nested} onClick={navigation}>
-     <NavLink to='/ProgrammingAndFramework'
+     <NavLink to='/employee/ProgrammingAndFramework'
          style={{color: 'white', textDecoration: 'none'}}
          activeStyle={{color: 'white', textDecoration: 'none'}}><ListItemText primary="Programming and Framework" /></NavLink>
           </ListItem>  
           <ListItem button className={classes.nested}>
-           <NavLink to='/Agile' 
+           <NavLink to='/employee/Agile' 
               style={{color: 'white', textDecoration: 'none'}}
               activeStyle={{color: 'white', textDecoration: 'none'}}><ListItemText primary="Agile Development"/></NavLink>
           </ListItem>
           <ListItem button className={classes.nested}>
-            <NavLink to='/DevOps'
+            <NavLink to='/employee/DevOps'
                style={{color: 'white', textDecoration: 'none'}}
                activeStyle={{color: 'white', textDecoration: 'none'}}><ListItemText primary="DevOps"/></NavLink>
           </ListItem>
@@ -180,7 +189,7 @@ const ResponsiveDrawerEmployee = (props) => {
   <path id="Icon_awesome-pencil-alt" data-name="Icon awesome-pencil-alt" d="M23.081,6.571,20.944,8.7a.558.558,0,0,1-.788,0L15.011,3.57a.554.554,0,0,1,0-.786L17.148.654a2.234,2.234,0,0,1,3.148,0l2.786,2.778A2.211,2.211,0,0,1,23.081,6.571ZM13.175,4.615,1,16.754.019,22.371a1.112,1.112,0,0,0,1.289,1.285l5.632-.985L19.113,10.532a.554.554,0,0,0,0-.786L13.968,4.615a.563.563,0,0,0-.793,0Zm-7.422,11.1a.643.643,0,0,1,0-.915L12.892,7.68a.648.648,0,1,1,.918.915L6.671,15.714A.648.648,0,0,1,5.753,15.714ZM4.08,19.6H6.305V21.28l-2.99.522L1.873,20.365,2.4,17.383H4.08Z" transform="translate(-0.002 -0.005)" fill="#bdbdbd"/>
 </svg>
         </ListItemIcon>
-        <NavLink to='/reviewAll' 
+        <NavLink to='/employee/reviewAll' 
           style={{color: 'white', textDecoration: 'none'}}
           activeStyle={{color: 'white', textDecoration: 'none'}}><ListItemText primary="REVIEW TEST" /></NavLink>
       </ListItem>
@@ -193,15 +202,30 @@ const ResponsiveDrawerEmployee = (props) => {
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
-          <IconButton
+   
+        <IconButton
             color="inherit"
             aria-label="open drawer"
             edge="start"
-            onClick={handleDrawerToggle}
             className={classes.menuButton}
           >
-            <MenuIcon />
+          <Profile/>  
           </IconButton>
+
+        <Button
+        color="inherit"
+        type="submit"
+        onClick={() => {
+          auth.logout(() => {
+            window.location = "/"
+          })
+          localStorage.clear()
+        }}
+        style={style}
+        >
+        <ExitToAppIcon />Log Out
+        </Button>
+
         </Toolbar>
       </AppBar>
       <nav className={classes.drawer} aria-label="mailbox folders">
@@ -238,14 +262,15 @@ const ResponsiveDrawerEmployee = (props) => {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <Grid>
-          <Route path='/DashBoardEmployee' component={DashBoardEmployee}></Route>
-          <Route path='/Agile' component={Agile}></Route>
-          <Route path='/ProgrammingAndFramework' component={ProgrammingAndFramework}></Route>
-          <Route path='/DevOps' component={DevOps}></Route>
-          <Route path='/takeTest' component={Countdown}></Route>
-          <Route path='/Test' component={TestDetails}></Route>
-          <Route path='/review' component={EmployeeReviewTest}></Route>
-          <Route path='/reviewAll' component={ReviewAllTests}></Route>
+          <Route path='/employee/DashBoardEmployee' component={DashBoardEmployee}></Route>
+          <Route path='/employee/Agile' component={Agile}></Route>
+          <Route path='/employee/ProgrammingAndFramework' component={ProgrammingAndFramework}></Route>
+          <Route path='/employee/DevOps' component={DevOps}></Route>
+          <Route path='/employee/takeTest' component={Countdown}></Route>
+          <Route path='/employee/Test' component={TestDetails}></Route>
+          <Route path='/employee/review' component={EmployeeReviewTest}></Route>
+          <Route path='/employee/reviewAll' component={ReviewAllTests}></Route>
+          <Route path='/employee/editProfile' component={EmployeeEditProfile}/>
    
         </Grid>
       </main>

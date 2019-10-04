@@ -43,7 +43,7 @@ class ProgrammingAndFramework extends Component
             </Grid>
     
                     <Grid item xs={12} style={style}>
-           <NavLink to={{pathname: '/Test', 
+           <NavLink to={{pathname: '/employee/Test', 
            category: 'Programming'}} style={buttonStyle}>
                <Button variant="contained" style={buttonStyle}>Programming And Framework</Button>
            </NavLink> 

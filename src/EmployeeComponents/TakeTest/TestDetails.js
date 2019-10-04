@@ -150,7 +150,7 @@ export default class TestDetails extends Component {
           onClick={() => 
           this.handleClickOpen(testSubtype, timeLimit, noOfQns)}>
             START
-      </Button> | <NavLink to={{pathname:'/reviewAll', resultId: this.state.resultId}} style={{"textDecoration": "none"}}><Button variant='contained' 
+      </Button> | <NavLink to={{pathname:'/employee/reviewAll', resultId: this.state.resultId}} style={{"textDecoration": "none"}}><Button variant='contained' 
           style={style} > REVIEW TEST</Button></NavLink> 
          </Grid>
        )
@@ -159,7 +159,7 @@ export default class TestDetails extends Component {
      {
        return(
          <Grid>
-          <NavLink to={{pathname:'/reviewAll', resultId: this.state.resultId}}  style={{"textDecoration": "none"}} ><Button variant='contained' 
+          <NavLink to={{pathname:'/employee/reviewAll', resultId: this.state.resultId}}  style={{"textDecoration": "none"}} ><Button variant='contained' 
           style={style} > REVIEW TEST</Button></NavLink> 
          </Grid>
        )
@@ -176,7 +176,7 @@ export default class TestDetails extends Component {
      if(this.state.openStart === true)
      {
       return(
-        <NavLink to={{pathname: '/takeTest', 
+        <NavLink to={{pathname: '/employee/takeTest', 
         testSubtypeData: this.state.testSubtype,
          timeData: this.state.time,
          resultId: this.state.resultId,

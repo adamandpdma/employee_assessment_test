@@ -19,7 +19,7 @@ import Grid from '@material-ui/core/Grid';
 import {Route} from 'react-router-dom';
 import {NavLink} from 'react-router-dom';
 import DashBoardHr from './DashBoardHr';
-import EmployeesList from './EmployeesList';
+import EmployeesList from './EmployeeList';
 import EmployeeResult from './EmployeeResult';
 import GuestList from './GuestList';
 import GuestResult from './GuestResult';
@@ -114,7 +114,7 @@ const ResponsiveDrawerGuest = (props) => {
   const navigation = () => 
   {
     return(
-        <NavLink to='/createTest'></NavLink>
+        <NavLink to='/hr/createTest'></NavLink>
        )
   }
 
@@ -133,7 +133,7 @@ const ResponsiveDrawerGuest = (props) => {
 </svg>
   }
 </ListItemIcon>
-    {<NavLink to='/DashBoardHr' 
+    {<NavLink to='/hr/DashBoardHr' 
       style={{color: 'white', textDecoration: 'none'}}
        activeStyle={{color: 'white', textDecoration: 'none'}}>
       <ListItemText primary="DASHBOARD" />
@@ -155,12 +155,12 @@ const ResponsiveDrawerGuest = (props) => {
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
     <ListItem button className={classes.nested} onClick={navigation}>
-     <NavLink to='/employees' style={listStyle}
+     <NavLink to='/hr/employees' style={listStyle}
         style={{color: 'white', textDecoration: 'none'}}
         activeStyle={{color: 'white', textDecoration: 'none'}} ><ListItemText primary="Existing Employees" /></NavLink>
           </ListItem>  
           <ListItem button className={classes.nested} onClick={navigation}>
-     <NavLink to='/GuestList' style={listStyle}
+     <NavLink to='/hr/GuestList' style={listStyle}
         style={{color: 'white', textDecoration: 'none'}}
         activeStyle={{color: 'white', textDecoration: 'none'}} ><ListItemText primary="Guest Users" /></NavLink>
           </ListItem>  
@@ -220,11 +220,11 @@ const ResponsiveDrawerGuest = (props) => {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <Grid>
-          <Route path='/DashBoardHr' component={DashBoardHr}></Route>
-          <Route path="/employees" component={EmployeesList}/>
-          <Route path="/EmployeeResult" component={EmployeeResult}/>
-          <Route path="/GuestResult" component={GuestResult}/>
-          <Route path="/GuestList" component={GuestList}/>
+          <Route path='/hr/DashBoardHr' component={DashBoardHr}></Route>
+          <Route path="/hr/employees" component={EmployeesList}/>
+          <Route path="/hr/EmployeeResult" component={EmployeeResult}/>
+          <Route path="/hr/GuestResult" component={GuestResult}/>
+          <Route path="/hr/GuestList" component={GuestList}/>
         </Grid>
       </main>
     </div>

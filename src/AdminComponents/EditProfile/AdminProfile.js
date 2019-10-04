@@ -166,10 +166,10 @@ class Profile extends Component {
     // this.props.history.push('/admin')
   }
 
-  handleOnclick = () => {
-    //this.props.history.push('/')
-    window.location ="/admin/editProfile"
-  }
+  // handleOnclick = () => {
+  //   //this.props.history.push('/')
+  //   window.location ="/admin/editProfile"
+  // }
 
 componentDidMount(){
 const adminId = localStorage.getItem('employeeid')
@@ -288,18 +288,15 @@ render(){
         </div>
 
       <CardActions>
-        <NavLink to='/admin/editProfile'>
       <Button
-      type= "submit"
-          margin="normal"
           fullWidth
-          variant="contained"
           className={classes.button}
-          // onClick={handleOnclick}
           >
-  Edit Profile
-      </Button> 
+      <NavLink to='/admin/editProfile'>     
+      Edit Profile
       </NavLink>
+
+      </Button> 
 
       </CardActions>
       </Card>
