@@ -11,7 +11,7 @@ import Grid from '@material-ui/core/Grid';
 import DialogContent from '@material-ui/core/DialogContent';
 
 import Typography from '@material-ui/core/Typography';
-import EmployeeReviewTest from './EmployeeReviewTest';
+import EmployeeReviewTest from '../ReviewTest/EmployeeReviewTest';
 
 
 const style ={

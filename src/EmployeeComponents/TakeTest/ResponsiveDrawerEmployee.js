@@ -20,14 +20,13 @@ import {Route} from 'react-router-dom';
 import {NavLink} from 'react-router-dom';
 import DashBoardEmployee from './DashBoardEmployee';
 import TestDetails from './TestDetails';
-import TakeTest from './TakeTest';
+import TakeTest from '../TakeTest';
 import Agile from './Agile';
 import ProgrammingAndFramework from './ProgrammingAndFramework';
 import DevOps from './DevOps';
 import Countdown from './Countdown';
-import EmployeeReviewTest from './EmployeeReviewTest'
-import BottomNavigation from '@material-ui/core/BottomNavigation';
-import ReviewAllTests from './ReviewAllTests'
+import EmployeeReviewTest from '../ReviewTest/EmployeeReviewTest'
+import ReviewAllTests from '../ReviewTest/ReviewAllTests'
 
 
 const drawerWidth = 300;
