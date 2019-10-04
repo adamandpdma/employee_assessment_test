@@ -114,8 +114,8 @@ const listStyle={
 }
 
 const style = {
-  //paddingLeft: "730px"
-  left:640
+  left:850,
+  position:'absolute'
 }
 
 const ResponsiveDrawer = (props) => {
@@ -224,6 +224,7 @@ const ResponsiveDrawer = (props) => {
             window.location = "/"
           })
           localStorage.clear()
+          sessionStorage.clear()
         }}
         style={style}
         >

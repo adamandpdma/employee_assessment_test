@@ -98,7 +98,8 @@ const listStyle={
 
 const style = {
   //paddingLeft: "730px"
-  left:640
+  left:850,
+  position:'absolute'
 }
 const ResponsiveDrawerGuest = (props) => {
   const { container } = props;
@@ -192,6 +193,7 @@ const ResponsiveDrawerGuest = (props) => {
             window.location = "/"
           })
           localStorage.clear()
+          sessionStorage.clear()
         }}
         style={style}
         >

@@ -100,8 +100,8 @@ const useStyles = makeStyles(theme => ({
   // }
 }));
 const style = {
-  //paddingLeft: "730px"
-  left:640
+  left:850,
+  position:'absolute'
 }
 const listStyle={
   textDecoration: "none",
@@ -220,6 +220,7 @@ const ResponsiveDrawerEmployee = (props) => {
             window.location = "/"
           })
           localStorage.clear()
+          sessionStorage.clear()
         }}
         style={style}
         >
