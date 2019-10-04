@@ -137,6 +137,14 @@ class TestRows extends React.Component {
             poolType: this.state.category
           }
     console.log(values); 
+    axios.put('http://192.168.200.200:8080/backendapi/admin/questionpool', values)
+    .then(res => {
+       console.log(res.data)
+       this.setState(
+           {
+           poolId: res.data
+           }
+       )})
     }    
    
     QnsImageArray = () => {
@@ -320,6 +328,14 @@ handleChange = (index, newAlignment) => {
 
             <Table>
               <TableBody>
+              <h4>INSTRUCTIONS</h4>
+                  <p>
+                    1) Click on choose file and Choose an Image. <br/>
+                    (Image size cannot exceed 64kb).<br/>
+                    2) Click on upload Image.<br/>
+                    3) Choose correct Option for the question Image.<br/>
+                    4) Click on Done.<br/><br/>
+                  </p>
                {this.rows()}
               </TableBody>
               </Table>
