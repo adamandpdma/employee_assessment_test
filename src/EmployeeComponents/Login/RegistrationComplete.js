@@ -2,11 +2,10 @@ import React, {useState} from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-import {Link} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Logo from '../../OptimumLogo.jpeg'
-import Emplogin from './EmployeeLogin'
 
 const useStyles = makeStyles(theme => ({
   modal: {
@@ -25,7 +24,10 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(2, 4, 3),
   },
   button: {
-    background: 'linear-gradient(#03f0fc,#03f0fc)',
+    background: 'linear-gradient(#03f0fc,#03f0fc)',   
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(2),
+
   },
   link:{
     display: 'flex',
@@ -35,8 +37,21 @@ const useStyles = makeStyles(theme => ({
   },
   typhography: {
     background: '#03f0fc',
-    borderRadius: 10,
+    textAlign: "center",
+    wdith: '100%',
+    color: 'white',
+    paddingTop:"24px",
+    paddingBottom:"24px",
+    marginBottom: theme.spacing(1),
+
     },
+
+  container: {
+      // marginTop: theme.spacing(4),
+      background: '#FFFFFF',
+      paddingLeft:"0px",
+      paddingRight:"0px"
+    },   
   text:{
     padding: theme.spacing(2),
   }  
@@ -68,19 +83,25 @@ return(
   width="280" height="72"/>
   </header>
   <Container style={bgStyle}>
-<Container
-component="main" 
-maxWidth="xs"
-className={classes.modal}>
-  <Grid>
-  <div>
+
+  <Container
+    style={{borderRadius: '10px'}}
+    className = {classes.container}
+    component="main" 
+    maxWidth="xs"
+    borderRadius={16}>
+     <div>    
 <Typography variant = "h4"
   className = {classes.typhography}
   margin="normal"
+  
 >            
-  Employee Register Page
+Register your Account
  </Typography>
- </div>
+ </div>   
+  <Grid>
+<Container>  
+
 
  <div>
 <Typography
@@ -108,9 +129,9 @@ className = {classes.button}
 margin="normal"
 fullWidth
 >
-<Link to={"./EmployeeLogin"} >
-  Back to Login</Link> 
+<NavLink to ='/EmployeeLogin' style={{color: 'white', textDecoration: 'none'}}>Return to Login</NavLink>
 </Button>  
+</Container>  
 </Grid>   
 </Container>
 </Container>

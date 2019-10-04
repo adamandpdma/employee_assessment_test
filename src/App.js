@@ -34,7 +34,9 @@ const App = () => {
           <Route path = '/guest' component = {GuestResponsiveDrawer}/>
           <Route path = '/admin' component = {ResponsiveDrawer}/>
           <Route path = '/employee' component = {EmployeeResponsiveDrawer}/>
-          <Route path = '/hr' component = {HrResponsiveDrawer}/>          
+          <Route path = '/hr' component = {HrResponsiveDrawer}/>   
+          <Route path = '/RegistrationComplete' component = {RegistrationComplete}/>
+       
           {/* <ProtectedRoute path = '/HrEditProfile' component = {HrEditProfile} />
           <ProtectedRoute path = '/GuestDashboard' component = {GuestDashboard} />
           <ProtectedRoute path = '/AdminEditProfile' component = {AdminEditProfile} />

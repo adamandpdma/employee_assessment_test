@@ -192,6 +192,7 @@ const ResponsiveDrawerGuest = (props) => {
             window.location = "/"
           })
           localStorage.clear()
+          sessionStorage.clear()
         }}
         style={style}
         >
