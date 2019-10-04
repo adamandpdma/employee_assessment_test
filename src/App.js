@@ -13,6 +13,8 @@ import EmployeeEditProfile from './EmployeeComponents/EditProfile/EmployeeEditPr
 import {ProtectedRoute} from "./Protected.Route"
 import HrEditProfile from './HrComponents/EditProfile/HrEditProfile'
 import Home from './Home'
+import ResponsiveDrawer from './AdminComponents/crudTest/ResponsiveDrawer'
+import EmployeeResponsiveDrawer from './EmployeeComponents/TakeTest/ResponsiveDrawerEmployee'
 
 
 const App = () => {
@@ -22,16 +24,19 @@ const App = () => {
   <Router>
       
           <Route exact path = '/' component = {Home} />
-          <Route path = '/AdminLogin' component = {AdminLogin} />
-          <Route path = '/HrLogin' component = {HrLogin} />
+          <Route exact path = '/AdminLogin' component = {AdminLogin} />
+          {/* <Route path = '/HrLogin' component = {HrLogin} />
           <Route path = '/EmployeeLogin' component = {EmployeeLogin}/>
           <Route path = '/EmployeeRegister' component = {EmployeeRegister}/>
-          <Route path = '/GuestLogin' component = {GuestLogin}/>
-          <ProtectedRoute path = '/HrEditProfile' component = {HrEditProfile} />
+          <Route path = '/GuestLogin' component = {GuestLogin}/> */}
+          <Route path = '/admin' component = {ResponsiveDrawer}/>
+          {/* <ProtectedRoute path = '/AdminEditProfile' component = {AdminEditProfile} /> */}
+          
+          {/* <ProtectedRoute path = '/HrEditProfile' component = {HrEditProfile} />
           <ProtectedRoute path = '/GuestDashboard' component = {GuestDashboard} />
           <ProtectedRoute path = '/AdminEditProfile' component = {AdminEditProfile} />
           <ProtectedRoute path = '/RegistrationComplete' component = {RegistrationComplete}/>
-          <ProtectedRoute path = '/EmployeeEditProfile' component = {EmployeeEditProfile}/>
+          <ProtectedRoute path = '/EmployeeEditProfile' component = {EmployeeEditProfile}/> */}
 
       
   </Router>

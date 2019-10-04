@@ -20,7 +20,7 @@ import {Route} from 'react-router-dom';
 import {NavLink} from 'react-router-dom';
 import DashBoardEmployee from './DashBoardEmployee';
 import TestDetails from './TestDetails';
-import TakeTest from '../TakeTest';
+// import TakeTest from '../TakeTest';
 import Agile from './Agile';
 import ProgrammingAndFramework from './ProgrammingAndFramework';
 import DevOps from './DevOps';

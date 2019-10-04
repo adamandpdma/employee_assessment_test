@@ -29,8 +29,15 @@ import EditTest from './EditTest';
 import ViewTest from './ViewTest';
 import TestRows from './TestRows';
 import ImageUpload from './ImageUpload';
-import {ProtectedRoute} from '../AdminLogin/Protected.Route';
+// import {ProtectedRoute} from '../AdminLogin/Protected.Route';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
+import { Button } from '@material-ui/core';
+import auth from "../../auth"
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import Profile from '../EditProfile/AdminProfile'
+import AdminEditProfile from '../EditProfile/AdminEditProfile'
+
+
 
 const drawerWidth = 300;
 
@@ -75,7 +82,6 @@ const useStyles = makeStyles(theme => ({
   menuButton: {
     marginRight: theme.spacing(2),
     [theme.breakpoints.up('sm')]: {
-      display: 'none',
     },
   },
   toolbar:theme.mixins.toolbar,
@@ -106,6 +112,12 @@ const listStyle={
   listStyle: 'none',
   color: 'none'
 }
+
+const style = {
+  //paddingLeft: "730px"
+  left:640
+}
+
 const ResponsiveDrawer = (props) => {
   const { container } = props;
   const classes = useStyles();
@@ -194,15 +206,30 @@ const ResponsiveDrawer = (props) => {
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
-          <IconButton
+   
+        <IconButton
             color="inherit"
             aria-label="open drawer"
             edge="start"
-            onClick={handleDrawerToggle}
             className={classes.menuButton}
           >
-            <MenuIcon />
+          <Profile/>  
           </IconButton>
+
+        <Button
+        color="inherit"
+        type="submit"
+        onClick={() => {
+          auth.logout(() => {
+            window.location = "./"
+          })
+          localStorage.clear()
+        }}
+        style={style}
+        >
+        <ExitToAppIcon />Log Out
+        </Button>
+
         </Toolbar>
       </AppBar>
       <nav className={classes.drawer} aria-label="mailbox folders">
@@ -249,6 +276,7 @@ const ResponsiveDrawer = (props) => {
           <Route path="/admin/employees" exact component={EmployeesList} />
           <Route path="/admin/employees/:id" component={EditEmployeesData} />
           <Route path="/admin/testRows" component={TestRows} />
+          <Route path='/admin/editProfile' component={AdminEditProfile}/>
         </Grid>
       </main>
     </div>

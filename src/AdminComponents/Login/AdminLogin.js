@@ -43,7 +43,8 @@ const adminId = employeeid;
           return (
             localStorage.setItem('employeeid', employeeid),
             localStorage.setItem('password', Password),
-            this.props.history.push('./AdminEditProfile')          
+            // window.location='/ResponsiveDrawer'  
+            this.props.history.push('./admin')          
           )}
       else{
         return(

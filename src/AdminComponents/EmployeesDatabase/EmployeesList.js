@@ -104,6 +104,7 @@ export default class EmployeesList1 extends Component {
         name: "Account Status",
         options: {
           filter: true,
+          filerList: ["Active", "Inactive"],
          
          customFilterListRender: v => {
           if (v === true) {

@@ -16,6 +16,7 @@ import FittedImage from 'react-fitted-image'
 import PropTypes from 'prop-types';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import {NavLink} from 'react-router-dom';
 
 
 const styles = theme => ({ 
@@ -162,11 +163,12 @@ class Profile extends Component {
   handleClose = () => {
     this.setState({open : false})
     this.setState({dialog : false})
+    // this.props.history.push('/admin')
   }
 
   handleOnclick = () => {
     //this.props.history.push('/')
-    window.location= "/"
+    window.location ="/admin/editProfile"
   }
 
 componentDidMount(){
@@ -286,15 +288,18 @@ render(){
         </div>
 
       <CardActions>
+        <NavLink to='/admin/editProfile'>
       <Button
+      type= "submit"
           margin="normal"
           fullWidth
           variant="contained"
           className={classes.button}
-          onClick={handleOnclick}
+          // onClick={handleOnclick}
           >
-      Edit Profile
+  Edit Profile
       </Button> 
+      </NavLink>
 
       </CardActions>
       </Card>
@@ -306,6 +311,14 @@ render(){
             aria-describedby="alert-dialog-description"
             >
             <DialogTitle id="alert-dialog-title">{"Profile Picture has been changed"}</DialogTitle>
+      <Button
+          margin="normal"
+          fullWidth
+          variant="contained"
+          className={classes.button}
+          >
+      <NavLink to={'/admin'}>Okay</NavLink>
+      </Button>
       </Dialog>
 
       </div>
