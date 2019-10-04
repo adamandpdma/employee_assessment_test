@@ -99,7 +99,7 @@ export default class TestDetails extends Component {
      if(this.state.openStart === true)
      {
       return(
-        <NavLink to={{pathname: '/takeTest', 
+        <NavLink to={{pathname: '/guest/takeTest', 
         testSubtypeData: this.state.testSubtype, 
         timeData: this.state.time,
         buttonDisable:this.state.buttonDisable }}  style={navStyle}>

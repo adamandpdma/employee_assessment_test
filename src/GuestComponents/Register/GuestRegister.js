@@ -62,10 +62,14 @@ submitValues = ({name, nric, mobile, educationLevel, gpa, graduationYear}) => {
   
   axios.post('http://192.168.200.200:8080/backendapi/guest/register',guest)
       .then(res =>{
+        localStorage.setItem("GuestId",res.data)
           return (
             // this.props.history.push('./RegistrationComplete')      
-            this.setState({message:true}) 
+            this.setState({
+              message:true
+            }) 
           )}
+          
 );
 }
 
