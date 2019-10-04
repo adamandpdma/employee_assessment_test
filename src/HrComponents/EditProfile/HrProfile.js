@@ -10,7 +10,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import {Link} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import axios from "axios";
 import FittedImage from 'react-fitted-image'
 import PropTypes from 'prop-types';
@@ -284,31 +284,36 @@ render(){
           </div> */}
         </div>
 
-      <CardActions>
+        <CardActions>
       <Button
-          margin="normal"
           fullWidth
-          variant="contained"
           className={classes.button}
-          onClick={handleOnclick}
           >
+      <NavLink to='/hr/editProfile' style={{color: 'black', textDecoration: 'none'}}>     
       Edit Profile
+      </NavLink>
+
       </Button> 
-      {/* </Link> */}
 
       </CardActions>
       </Card>
-      </Modal>
-
-      <Dialog
+        </Modal>
+        <Dialog
             open={dialog}
             onClose={handleClose}
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
             >
             <DialogTitle id="alert-dialog-title">{"Profile Picture has been changed"}</DialogTitle>
+      <Button
+          margin="normal"
+          fullWidth
+          variant="contained"
+          className={classes.button}
+          >
+      <NavLink to={'/hr'}>Okay</NavLink>
+      </Button>
       </Dialog>
-
       </div>
 
   );

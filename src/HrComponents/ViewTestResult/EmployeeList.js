@@ -134,7 +134,7 @@ export default class EmployeesList1 extends Component {
               currentemp.email,
               currentemp.department,
               
-              <Link to={{pathname:'/EmployeeResult',
+              <Link to={{pathname:'/hr/EmployeeResult',
                employeeId: currentemp.employeeId}}
                 style={{"textDecoration": "none"}}>
               <Fab variant="contained" 

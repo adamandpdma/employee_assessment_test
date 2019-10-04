@@ -292,7 +292,7 @@ render(){
           fullWidth
           className={classes.button}
           >
-      <NavLink to='/admin/editProfile'>     
+      <NavLink to='/admin/editProfile' style={{color: 'black', textDecoration: 'none'}}>     
       Edit Profile
       </NavLink>
 

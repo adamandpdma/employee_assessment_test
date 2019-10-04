@@ -44,7 +44,7 @@ const hrId = employeeid;
           return (
             localStorage.setItem('employeeid', employeeid),
             localStorage.setItem('password', Password),
-            this.props.history.push('./HrEditProfile')          
+            this.props.history.push('./hr')          
           )}
       else{
         this.setState({open:true})

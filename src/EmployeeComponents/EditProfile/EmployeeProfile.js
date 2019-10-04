@@ -292,7 +292,7 @@ render(){
           fullWidth
           className={classes.button}
           >
-      <NavLink to='/employee/editProfile'>     
+      <NavLink to='/employee/editProfile' style={{color: 'black', textDecoration: 'none'}}>     
       Edit Profile
       </NavLink>
       </Button> 

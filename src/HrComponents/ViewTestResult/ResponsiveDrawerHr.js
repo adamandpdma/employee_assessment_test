@@ -23,6 +23,12 @@ import EmployeesList from './EmployeeList';
 import EmployeeResult from './EmployeeResult';
 import GuestList from './GuestList';
 import GuestResult from './GuestResult';
+import { Button } from '@material-ui/core';
+import auth from "../../auth"
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import Profile from '../EditProfile/HrProfile'
+import HrEditProfile from '../EditProfile/HrEditProfile'
+
 
 
 
@@ -59,12 +65,12 @@ const useStyles = makeStyles(theme => ({
     
     },
   },
-  menuButton: {
-    marginRight: theme.spacing(2),
-    [theme.breakpoints.up('sm')]: {
-      display: 'none',
-    },
-  },
+  // // menuButton: {
+  // //   marginRight: theme.spacing(2),
+  // //   [theme.breakpoints.up('sm')]: {
+  // //     display: 'none',
+  // //   },
+  // },
   toolbar:theme.mixins.toolbar,
   drawerPaper: {
     width: drawerWidth,
@@ -175,15 +181,29 @@ const ResponsiveDrawerGuest = (props) => {
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
-          <IconButton
+   
+        <IconButton
             color="inherit"
             aria-label="open drawer"
             edge="start"
-            onClick={handleDrawerToggle}
             className={classes.menuButton}
           >
-            <MenuIcon />
+          <Profile/>  
           </IconButton>
+
+        <Button
+        color="inherit"
+        type="submit"
+        onClick={() => {
+          auth.logout(() => {
+            window.location = "/"
+          })
+          localStorage.clear()
+        }}
+        style={style}
+        >
+        <ExitToAppIcon />Log Out
+        </Button>
         </Toolbar>
       </AppBar>
       <nav className={classes.drawer} aria-label="mailbox folders">
@@ -225,6 +245,7 @@ const ResponsiveDrawerGuest = (props) => {
           <Route path="/hr/EmployeeResult" component={EmployeeResult}/>
           <Route path="/hr/GuestResult" component={GuestResult}/>
           <Route path="/hr/GuestList" component={GuestList}/>
+          <Route path="/hr/editProfile" component={HrEditProfile}/>
         </Grid>
       </main>
     </div>

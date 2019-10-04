@@ -127,7 +127,7 @@ export default class GuestList extends Component {
               currentemp.educationLevel,
               currentemp.gpa,
 
-              <Link to={{pathname:'/GuestResult',
+              <Link to={{pathname:'/hr/GuestResult',
                guestId: currentemp.guestId}}
                 style={{"textDecoration": "none"}}>
               <Fab variant="contained" 
