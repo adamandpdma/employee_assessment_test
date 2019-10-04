@@ -13,8 +13,17 @@ class Countdown extends Component
         this.state={
             counter: this.props.location.timeData * 60,
             testSubtypeData: this.props.location.testSubtypeData,
+            timeData: this.props.location.timeData,
+            resultId: this.props.location.resultId,
+            correctAns: this.props.location.correctAns,
+            employeeId: this.props.location.employeeId,
+            guestId: this.props.location.guestId,
+            score: this.props.location.score,
+            settingsId: this.props.location.settingsId,
+            userQnsIds: this.props.location.userQnsIds
         }
     }
+
     convertSeconds = (s) => 
     {  
         let min = floor(s/60);
@@ -27,6 +36,7 @@ class Countdown extends Component
         {
             sec = '0' + sec
         }
+
         return(
             <div>
              <table>
@@ -40,8 +50,6 @@ class Countdown extends Component
                
                 </tr>
                 <tr>
-                {/* <td>MIN</td>
-                <td>SEC</td> */}
                 </tr> 
                 </tbody>
                 </table>
@@ -71,7 +79,17 @@ class Countdown extends Component
     {
         return(
             <div>
-          <TakeTest functionCountdown ={this.convertSeconds(this.state.counter)} testSubtypeValue={this.state.testSubtypeData}/>
+          <TakeTest 
+          functionCountdown ={this.convertSeconds(this.state.counter)} 
+          testSubtypeValue={this.state.testSubtypeData}
+          timeData= {this.state.timeData}
+          resultId= {this.state.resultId}
+          correctAns= {this.state.correctAns}
+          employeeId= {this.state.employeeId}
+          guestId= {this.state.guestId}
+          score= {this.state.score}
+          settingsId= {this.state.settingsId}
+          userQnsIds= {this.state.userQnsIds}/>
             </div>
         )
     }

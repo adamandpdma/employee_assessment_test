@@ -1,221 +1,3 @@
-// import React from "react";
-// import Axios from 'axios';
-// import Countdown from './Countdown'
-// import Table from '@material-ui/core/Table';
-// import TableBody from '@material-ui/core/TableBody';
-// import TableCell from '@material-ui/core/TableCell';
-// import TableHead from '@material-ui/core/TableHead';
-// import TableRow from '@material-ui/core/TableRow';
-// import Button from '@material-ui/core/Button';
-// import '../App.css';
-// import {quizData} from './quizData'
-
-
-
-// const buttonStyle = { 
-// padding: "20px",
-// width: "150px",
-// backgroundColor: "grey",
-// color: "white",
-// margin: "10px",
-
-// }
-
-// class TakeTest extends React.Component {
-//   state = {
-//     currentQuestion: 0,
-//     myAnswer: [],
-//     options: [],
-//     testscore: 1,
-//     disabled: true,
-//     isEnd: false,
-//     time: '',
-//     data: [],
-//     questionNumber: 1,
-//     userAns: '',
-//     correctAnswer: '',
-//     qnsId: [],
-//     testSubtypeValue: this.props.testSubtypeValue,
-//     resultId: 0,
-//     employeeId: 0,
-//     guestId: 0,
-//     score: 0,
-//     settingsId: 0,
-//     userQnsIds: '',
-//     correctAns: ''
-//   };
-
-//   loadQuizData = () => {
-//    console.log(this.state.testSubtypeValue)
-//      Axios.get('http://192.168.200.200:8080/backendapi/employee/12378/tests/'+this.state.testSubtypeValue)
-//     .then(res => { 
-//       console.log(res.data)
-//     this.setState(
-//       {
-//         resultId: res.data.resultId,
-//         correctAns: res.data.correctAns,
-//         employeeId: res.data.employeeId,
-//         guestId: res.data.guestId,
-//         score: res.data.score,
-//         settingsId: res.data.settingsId,
-//         userQnsIds: res.data.userQnsIds
-     
-//       }
-//     )
-//     console.log(this.state.resultId)
-//     Axios.get('http://192.168.200.200:8080/backendapi/employee/12378/tests/'+this.state.resultId+'/question-list')
-//     .then(res => { 
-//       this.setState(() => {
-//             return {
-//               questions: res.data[this.state.currentQuestion].questions,
-//               answer: res.data[this.state.currentQuestion].correctAns,
-//               options: [`A`, `B`, `C`, `D`],
-//               data: res.data,
-//               // correctAnswer: res.data.correctAns,
-//               qnsId: res.data.qnsId,
-//             };
-//           });
-//           console.log(this.state.resultId)
-//     })
-//     .catch(res => { 
-//       console.log("NO TESTS AVAILABLE")
-//     });
-//     })
-   
-//   };
-  
-//   componentDidMount() {
-//     this.loadQuizData();
-//   }
-//   nextQuestionHandler = () => {
-//     // console.log('test')
-//     const { myAnswer, answer, testscore } = this.state;
-
-//     if (myAnswer === answer) {
-//       this.setState({
-//         testscore: testscore + 1,
-//       });
-//     }
-
-//     this.setState({
-//       currentQuestion: this.state.currentQuestion + 1,
-//       questionNumber: this.state.questionNumber + 1
-//     });
-//     console.log(this.state.currentQuestion);
-//   };
-
-//   componentDidUpdate(prevProps, prevState) {
-//     if (this.state.currentQuestion !== prevState.currentQuestion) {
-//     Axios.get('http://192.168.200.200:8080/backendapi/employee/12378/tests/'+this.state.resultId+'/question-list')
-//     .then(res => { console.log(res.data)
-//         this.setState(() => {
-//             return {
-//               disabled: true,
-//               questions: res.data[this.state.currentQuestion].questions,
-//               answer: res.data[this.state.currentQuestion].correctAns,
-//               options: [`A`, `B`, `C`, `D`],
-              
-//             };
-//           });
-//     })
-//   }
-// }
- 
-//   checkAnswer = (answer) => {
-//     this.setState({ myAnswer: answer, disabled: false,  userAns: this.state.userAns+answer+','});
-//   };
-//   finishHandler = () => {
-//  const values =  {
-//         correctAns: this.state.correctAns,
-//         employeeId: this.state.employeeId,
-//         guestId: this.state.guestId,
-//         resultId: this.state.resultId,
-//         score: this.state.score,
-//         settingsId: this.state.settingsId,
-//         userAns: this.state.userAns,
-//         userQnsIds: this.state.userQnsIds
-//       }
-//       console.log(values)
-//   Axios.post('http://192.168.200.200:8080/backendapi/employee/12378/tests/'+this.state.resultId+'/submit', values)
-//   .then(res => console.log(res.data))
-
-//     if (this.state.currentQuestion === this.state.data.length - 1) {
-//       this.setState({
-//         isEnd: true
-//       });
-//     }
-
-//     console.log(this.state.userAns)
-// }
-//   render() {
-//     const { options, myAnswer, currentQuestion, isEnd } = this.state;
-
-//     if (isEnd) {
-//       return (
-//         <div className="result">
-//           <h3> Thanks for taking the Test, Your test is submitted.Your final score {this.state.testscore}</h3>
-    
-//         </div>
-//       );
-//     } else {
-//       return (
-//         <div className="App">
-//           <h3>{this.props.functionCountdown}</h3>
-//           <Table>
-//             <TableHead>
-//             <TableRow>
-//             <TableCell>Qn No</TableCell>
-//             <TableCell>Question</TableCell>
-//             <TableCell>Options</TableCell>
-//             </TableRow>
-//             </TableHead>
-//             <TableBody>
-//               <TableRow>
-//               <TableCell>{this.state.questionNumber}</TableCell>
-//               <TableCell> <img style={{"height": "300px", "width": "300px"}} src= {`data:image/jpeg;base64,${this.state.questions}`} />
-//               </TableCell>
-//               <TableCell>  
-//               {options.map(option => (
-//             <Button
-//               key={option.id}
-//               className={`ui floating message options
-//          ${myAnswer === option ? "selected" : null}
-//          `}
-//               onClick={() => this.checkAnswer(option)}
-//               variant="contained"
-//             >
-//               {option}
-//             </Button>
-//           ))}</TableCell>
-//               </TableRow>
-//             </TableBody>
-//            </Table>
-  
-//           {currentQuestion < this.state.data.length - 1 && (
-//             <button
-//               className="ui inverted button"
-//               disabled={this.state.disabled}
-//               onClick={this.nextQuestionHandler}
-//               style={buttonStyle}
-//             >
-//               Next
-//             </button>
-//           )}
-  
-//           {currentQuestion === this.state.data.length - 1 && (
-//             <button className="ui inverted button" onClick={this.finishHandler}  style={buttonStyle}>
-//               Finish
-//             </button>
-//           )}
-//         </div>
-//       );
-//     }
-//   }
-// }
-
-// export default TakeTest;
-
-
 import React from "react";
 import Axios from 'axios';
 import Countdown from './Countdown'
@@ -230,10 +12,15 @@ import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import { createMuiTheme } from "@material-ui/core";
 import { ThemeProvider } from '@material-ui/styles';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import {NavLink} from 'react-router-dom';
+import Grid from '@material-ui/core/Grid';
 
 
 
-const buttonStyle = {  
+const buttonStyle = { 
 padding: "20px",
 width: "150px",
 backgroundColor: "grey",
@@ -275,8 +62,7 @@ class TakeTest extends React.Component {
     userAns: '',
     correctAnswer: '',
     qnsId: [],
-    testSubtypeValue: this.props.testSubtypeValue,
-    resultId: 0,
+    resultId: this.props.resultId,
     employeeId: 0,
     guestId: 0,
     score: 0,
@@ -284,32 +70,15 @@ class TakeTest extends React.Component {
     userQnsIds: '',
     correctAns: '',
     disabled: true,
-    alignment: ''
+    alignment: '',
   };
 
 
 
   loadQuizData = () => {
 
-   console.log(this.state.testSubtypeValue)
-     Axios.get('http://192.168.200.200:8080/backendapi/employee/1010/tests/'+this.state.testSubtypeValue)
-    .then(res => { 
-      console.log(res.data)
-    this.setState(
-      {
-        resultId: res.data.resultId,
-        correctAns: res.data.correctAns,
-        employeeId: res.data.employeeId,
-        guestId: res.data.guestId,
-        score: res.data.score,
-        settingsId: res.data.settingsId,
-        userQnsIds: res.data.userQnsIds
-     
-      }
-    )
     console.log(this.state.resultId)
-    Axios.get('http://192.168.200.200:8080/backendapi/employee/1010/tests/'+this.state.resultId+'/question-list')
-    // Axios.get('http://192.168.200.200:8080/backendapi/employee/1111/tests/81/question-list')
+    Axios.get('http://192.168.200.200:8080/backendapi/employee/101/tests/'+this.state.resultId+'/question-list')
     .then(res => { 
       this.setState(() => {
             return {
@@ -322,10 +91,9 @@ class TakeTest extends React.Component {
           console.log(this.state.resultId)
     })
     .catch(res => { 
-      console.log("NO TESTS AVAILABLE")
-    });
-    })
-   
+      alert("NO TESTS AVAILABLE !")
+      window.location='/DashBoardEmployee'
+    }); 
   };
   
   componentDidMount() {
@@ -334,8 +102,7 @@ class TakeTest extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state.currentQuestion !== prevState.currentQuestion) {
-    Axios.get('http://192.168.200.200:8080/backendapi/employee/1010/tests/'+this.state.resultId+'/question-list')
-    // Axios.get('http://192.168.200.200:8080/backendapi/employee/1111/tests/81/question-list')
+    Axios.get('http://192.168.200.200:8080/backendapi/employee/101/tests/'+this.state.resultId+'/question-list')
     .then(res => { console.log(res.data)
         this.setState(() => {
             return {
@@ -347,10 +114,8 @@ class TakeTest extends React.Component {
     })
   }
 }
- 
- 
+
 nextQuestionHandler = () => {
-  // console.log('test')
   const { myAnswer, answer, testscore } = this.state;
 
   if (myAnswer === answer) {
@@ -368,17 +133,17 @@ nextQuestionHandler = () => {
 
 finishHandler = () => {
  const values =  {
-        correctAns: this.state.correctAns,
-        employeeId: this.state.employeeId,
-        guestId: this.state.guestId,
-        resultId: this.state.resultId,
-        score: this.state.score,
-        settingsId: this.state.settingsId,
+        correctAns: this.props.correctAns,
+        employeeId: this.props.employeeId,
+        guestId: this.props.guestId,
+        resultId: this.props.resultId,
+        score: this.props.score,
+        settingsId: this.props.settingsId,
         userAns: this.state.alignment.toString()+',',
-        userQnsIds: this.state.userQnsIds
+        userQnsIds: this.props.userQnsIds
       }
       console.log(values)
-  Axios.post('http://192.168.200.200:8080/backendapi/employee/1010/tests/'+this.state.resultId+'/submit', values)
+  Axios.post('http://192.168.200.200:8080/backendapi/employee/101/tests/'+this.state.resultId+'/submit', values)
   .then(res => console.log(res.data))
 
     if (this.state.currentQuestion === this.state.data.length - 1) {
@@ -403,19 +168,56 @@ handleChange = (index, newAlignment) => {
 };
 
 children = [
-  <ToggleButton key={1} value="A" aria-label="left aligned">
-   A
+  <ToggleButton key={1} value="A" aria-label="left aligned" placeholder="A">
   </ToggleButton>,
-  <ToggleButton  key={2} value="B">
-   B
+  <ToggleButton  key={2} value="B" placeholder="B">
   </ToggleButton>,
   <ToggleButton  key={3} value="C">
-   C
   </ToggleButton>,
   <ToggleButton key={4} value="D">
-    D
+  </ToggleButton>,
+    <ToggleButton key={5} value="E">
   </ToggleButton>,
 ];
+
+popOverPkay = () => 
+  {
+          return(
+            <Grid>
+            <NavLink to='/Test'  style={buttonStyle}>
+            <Button onClick={this.handleClose} color="primary" autoFocus>
+         OKAY
+        </Button>
+            </NavLink>
+        </Grid>
+          )
+      }
+  handleClickOpen = () => {
+        this.setState(
+            {
+                open: true
+            }
+        )
+      }
+    
+  handleClose = () => {
+       this.setState(
+           {
+               open: false
+           },
+           
+  this.setState(
+            {
+            testCat: '',
+            testType: '',
+            testSubtype: '',
+            noOfQns: '',
+            timeLimit: '',
+            open: false
+            }
+        )
+       )
+      }
 
   render() {
     const { options, myAnswer, currentQuestion, isEnd } = this.state;
@@ -424,10 +226,10 @@ children = [
       return (
         <div className="result">
           <h3> Thanks for taking the Test, Your test is submitted.</h3>
-    
         </div>
       );
-    } else {
+    }
+     else {
       return (
         <div className="App">
           <h3>{this.props.functionCountdown}</h3>
@@ -455,6 +257,13 @@ children = [
          >
              {this.children}
             </ToggleButtonGroup>
+            <div style={{"float": "left", "paddingRight": "45px"}}>
+            <p  style={{"float": "left", "paddingRight": "45px"}}>A</p>
+            <p  style={{"float": "left", "paddingRight": "45px"}}>B</p>
+            <p  style={{"float": "left", "paddingRight": "45px"}}>C</p>
+            <p  style={{"float": "left", "paddingRight": "45px"}}>D</p>
+            <p  style={{"float": "left", "paddingRight": "45px"}}>E</p>
+            </div>
             </ThemeProvider>
          </TableCell>
               </TableRow>
@@ -473,10 +282,26 @@ children = [
           )}
       
           {currentQuestion === this.state.data.length - 1 && (
-            <button className="ui inverted button" onClick={this.finishHandler}  style={buttonStyle}>
+            <button className="ui inverted button" 
+            disabled={this.state.disabled}
+            onClick={this.finishHandler}  
+            style={buttonStyle}>
               Finish
             </button>
           )}
+
+       <Dialog
+        open={this.state.open}
+        onClose={this.handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{" You can review your Test!!"}</DialogTitle>
+
+        <DialogActions>
+          {this.popOverPkay()}
+        </DialogActions>
+      </Dialog>
         </div>
       );
     }
@@ -484,3 +309,14 @@ children = [
 }
 
 export default TakeTest;
+
+
+
+
+
+
+
+
+
+
+

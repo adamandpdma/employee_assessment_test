@@ -25,6 +25,9 @@ import Agile from './Agile';
 import ProgrammingAndFramework from './ProgrammingAndFramework';
 import DevOps from './DevOps';
 import Countdown from './Countdown';
+import EmployeeReviewTest from './EmployeeReviewTest'
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import ReviewAllTests from './ReviewAllTests'
 
 
 const drawerWidth = 300;
@@ -73,7 +76,7 @@ const useStyles = makeStyles(theme => ({
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3),
+    padding: theme.spacing(2),
   },
   paper: {
     padding: theme.spacing(2),
@@ -81,6 +84,16 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: "#EDEBEB",
      
   },
+  stickToBottom: {
+    width: '74%',
+    position: 'fixed',
+    bottom: 0,
+    backgroundColor: "#E1E1E1",
+    padding: "20px"
+  },
+  // Grid: {
+  //   padding: theme.spacing(0)
+  // }
 }));
 const listStyle={
   textDecoration: "none",
@@ -125,7 +138,10 @@ const ResponsiveDrawerEmployee = (props) => {
 </svg>
   }
 </ListItemIcon>
-    {<NavLink to='/DashBoardEmployee' style={listStyle} className="NavLink"><ListItemText primary="DASHBOARD"/></NavLink> 
+    {<NavLink to='/DashBoardEmployee' 
+       style={{color: 'white', textDecoration: 'none'}}
+       activeStyle={{color: 'white', textDecoration: 'none'}}
+     className="NavLink"><ListItemText primary="DASHBOARD"/></NavLink> 
   }
           </ListItem>
         ))}
@@ -143,16 +159,32 @@ const ResponsiveDrawerEmployee = (props) => {
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
     <ListItem button className={classes.nested} onClick={navigation}>
-     <NavLink to='/ProgrammingAndFramework' style={listStyle} ><ListItemText primary="Programming and Framework" /></NavLink>
+     <NavLink to='/ProgrammingAndFramework'
+         style={{color: 'white', textDecoration: 'none'}}
+         activeStyle={{color: 'white', textDecoration: 'none'}}><ListItemText primary="Programming and Framework" /></NavLink>
           </ListItem>  
           <ListItem button className={classes.nested}>
-           <NavLink to='/Agile' style={listStyle} ><ListItemText primary="Agile Development"/></NavLink>
+           <NavLink to='/Agile' 
+              style={{color: 'white', textDecoration: 'none'}}
+              activeStyle={{color: 'white', textDecoration: 'none'}}><ListItemText primary="Agile Development"/></NavLink>
           </ListItem>
           <ListItem button className={classes.nested}>
-            <NavLink to='/DevOps' style={listStyle} ><ListItemText primary="DevOps"/></NavLink>
+            <NavLink to='/DevOps'
+               style={{color: 'white', textDecoration: 'none'}}
+               activeStyle={{color: 'white', textDecoration: 'none'}}><ListItemText primary="DevOps"/></NavLink>
           </ListItem>
         </List>
       </Collapse>
+      <ListItem button>
+        <ListItemIcon>
+        <svg xmlns="http://www.w3.org/2000/svg" width="23.733" height="23.667" viewBox="0 0 23.733 23.667">
+  <path id="Icon_awesome-pencil-alt" data-name="Icon awesome-pencil-alt" d="M23.081,6.571,20.944,8.7a.558.558,0,0,1-.788,0L15.011,3.57a.554.554,0,0,1,0-.786L17.148.654a2.234,2.234,0,0,1,3.148,0l2.786,2.778A2.211,2.211,0,0,1,23.081,6.571ZM13.175,4.615,1,16.754.019,22.371a1.112,1.112,0,0,0,1.289,1.285l5.632-.985L19.113,10.532a.554.554,0,0,0,0-.786L13.968,4.615a.563.563,0,0,0-.793,0Zm-7.422,11.1a.643.643,0,0,1,0-.915L12.892,7.68a.648.648,0,1,1,.918.915L6.671,15.714A.648.648,0,0,1,5.753,15.714ZM4.08,19.6H6.305V21.28l-2.99.522L1.873,20.365,2.4,17.383H4.08Z" transform="translate(-0.002 -0.005)" fill="#bdbdbd"/>
+</svg>
+        </ListItemIcon>
+        <NavLink to='/reviewAll' 
+          style={{color: 'white', textDecoration: 'none'}}
+          activeStyle={{color: 'white', textDecoration: 'none'}}><ListItemText primary="REVIEW TEST" /></NavLink>
+      </ListItem>
       </List>
     </div>
   );
@@ -213,6 +245,8 @@ const ResponsiveDrawerEmployee = (props) => {
           <Route path='/DevOps' component={DevOps}></Route>
           <Route path='/takeTest' component={Countdown}></Route>
           <Route path='/Test' component={TestDetails}></Route>
+          <Route path='/review' component={EmployeeReviewTest}></Route>
+          <Route path='/reviewAll' component={ReviewAllTests}></Route>
    
         </Grid>
       </main>
