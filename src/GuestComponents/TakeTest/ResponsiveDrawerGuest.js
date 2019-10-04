@@ -21,7 +21,11 @@ import {NavLink} from 'react-router-dom';
 import DashBoardGuest from './DashBoardGuest';
 import ViewTestDetails from './ViewTestDetails'
 import Countdown from './Countdown';
+import GuestRegister from '../Register/GuestRegister'
 import BottomNavigation from '@material-ui/core/BottomNavigation';
+import { Button } from '@material-ui/core';
+import auth from "../../auth"
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 
 const drawerWidth = 300;
@@ -91,6 +95,11 @@ const listStyle={
   listStyle: 'none',
   color: 'none'
 }
+
+const style = {
+  //paddingLeft: "730px"
+  left:640
+}
 const ResponsiveDrawerGuest = (props) => {
   const { container } = props;
   const classes = useStyles();
@@ -129,7 +138,7 @@ const ResponsiveDrawerGuest = (props) => {
 </svg>
   }
 </ListItemIcon>
-    {<NavLink to='/DashBoardGuest'
+    {<NavLink to='/guest/DashBoardGuest'
        style={{color: 'white', textDecoration: 'none'}}
        activeStyle={{color: 'white', textDecoration: 'none'}}
     className="NavLink"><ListItemText primary="DASHBOARD"/></NavLink> 
@@ -150,7 +159,7 @@ const ResponsiveDrawerGuest = (props) => {
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
     <ListItem button className={classes.nested} onClick={navigation}>
-     <NavLink to='/Register' style={listStyle} 
+     <NavLink to='/guest/Register' style={listStyle} 
         style={{color: 'white', textDecoration: 'none'}}
         activeStyle={{color: 'white', textDecoration: 'none'}}><ListItemText primary="Register" /></NavLink>
           </ListItem>  
@@ -174,6 +183,20 @@ const ResponsiveDrawerGuest = (props) => {
           >
             <MenuIcon />
           </IconButton>
+
+          <Button
+        color="inherit"
+        type="submit"
+        onClick={() => {
+          auth.logout(() => {
+            window.location = "/"
+          })
+          localStorage.clear()
+        }}
+        style={style}
+        >
+        <ExitToAppIcon />Log Out
+        </Button>
         </Toolbar>
       </AppBar>
       <nav className={classes.drawer} aria-label="mailbox folders">
@@ -209,9 +232,10 @@ const ResponsiveDrawerGuest = (props) => {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <Grid>
-          <Route path='/DashBoardGuest' component={DashBoardGuest}></Route>
-          <Route path='/ViewTestDetails' component={ViewTestDetails}></Route>
-          <Route path='/takeTest' component={Countdown}></Route>
+          <Route path='/guest/DashBoardGuest' component={DashBoardGuest}></Route>
+          <Route path='/guest/ViewTestDetails' component={ViewTestDetails}></Route>
+          <Route path='/guest/takeTest' component={Countdown}></Route>
+          <Route path='/guest/register' component={GuestRegister}></Route>
         </Grid>
       </main>
     </div>

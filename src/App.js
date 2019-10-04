@@ -16,6 +16,7 @@ import Home from './Home'
 import ResponsiveDrawer from './AdminComponents/crudTest/ResponsiveDrawer'
 import EmployeeResponsiveDrawer from './EmployeeComponents/TakeTest/ResponsiveDrawerEmployee'
 import HrResponsiveDrawer from './HrComponents/ViewTestResult/ResponsiveDrawerHr'
+import GuestResponsiveDrawer from './GuestComponents/TakeTest/ResponsiveDrawerGuest'
 
 
 const App = () => {
@@ -30,6 +31,7 @@ const App = () => {
           <Route path = '/EmployeeLogin' component = {EmployeeLogin}/>
           <Route path = '/EmployeeRegister' component = {EmployeeRegister}/>
           <Route path = '/GuestLogin' component = {GuestLogin}/>
+          <Route path = '/guest' component = {GuestResponsiveDrawer}/>
           <Route path = '/admin' component = {ResponsiveDrawer}/>
           <Route path = '/employee' component = {EmployeeResponsiveDrawer}/>
           <Route path = '/hr' component = {HrResponsiveDrawer}/>          
