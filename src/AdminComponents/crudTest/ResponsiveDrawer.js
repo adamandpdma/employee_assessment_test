@@ -21,13 +21,16 @@ import {NavLink} from 'react-router-dom';
 import Technical from './Technical';
 import NonTechnical from './NonTechnical'
 import Dashboard from './Dashboard';
-import EmployeesList from '../../AdminComponents/EmployeesDatabase/EmployeesList';
-import EditEmployeesData from '../../AdminComponents/EmployeesDatabase/EditEmployeesData'
+import EmployeesList from '../EmployeesDatabase/EmployeesList';
+import EditEmployeesData from '../EmployeesDatabase/EditEmployeesData'
 import CreateTest from './CreateTest';
 import UploadTestBank from './UploadTestBank';
 import EditTest from './EditTest';
 import ViewTest from './ViewTest';
 import TestRows from './TestRows';
+import ImageUpload from './ImageUpload';
+import {ProtectedRoute} from '../AdminLogin/Protected.Route';
+import BottomNavigation from '@material-ui/core/BottomNavigation';
 
 const drawerWidth = 300;
 
@@ -35,11 +38,25 @@ const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
   },
+  stickToBottom: {
+    width: '74%',
+    position: 'fixed',
+    bottom: 0,
+    backgroundColor: "#E1E1E1",
+    padding: "20px"
+  },
   drawer: {
     [theme.breakpoints.up('sm')]: {
       width: drawerWidth,
       flexShrink: 0,
 
+    },
+    stickToBottom: {
+      width: '74%',
+      position: 'fixed',
+      bottom: 0,
+      backgroundColor: "#E1E1E1",
+      padding: "20px"
     },
   },
   appBar:{
@@ -89,7 +106,7 @@ const listStyle={
   listStyle: 'none',
   color: 'none'
 }
-const ResponsiveDrawerAdmin = (props) => {
+const ResponsiveDrawer = (props) => {
   const { container } = props;
   const classes = useStyles();
   const theme = useTheme();
@@ -134,8 +151,14 @@ const ResponsiveDrawerAdmin = (props) => {
 </svg>
   }
 </ListItemIcon>
-    {index % 2 === 0 ?<NavLink to='c' style={listStyle} className="NavLink"><ListItemText primary="DASHBOARD"/></NavLink> 
-    :<NavLink to='/admin/employees' style={listStyle} className="NavLink"><ListItemText primary="EMPLOYEES DATABASE"/></NavLink>}
+    {index % 2 === 0 ?<NavLink to='c' 
+       style={{color: 'white', textDecoration: 'none'}}
+       activeStyle={{color: 'white', textDecoration: 'none'}} 
+    className="NavLink"><ListItemText primary="DASHBOARD"/></NavLink> 
+    :<NavLink to='/admin/employees' 
+    style={{color: 'white', textDecoration: 'none'}}
+    activeStyle={{color: 'white', textDecoration: 'none'}}
+     className="NavLink"><ListItemText primary="EMPLOYEES DATABASE"/></NavLink>}
           </ListItem>
         ))}
         <ListItem button onClick={handleClick}>
@@ -151,10 +174,14 @@ const ResponsiveDrawerAdmin = (props) => {
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
     <ListItem button className={classes.nested} onClick={navigation}>
-     <NavLink to='/Technical' style={listStyle} ><ListItemText primary="Technical Test" /></NavLink>
+     <NavLink to='/admin/Technical' 
+        style={{color: 'white', textDecoration: 'none'}}
+        activeStyle={{color: 'white', textDecoration: 'none'}}><ListItemText primary="Technical Test" /></NavLink>
           </ListItem>  
           <ListItem button className={classes.nested}>
-            <NavLink to='/NonTechnical' style={listStyle} ><ListItemText primary="Non-Technical Test"/></NavLink>
+            <NavLink to='/admin/NonTechnical' 
+               style={{color: 'white', textDecoration: 'none'}}
+               activeStyle={{color: 'white', textDecoration: 'none'}} ><ListItemText primary="Non-Technical Test"/></NavLink>
           </ListItem>
         </List>
       </Collapse>
@@ -212,30 +239,26 @@ const ResponsiveDrawerAdmin = (props) => {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <Grid>
-          {/* <Paper className={classes.paper}>DashBoard / <a style={anchor}>My DashBoard</a></Paper>   */}
-          {/* <Route exact path='/' component={ResponsiveDrawer}></Route> */}
-          <Route path='/Technical' component={Technical}></Route>
-          <Route path='/createTest' component={CreateTest}></Route>
-          <Route path='/createTest' component={CreateTest}></Route>
-          <Route path='/uploadTestBank' component={UploadTestBank}></Route>
-          <Route path='/viewTest' component={ViewTest}></Route>
-          <Route path='/editTest/:id' component={EditTest}></Route>
-          <Route path='/NonTechnical' component={NonTechnical}></Route>
-          <Route path='/Dashboard' component={Dashboard}></Route>
+          <Route path='/admin/Technical' component={Technical}></Route>
+          <Route path='/admin/createTest' component={CreateTest}></Route>
+          <Route path='/admin/uploadTestBank' component={UploadTestBank}></Route>
+          <Route path='/admin/viewTest' component={ViewTest}></Route>
+          <Route path='/admin/editTest/:id' component={EditTest}></Route>
+          <Route path='/admin/NonTechnical' component={NonTechnical}></Route>
+          <Route path='/admin/Dashboard' component={Dashboard}></Route>
           <Route path="/admin/employees" exact component={EmployeesList} />
           <Route path="/admin/employees/:id" component={EditEmployeesData} />
-          <Route path="/testRows" component={TestRows} />
+          <Route path="/admin/testRows" component={TestRows} />
         </Grid>
       </main>
     </div>
   );
 }
 
-ResponsiveDrawerAdmin.propTypes = {
+ResponsiveDrawer.propTypes = {
   container: PropTypes.instanceOf(typeof Element === 'undefined' ? Object : Element),
 };
 
-export default ResponsiveDrawerAdmin;
-
+export default ResponsiveDrawer;
 
 

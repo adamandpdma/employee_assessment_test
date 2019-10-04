@@ -47,13 +47,13 @@ export default class ViewTest extends Component {
              )
              this.setState(
                 {
-                    data: this.state.data.filter(el => el.testCat === "Technical" && el.isHidden === false),
+                    data: this.state.data.filter(el => el.isHidden === false),
                 }
             )
           
         })
     }
-    else
+    if(this.state.testCat === "Non-Technical")
     {
         axios.get('http://192.168.200.200:8080/backendapi/admin/test-detail/category/'+this.state.testCat)
         .then(res => {
@@ -64,7 +64,7 @@ export default class ViewTest extends Component {
              )
              this.setState(
                 {
-                    data: this.state.data.filter(el => el.testCat === "Non-Technical" && el.isHidden === false),
+                    data: this.state.data.filter(el => el.isHidden === false),
                 }
             )
           
@@ -91,7 +91,7 @@ export default class ViewTest extends Component {
           {
               return(
                 <Grid>
-                <NavLink to='/Technical'><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 18 18">
+                <NavLink to='/admin/Technical'><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 18 18">
                 <path d="M15 8.25H5.87l4.19-4.19L9 3 3 9l6 6 1.06-1.06-4.19-4.19H15v-1.5z"/></svg></NavLink><h3 style={textStyle}>VIEW TEST</h3>			
                 </Grid>
               )
@@ -99,7 +99,7 @@ export default class ViewTest extends Component {
           else{
               return(
                 <Grid>
-                <NavLink to='/NonTechnical'><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 18 18">
+                <NavLink to='/admin/NonTechnical'><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 18 18">
                 <path d="M15 8.25H5.87l4.19-4.19L9 3 3 9l6 6 1.06-1.06-4.19-4.19H15v-1.5z"/></svg></NavLink><h3 style={textStyle}>VIEW TEST</h3>			
                 </Grid>
               )
@@ -176,7 +176,7 @@ export default class ViewTest extends Component {
                currentemp.testSubtype,
                currentemp.noOfQns,
                currentemp.timeLimit,
-               <TableCell><NavLink to={{pathname: '/editTest/'+currentemp.settingsId, 
+               <TableCell><NavLink to={{pathname: '/admin/editTest/'+currentemp.settingsId, 
                aboutprops: currentemp.testCat, 
                aboutpropsTwo: currentemp.settingsId}} style={Navstyle}>
                     <Button variant="contained"  style={style}>EDIT</Button>

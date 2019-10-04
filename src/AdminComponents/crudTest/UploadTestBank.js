@@ -1,3 +1,4 @@
+//original
 import React,{Component} from 'react';
 import axios from 'axios';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -39,6 +40,10 @@ const textStyle={
 const navStyle = {
     textDecoration: "none",
   }
+  const errorColor=
+{
+    color: "red"
+}
  
 class UploadTestBank extends Component
 {
@@ -54,27 +59,85 @@ class UploadTestBank extends Component
      this.state = {
           domain: this.props.location.domain,
           category: '',
+          categoryError: '',
           typeoftest: '',
-          numberofquestions: '',
-          open: false
+          typeoftestError: '',
+          numberofquestions: 0,
+          numberofquestionsError: '',
+          open: false,
      }
  }
- onSubmitHandler = (event) =>
- {
-     event.preventDefault();
+ validate = () => 
+{
+    let isError = false;
+    const errors ={};
 
-    const values = {
+    if(this.state.numberofquestions === ''){
+        isError = true;
+        errors.numberofquestionsError= "Enter a number";
+    }
+    if(this.state.category === ''){
+        isError = true;
+        errors.categoryError= "Enter Test Category";
+    }
+    
+    if(this.state.typeoftest === ''){
+        isError = true;
+        errors.typeoftestError= "Enter test type";
+    }
+    if(this.state.numberofquestions.length >= 1)
+    {
+        this.setState(
+            {
+               numberofquestionsError: ""
+            }
+        )
+    }
+    if(this.state.category.match("^[A-z 0-9]+$" ))
+    {
+        this.setState(
+            {
+               categoryError: ""
+            }
+        )
+    }
+    if(this.state.typeoftest.match("^[A-z 0-9]+$" ))
+    {
+        this.setState(
+            {
+               typeoftestError: ""
+            }
+        )
+    }
+    
+    if(isError){
+        this.setState(
+            {
+                ...this.state,
+                ...errors
+            });
+    }
+
+    return isError;
+}
+
+ onSubmitHandler = () =>
+ {
+     console.log("hello submit here")
+
+
+          const values ={
+
+          
             domain: this.state.domain,
             category: this.state.category,
             typeoftest: this.state.typeoftest,
             numberofquestions: this.state.numberofquestions,
+          }
+          console.log(values);
         }
-    console.log(values);
-    // axios.post("http://localhost:5000/TestBank/add", values)
-    // .then((res) => console.log(res.data))
-
- }
-
+  
+ 
   categoryOnChangeHandler = (event) =>
   {
       this.setState(
@@ -105,7 +168,7 @@ class UploadTestBank extends Component
       {
           return(
             <Grid>
-            <NavLink to='/Technical'><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 18 18">
+            <NavLink to='/admin/Technical'><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 18 18">
             <path d="M15 8.25H5.87l4.19-4.19L9 3 3 9l6 6 1.06-1.06-4.19-4.19H15v-1.5z"/></svg></NavLink><h3 style={textStyle}>UPLOAD TEST BANK</h3>			
             </Grid>
           )
@@ -113,7 +176,7 @@ class UploadTestBank extends Component
       else{
           return(
             <Grid>
-            <NavLink to='/NonTechnical'><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 18 18">
+            <NavLink to='/admin/NonTechnical'><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 18 18">
             <path d="M15 8.25H5.87l4.19-4.19L9 3 3 9l6 6 1.06-1.06-4.19-4.19H15v-1.5z"/></svg></NavLink><h3 style={textStyle}>UPLOAD TEST BANK</h3>			
             </Grid>
           )
@@ -144,8 +207,9 @@ class UploadTestBank extends Component
                   required 
                   onChange={this.categoryOnChangeHandler} 
                   value={this.state.category}
-                  >
+                  errorText={this.state.categoryError}>
               </TextField><br/>
+              <div style={errorColor}>{this.state.categoryError}</div>
               </FormControl><br/>
            
               <InputLabel style={InputLabelStyle}>TYPE OF TEST</InputLabel>
@@ -154,8 +218,10 @@ class UploadTestBank extends Component
                  style={fieldStyle}
                  required 
                   onChange={this.typeOfTestOnChangeHandler} 
-                  value={this.state.typeoftest}>
+                  value={this.state.typeoftest}
+                  errorText={this.state.typeoftestError}>
               </TextField><br/>
+              <div style={errorColor}>{this.state.typeoftestError}</div>
               </FormControl><br/>
 
               <InputLabel style={InputLabelStyle}>NO OF QUESTIONS</InputLabel>
@@ -166,11 +232,25 @@ class UploadTestBank extends Component
               type="number"
               onChange={this.noOfQuestionsOnChangeHandler}
               value={this.state.numberofquestions
-              }></TextField>
+              }
+              errorText={this.state.numberofquestionsError}>
+              </TextField>
+               <div style={errorColor}>{this.state.numberofquestionsError}</div>
                </FormControl><br/><br/>
-
-               <NavLink to={{pathname: '/testRows', 
-           numberofquestions: this.state.numberofquestions, category: this.state.category, typeoftest: this.state.typeoftest}}  style={navStyle}><Button variant="contained" style={buttonStyle}>Generate Test Rows</Button></NavLink> 
+          
+               <NavLink to={{pathname:'/admin/testRows', 
+           numberofquestions: this.state.numberofquestions,
+           category: this.state.category,
+           typeoftest: this.state.typeoftest,
+           domain: this.state.domain
+          }}
+           style={navStyle}
+           >
+           <Button variant="contained" 
+           style={buttonStyle}
+           onClick={this.onSubmitHandler}
+           >Generate Test Rows</Button>
+           </NavLink>
               </form>
                 </Grid>
                 </Grid>
