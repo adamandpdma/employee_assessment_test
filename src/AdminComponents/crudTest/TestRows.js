@@ -30,7 +30,9 @@ const ObjectRow = (props) => {
 
         <TableCell>
          <ImageUpload numberofquestions={props.numberofquestions} alignment={props.alignment[props.keyData]}/>
-         <Button onClick={props.QnsImageArray}>DONE</Button>
+         <Button variant="contained" 
+         onClick={(event) => props.QnsImageArray(event)}
+         style={{"fontSize": "10px"}}>DONE</Button>
         </TableCell>
         
         <TableCell> 
@@ -147,13 +149,15 @@ class TestRows extends React.Component {
        )})
     }    
    
-    QnsImageArray = () => {
+    QnsImageArray = (event) => {
     
           const values = {
           correctAns: this.state.alignment[this.state.i],
           poolId: this.state.poolId,
           qns: this.props.location.testtwo.split(',')[1]
         }   
+      
+      event.target.style.color="grey"
                  
       qnsImg.push(values)
       console.log(qnsImg)
@@ -175,7 +179,7 @@ for (let i = 0; i < this.state.numberofquestions; i++) {
          handleChange={this.handleChange}
          onSubmitHandler={this.onSubmitHandler}
          numberofquestions={this.state.numberofquestions}
-         QnsImageArray={this.QnsImageArray}
+         QnsImageArray={(event) => this.QnsImageArray(event)}
          />);
 }
 return <TableBody>{rows}</TableBody>;
@@ -339,7 +343,7 @@ handleChange = (index, newAlignment) => {
                {this.rows()}
               </TableBody>
               </Table>
-              <Button variant="contained" style={{"margin": "20px"}} 
+              <Button variant="contained" style={{"margin": "20px", "color": "black"}} 
               onClick={this.onSubmitHandler}>UPLOAD TEST BANK</Button>
                 <Dialog
         open={this.state.open}

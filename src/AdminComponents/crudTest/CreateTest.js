@@ -23,7 +23,7 @@ const fieldStyle = {
   flexWrap: 'wrap'
 }
 const buttonStyle = {
-    color: "grey",
+    color: "black",
     marginTop: "30px",
     marginLeft: "30px",
     width: "170px",

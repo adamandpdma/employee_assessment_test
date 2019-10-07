@@ -23,7 +23,7 @@ import TestRows from './TestRows';
           flexWrap: 'wrap'
   }
   const buttonStyle = {
-      color: "grey",
+      color: "black",
   }
   const containerStyle = {
     display: 'flex',
@@ -135,7 +135,7 @@ class UploadTestBank extends Component
             numberofquestions: this.state.numberofquestions,
           }
           console.log(values);
-        }
+ }
   
  
   categoryOnChangeHandler = (event) =>

@@ -18,6 +18,7 @@ class ImageUpload extends React.Component {
         file: '',
         imagePreviewUrl: '',
         numberofquestions: this.props.numberofquestions,
+        backgroundColor: ""
             }
     }
     _handleSubmit(e) 
@@ -55,7 +56,10 @@ class ImageUpload extends React.Component {
          reader.readAsDataURL(file);
       });
     }
-
+   colorChange = (event) => 
+   {
+    event.target.style.color= "grey"
+   }
     render() {
   
       let {imagePreviewUrl} = this.state;
@@ -63,7 +67,7 @@ class ImageUpload extends React.Component {
       if (imagePreviewUrl) {
         $imagePreview = (<img src={imagePreviewUrl} style={imgStyle}/>);
       } else {
-        $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
+        $imagePreview = (<div><p className="previewText">Please select an Image for Preview</p><br/></div>);
       }
       return (
         <div className="previewComponent">
@@ -74,11 +78,15 @@ class ImageUpload extends React.Component {
  <NavLink to={{Pathname: '/admin/testRows',
        testtwo: this.state.imagePreviewUrl
         }}
+        style={{"textDecoration": "none"}}
+        onClick={(event) => this.colorChange(event)}
         >
-          <button variant="contained"
-          style={{"padding": "10px", "marginTop": "10px"}}
-              >Upload Image
-              </button>
+          <Button variant="contained"
+          style={{"padding": "5px",
+           "marginTop": "5px", "fontSize": "10px"}}
+          >
+            Upload Image
+              </Button>
               </NavLink> 
 
           </form>

@@ -17,7 +17,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
           flexWrap: 'wrap'
   }
   const buttonStyle = {
-      color: "grey",
+      color: "black",
   }
   const containerStyle = {
     display: 'flex',
