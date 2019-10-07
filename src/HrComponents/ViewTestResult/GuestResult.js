@@ -5,13 +5,19 @@ import MUIDataTable from "mui-datatables";
 import Fab from '@material-ui/core/Fab';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 
+const ceil =require('math-ceil')
+
 export default class GuestResult extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
         guestId: this.props.location.guestId,
-        guests: []
+        guests: [],
+        score: [],
+        qnsNo: [],
+        pass: true,
+        booleanResults: []
     };
   }
 
@@ -43,22 +49,66 @@ export default class GuestResult extends Component {
   })
 
   componentDidMount() {
+    
     axios.get('http://192.168.200.200:8080/backendapi/human-resources/{hrId}/test-result/guest/'+this.state.guestId)
       .then(response => {
-        this.setState({ 
+        this.setState
+        ({ 
             guests: response.data 
         })
+        this.setState(
+          {
+          score: this.state.guests.map(el => el.score),
+          qnsNo: this.state.guests.map(el => el.userQnsIds)
+          }
+      ) 
         this.setState(
             {
             guests: this.state.guests.filter(el => el.testType !== "" && el.testSubtype !== ""),
             }
         )
+
+        for(let i=0, j=0; i<this.state.score.length, j<this.state.qnsNo.length; i++, j++){
+          if(ceil((this.state.score[i]/((this.state.qnsNo[j].split(',').length) - 1))*100) >= 50)
+          {
+            this.setState({
+              pass: "true"
+            })
+          }
+          else {
+            this.setState({
+              pass: "false"
+            })
+            
+          }
+  
+            this.setState({
+              booleanResults: this.state.booleanResults.concat(this.state.pass)
+            })
+        }
+
+
       })
       .catch((error) => {
         console.log(error);
       })
+
   }
-  
+  Percentage = (score,qnsNo) => 
+  {
+       if(score === 0 && qnsNo === "")
+       {
+         return(
+           <p>0%</p>
+         )
+       }
+       else
+       {
+         return(
+           <p>{ceil((score/((qnsNo.split(',').length) - 1))*100) + '%'}</p>
+         )
+       }
+  }
  
 
   render() {
@@ -95,6 +145,41 @@ export default class GuestResult extends Component {
           filter: false,
         }
       },
+      {
+        name: "Percentage",
+        options: {
+          filter: false,
+        }
+      },
+      {
+        name: "Pass/Fail",
+        options: {
+          filter: true,
+          filterOptions: {
+            names: ['Pass', 'Fail'],
+            logic(v, filterVal) {
+             // v = this.testFilterRender(v)
+            if (v === "true") {
+              return filterVal.indexOf('Pass');
+            } else {
+              return filterVal.indexOf('Fail');
+            }
+          },
+          },
+
+          customBodyRender: (value) => {
+            if (value === "true")
+              return (
+                <label style={{color: "green", "font-weight": "bold"}}>Pass</label>
+              );
+            else
+              return (
+                <label style={{color: "red", "font-weight": "bold"}}>Fail</label>
+              );
+          }
+        }
+
+      },
   ]
     
 
@@ -103,11 +188,13 @@ export default class GuestResult extends Component {
     <MUIDataTable 
   
         title={"Guest Test Result"}
-        data={this.state.guests.map(currentemp => {
+        data={this.state.guests.map((currentemp,i) => {
             return [
               currentemp.testType,
               currentemp.testSubtype,
-              currentemp.score+' / '+((currentemp.userQnsIds.split(',').length) - 1),        
+              currentemp.score+' / '+((currentemp.userQnsIds.split(',').length) - 1),  
+              this.Percentage(currentemp.score, currentemp.userQnsIds) ,
+              this.state.booleanResults[i]        
             ]})}
 
         columns={columns}

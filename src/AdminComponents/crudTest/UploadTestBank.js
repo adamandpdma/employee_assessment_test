@@ -199,8 +199,15 @@ class UploadTestBank extends Component
                 >
                 <Grid item xs={12}>
                 <form onSubmit={this.onSubmitHandler} style={style}>
-     
-              <InputLabel style={InputLabelStyle}>CATEGORY</InputLabel>
+      
+              {this.state.domain === "Technical" && (
+                 <InputLabel style={InputLabelStyle}>CATEGORY
+                 <p style={{"color": "blue"}}>Ex: Programming, Agile, DevOps</p></InputLabel>
+              )}
+              {this.state.domain === "Non-Technical" && (
+                 <InputLabel style={InputLabelStyle}>CATEGORY
+                 </InputLabel>
+              )}
               <FormControl>
                   <TextField
                   style={fieldStyle}
