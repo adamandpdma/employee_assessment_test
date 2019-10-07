@@ -52,8 +52,8 @@ submitValues = ({name, nric, mobile, educationLevel, gpa, graduationYear}) => {
 
   const guest ={
     name: name,
-    email:"",
-    nric:   nric,
+    email:"Guest@Optimum.com",
+    nric: nric,
     mobileNo: mobile,
     educationLevel: educationLevel,
     gpa: gpa,
@@ -62,6 +62,7 @@ submitValues = ({name, nric, mobile, educationLevel, gpa, graduationYear}) => {
   
   axios.post('http://192.168.200.200:8080/backendapi/guest/register',guest)
       .then(res =>{
+        if(res.data != -1){
         localStorage.setItem("GuestId",res.data)
           return (
             // this.props.history.push('./RegistrationComplete')      
@@ -69,6 +70,12 @@ submitValues = ({name, nric, mobile, educationLevel, gpa, graduationYear}) => {
               message:true
             }) 
           )}
+        else{
+          this.setState({
+            errorMessage:true
+          })
+      }  
+      }
           
 );
 }
@@ -108,14 +115,14 @@ handleClose = () => {
               validationSchema={validationSchema}
               onSubmit={this.submitValues}
             />      
-      {/* <Dialog
+      <Dialog
             open={errorMessage}
             onClose={handleClose}
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
             >
-            <DialogTitle id="alert-dialog-title">{"Invalid Credentials"}</DialogTitle>
-      </Dialog> */}
+            <DialogTitle id="alert-dialog-title">{"NRIC has been registered once"}</DialogTitle>
+      </Dialog>
       <Dialog
             open={message}
             onClose={handleClose}
