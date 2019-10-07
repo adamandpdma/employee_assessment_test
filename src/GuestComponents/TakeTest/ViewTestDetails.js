@@ -142,20 +142,20 @@ export default class ViewTestDetails extends Component {
     timeLimit, noOfQns) => {
     if (sessionStorage.getItem(id)) {
         return (
-            <img src={Start} className="btn"  id={id}  
+            <Button src={Start} className="btn"  id={id}  
             onClick={(element) => this.handleClickOpen(testSubtype, 
               timeLimit, noOfQns,element)} 
                variant="contained" 
                disabled={true}
-               style={{"height": "35px"}}></img>
+               style={{"height": "35px"}}>START</Button>
         
         )
     } else {
         return (
-            <img  src={Start}  className="btn"  id={id}  
+            <Button  src={Start}  className="btn"  id={id}  
             onClick={(element) => this.handleClickOpen(testSubtype, 
               timeLimit, noOfQns,element)} 
-           variant="contained" style={{"height": "35px"}}></img>
+           variant="contained" style={{"height": "35px"}}>START</Button>
         
         )
     }
