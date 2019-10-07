@@ -250,24 +250,24 @@ popOverPkay = () =>
               <TableCell> <img style={{"height": "300px", "width": "300px"}} src= {`data:image/jpeg;base64,${this.state.questions}`} />
               </TableCell>
               <TableCell> 
-              <ThemeProvider theme={theme}>
+              {/* <ThemeProvider theme={theme}> */}
               <ToggleButtonGroup 
          value={this.state.alignment[this.state.currentQuestion]} key={this.state.currentQuestion}
          exclusive onChange={(e) => this.handleChange(this.state.currentQuestion, e.target.value)} 
          aria-label="text alignment"
          onClick={this.checkAnswer}
-         style={theme}
+        //  style={theme}
          >
              {this.children}
-            </ToggleButtonGroup>
-            <div style={{"float": "left", "paddingRight": "45px"}}>
-            <p  style={{"float": "left", "paddingRight": "45px"}}>A</p>
-            <p  style={{"float": "left", "paddingRight": "45px"}}>B</p>
-            <p  style={{"float": "left", "paddingRight": "45px"}}>C</p>
-            <p  style={{"float": "left", "paddingRight": "45px"}}>D</p>
-            <p  style={{"float": "left", "paddingRight": "45px"}}>E</p>
+            </ToggleButtonGroup><br/>
+            <div style={{"float": "left", "paddingRight": "18px"}}>
+            <p  style={{"float": "left", "paddingRight": "18px"}}>A</p>
+            <p  style={{"float": "left", "paddingRight": "18px"}}>B</p>
+            <p  style={{"float": "left", "paddingRight": "18px"}}>C</p>
+            <p  style={{"float": "left", "paddingRight": "18px"}}>D</p>
+            <p  style={{"float": "left", "paddingRight": "18px"}}>E</p>
             </div>
-            </ThemeProvider>
+            {/* </ThemeProvider> */}
          </TableCell>
               </TableRow>
             </TableBody>
