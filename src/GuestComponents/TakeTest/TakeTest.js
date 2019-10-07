@@ -127,6 +127,7 @@ nextQuestionHandler = () => {
   this.setState({
     currentQuestion: this.state.currentQuestion + 1,
     questionNumber: this.state.questionNumber + 1,
+    disabled: true
   });
   console.log(this.state.currentQuestion);
 };
