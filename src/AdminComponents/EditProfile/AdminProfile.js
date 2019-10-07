@@ -203,6 +203,7 @@ render(){
   const open = this.state.open
   const dialog = this.state.dialog
   const details = this.state.details
+  const name = localStorage.getItem('name')
 
   return (
 
@@ -221,7 +222,7 @@ render(){
         </Avatar>
         </Box>
         <Box mx={1.5}>
-        {details.name}  
+          {name}
         </Box>
       </Box>
 

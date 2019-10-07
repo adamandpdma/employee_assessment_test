@@ -39,6 +39,7 @@ class InputForm extends Component {
         console.log(res.data)
        { if (res.data === true) {
           return (
+            localStorage.setItem("name",name),
             this.setState({message:true})
             )}}
       }))
