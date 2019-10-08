@@ -18,6 +18,9 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import {NavLink} from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import { withRouter } from "react-router";
+import PopupState, { bindTrigger, bindPopover } from 'material-ui-popup-state';
+import Popover from '@material-ui/core/Popover';
+import Typography from '@material-ui/core/Typography';
 
 
 
@@ -249,8 +252,35 @@ popOverPkay = () =>
             <TableBody>
               <TableRow>
               <TableCell>{this.state.questionNumber}</TableCell>
-              <TableCell> <img style={{"height": "300px", "width": "300px"}} src= {`data:image/jpeg;base64,${this.state.questions}`} />
-              </TableCell>
+              {/* <TableCell> <img style={{"height": "300px", "width": "300px"}} src= {`data:image/jpeg;base64,${this.state.questions}`} />
+              </TableCell> */}
+             <TableCell>
+              <PopupState variant="popover" popupId="demo-popup-popover">
+                    {popupState => (
+                      <div>
+                        <img id="myImg" src={`data:image/jpeg;base64,${this.state.questions}`} alt="Test" style={{"width":"100%","max-width":"300px"}} {...bindTrigger(popupState)}  /> 
+                        <Popover
+                          {...bindPopover(popupState)}
+                          anchorOrigin={{
+                            vertical: 'bottom',
+                            horizontal: 'center',
+                          }}
+                          transformOrigin={{
+                            vertical: 'top',
+                            horizontal: 'center',
+                          }}
+                        >
+                          <Typography>
+                          <img id="myImg" src={`data:image/jpeg;base64,${this.state.questions}`} style={{"width":"700px","height":"500px"}} alt="Test" />
+                          </Typography>
+                        </Popover>
+                      </div>
+                    )}
+                  </PopupState>
+
+               </TableCell>
+
+
               <TableCell> 
               {/* <ThemeProvider theme={theme}> */}
               <ToggleButtonGroup 
