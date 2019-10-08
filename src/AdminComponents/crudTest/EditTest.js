@@ -68,7 +68,8 @@ class EditTest extends Component
           previousNumberOfquestions: '',
           id: this.props.location.aboutpropsTwo,
           poolId: '',
-          isHidden: ''
+          isHidden: '',
+          dataValues: []
      }
  }
 
@@ -86,30 +87,40 @@ class EditTest extends Component
                   previousNumberOfquestions: testByID.data.noOfQns,
                   poolId: testByID.data.poolId,
                   isHidden: testByID.data.isHidden
-              }
-          )
+              })
+              
+        axios.get("http://192.168.200.200:8080/backendapi/admin/questionpool")
+        .then(res => {
+                  this.setState({
+                    dataValues: res.data
+                  })
+                  this.setState(
+                      {
+                    dataValues: this.state.dataValues.filter(el => 
+                        el.poolType === this.state.testType && 
+                        el.poolSubtype === this.state.testSubtype &&
+                        el.poolCat === this.state.testCat )
+                      }
+                  )
+              })
         })
  }
+
  validate = () => 
- {
+{
+    console.log(this.state.dataValues[0].noOfQnsInPool)
     let isError = false;
     const errors ={};
 
-    console.log(this.state.noOfQns)
     if(this.state.noOfQns === ''){
         isError = true;
         errors.numberofquestionsError= "Enter a number";
     }
-    return isError;
- }
- validate = () => 
-{
-    let isError = false;
-    const errors ={};
-
-    if(this.state.noOfQns === ''){
+    if(this.state.noOfQns > this.state.dataValues[0].noOfQnsInPool)
+    {
         isError = true;
-        errors.numberofquestionsError= "Enter a number";
+        errors.numberofquestionsError= "Number cannot exceed" + " "+ this.state.dataValues[0].noOfQnsInPool;
+
     }
     if(this.state.noOfQns< this.state.previousNumberOfquestions){
         isError = true;
