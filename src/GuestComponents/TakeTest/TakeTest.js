@@ -107,7 +107,7 @@ class TakeTest extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state.currentQuestion !== prevState.currentQuestion) {
-    Axios.get('http://192.168.200.200:8080/backendapi/employee/'+ localStorage.getItem("GuestId")+'/guest/'+this.state.resultId+'/question-list')
+    Axios.get('http://192.168.200.200:8080/backendapi/guest/'+ localStorage.getItem("GuestId")+'/guest/'+this.state.resultId+'/question-list')
     .then(res => { console.log(res.data)
         this.setState(() => {
             return {
@@ -149,7 +149,8 @@ finishHandler = () => {
         userQnsIds: this.props.userQnsIds
       }
       console.log(values)
-  Axios.post('http://192.168.200.200:8080/backendapi/guest//te'+ localStorage.getItem("GuestId")+'sts/'+this.state.resultId+'/submit', values)
+      http://192.168.200.200:8080/backendapi/guest/784/tests/785/submit
+  Axios.post('http://192.168.200.200:8080/backendapi/guest/'+localStorage.getItem("GuestId")+'/tests/'+this.state.resultId+'/submit', values)
   .then(res => console.log(res.data))
 
     if (this.state.currentQuestion === this.state.data.length - 1) {
