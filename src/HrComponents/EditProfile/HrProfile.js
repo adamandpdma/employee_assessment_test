@@ -340,7 +340,7 @@ render(){
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
             >
-            <DialogTitle id="alert-dialog-title">{"Please select a 64kb or smaller sized image"}</DialogTitle>
+            <DialogTitle id="alert-dialog-title">{"Select an image of size within the range 1KB and 64KB"}</DialogTitle>
       </Dialog>
 
       </div>

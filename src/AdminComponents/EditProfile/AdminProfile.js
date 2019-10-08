@@ -138,6 +138,8 @@ class Profile extends Component {
           
         }}
       }))   
+    } else {
+      console.log("Image size should be at least 1KB.")
     }
   }
 
@@ -312,9 +314,7 @@ render(){
           </Button>
           </div>  
           </form>
-          {/* <div >
-            {$imagePreview}
-          </div> */}
+        
         </div>
 
       <CardActions>
@@ -340,14 +340,7 @@ render(){
             aria-describedby="alert-dialog-description"
             >
             <DialogTitle id="alert-dialog-title">{"Profile Picture has been changed"}</DialogTitle>
-      {/* <Button
-          margin="normal"
-          fullWidth
-          variant="contained"
-          className={classes.button}
-          >
-      <NavLink to={'/admin'}>Okay</NavLink>
-      </Button> */}
+     
       </Dialog>
       <Dialog
             open={errorDialog}
@@ -355,7 +348,7 @@ render(){
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
             >
-            <DialogTitle id="alert-dialog-title">{"Please select a 64kb or smaller sized image"}</DialogTitle>
+            <DialogTitle id="alert-dialog-title">{"Select an image of size within the range 1KB and 64KB"}</DialogTitle>
       </Dialog>
 
 
