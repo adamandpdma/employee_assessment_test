@@ -126,7 +126,7 @@ const change = (name, e) => {
       <div>
       <Typography variant = "h4"
       className = {classes.typhography}>            
-      Employee Register Page
+      Register your Account
       </Typography>
       </div>
 

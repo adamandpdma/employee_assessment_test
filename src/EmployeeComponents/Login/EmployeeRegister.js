@@ -56,7 +56,7 @@ submitValues = ({employeeid, email, employeeName, mobile, department}) => {
       .then(res =>
         { if (res.data === true) {
           return (
-            this.props.history.push('./RegistrationComplete')          
+            this.props.history.push('/RegistrationComplete')          
           )}
       else{
         this.setState({open:true})

@@ -7,14 +7,16 @@ import {NavLink} from 'react-router-dom';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Grid from '@material-ui/core/Grid';
 import DialogContent from '@material-ui/core/DialogContent';
 
 import Typography from '@material-ui/core/Typography';
+import EmployeeReviewTest from '../ReviewTest/EmployeeReviewTest';
 
 
 const style ={
     textDecoration: "none",
-    width: "50px",
+    width: "100px",
     margin: '10px',
     borderRadius: "30px",
     fontSize: "10px"
@@ -43,17 +45,16 @@ export default class TestDetails extends Component {
         i: 0 ,
         dataTest: '',
         attemptsDataTest: [],
+        openStart: false
 
         
         
   }
-  //this.attemptsDataHandler = this.attemptsDataHandler.bind(this)
 }
 
   componentDidMount() 
   {
-    console.log(this.state.category)
-
+  console.log(this.state.category)
   axios.get('http://192.168.200.200:8080/backendapi/admin/test-detail/type/'+ this.state.category)
         .then(res => {
             this.setState (
@@ -62,27 +63,15 @@ export default class TestDetails extends Component {
                 },
              )
              console.log(res.data)
-            // console.log(this.state.data.map(setId => { return(setId.settingsId)}))
              this.setState(
               {
                 data: this.state.data.filter(el => el.isHidden === false),
                 settingsId: this.state.data.map(setId => { return(setId.settingsId)})
               }
-          )
-          
-
-    //  for (let j = 0; j<this.state.settingsId.length; j++) {
-    //   //console.log(this.state.settingsId[j])
-    //   this.fetchData(this.state.settingsId[j])
-      
-    //  }
+          )    
     this.fetchData(this.state.settingsId)
-
-    // Promise.all(this.state.attemptsData).then(responses => responses.forEach(res => console.log(res)))
-
-    })
-    
-            
+   }
+   ) 
   }
 
 
@@ -90,18 +79,14 @@ export default class TestDetails extends Component {
 
       for (let j = 0; j<i.length; j++) {
        
-        await axios.get('http://192.168.200.200:8080/backendapi/employee/10/tests/'+i[j]+'/attempts')
+        await axios.get('http://192.168.200.200:8080/backendapi/employee/101/tests/'+i[j]+'/attempts')
         .then( res => { 
         this.setState({
-          //attemptsData: res.data
           attemptsData: this.state.attemptsData.concat(res.data)
-        //attemptsDataTest: this.state.attemptsData.prototype.concat(res.data)
-          
+
         })
   
         console.log(i)
-        //Promise.all(this.state.attemptsData).then(responses => responses.forEach(res => console.log(res)))
-        
         }
         )
         
@@ -111,37 +96,28 @@ export default class TestDetails extends Component {
   }
   
  
- 
-
-    // componentDidUpdate=() => {
-         
-//       fetchData = (id) =>{
-//             axios.get('http://192.168.200.200:8080/backendapi/employee/10/tests/'+id+'/attempts')
-//               .then( res => { 
-//                 this.setState({
-//                   attemptsData: res.data
-//                   //attemptsData: this.state.attemptsData.concat(res.data)
-//                 })
-//               }
-//               )       
-//      return(<TableCell>{this.state.attemptsData}/2</TableCell>)
-//     //  console.log(this.state.attemptsData)
- 
-// }
-    // }
-
-
-
     handleClickOpen = (testSubtypeName, timeValue, noOfQnsValue) => {
-      this.setState(
-          {
-              open: true,
-              testSubtype: testSubtypeName,
-              time: timeValue,
-              noOfQnsData: noOfQnsValue
-          }
-      )
-      console.log(this.state.settingsId)
+        
+     axios.get('http://192.168.200.200:8080/backendapi/employee/101/tests/'+testSubtypeName.replace(" ", "%20"))
+     .then(res => { 
+       console.log(res.data)
+     this.setState(
+       {
+         resultId: res.data.resultId,
+         correctAns: res.data.correctAns,
+         employeeId: res.data.employeeId,
+         guestId: res.data.guestId,
+         score: res.data.score,
+         settingsId: res.data.settingsId,
+         userQnsIds: res.data.userQnsIds,
+         open: true,
+         testSubtype: testSubtypeName,
+         time: timeValue,
+         noOfQnsData: noOfQnsValue     
+       }
+     )
+     console.log(this.state.resultId+"RESULT ID")})
+     console.log(this.state.settingsId)
     }
  
     handleClose = () => {
@@ -151,8 +127,73 @@ export default class TestDetails extends Component {
         }
       )
     }
-   
-  
+   TestReview = (attempts, testSubtype, timeLimit, noOfQns) => {
+     if(attempts === "0")
+     {
+       return(
+         <Grid>
+          <Button variant='contained' 
+          style={style} 
+          onClick={() => 
+          this.handleClickOpen(testSubtype, timeLimit, noOfQns)}>
+            START
+      </Button>
+         </Grid>
+       )
+     }
+     else if(attempts === "1")
+     {
+       return(
+         <Grid>
+              <Button variant='contained' 
+          style={style} 
+          onClick={() => 
+          this.handleClickOpen(testSubtype, timeLimit, noOfQns)}>
+            START
+      </Button> | <NavLink to={{pathname:'/employee/reviewAll', resultId: this.state.resultId}} style={{"textDecoration": "none"}}><Button variant='contained' 
+          style={style} > REVIEW TEST</Button></NavLink> 
+         </Grid>
+       )
+     }
+     else if(attempts === "2")
+     {
+       return(
+         <Grid>
+          <NavLink to={{pathname:'/employee/reviewAll', resultId: this.state.resultId}}  style={{"textDecoration": "none"}} ><Button variant='contained' 
+          style={style} > REVIEW TEST</Button></NavLink> 
+         </Grid>
+       )
+     }
+   }
+   checkedHandler = () => {
+      this.setState(
+        {
+          openStart: true
+        }
+      )
+   }
+   startTest = () => {
+     if(this.state.openStart === true)
+     {
+      return(
+        <NavLink to={{pathname: '/employee/takeTest', 
+        testSubtypeData: this.state.testSubtype,
+         timeData: this.state.time,
+         resultId: this.state.resultId,
+         correctAns: this.state.correctAns,
+         employeeId: this.state.employeeId,
+         guestId: this.state.guestId,
+         score: this.state.score,
+         settingsId: this.state.settingsId,
+         userQnsIds: this.state.userQnsIds
+          }}  style={navStyle}>
+          <Button variant="contained" color="#707070">
+         START TEST
+       </Button>
+       </NavLink>
+       )
+     }
+   }
    render() {
   
     const options = {
@@ -232,13 +273,8 @@ export default class TestDetails extends Component {
             
           </Typography>
         </DialogContent>
-        <DialogActions>
-          <NavLink to={{pathname: '/takeTest', 
-           testSubtypeData: this.state.testSubtype, timeData: this.state.time }}  style={navStyle}>
-             <Button onClick={this.handleClose} color="#707070">
-            START TEST
-          </Button>
-          </NavLink>
+        <DialogActions>  
+          {this.startTest()}      
         </DialogActions>
       </Dialog>
 
@@ -249,19 +285,12 @@ export default class TestDetails extends Component {
                currentemp.testSubtype,
                currentemp.noOfQns,
                currentemp.timeLimit + "  "+ 'minutes',
-               
-              // this.attemptsDataHandler(currentemp.settingsId),
-               <TableCell>
-                 <Button variant='contained' style={style} onClick={() => this.handleClickOpen(currentemp.testSubtype, currentemp.timeLimit, currentemp.noOfQns)}>Start</Button>
-                 </TableCell>,
-            this.state.attemptsData[i]
-
-            
-
-          
-               
-               
-            ]})}
+               this.state.attemptsData[i]+'/2',
+               this.TestReview(this.state.attemptsData[i], 
+                currentemp.testSubtype,
+                 currentemp.timeLimit, 
+                 currentemp.noOfQns)
+                     ]})}
 
         columns={columns}
         options={options}
@@ -271,50 +300,3 @@ export default class TestDetails extends Component {
     )
   }
 }
-
-
-
-//attempts values 
-// do{
-//   console.log(this.state.settingsId[this.state.i])
-//       axios.get('http://192.168.200.200:8080/backendapi/employee/10/tests/'+this.state.settingsId[this.state.i]+'/attempts')
-//       .then( res => { 
-//       this.setState({
-//         //attemptsData: res.data
-//         attemptsData: this.state.attemptsData.concat(res.data)
-//        //attemptsDataTest: this.state.attemptsData.prototype.concat(res.data),
-       
-        
-//       })
-
-//       console.log(this.state.attemptsData)
-      
-//       }
-//       )
-//       this.state.i++
-//       }
-      
-//       while(this.state.i<this.state.settingsId.length)
-
-
-//async function
-// async fetchData(i) {
-//   //console.log(i)
-//   await axios.get('http://192.168.200.200:8080/backendapi/employee/10/tests/'+i+'/attempts')
-//   .then( res => { 
-//   this.setState({
-//     //attemptsData: res.data
-//     attemptsData: this.state.attemptsData.concat(res.data)
-//   //attemptsDataTest: this.state.attemptsData.prototype.concat(res.data)
-    
-//   })
-
-//   console.log(this.state.attemptsData,i)
-//   //Promise.all(this.state.attemptsData).then(responses => responses.forEach(res => console.log(res)))
-  
-//   }
-//   )
-
-// }
-
-  

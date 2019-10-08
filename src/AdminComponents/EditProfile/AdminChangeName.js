@@ -5,6 +5,8 @@ import * as Yup from "yup";
 import axios from 'axios';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Button from "@material-ui/core/Button";
+import {NavLink} from 'react-router-dom';
 
 
 const validationSchema = Yup.object({
@@ -37,6 +39,7 @@ class InputForm extends Component {
         console.log(res.data)
        { if (res.data === true) {
           return (
+            localStorage.setItem("name",name),
             this.setState({message:true})
             )}}
       }))
@@ -47,8 +50,9 @@ class InputForm extends Component {
   };
   
   handleClose = () => {
-    this.setState({message:false})
     this.setState({errorMessage:false})
+    this.setState({message:false})
+
 
   }
 
@@ -71,20 +75,40 @@ class InputForm extends Component {
             />
             <Dialog
             open={message}
-            onClose={handleClose}
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
             >
-            <DialogTitle id="alert-dialog-title">{"Name has been changed"}</DialogTitle>
+            <DialogTitle id="alert-dialog-title">{"Name has been changed."}</DialogTitle>
+            <Button
+          margin="normal"
+          fullWidth
+          variant="contained"
+          >
+      <NavLink to={'/admin'}
+      onClick={handleClose}
+      style={{color: 'black', textDecoration: 'none'}} activeStyle={{color: 'black', textDecoration: 'none'}}
+      >Okay</NavLink>
+      </Button>
+
       </Dialog>
       
       <Dialog
             open={errorMessage}
-            onClose={handleClose}
+            // onClose={handleClose}
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
             >
             <DialogTitle id="alert-dialog-title">{"Name is same as current name!"}</DialogTitle>
+            <Button
+          margin="normal"
+          fullWidth
+          variant="contained"
+          >
+      <NavLink to={'/admin/editProfile'}
+      onClick={handleClose}
+      style={{color: 'black', textDecoration: 'none'}} activeStyle={{color: 'black', textDecoration: 'none'}}
+      >Okay</NavLink>
+      </Button>
       </Dialog>
 
       </React.Fragment>

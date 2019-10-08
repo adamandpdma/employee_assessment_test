@@ -42,7 +42,9 @@ button:{
 },
 
 textfield:{
-      height:40
+      height:40,
+      marginBottom: theme.spacing(4),       
+
     }
 
   });
@@ -140,10 +142,7 @@ textfield:{
       />
       </div>
 
-      <div>
-      <Link>
-      Back
-      </Link>  
+      <div> 
       <Button
       id = "Button"
         type="submit"

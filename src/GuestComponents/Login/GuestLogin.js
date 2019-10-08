@@ -40,7 +40,7 @@ submitValues = ({employeeid,Password,event}) => {
         console.log(res.data)
        { if (res.data === true) {
           return (
-            this.props.history.push('./GuestDashBoard')          
+            this.props.history.push('./guest')          
           )}
       else{
         this.setState({open:true})

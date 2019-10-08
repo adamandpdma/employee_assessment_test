@@ -10,7 +10,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import {Link} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import axios from "axios";
 import FittedImage from 'react-fitted-image'
 import PropTypes from 'prop-types';
@@ -21,7 +21,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 const styles = theme => ({ 
 modal : {
         display: 'flex',
-        alignItems: 'center',
+        alignItems: 'center', 
         justifyContent: 'center',
         padding: "0"
       },
@@ -113,17 +113,28 @@ class Profile extends Component {
 
     console.log(values)
 
-    axios.post("http://192.168.200.200:8080/backendapi/employee/"+ empId + "/profile-image", values)
-    .then((res => {
-      console.log(res.data)
-     { if (res.data === true) {
-        return (
-          // alert("Profile Picture has changed successfully")
+    let i = parseInt(Math.floor(Math.log(this.state.file.size) / Math.log(1024)));
+    let KB=  Math.round(this.state.file.size / Math.pow(1024, i), 2);
+
+      if(KB > 64)
+      {
+      this.setState({errorDialog:true}) 
+      }  
+      else if(KB <= 64)
+      {
+        axios.post("http://192.168.200.200:8080/backendapi/employee/"+ empId + "/update-profile-image", values)
+        .then((res => {
+          console.log(res.data)
+         { if (res.data === true) {
           this.setState({dialog:true})
-        )}
-    else{
-  }}
-  }))}
+          // this.setState({pic:this.state.imagePreviewUrl.split(',')[1]})
+          // this.setState({defaultPic:false})
+          localStorage.setItem('profile', this.state.imagePreviewUrl.split(',')[1])
+          
+        }}
+      }))   
+    }
+}
 
   _handleImageChange(e) {
     e.preventDefault();
@@ -181,6 +192,7 @@ axios.get("http://192.168.200.200:8080/backendapi/employee/" + empId +"/profile/
   this.setState({ details: res.data })
   console.log(this.state.details)
   localStorage.setItem('name', this.state.details.name)
+  localStorage.setItem('profile', this.state.details.profileImg)
 })
 }
 else{
@@ -202,6 +214,7 @@ render(){
   const handleOnclick = this.handleOnclick
   const open = this.state.open
   const dialog = this.state.dialog
+  const errorDialog =this.state.errorDialog
   const details = this.state.details
 
   return (
@@ -217,11 +230,11 @@ render(){
         >
         <FittedImage
         fit="cover" 
-        src={`data:image/jpeg;base64,${details.profileImg}`} />       
+        src={`data:image/jpeg;base64,${localStorage.getItem('profile')}`} />       
         </Avatar>
         </Box>
         <Box mx={1.5}>
-        {details.name}  
+          {localStorage.getItem('name')}
         </Box>
       </Box>
 
@@ -247,7 +260,7 @@ render(){
            align="center"
            margin= "normal"
            className={classes.typography}>
-           {details.name}  
+          {localStorage.getItem('name')}
         </Typography>
         </CardContent>
         <CardMedia
@@ -257,7 +270,7 @@ render(){
         className={classes.avatar}>
         <FittedImage
         fit="cover" 
-        src={`data:image/jpeg;base64,${details.profileImg}`} />       
+        src={`data:image/jpeg;base64,${localStorage.getItem('profile')}`} />       
         </Avatar>
         </CardMedia>
         </CardActionArea>  
@@ -289,13 +302,12 @@ render(){
 
       <CardActions>
       <Button
-          margin="normal"
           fullWidth
-          variant="contained"
           className={classes.button}
-          onClick={handleOnclick}
           >
+      <NavLink to='/employee/editProfile' style={{color: 'black', textDecoration: 'none'}}>     
       Edit Profile
+      </NavLink>
       </Button> 
       {/* </Link> */}
 
@@ -309,6 +321,22 @@ render(){
             aria-describedby="alert-dialog-description"
             >
             <DialogTitle id="alert-dialog-title">{"Profile Picture has been changed"}</DialogTitle>
+      {/* <Button
+          margin="normal"
+          fullWidth
+          variant="contained"
+          className={classes.button}
+          >
+      <NavLink to={'/employee'}>Okay</NavLink>
+      </Button> */}
+      </Dialog>
+      <Dialog
+            open={errorDialog}
+            onClose={handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+            >
+            <DialogTitle id="alert-dialog-title">{"Please select a 64kb or smaller sized image"}</DialogTitle>
       </Dialog>
       </div>
 

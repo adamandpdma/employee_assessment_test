@@ -42,7 +42,15 @@ export default class EmployeesList1 extends Component {
   componentDidMount() {
     axios.get('http://192.168.200.200:8080/backendapi/admin/employees')
       .then(response => {
-        this.setState({ employees: response.data })
+        this.setState
+        ({ 
+            employees: response.data 
+        })
+        this.setState(
+            {
+           employees: this.state.employees.filter(el => el.isActive === true),
+            }
+        )
       })
       .catch((error) => {
         console.log(error);
@@ -73,23 +81,23 @@ export default class EmployeesList1 extends Component {
           }
       },
         {
-          name: "User ID",
+          name: "Employee ID",
           options: {
-            filter: false,
+            filter: true,
           
           }
         },
         {
           name: "Username",   
           options: {
-            filter: false,
+            filter: true,
            
           }
         },
         {
           name: "Email",
           options: {
-            filter: false,
+            filter: true,
            
           }
         },
@@ -100,33 +108,7 @@ export default class EmployeesList1 extends Component {
     
         }
       },
-      {
-        name: "Account Status",
-        options: {
-          filter: true,
-          filerList: ["Active", "Inactive"],
-         
-         customFilterListRender: v => {
-          if (v === true) {
-            return `Active`;
-          } else {
-            return `Inactive`;
-          } 
-        },
-
-          customBodyRender: (value) => {
-            if (value === true)
-              return (
-                <label style={{color: "green", "font-weight": "bold"}}>Active</label>
-              );
-            else
-              return (
-                <label style={{color: "red", "font-weight": "bold"}}>Inactive</label>
-              );
-          }
-        }
-      },
-     
+   
         {
             name: "",
             options: {
@@ -151,11 +133,13 @@ export default class EmployeesList1 extends Component {
               currentemp.name,
               currentemp.email,
               currentemp.department,
-              currentemp.isActive,
               
-              <Link to={"/admin/employees/"+ currentemp.employeeId} style={{"textDecoration": "none"}}>
-              <Fab variant="contained" style={{width: "120px", height:"60px", "text-transform": "none", padding: "5px"}}>
-                Manage Account
+              <Link to={{pathname:'/hr/EmployeeResult',
+               employeeId: currentemp.employeeId}}
+                style={{"textDecoration": "none"}}>
+              <Fab variant="contained" 
+              style={{width: "120px", height:"60px", "text-transform": "none", padding: "5px", textDecoration: "none"}}>
+               View Test Details
               </Fab>
               </Link>,
               

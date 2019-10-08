@@ -3,8 +3,10 @@ import { Formik } from "formik";
 import  ChangePassword  from "./ChangePasswordForm";
 import * as Yup from "yup";
 import axios from "axios";
-import Dialog from '@material-ui/core/Dialog';
+import Button from "@material-ui/core/Button";
+import {NavLink} from 'react-router-dom';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Dialog from '@material-ui/core/Dialog';
 
 
 const alphanumeric = /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1}).*$/
@@ -57,6 +59,7 @@ class InputForm extends Component {
       console.log(res.data)
      { if (res.data === true) {
         return (
+          localStorage.setItem('password', Password),
           this.setState({message:true})
           )}
       else{
@@ -98,6 +101,14 @@ class InputForm extends Component {
             aria-describedby="alert-dialog-description"
             >
             <DialogTitle id="alert-dialog-title">{"Password has been changed"}</DialogTitle>
+            <Button
+          margin="normal"
+          fullWidth
+          variant="contained"
+          >
+      <NavLink to={'/admin'}>Okay</NavLink>
+      </Button>
+
       </Dialog>
       
       <Dialog

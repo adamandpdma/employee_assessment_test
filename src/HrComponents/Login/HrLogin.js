@@ -41,10 +41,17 @@ const hrId = employeeid;
       .then((res => {
         console.log(res.data)
        { if (res.data === true) {
+        axios.get("http://192.168.200.200:8080/backendapi/human-resources/" + hrId +"/profile/")
+        .then(res => {
+         console.log(res.data)
+         localStorage.setItem('name', res.data.name)
+         localStorage.setItem('profile', res.data.profileImg)
+         console.log(localStorage.getItem('name'))
+      })
           return (
             localStorage.setItem('employeeid', employeeid),
             localStorage.setItem('password', Password),
-            this.props.history.push('./HrEditProfile')          
+            this.props.history.push('./hr')          
           )}
       else{
         this.setState({open:true})

@@ -18,13 +18,12 @@ const style = {
   display: "block"
 }
 const fieldStyle = {
-//   marginLeft: "300px",
   width: "200px",
   display: 'flex',
-        flexWrap: 'wrap'
+  flexWrap: 'wrap'
 }
 const buttonStyle = {
-    color: "grey",
+    color: "black",
     marginTop: "30px",
     marginLeft: "30px",
     width: "170px",
@@ -63,9 +62,9 @@ class CreateTest extends Component
 
      this.state = {
           testCat: this.props.location.domain,
-          testType:'',
+          testType:this.props.location.category,
           categoryError: '',
-          testSubtype:'',
+          testSubtype:this.props.location.typeoftest,
           typeoftestError: '',
           noOfQns:'',
           numberofquestionsError: '',
@@ -75,11 +74,13 @@ class CreateTest extends Component
           testBankTypeOfTests: [],
           dataCategories: [],
           dataTypeOfTests: [],
+          poolId: [],
           selectCategory: false,
           selectTypeoftest: false,
           isHidden: false,
-          poolId: 0,
-          settingsId: 0
+          settingsId: 0,
+          poolId: this.props.location.poolId,
+          numberofquestions: this.props.location.numberofquestions
      }
  }
 
@@ -87,25 +88,33 @@ class CreateTest extends Component
  componentDidMount() //loads right before anything loads on the page
  {
      console.log(this.state.testCat)
+     console.log(this.state.poolId + "POOL ID")
     if(this.state.testCat === "Non-Technical")
     {
         // axios.get('http://localhost:5000/TestBank/')
-        axios.get('http://192.168.200.200:8080/backendapi/admin/test-detail/category/'+"Non-Technical")
+        // axios.get('http://192.168.200.200:8080/backendapi/admin/test-detail/category/'+"Non-Technical")
+        axios.get("http://192.168.200.200:8080/backendapi/admin/questionpool")
         .then(res => { 
                 this.setState(
                     {
-                        testBankCategories: res.data
+                        testBankCategories: res.data,
                     })
                     this.setState(
                         {
-                    testBankCategories: this.state.testBankCategories.filter(el => el.testCat === "Non-Technical"),
+                    testBankCategories: this.state.testBankCategories.filter(el => el.hidden === false),
+                        }
+                    )
+                    this.setState(
+                        {
+                    testBankCategories: this.state.testBankCategories.filter(el => el.poolCat === "Non-Technical"),
                         }
                     )
                     this.setState(
                         {
                            
-                            dataCategories: this.state.testBankCategories.map(categoriess => categoriess.testType),
-                            dataTypeOfTests: this.state.testBankCategories.map(categoriess => categoriess.testSubtype),
+                            dataCategories: this.state.testBankCategories.map(categoriess => categoriess.poolType),
+                            dataTypeOfTests: this.state.testBankCategories.map(categoriess => categoriess.poolSubtype),
+
 
                         }
                     )
@@ -114,28 +123,28 @@ class CreateTest extends Component
     }
     else
     {
-        // axios.get('http://localhost:5000/TestBank/')
-        axios.get('http://192.168.200.200:8080/backendapi/admin/test-detail/category/'+"Technical")
+
+        axios.get("http://192.168.200.200:8080/backendapi/admin/questionpool")
         .then(res => { 
                 this.setState(
                     {
-                        testBankCategories: res.data
+                        testBankCategories: res.data,
                     })
                     this.setState(
                         {
-                    testBankCategories: this.state.testBankCategories.filter(el => el.isHidden === false),
+                    testBankCategories: this.state.testBankCategories.filter(el => el.hidden === false),
                         }
                     )
                     this.setState(
                         {
-                    testBankCategories: this.state.testBankCategories.filter(el => el.testCat === "Technical"),
+                    testBankCategories: this.state.testBankCategories.filter(el => el.poolCat === "Technical"),
                         }
                     )
                     this.setState(
                         {
                            
-                            dataCategories: this.state.testBankCategories.map(categoriess => categoriess.testType),
-                            dataTypeOfTests: this.state.testBankCategories.map(categoriess => categoriess.testSubtype),
+                            dataCategories: this.state.testBankCategories.map(categoriess => categoriess.poolType),
+                            dataTypeOfTests: this.state.testBankCategories.map(categoriess => categoriess.poolSubtype),
                         }
                     )
                     
@@ -143,10 +152,12 @@ class CreateTest extends Component
     }
        
    
+   
 }
 
 validate = () => 
 {
+
     let isError = false;
     const errors ={};
 
@@ -154,10 +165,10 @@ validate = () =>
         isError = true;
         errors.numberofquestionsError= "Enter a number";
     }
-    // if(this.state.numberofquestions > ''){
-    //     isError = true;
-    //     errors.numberofquestionsError= "Enter a number <";
-    // }
+    if(this.state.noOfQns > this.state.numberofquestions){
+        isError = true;
+        errors.numberofquestionsError= "Number should be < or =" + this.state.numberofquestions;
+    }
     
     if(this.state.timeLimit === ''){
         isError = true;
@@ -227,7 +238,7 @@ validate = () =>
     const values = {
         isHidden: this.state.isHidden,
         noOfQns: this.state.noOfQns,
-        // poolId: this.state.poolId,
+        poolId: this.state.poolId,
         settingsId: this.state.settingsId,
         testCat: this.state.testCat,
         testSubtype: this.state.testSubtype,
@@ -237,8 +248,7 @@ validate = () =>
     }
     console.log(values);
 
-    // axios.post("http://localhost:5000/Test/add", values)
-    axios.post("http://192.168.200.200:8080/backendapi/admin/test-detail/update", values)
+    axios.post("http://192.168.200.200:8080/backendapi/admin/test-detail/create", values)
     .then((res) => console.log(res.data))
     .then(this.handleClickOpen())
     }
@@ -297,7 +307,7 @@ validate = () =>
       {
           return(
             <Grid>
-            <NavLink to='/Technical'><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 18 18">
+            <NavLink to='/admin/Technical'><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 18 18">
             <path d="M15 8.25H5.87l4.19-4.19L9 3 3 9l6 6 1.06-1.06-4.19-4.19H15v-1.5z"/></svg></NavLink><h3 style={textStyle}>CREATE TEST</h3>			
             </Grid>
           )
@@ -305,7 +315,7 @@ validate = () =>
       else{
           return(
             <Grid>
-            <NavLink to='/NonTechnical'><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 18 18">
+            <NavLink to='/admin/NonTechnical'><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 18 18">
             <path d="M15 8.25H5.87l4.19-4.19L9 3 3 9l6 6 1.06-1.06-4.19-4.19H15v-1.5z"/></svg></NavLink><h3 style={textStyle}>CREATE TEST</h3>			
             </Grid>
           )
@@ -317,7 +327,7 @@ validate = () =>
       {
           return(
             <Grid>
-            <NavLink to='/Technical'  style={buttonStyle}>
+            <NavLink to='/admin/Technical'  style={buttonStyle}>
             <Button onClick={this.handleClose} color="primary" autoFocus>
          OKAY
         </Button>
@@ -329,7 +339,7 @@ validate = () =>
         {
             return(
                 <Grid>
-                <NavLink to='/NonTechnical'  style={buttonStyle}>
+                <NavLink to='/admin/NonTechnical'  style={buttonStyle}>
                 <Button onClick={this.handleClose} color="primary" autoFocus>
              OKAY
             </Button>
@@ -368,8 +378,16 @@ validate = () =>
     )
    )
   }
+
     render()
     {
+        const uniqueValuesType =  this.state.testBankCategories.map(categoriess => categoriess.poolType)
+        const uniqueType = [...new Set(uniqueValuesType)]; 
+        console.log(uniqueType)
+        
+        const uniqueValuesSubtype =  this.state.testBankCategories.map(categoriess => categoriess.poolSubtype)
+        const uniqueSubType = [...new Set(uniqueValuesSubtype)]; 
+        console.log(uniqueSubType)
         return(
           
             <div>
@@ -388,54 +406,21 @@ validate = () =>
     <form onSubmit={this.onSubmitHandler} style={style}>
                        <InputLabel style={InputLabelStyle}>CATEGORY</InputLabel>
                        <FormControl>
-                           <Select
-                           required="required"
+                           <TextField
                            style={fieldStyle}
-                           ref="userInput" required 
-                           onChange={this.categoryOnChangeHandler} 
+                           required 
                            value={this.state.testType}
-                           placeholder="select an option"
-                           errorText={this.state.categoryError}
-                           onClick={this.selectOnclickCategory}
                          >
-                                <option disabled selected value> -- select an option -- </option>
-                          {
-                              this.state.dataCategories.map(categories => {
-                                  return (  <option
-                                   key ={categories}
-                                   value ={categories}> 
-                                   {categories}
-                               </option>
-                                     
-                                        )
-                              })
-                          }
-                       </Select><br/>
+                       </TextField><br/>
                        <div style={errorColor}>{this.state.categoryError}</div>
                        </FormControl><br/>
                     
                        <InputLabel style={InputLabelStyle}>TYPE OF TEST</InputLabel>
                        <FormControl>                  
-                           <Select required
+                           <TextField required
                            style={fieldStyle}
-                           ref="userInput" required 
-                           onChange={this.typeOfTestOnChangeHandler} 
-                           value={this.state.testSubtype}
-                           placeholder="select an option"
-                           errorText={this.state.typeoftestError}
-                           onClick={this.selectOnclicktypeoftest}>
-                                   <option disabled selected value> -- select an option -- </option>
-                          {
-                              this.state.dataTypeOfTests.map(typeoftests => {
-                                  return (   <option
-                                   key ={typeoftests}
-                                   value ={typeoftests}> 
-                                   {typeoftests}
-                               </option>
-                                  )
-                              })
-                          }
-                       </Select><br/>
+                           value={this.state.testSubtype}>
+                       </TextField><br/>
                        <div style={errorColor}>{this.state.typeoftestError}</div>
                        </FormControl><br/>
        
@@ -488,6 +473,8 @@ validate = () =>
     }
 }
 export default CreateTest;
+
+
 
 
 

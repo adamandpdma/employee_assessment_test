@@ -5,11 +5,11 @@ import MUIDataTable from "mui-datatables";
 import Fab from '@material-ui/core/Fab';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 
-export default class EmployeesList1 extends Component {
+export default class GuestList extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {employees: []};
+    this.state = {guests: []};
   }
 
 
@@ -40,9 +40,12 @@ export default class EmployeesList1 extends Component {
   })
 
   componentDidMount() {
-    axios.get('http://192.168.200.200:8080/backendapi/admin/employees')
+    axios.get('http://192.168.200.200:8080/backendapi/human-resources/{hrId}/guests')
       .then(response => {
-        this.setState({ employees: response.data })
+        this.setState
+        ({ 
+            guests: response.data 
+        })
       })
       .catch((error) => {
         console.log(error);
@@ -66,67 +69,40 @@ export default class EmployeesList1 extends Component {
         
       const columns = [
         {
-          name: "",
-          options: {
-            filter: false,
-
-          }
-      },
-        {
-          name: "User ID",
+          name: "Guest ID",
           options: {
             filter: false,
           
           }
         },
         {
-          name: "Username",   
+          name: "Name",   
           options: {
             filter: false,
            
           }
         },
         {
-          name: "Email",
+          name: "NRIC",
           options: {
             filter: false,
            
           }
         },
       {
-        name: "Department",
+        name: "Graduation Level",
         options: {
           filter: true,
     
         }
       },
-      {
-        name: "Account Status",
-        options: {
-          filter: true,
-          filerList: ["Active", "Inactive"],
-         
-         customFilterListRender: v => {
-          if (v === true) {
-            return `Active`;
-          } else {
-            return `Inactive`;
-          } 
-        },
+        {
+            name: "GPA",
+            options: {
+              filter: true,
 
-          customBodyRender: (value) => {
-            if (value === true)
-              return (
-                <label style={{color: "green", "font-weight": "bold"}}>Active</label>
-              );
-            else
-              return (
-                <label style={{color: "red", "font-weight": "bold"}}>Inactive</label>
-              );
-          }
-        }
-      },
-     
+            }
+        },
         {
             name: "",
             options: {
@@ -142,20 +118,21 @@ export default class EmployeesList1 extends Component {
      <MuiThemeProvider theme={this.getMuiTheme()}>
     <MUIDataTable 
   
-        title={"Employee Database"}
-        data={this.state.employees.map(currentemp => {
+        title={"Guest Database"}
+        data={this.state.guests.map(currentemp => {
             return [
-              <img style={{width: 85, height: 85, borderRadius: 85/ 2}} src={`data:image/jpeg;base64,${currentemp.profileImg}`} />,
-             
-              currentemp.employeeId,
+              currentemp.guestId,
               currentemp.name,
-              currentemp.email,
-              currentemp.department,
-              currentemp.isActive,
-              
-              <Link to={"/admin/employees/"+ currentemp.employeeId} style={{"textDecoration": "none"}}>
-              <Fab variant="contained" style={{width: "120px", height:"60px", "text-transform": "none", padding: "5px"}}>
-                Manage Account
+              currentemp.nric,
+              currentemp.educationLevel,
+              currentemp.gpa,
+
+              <Link to={{pathname:'/hr/GuestResult',
+               guestId: currentemp.guestId}}
+                style={{"textDecoration": "none"}}>
+              <Fab variant="contained" 
+              style={{width: "120px", height:"60px", "text-transform": "none", padding: "5px", textDecoration: "none"}}>
+               View Test Details
               </Fab>
               </Link>,
               
@@ -170,3 +147,8 @@ export default class EmployeesList1 extends Component {
     )
   }
 }
+
+
+
+
+

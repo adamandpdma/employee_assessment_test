@@ -20,11 +20,19 @@ import {Route} from 'react-router-dom';
 import {NavLink} from 'react-router-dom';
 import DashBoardEmployee from './DashBoardEmployee';
 import TestDetails from './TestDetails';
-import TakeTest from './TakeTest';
+// import TakeTest from '../TakeTest';
 import Agile from './Agile';
 import ProgrammingAndFramework from './ProgrammingAndFramework';
 import DevOps from './DevOps';
 import Countdown from './Countdown';
+import EmployeeReviewTest from '../ReviewTest/EmployeeReviewTest'
+import ReviewAllTests from '../ReviewTest/ReviewAllTests'
+import Profile from '../EditProfile/EmployeeProfile'
+import { Button } from '@material-ui/core';
+import auth from "../../auth"
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import EmployeeEditProfile from '../EditProfile/EmployeeEditProfile';
+import {ProtectedRoute} from "../../Protected.Route";
 
 
 const drawerWidth = 300;
@@ -53,12 +61,12 @@ const useStyles = makeStyles(theme => ({
     
     },
   },
-  menuButton: {
-    marginRight: theme.spacing(2),
-    [theme.breakpoints.up('sm')]: {
-      display: 'none',
-    },
-  },
+  // // menuButton: {
+  // //   marginRight: theme.spacing(2),
+  // //   [theme.breakpoints.up('sm')]: {
+  // //     display: 'none',
+  // //   },
+  // },
   toolbar:theme.mixins.toolbar,
   drawerPaper: {
     width: drawerWidth,
@@ -73,7 +81,7 @@ const useStyles = makeStyles(theme => ({
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3),
+    padding: theme.spacing(2),
   },
   paper: {
     padding: theme.spacing(2),
@@ -81,7 +89,21 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: "#EDEBEB",
      
   },
+  stickToBottom: {
+    width: '74%',
+    position: 'fixed',
+    bottom: 0,
+    backgroundColor: "#E1E1E1",
+    padding: "20px"
+  },
+  // Grid: {
+  //   padding: theme.spacing(0)
+  // }
 }));
+const style = {
+  left:850,
+  position:'absolute'
+}
 const listStyle={
   textDecoration: "none",
   listStyle: 'none',
@@ -125,7 +147,10 @@ const ResponsiveDrawerEmployee = (props) => {
 </svg>
   }
 </ListItemIcon>
-    {<NavLink to='/DashBoardEmployee' style={listStyle} className="NavLink"><ListItemText primary="DASHBOARD"/></NavLink> 
+    {<NavLink to='/employee/DashBoardEmployee' 
+       style={{color: 'white', textDecoration: 'none'}}
+       activeStyle={{color: 'white', textDecoration: 'none'}}
+     className="NavLink"><ListItemText primary="DASHBOARD"/></NavLink> 
   }
           </ListItem>
         ))}
@@ -143,16 +168,32 @@ const ResponsiveDrawerEmployee = (props) => {
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
     <ListItem button className={classes.nested} onClick={navigation}>
-     <NavLink to='/ProgrammingAndFramework' style={listStyle} ><ListItemText primary="Programming and Framework" /></NavLink>
+     <NavLink to='/employee/ProgrammingAndFramework'
+         style={{color: 'white', textDecoration: 'none'}}
+         activeStyle={{color: 'white', textDecoration: 'none'}}><ListItemText primary="Programming and Framework" /></NavLink>
           </ListItem>  
           <ListItem button className={classes.nested}>
-           <NavLink to='/Agile' style={listStyle} ><ListItemText primary="Agile Development"/></NavLink>
+           <NavLink to='/employee/Agile' 
+              style={{color: 'white', textDecoration: 'none'}}
+              activeStyle={{color: 'white', textDecoration: 'none'}}><ListItemText primary="Agile Development"/></NavLink>
           </ListItem>
           <ListItem button className={classes.nested}>
-            <NavLink to='/DevOps' style={listStyle} ><ListItemText primary="DevOps"/></NavLink>
+            <NavLink to='/employee/DevOps'
+               style={{color: 'white', textDecoration: 'none'}}
+               activeStyle={{color: 'white', textDecoration: 'none'}}><ListItemText primary="DevOps"/></NavLink>
           </ListItem>
         </List>
       </Collapse>
+      <ListItem button>
+        <ListItemIcon>
+        <svg xmlns="http://www.w3.org/2000/svg" width="23.733" height="23.667" viewBox="0 0 23.733 23.667">
+  <path id="Icon_awesome-pencil-alt" data-name="Icon awesome-pencil-alt" d="M23.081,6.571,20.944,8.7a.558.558,0,0,1-.788,0L15.011,3.57a.554.554,0,0,1,0-.786L17.148.654a2.234,2.234,0,0,1,3.148,0l2.786,2.778A2.211,2.211,0,0,1,23.081,6.571ZM13.175,4.615,1,16.754.019,22.371a1.112,1.112,0,0,0,1.289,1.285l5.632-.985L19.113,10.532a.554.554,0,0,0,0-.786L13.968,4.615a.563.563,0,0,0-.793,0Zm-7.422,11.1a.643.643,0,0,1,0-.915L12.892,7.68a.648.648,0,1,1,.918.915L6.671,15.714A.648.648,0,0,1,5.753,15.714ZM4.08,19.6H6.305V21.28l-2.99.522L1.873,20.365,2.4,17.383H4.08Z" transform="translate(-0.002 -0.005)" fill="#bdbdbd"/>
+</svg>
+        </ListItemIcon>
+        <NavLink to='/employee/reviewAll' 
+          style={{color: 'white', textDecoration: 'none'}}
+          activeStyle={{color: 'white', textDecoration: 'none'}}><ListItemText primary="REVIEW TEST" /></NavLink>
+      </ListItem>
       </List>
     </div>
   );
@@ -162,15 +203,31 @@ const ResponsiveDrawerEmployee = (props) => {
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
-          <IconButton
+   
+        <IconButton
             color="inherit"
             aria-label="open drawer"
             edge="start"
-            onClick={handleDrawerToggle}
             className={classes.menuButton}
           >
-            <MenuIcon />
+          <Profile/>  
           </IconButton>
+
+        <Button
+        color="inherit"
+        type="submit"
+        onClick={() => {
+          auth.logout(() => {
+            window.location = "/"
+          })
+          localStorage.clear()
+          sessionStorage.clear()
+        }}
+        style={style}
+        >
+        <ExitToAppIcon />Log Out
+        </Button>
+
         </Toolbar>
       </AppBar>
       <nav className={classes.drawer} aria-label="mailbox folders">
@@ -207,12 +264,15 @@ const ResponsiveDrawerEmployee = (props) => {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <Grid>
-          <Route path='/DashBoardEmployee' component={DashBoardEmployee}></Route>
-          <Route path='/Agile' component={Agile}></Route>
-          <Route path='/ProgrammingAndFramework' component={ProgrammingAndFramework}></Route>
-          <Route path='/DevOps' component={DevOps}></Route>
-          <Route path='/takeTest' component={Countdown}></Route>
-          <Route path='/Test' component={TestDetails}></Route>
+          <ProtectedRoute path='/employee/DashBoardEmployee' component={DashBoardEmployee}/>
+          <ProtectedRoute path='/employee/Agile' component={Agile}/>
+          <ProtectedRoute path='/employee/ProgrammingAndFramework' component={ProgrammingAndFramework}/>
+          <ProtectedRoute path='/employee/DevOps' component={DevOps}/>
+          <ProtectedRoute path='/employee/takeTest' component={Countdown}/>
+          <ProtectedRoute path='/employee/Test' component={TestDetails}/>
+          <ProtectedRoute path='/employee/review' component={EmployeeReviewTest}/>
+          <ProtectedRoute path='/employee/reviewAll' component={ReviewAllTests}/>
+          <ProtectedRoute path='/employee/editProfile' component={EmployeeEditProfile}/>
    
         </Grid>
       </main>

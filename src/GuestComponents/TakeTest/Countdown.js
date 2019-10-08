@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import TakeTest from './TakeTest'
+import TakeTest from './TakeTest';
+import { withRouter } from "react-router"
 
 
 const floor =require('math-floor')
@@ -13,6 +14,14 @@ class Countdown extends Component
         this.state={
             counter: this.props.location.timeData * 60,
             testSubtypeData: this.props.location.testSubtypeData,
+            resultId: this.props.location.resultId,
+            timeData: this.props.location.timeData,
+            correctAns: this.props.location.correctAns,
+            employeeId: this.props.location.employeeId,
+            guestId: this.props.location.guestId,
+            score: this.props.location.score,
+            settingsId: this.props.location.settingsId,
+            userQnsIds: this.props.location.userQnsIds
         }
     }
     convertSeconds = (s) => 
@@ -40,8 +49,6 @@ class Countdown extends Component
                
                 </tr>
                 <tr>
-                {/* <td>MIN</td>
-                <td>SEC</td> */}
                 </tr> 
                 </tbody>
                 </table>
@@ -63,6 +70,8 @@ class Countdown extends Component
            if(this.state.counter === -1)
            {
                alert("Time out")
+               this.props.history.push("/guest/ViewTestDetails")
+               //window.location='/guest/ViewTestDetails'
            }
         }, 1000);
     }
@@ -71,13 +80,23 @@ class Countdown extends Component
     {
         return(
             <div>
-          <TakeTest functionCountdown ={this.convertSeconds(this.state.counter)} testSubtypeValue={this.state.testSubtypeData}/>
+          <TakeTest 
+          functionCountdown ={this.convertSeconds(this.state.counter)} 
+          testSubtypeValue={this.state.testSubtypeData}
+          resultId={this.state.resultId}
+          timeData= {this.state.timeData}
+          correctAns= {this.state.correctAns}
+          employeeId= {this.state.employeeId}
+          guestId= {this.state.guestId}
+          score= {this.state.score}
+          settingsId= {this.state.settingsId}
+          userQnsIds= {this.state.userQnsIds}/>
             </div>
         )
     }
 }
 
-export default Countdown;
+export default withRouter(Countdown);
 
 
 

@@ -31,7 +31,7 @@ const anchor = {
     padding: "17px",
   }
 
-class DevOps extends Component
+class ProgrammingAndFramework extends Component
 {
     render()
     {
@@ -39,17 +39,17 @@ class DevOps extends Component
             <main>
             <div  />
             <Grid item xs={12}>
-              <Paper style={paper}>Manage Test / <a style={anchor}>DevOps</a></Paper>   
+              <Paper style={paper}>Manage Test / <a style={anchor}>Prgramming and framework</a></Paper>   
             </Grid>
     
                     <Grid item xs={12} style={style}>
-           <NavLink to={{pathname: '/Test', 
-           category: 'DevOps'}} style={buttonStyle}>
-               <Button variant="contained" style={buttonStyle}>DevOps</Button>
+           <NavLink to={{pathname: '/employee/Test', 
+           category: 'Programming'}} style={buttonStyle}>
+               <Button variant="contained" style={buttonStyle}>Programming And Framework</Button>
            </NavLink> 
           </Grid>
           </main>
         )
     }
 }
-export default DevOps;
+export default ProgrammingAndFramework;

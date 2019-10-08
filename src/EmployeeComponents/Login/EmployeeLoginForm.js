@@ -7,7 +7,7 @@ import Container from '@material-ui/core/Container';
 import { TextField, Typography } from '@material-ui/core';
 import Popup from './EmployeeForgotPassword'
 import withStyles from "@material-ui/core/styles/withStyles";
-import {Link} from 'react-router-dom';
+import {Link,NavLink} from 'react-router-dom';
 import auth from '../../auth'
 import Logo from '../../OptimumLogo.jpeg'
 import '../../Form.css'
@@ -88,7 +88,7 @@ const employeeForm = withStyles(styles)(props => {
       <img src = {Logo}
       width="280" height="72"/>
 
-      <Link to={`./EmployeeRegisterInput`} 
+      <Link to={`./EmployeeRegister`} 
       style={{"position":"absolute","right":"0","paddingTop":"20px", "paddingRight":"40px", "color":"#65D2B5"}}>Register</Link> 
 
     {/* </svg> */}
@@ -178,7 +178,8 @@ const employeeForm = withStyles(styles)(props => {
       margin="normal"
       fullWidth
       className = {classes.switch}>      
-     <Link to={`/`}>Switch User</Link>
+     <NavLink to={`/`}style={{color: 'lightBlue', textDecoration: 'none'}} activeStyle={{color: '#3f51b5', textDecoration: 'none'}}>
+       Switch User</NavLink>
       </Button>  
       </div>
       </Container>
