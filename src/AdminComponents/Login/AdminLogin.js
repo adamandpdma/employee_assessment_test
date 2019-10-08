@@ -20,7 +20,8 @@ class InputForm extends Component {
     super(props);
     this.state = {
       Id: "",
-      open:false
+      open:false,
+      details:[]
     };
   }
 
@@ -40,9 +41,17 @@ const adminId = employeeid;
       .then((res => {
         console.log(res.data)
        { if (res.data === true) {
+        axios.get("http://192.168.200.200:8080/backendapi/admin/" + adminId +"/profile/")
+        .then(res => {
+         console.log(res.data)
+         localStorage.setItem('name', res.data.name)
+         localStorage.setItem('profile', res.data.profileImg)
+         console.log(localStorage.getItem('name'))
+      })
           return (
             localStorage.setItem('employeeid', employeeid),
             localStorage.setItem('password', Password),
+              // localStorage.setItem('profile', this.state.details.profileImg)
             // window.location='/ResponsiveDrawer'  
             this.props.history.push('./admin')          
           )}
