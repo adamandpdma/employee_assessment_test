@@ -3,6 +3,9 @@ import React,{Component} from 'react';
 import TestRows from './TestRows';
 import {NavLink} from 'react-router-dom';
 import { Button } from '@material-ui/core';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 const imgStyle ={
   width: "350px",
@@ -10,6 +13,7 @@ const imgStyle ={
 }
 
 
+let KB = 0
 
 class ImageUpload extends React.Component {
     constructor(props) {
@@ -18,7 +22,10 @@ class ImageUpload extends React.Component {
         file: '',
         imagePreviewUrl: '',
         numberofquestions: this.props.numberofquestions,
-        backgroundColor: ""
+        backgroundColor: "",
+        open: false,
+        openSuccess: false,
+        openChooseFile: false
             }
     }
     _handleSubmit(e) 
@@ -56,10 +63,59 @@ class ImageUpload extends React.Component {
          reader.readAsDataURL(file);
       });
     }
-   colorChange = (event) => 
-   {
-    event.target.style.color= "grey"
+    handleClose = () => {
+      this.setState(
+        {
+          open: false
+        }
+      )
+    }
+    handleCloseSuccess = () => {
+      this.setState(
+        {
+          openSuccess: false
+        }
+      )
+    }
+   handleCloseChooseFile = () => {
+     this.setState(
+       {
+         openChooseFile: false
+       }
+     )
    }
+    colorChange = (event) => 
+    {     
+     let i = parseInt(Math.floor(Math.log(this.state.file.size) / Math.log(1024)));
+     KB=  Math.round(this.state.file.size / Math.pow(1024, i), 2);
+
+       if(KB > 64)
+       {
+         this.setState(
+           {
+            open: true
+           }
+         )
+       }  
+       else if(KB <= 64)
+       {
+        this.setState(
+          {
+           openSuccess: true
+          }
+        )
+        event.target.style.color= "grey";
+       }
+       else{
+        this.setState(
+          {
+           openChooseFile: true
+          }
+        )
+         event.target.style.color="Black"
+       }
+    }
+
     render() {
   
       let {imagePreviewUrl} = this.state;
@@ -93,6 +149,47 @@ class ImageUpload extends React.Component {
           <div >
             {$imagePreview}
           </div>
+          <div>
+        <Dialog
+        open={this.state.open}
+        onClose={this.handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Image size cannot exceed 64KB!"}</DialogTitle> 
+        <DialogActions>
+            <Button onClick={this.handleClose} color="primary" autoFocus>
+         OKAY
+        </Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog
+        open={this.state.openSuccess}
+        onClose={this.handleCloseSuccess}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Image uploaded successfully!"}</DialogTitle>
+        <DialogActions>
+            <Button onClick={this.handleCloseSuccess} color="primary" autoFocus>
+         OKAY
+        </Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog
+        open={this.state.openChooseFile}
+        onClose={this.handleCloseChooseFile}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Choose a file to upload an image!"}</DialogTitle>
+        <DialogActions>
+            <Button onClick={this.handleCloseChooseFile} color="primary" autoFocus>
+         OKAY
+        </Button>
+        </DialogActions>
+      </Dialog>
+           </div>
         </div>
       )
     }

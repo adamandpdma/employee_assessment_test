@@ -32,7 +32,9 @@ const ObjectRow = (props) => {
          <ImageUpload numberofquestions={props.numberofquestions} alignment={props.alignment[props.keyData]}/>
          <Button variant="contained" 
          onClick={(event) => props.QnsImageArray(event)}
-         style={{"fontSize": "10px"}}>DONE</Button>
+         style={{"fontSize": "10px"}}
+         disabled={props.disable}
+         >DONE</Button>
         </TableCell>
         
         <TableCell> 
@@ -124,6 +126,8 @@ class TestRows extends React.Component {
             alignment: '',
             indexImg: 0,
             i: 0,
+            disable: true,
+            openEmpty: false
         }
     }
  
@@ -151,19 +155,20 @@ class TestRows extends React.Component {
    
     QnsImageArray = (event) => {
     
+   
+      event.target.disabled = true
           const values = {
           correctAns: this.state.alignment[this.state.i],
           poolId: this.state.poolId,
           qns: this.props.location.testtwo.split(',')[1]
         }   
       
-      event.target.style.color="grey"
-                 
       qnsImg.push(values)
       console.log(qnsImg)
       this.setState(
         {
-          i: this.state.i +1 
+          i: this.state.i +1,
+          disable: true
         }
       )
     }
@@ -180,6 +185,7 @@ for (let i = 0; i < this.state.numberofquestions; i++) {
          onSubmitHandler={this.onSubmitHandler}
          numberofquestions={this.state.numberofquestions}
          QnsImageArray={(event) => this.QnsImageArray(event)}
+         disable={this.state.disable}
          />);
 }
 return <TableBody>{rows}</TableBody>;
@@ -191,6 +197,7 @@ handleChange = (index, newAlignment) => {
     updatedAlignment[index] = newAlignment
     this.setState({
       alignment: updatedAlignment,
+      disable: false
     }, () => {
       console.log(this.state.alignment)
     },)
@@ -199,11 +206,19 @@ handleChange = (index, newAlignment) => {
 
   onSubmitHandler = () => 
   {
-    console.log(qnsImg)
-            
-    axios.put("http://192.168.200.200:8080/backendapi/admin/questionpool/create-question/"+this.state.poolId,qnsImg)
-    .then(res => console.log(res.data))
-    .then(this.handleClickOpen())
+          if(qnsImg.length < this.state.numberofquestions)
+          {
+            this.setState(
+              {
+                openEmpty: true
+              }
+            )
+          }  
+          else{
+            axios.put("http://192.168.200.200:8080/backendapi/admin/questionpool/create-question/"+this.state.poolId,qnsImg)
+            .then(res => console.log(res.data))
+            .then(this.handleClickOpen())
+          }
 }
 
   children = [
@@ -281,6 +296,13 @@ handleChange = (index, newAlignment) => {
     )
    )
   }
+  handleCloseEmpty = () => {
+    this.setState(
+      {
+        openEmpty: false
+      }
+    )
+  }
 
   render() {   
 
@@ -355,6 +377,20 @@ handleChange = (index, newAlignment) => {
 
         <DialogActions>
           {this.popOverPkay()}
+        </DialogActions>
+      </Dialog>
+      <Dialog
+        open={this.state.openEmpty}
+        onClose={this.handleCloseEmpty}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Upload questions, Cannot leave blank!!"}</DialogTitle>
+
+        <DialogActions>
+        <Button onClick ={this.handleCloseEmpty}>
+          OKAY
+          </Button>
         </DialogActions>
       </Dialog>
               </Grid>
