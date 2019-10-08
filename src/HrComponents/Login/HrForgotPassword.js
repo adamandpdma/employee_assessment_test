@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(2, 4, 3),
   },
   button: {
-    background: 'linear-gradient(45deg, #03a9f4 30%, #00bcd4 90%)',
+    background: '#03f0fc',
   },
   link:{
     display: 'flex',
