@@ -1,4 +1,5 @@
 
+@import '~@csstools/normalize.css';
   
   .result {
     margin-top: 20px;
