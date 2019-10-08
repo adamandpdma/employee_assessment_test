@@ -307,7 +307,9 @@ render(){
           fullWidth
           className={classes.button}
           >
-      <NavLink to='/hr/editProfile' style={{color: 'black', textDecoration: 'none'}}>     
+      <NavLink to='/hr/editProfile' style={{color: 'black', textDecoration: 'none'}}
+            onClick={handleClose}
+            >     
       Edit Profile
       </NavLink>
 
