@@ -17,6 +17,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import {NavLink} from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
+import { withRouter } from "react-router"
 
 
 
@@ -92,7 +93,8 @@ class TakeTest extends React.Component {
     })
     .catch(res => { 
       alert("NO TESTS AVAILABLE !")
-      window.location='/employee/DashBoardEmployee'
+      this.props.history.push("/employee/DashBoardEmployee")
+      //window.location='/employee/DashBoardEmployee'
     }); 
   };
   
@@ -308,7 +310,7 @@ popOverPkay = () =>
   }
 }
 
-export default TakeTest;
+export default withRouter(TakeTest);
 
 
 

@@ -35,7 +35,8 @@ import { Button } from '@material-ui/core';
 import auth from "../../auth"
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Profile from '../EditProfile/AdminProfile'
-import AdminEditProfile from '../EditProfile/AdminEditProfile'
+import AdminEditProfile from '../EditProfile/AdminEditProfile';
+import {ProtectedRoute} from "../../Protected.Route"
 
 
 
@@ -267,17 +268,17 @@ const ResponsiveDrawer = (props) => {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <Grid>
-          <Route path='/admin/Technical' component={Technical}></Route>
-          <Route path='/admin/createTest' component={CreateTest}></Route>
-          <Route path='/admin/uploadTestBank' component={UploadTestBank}></Route>
-          <Route path='/admin/viewTest' component={ViewTest}></Route>
-          <Route path='/admin/editTest/:id' component={EditTest}></Route>
-          <Route path='/admin/NonTechnical' component={NonTechnical}></Route>
-          <Route path='/admin/Dashboard' component={Dashboard}></Route>
-          <Route path="/admin/employees" exact component={EmployeesList} />
-          <Route path="/admin/employees/:id" component={EditEmployeesData} />
-          <Route path="/admin/testRows" component={TestRows} />
-          <Route path='/admin/editProfile' component={AdminEditProfile}/>
+          <ProtectedRoute path='/admin/Technical' component={Technical}/>
+          <ProtectedRoute path='/admin/createTest' component={CreateTest}/>
+          <ProtectedRoute path='/admin/uploadTestBank' component={UploadTestBank}/>
+          <ProtectedRoute path='/admin/viewTest' component={ViewTest}/>
+          <ProtectedRoute path='/admin/editTest/:id' component={EditTest}/>
+          <ProtectedRoute path='/admin/NonTechnical' component={NonTechnical}/>
+          <ProtectedRoute path='/admin/Dashboard' component={Dashboard}/>
+          <ProtectedRoute path="/admin/employees" exact component={EmployeesList} />
+          <ProtectedRoute path="/admin/employees/:id" component={EditEmployeesData} />
+          <ProtectedRoute path="/admin/testRows" component={TestRows} />
+          <ProtectedRoute path='/admin/editProfile' component={AdminEditProfile}/>
         </Grid>
       </main>
     </div>
