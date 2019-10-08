@@ -36,6 +36,7 @@ import auth from "../../auth"
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Profile from '../EditProfile/AdminProfile'
 import AdminEditProfile from '../EditProfile/AdminEditProfile'
+import ViewTestBank from './ViewTestBank'
 
 
 
@@ -278,6 +279,7 @@ const ResponsiveDrawer = (props) => {
           <Route path="/admin/employees/:id" component={EditEmployeesData} />
           <Route path="/admin/testRows" component={TestRows} />
           <Route path='/admin/editProfile' component={AdminEditProfile}/>
+          <Route path='/admin/ViewTestBank' component={ViewTestBank}/>
         </Grid>
       </main>
     </div>

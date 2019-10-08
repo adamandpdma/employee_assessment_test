@@ -22,7 +22,7 @@ const style ={
 const textStyle={
             padding: "25px"
         }
-export default class ViewTest extends Component {
+export default class ViewTestBank extends Component {
   constructor(props) {
     super(props);
 
@@ -42,7 +42,7 @@ export default class ViewTest extends Component {
     console.log(this.state.domain)
     if(this.state.testCat === "Technical")
     {
-        axios.get('http://192.168.200.200:8080/backendapi/admin/test-detail/category/'+this.state.testCat)
+        axios.get("http://192.168.200.200:8080/backendapi/admin/questionpool")
         .then(res => {
             this.setState (
                 {
@@ -51,7 +51,8 @@ export default class ViewTest extends Component {
              )
              this.setState(
                 {
-                    data: this.state.data.filter(el => el.isHidden === false),
+                    data: this.state.data.filter(el => el.hidden === false && el.poolCat === "Technical"
+                    && el.noOfQnsInPool !== 0 && el.poolType !== "" && el.poolSubtype !== ""),
                 }
             )
           
@@ -59,7 +60,7 @@ export default class ViewTest extends Component {
     }
     if(this.state.testCat === "Non-Technical")
     {
-        axios.get('http://192.168.200.200:8080/backendapi/admin/test-detail/category/'+this.state.testCat)
+        axios.get("http://192.168.200.200:8080/backendapi/admin/questionpool")
         .then(res => {
             this.setState(
                 {
@@ -68,7 +69,8 @@ export default class ViewTest extends Component {
              )
              this.setState(
                 {
-                    data: this.state.data.filter(el => el.isHidden === false),
+                    data: this.state.data.filter(el => el.hidden === false && el.poolCat === "Non-Technical" 
+                    && el.noOfQnsInPool !== 0 && el.poolType !== "" && el.poolSubtype !== "" ),
                 }
             )
           
@@ -76,29 +78,29 @@ export default class ViewTest extends Component {
     }
   }
   handleclickopen = () => {
-    this.setState(
-        {
-            open: true
-        }
-    )
-}
-handleClose = () => {
-    this.setState(
-        {
-            open: false
-        }
-    )
-}
+      this.setState(
+          {
+              open: true
+          }
+      )
+  }
+  handleClose = () => {
+      this.setState(
+          {
+              open: false
+          }
+      )
+  }
   deleteTest = (id) => 
   {
   console.log(id)
-   axios.post('http://192.168.200.200:8080/backendapi/admin/test-detail/hide/'+id)
+   axios.post('http://192.168.200.200:8080/backendapi/admin/questionpool/set-hidden/'+id)
    .then((res) => console.log(res.data)) 
-   .then(this.handleclickopen)
+   .then(this.handleclickopen())
 
    this.setState(
        {
-           data: this.state.data.filter(el => el.settingsId !== id) ,
+           data: this.state.data.filter(el => el.poolId !== id) ,
            isHidden: true
        }
    )
@@ -110,7 +112,8 @@ handleClose = () => {
               return(
                 <Grid>
                 <NavLink to='/admin/Technical'><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 18 18">
-                <path d="M15 8.25H5.87l4.19-4.19L9 3 3 9l6 6 1.06-1.06-4.19-4.19H15v-1.5z"/></svg></NavLink><h3 style={textStyle}>VIEW TEST</h3>			
+                <path d="M15 8.25H5.87l4.19-4.19L9 3 3 9l6 6 1.06-1.06-4.19-4.19H15v-1.5z"/></svg></NavLink>
+                <h3 style={textStyle}>VIEW TEST</h3>			
                 </Grid>
               )
           }
@@ -118,7 +121,8 @@ handleClose = () => {
               return(
                 <Grid>
                 <NavLink to='/admin/NonTechnical'><svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 18 18">
-                <path d="M15 8.25H5.87l4.19-4.19L9 3 3 9l6 6 1.06-1.06-4.19-4.19H15v-1.5z"/></svg></NavLink><h3 style={textStyle}>VIEW TEST</h3>			
+                <path d="M15 8.25H5.87l4.19-4.19L9 3 3 9l6 6 1.06-1.06-4.19-4.19H15v-1.5z"/>
+                </svg></NavLink><h3 style={textStyle}>VIEW TEST</h3>			
                 </Grid>
               )
           }
@@ -165,43 +169,31 @@ handleClose = () => {
            
           }
         },
-      {
-        name: "Time Limit",
-        options: {
-          filter: false,
-    
-        }
-      },
      
-        {
-            name: "Action",
-            options: {
-              filter: false,
+        // {
+        //     name: "Action",
+        //     options: {
+        //       filter: false,
 
-            }
-        }
+        //     }
+        // }
     
   ]
 
     return (
-      <div>
- <MUIDataTable 
+        <div>
+             <MUIDataTable 
 
-title={"Test Details"}
+title={"Question Pool Details"}
 data={this.state.data.map(currentemp => {
     return [
-       currentemp.testCat,
-       currentemp.testType,
-       currentemp.testSubtype,
-       currentemp.noOfQns,
-       currentemp.timeLimit,
-       <TableCell><NavLink to={{pathname: '/admin/editTest/'+currentemp.settingsId, 
-       aboutprops: currentemp.testCat, 
-       aboutpropsTwo: currentemp.settingsId}} style={Navstyle}>
-            <Button variant="contained"  style={style}>EDIT</Button>
-            </NavLink> 
-            <Button variant="contained" href="#" onClick = {() => this.deleteTest(currentemp.settingsId)}  style={style}>
-                DELETE</Button></TableCell>
+       currentemp.poolCat,
+       currentemp.poolType,
+       currentemp.poolSubtype,
+       currentemp.noOfQnsInPool,
+    //    <TableCell> 
+    //         <Button variant="contained" href="#" onClick = {() => this.deleteTest(currentemp.poolId)}  style={style}>
+    //             DELETE</Button></TableCell>
 
     ]})}
 
@@ -215,16 +207,17 @@ onClose={this.handleClose}
 aria-labelledby="alert-dialog-title"
 aria-describedby="alert-dialog-description"
 >
-<DialogTitle id="alert-dialog-title">{"You have successfully deleted the Test !!"}</DialogTitle>
+<DialogTitle id="alert-dialog-title">{"You have successfully deleted the question Bank !!"}</DialogTitle>
 
 <DialogActions>
-<Button onClick ={this.handleClose}>
-OKAY
-</Button>
+ <Button onClick ={this.handleClose}>
+     OKAY
+ </Button>
 </DialogActions>
 </Dialog>
 
-      </div>
+        </div>
+
     )
   }
 }
