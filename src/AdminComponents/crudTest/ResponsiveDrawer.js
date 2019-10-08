@@ -189,12 +189,12 @@ const ResponsiveDrawer = (props) => {
     <ListItem button className={classes.nested} onClick={navigation}>
      <NavLink to='/admin/Technical' 
         style={{color: 'white', textDecoration: 'none'}}
-        activeStyle={{color: 'white', textDecoration: 'none'}}><ListItemText primary="Technical Test" /></NavLink>
+        activeStyle={{color: 'white', textDecoration: 'none'}}><ListItemText primary="Employee User Test" /></NavLink>
           </ListItem>  
           <ListItem button className={classes.nested}>
             <NavLink to='/admin/NonTechnical' 
                style={{color: 'white', textDecoration: 'none'}}
-               activeStyle={{color: 'white', textDecoration: 'none'}} ><ListItemText primary="Non-Technical Test"/></NavLink>
+               activeStyle={{color: 'white', textDecoration: 'none'}} ><ListItemText primary="Guest user Test"/></NavLink>
           </ListItem>
         </List>
       </Collapse>
