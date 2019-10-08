@@ -35,12 +35,8 @@ import { Button } from '@material-ui/core';
 import auth from "../../auth"
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Profile from '../EditProfile/AdminProfile'
-import AdminEditProfile from '../EditProfile/AdminEditProfile'
 import ViewTestBank from './ViewTestBank'
-
-
-
-const drawerWidth = 300;
+import {ProtectedRoute} from "../../Protected.Route"
 
 const useStyles = makeStyles(theme => ({
   root: {

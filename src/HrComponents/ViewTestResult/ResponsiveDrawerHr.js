@@ -28,6 +28,7 @@ import auth from "../../auth"
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Profile from '../EditProfile/HrProfile'
 import HrEditProfile from '../EditProfile/HrEditProfile'
+import {ProtectedRoute} from "../../Protected.Route";
 
 
 
@@ -244,12 +245,12 @@ const ResponsiveDrawerGuest = (props) => {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <Grid>
-          <Route path='/hr/DashBoardHr' component={DashBoardHr}></Route>
-          <Route path="/hr/employees" component={EmployeesList}/>
-          <Route path="/hr/EmployeeResult" component={EmployeeResult}/>
-          <Route path="/hr/GuestResult" component={GuestResult}/>
-          <Route path="/hr/GuestList" component={GuestList}/>
-          <Route path="/hr/editProfile" component={HrEditProfile}/>
+          <ProtectedRoute path='/hr/DashBoardHr' component={DashBoardHr}/>
+          <ProtectedRoute path="/hr/employees" component={EmployeesList}/>
+          <ProtectedRoute path="/hr/EmployeeResult" component={EmployeeResult}/>
+          <ProtectedRoute path="/hr/GuestResult" component={GuestResult}/>
+          <ProtectedRoute path="/hr/GuestList" component={GuestList}/>
+          <ProtectedRoute path="/hr/editProfile" component={HrEditProfile}/>
         </Grid>
       </main>
     </div>

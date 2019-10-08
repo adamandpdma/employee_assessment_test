@@ -26,6 +26,7 @@ import BottomNavigation from '@material-ui/core/BottomNavigation';
 import { Button } from '@material-ui/core';
 import auth from "../../auth"
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import {ProtectedRoute} from "../../Protected.Route"
 
 
 const drawerWidth = 300;
@@ -234,10 +235,10 @@ const ResponsiveDrawerGuest = (props) => {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <Grid>
-          <Route path='/guest/DashBoardGuest' component={DashBoardGuest}></Route>
-          <Route path='/guest/ViewTestDetails' component={ViewTestDetails}></Route>
-          <Route path='/guest/takeTest' component={Countdown}></Route>
-          <Route path='/guest/register' component={GuestRegister}></Route>
+          <ProtectedRoute path='/guest/DashBoardGuest' component={DashBoardGuest}/>
+          <ProtectedRoute path='/guest/ViewTestDetails' component={ViewTestDetails}/>
+          <ProtectedRoute path='/guest/takeTest' component={Countdown}/>
+          <ProtectedRoute path='/guest/register' component={GuestRegister}/>
         </Grid>
       </main>
     </div>

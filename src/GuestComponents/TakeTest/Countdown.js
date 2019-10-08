@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import TakeTest from './TakeTest'
+import TakeTest from './TakeTest';
+import { withRouter } from "react-router"
 
 
 const floor =require('math-floor')
@@ -69,7 +70,8 @@ class Countdown extends Component
            if(this.state.counter === -1)
            {
                alert("Time out")
-               window.location='/guest/ViewTestDetails'
+               this.props.history.push("/guest/ViewTestDetails")
+               //window.location='/guest/ViewTestDetails'
            }
         }, 1000);
     }
@@ -94,7 +96,7 @@ class Countdown extends Component
     }
 }
 
-export default Countdown;
+export default withRouter(Countdown);
 
 
 

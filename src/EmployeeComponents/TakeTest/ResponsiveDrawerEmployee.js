@@ -31,7 +31,8 @@ import Profile from '../EditProfile/EmployeeProfile'
 import { Button } from '@material-ui/core';
 import auth from "../../auth"
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import EmployeeEditProfile from '../EditProfile/EmployeeEditProfile'
+import EmployeeEditProfile from '../EditProfile/EmployeeEditProfile';
+import {ProtectedRoute} from "../../Protected.Route";
 
 
 const drawerWidth = 300;
@@ -263,15 +264,15 @@ const ResponsiveDrawerEmployee = (props) => {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <Grid>
-          <Route path='/employee/DashBoardEmployee' component={DashBoardEmployee}></Route>
-          <Route path='/employee/Agile' component={Agile}></Route>
-          <Route path='/employee/ProgrammingAndFramework' component={ProgrammingAndFramework}></Route>
-          <Route path='/employee/DevOps' component={DevOps}></Route>
-          <Route path='/employee/takeTest' component={Countdown}></Route>
-          <Route path='/employee/Test' component={TestDetails}></Route>
-          <Route path='/employee/review' component={EmployeeReviewTest}></Route>
-          <Route path='/employee/reviewAll' component={ReviewAllTests}></Route>
-          <Route path='/employee/editProfile' component={EmployeeEditProfile}/>
+          <ProtectedRoute path='/employee/DashBoardEmployee' component={DashBoardEmployee}/>
+          <ProtectedRoute path='/employee/Agile' component={Agile}/>
+          <ProtectedRoute path='/employee/ProgrammingAndFramework' component={ProgrammingAndFramework}/>
+          <ProtectedRoute path='/employee/DevOps' component={DevOps}/>
+          <ProtectedRoute path='/employee/takeTest' component={Countdown}/>
+          <ProtectedRoute path='/employee/Test' component={TestDetails}/>
+          <ProtectedRoute path='/employee/review' component={EmployeeReviewTest}/>
+          <ProtectedRoute path='/employee/reviewAll' component={ReviewAllTests}/>
+          <ProtectedRoute path='/employee/editProfile' component={EmployeeEditProfile}/>
    
         </Grid>
       </main>
