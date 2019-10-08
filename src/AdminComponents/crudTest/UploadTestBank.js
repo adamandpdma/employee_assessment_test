@@ -8,6 +8,9 @@ import Grid from '@material-ui/core/Grid';
 import { TextField } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import {NavLink} from 'react-router-dom';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import TestRows from './TestRows';
 
    const style = {
@@ -68,73 +71,71 @@ class UploadTestBank extends Component
      }
  }
  validate = () => 
-{
-    let isError = false;
-    const errors ={};
-
-    if(this.state.numberofquestions === ''){
-        isError = true;
-        errors.numberofquestionsError= "Enter a number";
-    }
-    if(this.state.category === ''){
-        isError = true;
-        errors.categoryError= "Enter Test Category";
-    }
-    
-    if(this.state.typeoftest === ''){
-        isError = true;
-        errors.typeoftestError= "Enter test type";
-    }
-    if(this.state.numberofquestions.length >= 1)
-    {
-        this.setState(
-            {
-               numberofquestionsError: ""
-            }
-        )
-    }
-    if(this.state.category.match("^[A-z 0-9]+$" ))
-    {
-        this.setState(
-            {
-               categoryError: ""
-            }
-        )
-    }
-    if(this.state.typeoftest.match("^[A-z 0-9]+$" ))
-    {
-        this.setState(
-            {
-               typeoftestError: ""
-            }
-        )
-    }
-    
-    if(isError){
-        this.setState(
-            {
-                ...this.state,
-                ...errors
-            });
-    }
-
-    return isError;
-}
+ {
+     let isError = false;
+     const errors ={};
+ 
+     if(this.state.numberofquestions === 0){
+         isError = true;
+         errors.numberofquestionsError= "Enter a number";
+     }
+     if(this.state.category === ''){
+         isError = true;
+         errors.categoryError= "Enter Test Category";
+     }
+     
+     if(this.state.typeoftest === ''){
+         isError = true;
+         errors.typeoftestError= "Enter test type";
+     }
+     if(this.state.numberofquestions.length >= 1)
+     {
+         this.setState(
+             {
+                numberofquestionsError: ""
+             }
+         )
+     }
+     if(this.state.category.match("^[A-z 0-9]+$" ))
+     {
+         this.setState(
+             {
+                categoryError: ""
+             }
+         )
+     }
+     if(this.state.typeoftest.match("^[A-z 0-9]+$" ))
+     {
+         this.setState(
+             {
+                typeoftestError: ""
+             }
+         )
+     }
+     
+     if(isError){
+         this.setState(
+             {
+                 ...this.state,
+                 ...errors
+             });
+     }
+ 
+     return isError;
+ }
 
  onSubmitHandler = () =>
  {
-     console.log("hello submit here")
-
-
-          const values ={
-
-          
-            domain: this.state.domain,
-            category: this.state.category,
-            typeoftest: this.state.typeoftest,
-            numberofquestions: this.state.numberofquestions,
-          }
-          console.log(values);
+  
+     const err = this.validate();
+     if(!err)
+     {
+       this.setState(
+           {
+               open: true
+           }
+       )
+     }
  }
   
  
@@ -244,21 +245,32 @@ class UploadTestBank extends Component
               </TextField>
                <div style={errorColor}>{this.state.numberofquestionsError}</div>
                </FormControl><br/><br/>
-          
-               <NavLink to={{pathname:'/admin/testRows', 
+        
+           <Button variant="contained" 
+           style={buttonStyle}
+           onClick={this.onSubmitHandler}
+           >Generate Test Rows</Button>
+              </form>
+              <Dialog
+        open={this.state.open}
+        onClose={this.handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Proceed to add questions!!"}</DialogTitle>
+
+        <DialogActions>
+        <NavLink to={{pathname:'/admin/testRows', 
            numberofquestions: this.state.numberofquestions,
            category: this.state.category,
            typeoftest: this.state.typeoftest,
            domain: this.state.domain
           }}
-           style={navStyle}
-           >
-           <Button variant="contained" 
-           style={buttonStyle}
-           onClick={this.onSubmitHandler}
-           >Generate Test Rows</Button>
-           </NavLink>
-              </form>
+           style={navStyle}>
+         <Button> OKAY </Button>
+         </NavLink>
+        </DialogActions>
+      </Dialog>
                 </Grid>
                 </Grid>
                 </Container>
