@@ -139,7 +139,7 @@ class Profile extends Component {
         }}
       }))   
     }
-}
+  }
 
   _handleImageChange(e) {
     e.preventDefault();
@@ -322,7 +322,9 @@ render(){
           fullWidth
           className={classes.button}
           >
-      <NavLink to='/admin/editProfile' style={{color: 'black', textDecoration: 'none'}}>     
+      <NavLink to='/admin/editProfile' style={{color: 'black', textDecoration: 'none'}}
+            onClick={handleClose}
+            >     
       Edit Profile
       </NavLink>
 
