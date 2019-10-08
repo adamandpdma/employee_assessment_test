@@ -60,6 +60,7 @@ class InputForm extends Component {
       console.log(res.data)
      { if (res.data === true) {
         return (
+          localStorage.setItem('password', Password),
           this.setState({message:true})
           )}
       else{

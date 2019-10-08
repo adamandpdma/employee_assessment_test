@@ -50,8 +50,9 @@ class InputForm extends Component {
   };
   
   handleClose = () => {
-    this.setState({message:false})
     this.setState({errorMessage:false})
+    this.setState({message:false})
+
 
   }
 
@@ -74,28 +75,40 @@ class InputForm extends Component {
             />
             <Dialog
             open={message}
-            onClose={handleClose}
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
             >
-            <DialogTitle id="alert-dialog-title">{"Name has been changed. Please log out to see changes"}</DialogTitle>
+            <DialogTitle id="alert-dialog-title">{"Name has been changed."}</DialogTitle>
             <Button
           margin="normal"
           fullWidth
           variant="contained"
           >
-      <NavLink to={'/admin'}>Okay</NavLink>
+      <NavLink to={'/admin'}
+      onClick={handleClose}
+      style={{color: 'black', textDecoration: 'none'}} activeStyle={{color: 'black', textDecoration: 'none'}}
+      >Okay</NavLink>
       </Button>
 
       </Dialog>
       
       <Dialog
             open={errorMessage}
-            onClose={handleClose}
+            // onClose={handleClose}
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
             >
             <DialogTitle id="alert-dialog-title">{"Name is same as current name!"}</DialogTitle>
+            <Button
+          margin="normal"
+          fullWidth
+          variant="contained"
+          >
+      <NavLink to={'/admin/editProfile'}
+      onClick={handleClose}
+      style={{color: 'black', textDecoration: 'none'}} activeStyle={{color: 'black', textDecoration: 'none'}}
+      >Okay</NavLink>
+      </Button>
       </Dialog>
 
       </React.Fragment>

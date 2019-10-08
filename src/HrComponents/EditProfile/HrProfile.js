@@ -83,6 +83,8 @@ class Profile extends Component {
        open: false,
 
        dialog:false,
+
+       errorDialog:false,
       
        data: "",
 
@@ -113,14 +115,28 @@ class Profile extends Component {
 
     console.log(values)
 
-    axios.post("http://192.168.200.200:8080/backendapi/human-resources/" +hrId+ "/profile-image", values)
-    .then((res => {
-      console.log(res.data)
-     { if (res.data === true) {
-       this.setState({dialog:true})      }
-    else{
-    }}
-  }))}
+    let i = parseInt(Math.floor(Math.log(this.state.file.size) / Math.log(1024)));
+    let KB=  Math.round(this.state.file.size / Math.pow(1024, i), 2);
+
+      if(KB > 64)
+      {
+      this.setState({errorDialog:true}) 
+      }  
+      else if(KB <= 64)
+      {
+        axios.post("http://192.168.200.200:8080/backendapi/human-resources/" +hrId+ "/profile-image", values)
+        .then((res => {
+          console.log(res.data)
+         { if (res.data === true) {
+          this.setState({dialog:true})
+          // this.setState({pic:this.state.imagePreviewUrl.split(',')[1]})
+          // this.setState({defaultPic:false})
+          localStorage.setItem('profile', this.state.imagePreviewUrl.split(',')[1])
+          
+        }}
+      }))   
+    }
+}
 
   _handleImageChange(e) {
     e.preventDefault();
@@ -161,6 +177,7 @@ class Profile extends Component {
   handleClose = () => {
     this.setState({open : false})
     this.setState({dialog : false})
+    this.setState({errorDialog : false})
   }
 
   handleOnclick = () => {
@@ -171,13 +188,13 @@ class Profile extends Component {
 componentDidMount(){
 const hrId = localStorage.getItem('employeeid')
 if(hrId != null){
-// const adminId = 42
-// console.log(user_employeeid)
-axios.get("http://192.168.200.200:8080/backendapi/human-resources/55555/profile")
+axios.get("http://192.168.200.200:8080/backendapi/human-resources/" + hrId + "/profile")
 .then(res => {
   this.setState({ details: res.data })
   console.log(this.state.details)
   localStorage.setItem('name', this.state.details.name)
+  localStorage.setItem('profile', this.state.details.profileImg)
+
 })
 }
 else{
@@ -200,6 +217,7 @@ render(){
   const open = this.state.open
   const dialog = this.state.dialog
   const details = this.state.details
+  const errorDialog = this.state.errorDialog
 
   return (
 
@@ -214,11 +232,11 @@ render(){
         >
         <FittedImage
         fit="cover" 
-        src={`data:image/jpeg;base64,${details.profileImg}`} />       
+        src={`data:image/jpeg;base64,${localStorage.getItem('profile')}`} />       
         </Avatar>
         </Box>
         <Box mx={1.5}>
-        {details.name}  
+          {localStorage.getItem('name')}
         </Box>
       </Box>
 
@@ -244,7 +262,7 @@ render(){
            align="center"
            margin= "normal"
            className={classes.typography}>
-           {details.name}  
+          {localStorage.getItem('name')}
         </Typography>
         </CardContent>
         <CardMedia
@@ -254,7 +272,7 @@ render(){
         className={classes.avatar}>
         <FittedImage
         fit="cover" 
-        src={`data:image/jpeg;base64,${details.profileImg}`} />       
+        src={`data:image/jpeg;base64,${localStorage.getItem('profile')}`} />       
         </Avatar>
         </CardMedia>
         </CardActionArea>  
@@ -305,15 +323,24 @@ render(){
             aria-describedby="alert-dialog-description"
             >
             <DialogTitle id="alert-dialog-title">{"Profile Picture has been changed"}</DialogTitle>
-      <Button
+      {/* <Button
           margin="normal"
           fullWidth
           variant="contained"
           className={classes.button}
           >
       <NavLink to={'/hr'}>Okay</NavLink>
-      </Button>
+      </Button> */}
       </Dialog>
+      <Dialog
+            open={errorDialog}
+            onClose={handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+            >
+            <DialogTitle id="alert-dialog-title">{"Please select a 64kb or smaller sized image"}</DialogTitle>
+      </Dialog>
+
       </div>
 
   );

@@ -84,6 +84,8 @@ class Profile extends Component {
        open: false,
 
        dialog:false,
+
+       errorDialog:false,
       
        data: "",
 
@@ -92,6 +94,8 @@ class Profile extends Component {
        file: '',
 
        imagePreviewUrl: '',
+
+       defaultPic:true
 
     };
   }
@@ -114,15 +118,28 @@ class Profile extends Component {
 
     console.log(values)
 
-    axios.post("http://192.168.200.200:8080/backendapi/admin/"+ adminId +"/profile-image", values)
-    .then((res => {
-      console.log(res.data)
-     { if (res.data === true) {
-      this.setState({dialog:true})
+    let i = parseInt(Math.floor(Math.log(this.state.file.size) / Math.log(1024)));
+    let KB=  Math.round(this.state.file.size / Math.pow(1024, i), 2);
+
+      if(KB > 64)
+      {
+      this.setState({errorDialog:true}) 
+      }  
+      else if(KB <= 64)
+      {
+        axios.post("http://192.168.200.200:8080/backendapi/admin/"+ adminId +"/profile-image", values)
+        .then((res => {
+          console.log(res.data)
+         { if (res.data === true) {
+          this.setState({dialog:true})
+          // this.setState({pic:this.state.imagePreviewUrl.split(',')[1]})
+          // this.setState({defaultPic:false})
+          localStorage.setItem('profile', this.state.imagePreviewUrl.split(',')[1])
+          
+        }}
+      }))   
     }
-    else{
-    }}
-  }))}
+}
 
   _handleImageChange(e) {
     e.preventDefault();
@@ -163,6 +180,7 @@ class Profile extends Component {
   handleClose = () => {
     this.setState({open : false})
     this.setState({dialog : false})
+    this.setState({errorDialog : false})
     // this.props.history.push('/admin')
   }
 
@@ -181,6 +199,7 @@ axios.get("http://192.168.200.200:8080/backendapi/admin/" + adminId +"/profile/"
   this.setState({ details: res.data })
   console.log(this.state.details)
   localStorage.setItem('name', this.state.details.name)
+  localStorage.setItem('profile', this.state.details.profileImg)
 })
 }
 else{
@@ -194,7 +213,9 @@ render(){
     $imagePreview = (<img src={imagePreviewUrl} style={imgStyle}/>);
   } else {
     $imagePreview = (<div className="previewText"></div>);
-  }
+  }  
+  console.log(localStorage.getItem('name'))
+
 
   const {classes} = this.props;
   const handleOpen = this.handleOpen
@@ -202,8 +223,11 @@ render(){
   const handleOnclick = this.handleOnclick
   const open = this.state.open
   const dialog = this.state.dialog
+  const errorDialog =this.state.errorDialog
   const details = this.state.details
   const name = localStorage.getItem('name')
+  const pic = this.state.details.profileImg
+  const defaultPic = this.state.defaultPic
 
   return (
 
@@ -216,13 +240,18 @@ render(){
         <Box>
         <Avatar
         >
+        {/* <FittedImage
+        fit="cover" 
+        src={`data:image/jpeg;base64,${pic}`} />        */}
+
         <FittedImage
         fit="cover" 
-        src={`data:image/jpeg;base64,${details.profileImg}`} />       
+        src={`data:image/jpeg;base64,${localStorage.getItem('profile')}`} />       
         </Avatar>
         </Box>
         <Box mx={1.5}>
           {name}
+          {/* {localStorage.getItem('name')} */}
         </Box>
       </Box>
 
@@ -242,13 +271,13 @@ render(){
           fullWidth
           className={classes.profile}
           align="center">
-              Profile
+          {localStorage.getItem('name')}
           </Typography>
         <Typography
            align="center"
            margin= "normal"
            className={classes.typography}>
-           {details.name}  
+          {name}
         </Typography>
         </CardContent>
         <CardMedia
@@ -258,7 +287,7 @@ render(){
         className={classes.avatar}>
         <FittedImage
         fit="cover" 
-        src={`data:image/jpeg;base64,${details.profileImg}`} />       
+        src={`data:image/jpeg;base64,${localStorage.getItem('profile')}`} />       
         </Avatar>
         </CardMedia>
         </CardActionArea>  
@@ -309,15 +338,24 @@ render(){
             aria-describedby="alert-dialog-description"
             >
             <DialogTitle id="alert-dialog-title">{"Profile Picture has been changed"}</DialogTitle>
-      <Button
+      {/* <Button
           margin="normal"
           fullWidth
           variant="contained"
           className={classes.button}
           >
       <NavLink to={'/admin'}>Okay</NavLink>
-      </Button>
+      </Button> */}
       </Dialog>
+      <Dialog
+            open={errorDialog}
+            onClose={handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+            >
+            <DialogTitle id="alert-dialog-title">{"Please select a 64kb or smaller sized image"}</DialogTitle>
+      </Dialog>
+
 
       </div>
 

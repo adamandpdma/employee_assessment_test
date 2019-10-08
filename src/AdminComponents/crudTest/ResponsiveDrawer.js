@@ -163,7 +163,7 @@ const ResponsiveDrawer = (props) => {
 </svg>
   }
 </ListItemIcon>
-    {index % 2 === 0 ?<NavLink to='c' 
+    {index % 2 === 0 ?<NavLink to='/admin/Dashboard' 
        style={{color: 'white', textDecoration: 'none'}}
        activeStyle={{color: 'white', textDecoration: 'none'}} 
     className="NavLink"><ListItemText primary="DASHBOARD"/></NavLink> 
