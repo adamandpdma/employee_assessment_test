@@ -83,8 +83,8 @@ export default class TestDetails extends Component {
         .then( res => { 
         this.setState({
           attemptsData: this.state.attemptsData.concat(res.data)
-
         })
+     
   
         console.log(i)
         }
