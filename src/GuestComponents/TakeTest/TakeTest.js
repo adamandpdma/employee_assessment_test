@@ -169,9 +169,9 @@ finishHandler = () => {
     console.log(CompletedTime.toString())
     console.log("Completed time =" + " " + min +":"+ sec)
 
-  
-
- const values =  {
+    const values =  {
+        
+        completionTime: CompletedTime.toString(),
         correctAns: this.props.correctAns,
         employeeId: this.props.employeeId,
         guestId: this.props.guestId,
@@ -182,8 +182,8 @@ finishHandler = () => {
         userQnsIds: this.props.userQnsIds
       }
       console.log(values)
-  Axios.post('http://192.168.200.200:8080/backendapi/guest/'+localStorage.getItem("GuestId")+'/tests/'+this.state.resultId+'/submit', values)
-  .then(res => console.log(res.data))
+    Axios.post('http://192.168.200.200:8080/backendapi/guest/'+localStorage.getItem("GuestId")+'/tests/'+this.state.resultId+'/submit', values)
+    .then(res => console.log(res.data))
 
     if (this.state.currentQuestion === this.state.data.length - 1) {
       this.setState({
