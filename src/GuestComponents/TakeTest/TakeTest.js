@@ -98,9 +98,8 @@ class TakeTest extends React.Component {
     })
     .catch(res => { 
       alert("NO TESTS AVAILABLE !")
-      this.props.history.push("/guest/ViewTestDetails")
       
-      //window.location='/guest/ViewTestDetails'
+      window.location='/guest/ViewTestDetails'
     }); 
   };
 

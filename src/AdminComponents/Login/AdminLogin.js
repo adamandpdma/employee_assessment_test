@@ -49,11 +49,13 @@ const adminId = employeeid;
          console.log(localStorage.getItem('name'))
       })
           return (
-            localStorage.setItem('employeeid', employeeid),
+            localStorage.setItem("isAuth", true),
+            localStorage.setItem('adminid', employeeid),
+            console.log(localStorage.getItem('adminid')),
             localStorage.setItem('password', Password),
               // localStorage.setItem('profile', this.state.details.profileImg)
-            // window.location='/ResponsiveDrawer'  
-            this.props.history.push('./admin')          
+            window.location='/admin'  
+            // this.props.history.push('./admin')          
           )}
       else{
         return(

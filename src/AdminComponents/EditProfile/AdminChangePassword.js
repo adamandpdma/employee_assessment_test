@@ -41,7 +41,7 @@ class InputForm extends Component {
  
   submitValues = ({Password,newPassword,retypePassword}) => {
 
-    const adminId = localStorage.getItem('employeeid')
+    const adminId = localStorage.getItem('adminid')
     const postData = {
       
     }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -127,6 +127,22 @@ const openTestCheck = () =>
   }
 
   const [open, setOpen] = React.useState(false);
+
+  useEffect(() => {
+    if(localStorage.getItem("guestid") !== null)
+    {
+      // localStorage.setItem("isAuth", true)
+      console.log(localStorage.getItem("guestid"))
+      console.log('True')
+    } else {
+      // localStorage.setItem("isAuth", false)
+      console.log(localStorage.getItem("guestid"))
+      console.log('False')
+     window.location='/'
+     localStorage.clear()
+    //  window.location.reload(true)
+    }
+  });
 
   const handleClick = () => {
     setOpen(!open);

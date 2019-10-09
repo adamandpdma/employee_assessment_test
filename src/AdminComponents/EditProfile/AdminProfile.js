@@ -192,7 +192,7 @@ class Profile extends Component {
   // }
 
 componentDidMount(){
-const adminId = localStorage.getItem('employeeid')
+const adminId = localStorage.getItem('adminid')
 if(adminId != null){
 // const adminId = 42
 // console.log(user_employeeid)

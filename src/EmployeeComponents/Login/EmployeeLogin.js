@@ -47,14 +47,17 @@ class employeeLogin extends Component {
            localStorage.setItem('name', res.data.name)
            localStorage.setItem('profile', res.data.profileImg)
            console.log(localStorage.getItem('name'))
-           console.log(localStorage.getItem('adminid'))
+           console.log("Admin Id:" + localStorage.getItem('adminid'))
+           console.log("Employee Id:" + localStorage.getItem('employeeid'))
         })  
             return (
+              localStorage.setItem("isAuth", true),
               localStorage.setItem('employeeid', employeeid),
               localStorage.setItem('password', Password),
               auth.login(),
               //localStorage.setItem('isAuth', this.state.authenticated),
-              this.props.history.push('./employee')          
+              window.location='/employee'
+              // this.props.history.push('./employee')          
             )}
         else{
           console.log(postValue)
