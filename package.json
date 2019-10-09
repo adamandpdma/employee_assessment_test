@@ -11,6 +11,7 @@
     "check-prop-types": "^1.1.2",
     "create-react-app": "^3.1.2",
     "formik": "^1.5.8",
+    "material-ui-popup-state": "^1.4.1",
     "math-ceil": "^1.0.0",
     "math-floor": "^1.0.1",
     "mui-datatables": "^2.11.1",
