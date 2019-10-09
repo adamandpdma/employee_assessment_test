@@ -5,6 +5,9 @@ import LockIcon from "@material-ui/icons/Lock";
 import Link from '@material-ui/core/Link';
 import { TextField, Typography, Grid } from '@material-ui/core';
 import withStyles from "@material-ui/core/styles/withStyles";
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
+import IconButton from "@material-ui/core/IconButton";
 
 const styles = theme => ({
     notchedOutline: {
@@ -58,7 +61,8 @@ textfield:{
     handleSubmit,
     handleChange,
     setFieldTouched,
-    classes
+    classes,
+    
   } = props;
 
   const change = (name, e) => {
@@ -66,6 +70,20 @@ textfield:{
     setFieldTouched(name);
   };
 
+  
+
+  const [showPassword, setShowPassword] = React.useState(false);
+
+  const handleClickShowPassword = () => {
+    setShowPassword({showPassword: !showPassword });
+  };
+
+
+  const handleMouseDownPassword = event => {
+    event.preventDefault();
+  };
+
+  //end of password visibility
 
   return (
     <React.Fragment>
@@ -108,15 +126,32 @@ textfield:{
       </Typography>
       <TextField
         id="newPassword"
+        //id="outlined-adornment-password"
         name="newPassword"
         className= {classes.textfield}
         helperText={touched.newPassword ? errors.newPassword : ""}
         error={touched.newPassword && Boolean(errors.newPassword)}
         variant="outlined"
         margin="normal"
-        type="Password"
+        //type="Password"
+        type={showPassword ? "text" : "password"}
         value={newPassword}
         onChange={change.bind(null, "newPassword")}
+
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton
+                edge="end"
+                aria-label="toggle password visibility"
+                onClick={handleClickShowPassword}
+                onMouseDown={handleMouseDownPassword}
+              >
+                {showPassword ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            </InputAdornment>
+          )
+        }}
 
       />
       </div>

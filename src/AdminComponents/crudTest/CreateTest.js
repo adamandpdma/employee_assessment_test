@@ -158,6 +158,8 @@ class CreateTest extends Component
 validate = () => 
 {
 
+    console.log(this.state.noOfQns)
+    console.log(this.state.numberofquestions)
     let isError = false;
     const errors ={};
 
@@ -169,7 +171,19 @@ validate = () =>
         isError = true;
         errors.numberofquestionsError= "Number should be < or =" + this.state.numberofquestions;
     }
-    
+    if(this.state.noOfQns > this.state.numberofquestions+"0"){
+        isError = true;
+        errors.numberofquestionsError= "Number should be < or =" + this.state.numberofquestions;
+    }  
+    if(this.state.noOfQns.match("[0-9]") && !(this.state.noOfQns > this.state.numberofquestions) 
+    && !(this.state.noOfQns > this.state.numberofquestions+"0"))
+    {
+        errors.numberofquestionsError=""
+    }
+    if(this.state.timeLimit.match("[0-9]"))
+    {
+        errors.timelimitError= " ";
+    }
     if(this.state.timeLimit === ''){
         isError = true;
         errors.timelimitError= "Enter a number";
@@ -188,14 +202,6 @@ validate = () =>
         this.setState(
             {
                timelimitError: ""
-            }
-        )
-    }
-    if(this.state.noOfQns.length >= 1)
-    {
-        this.setState(
-            {
-               numberofquestionsError: ""
             }
         )
     }

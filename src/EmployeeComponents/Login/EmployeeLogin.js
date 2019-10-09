@@ -5,6 +5,7 @@ import axios from 'axios';
 import EmployeeLoginForm from "./EmployeeLoginForm";
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import auth from "../../auth"
 
 const validationSchema = Yup.object({
   employeeid: Yup.string("Enter your Id")
@@ -20,7 +21,8 @@ class employeeLogin extends Component {
     super(props);
     this.state = {
       Id: "",
-      open:false
+      open:false,
+      authenticated: true
     };
   }
 
@@ -50,6 +52,8 @@ class employeeLogin extends Component {
             return (
               localStorage.setItem('employeeid', employeeid),
               localStorage.setItem('password', Password),
+              auth.login(),
+              //localStorage.setItem('isAuth', this.state.authenticated),
               this.props.history.push('./employee')          
             )}
         else{

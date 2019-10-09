@@ -8,17 +8,14 @@ class Auth {
     login() {
        
         this.authenticated = true;
+        localStorage.setItem("isAuth", true)
     }
 
-    // register() {
-       
-    //     this.authenticated = true;
-    // }
 
     logout(cb) {
-        this.authenticated = false;
+       
         localStorage.clear()
-      //  history.push('/')   
+
         cb();
     }
 

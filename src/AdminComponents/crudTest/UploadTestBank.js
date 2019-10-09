@@ -68,16 +68,43 @@ class UploadTestBank extends Component
           numberofquestions: 0,
           numberofquestionsError: '',
           open: false,
+          subtypeData: []
+     }
+ }
+ componentDidMount = () => 
+ {
+     if(this.state.domain === "Technical")
+     {
+        axios.get("http://192.168.200.200:8080/backendapi/admin/test-detail/category/Technical")
+        .then(res => {
+            this.setState(
+                {
+                    subtypeData:res.data.map(values => values.testSubtype)
+                }
+            )
+        })
+     }
+     else if(this.state.domain === "Non-Technical")
+     {
+        axios.get("http://192.168.200.200:8080/backendapi/admin/test-detail/category/Non-Technical")
+        .then(res => {
+            this.setState(
+                {
+                    subtypeData:res.data.map(values => values.testSubtype)
+                }
+            )
+        })
      }
  }
  validate = () => 
  {
+     console.log(this.state.subtypeData + "hehe")
      let isError = false;
      const errors ={};
  
      if(this.state.numberofquestions === 0){
          isError = true;
-         errors.numberofquestionsError= "Enter a number";
+         errors.numberofquestionsError= "Enter a number greater than 0";
      }
      if(this.state.category === ''){
          isError = true;
@@ -88,15 +115,25 @@ class UploadTestBank extends Component
          isError = true;
          errors.typeoftestError= "Enter test type";
      }
-     if(this.state.numberofquestions.length >= 1)
+     if(this.state.subtypeData.includes(this.state.typeoftest))
      {
-         this.setState(
-             {
-                numberofquestionsError: ""
-             }
-         )
+        isError = true;
+        errors.typeoftestError= "The subtype already exists enter a new subtype !";
+       
      }
      if(this.state.category.match("^[A-z 0-9]+$" ))
+     {
+        errors.categoryError= "";
+     }
+     if(this.state.typeoftest.match("^[A-z 0-9]+$" ) && !this.state.subtypeData.includes(this.state.typeoftest))
+     {
+        errors.typeoftestError= "";
+     }
+     if(this.state.numberofquestions > 0){
+
+        errors.numberofquestionsError= "";
+    }
+     if(this.state.category.match("^[A-z]+$" ))
      {
          this.setState(
              {

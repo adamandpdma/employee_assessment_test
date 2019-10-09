@@ -31,8 +31,8 @@ const App = () => {
           <Route path = '/EmployeeLogin' component = {EmployeeLogin}/>
           <Route path = '/EmployeeRegister' component = {EmployeeRegister}/>
           <Route path = '/GuestLogin' component = {GuestLogin}/>
-          <Route path = '/guest' component = {GuestResponsiveDrawer}/>
-          <ProtectedRoute path = '/admin' component = {ResponsiveDrawer}/>
+          <ProtectedRoute path = '/guest' component = {GuestResponsiveDrawer}/>
+          <Route path = '/admin' component = {ResponsiveDrawer}/>
           <Route path = '/employee' component = {EmployeeResponsiveDrawer}/>
           <Route path = '/hr' component = {HrResponsiveDrawer}/>   
           <Route path = '/RegistrationComplete' component = {RegistrationComplete}/>
