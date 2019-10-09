@@ -47,6 +47,7 @@ class employeeLogin extends Component {
            localStorage.setItem('name', res.data.name)
            localStorage.setItem('profile', res.data.profileImg)
            console.log(localStorage.getItem('name'))
+           console.log(localStorage.getItem('adminid'))
         })  
             return (
               localStorage.setItem('employeeid', employeeid),

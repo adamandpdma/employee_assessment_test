@@ -17,6 +17,7 @@
     "mui-datatables": "^2.11.1",
     "normalize.css": "^8.0.1",
     "react": "^16.9.0",
+    "react-app-polyfill": "^1.0.4",
     "react-beforeunload": "^2.1.0",
     "react-dom": "^16.9.0",
     "react-fitted-image": "^1.0.1",

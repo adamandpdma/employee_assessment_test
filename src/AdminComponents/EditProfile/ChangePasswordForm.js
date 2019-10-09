@@ -67,7 +67,7 @@ textfield:{
 
   const change = (name, e) => {
     handleChange(e);
-    setFieldTouched(name, true, false);
+    setFieldTouched(name);
   };
 
   
