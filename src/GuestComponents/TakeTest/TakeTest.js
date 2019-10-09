@@ -164,7 +164,7 @@ finishHandler = () => {
     {
         sec = '0' + sec
     }
-    
+
     let CompletedTime = min +":"+ sec
     console.log(CompletedTime.toString())
     console.log("Completed time =" + " " + min +":"+ sec)
