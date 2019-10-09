@@ -108,7 +108,7 @@ const ResponsiveDrawerGuest = (props) => {
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [testDetailsOpen, settestDetailsOpen] = React.useState(false);
+  const [testDetailsOpen, settestDetailsOpen] = React.useState("false");
 
   useEffect(() => {
     if(props.location.openBoolean)
@@ -119,7 +119,9 @@ const ResponsiveDrawerGuest = (props) => {
 });
 const openTestCheck = () => 
 {
-  settestDetailsOpen(true)
+  localStorage.setItem("fav", "true");
+  window.location='/guest/ViewTestDetails'
+  // settestDetailsOpen(true)
 }
 
   const handleDrawerToggle = () => {
@@ -192,7 +194,7 @@ const openTestCheck = () =>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
     <ListItem button className={classes.nested} onClick={navigation}>
-      {testDetailsOpen ?
+      {localStorage.getItem("fav")  === "true"  ?
          <NavLink to='/guest/ViewTestDetails' style={listStyle} 
          style={{color: 'white', textDecoration: 'none'}}
          activeStyle={{color: 'white', textDecoration: 'none'}}
