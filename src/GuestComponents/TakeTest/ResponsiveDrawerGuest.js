@@ -26,7 +26,8 @@ import BottomNavigation from '@material-ui/core/BottomNavigation';
 import { Button } from '@material-ui/core';
 import auth from "../../auth"
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import {ProtectedRoute} from "../../Protected.Route"
+import {ProtectedRoute} from "../../Protected.Route";
+import { useEffect, useState } from 'react';
 
 
 const drawerWidth = 300;
@@ -107,6 +108,19 @@ const ResponsiveDrawerGuest = (props) => {
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [testDetailsOpen, settestDetailsOpen] = React.useState(false);
+
+  useEffect(() => {
+    if(props.location.openBoolean)
+    {
+      openTestCheck()
+    }
+  
+});
+const openTestCheck = () => 
+{
+  settestDetailsOpen(true)
+}
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -124,6 +138,7 @@ const ResponsiveDrawerGuest = (props) => {
         <NavLink to='/createTest'></NavLink>
        )
   }
+ 
 
   const drawer = (
     <div>
@@ -161,15 +176,25 @@ const ResponsiveDrawerGuest = (props) => {
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
     <ListItem button className={classes.nested} onClick={navigation}>
-     <NavLink to='/guest/Register' style={listStyle} 
-        style={{color: 'white', textDecoration: 'none'}}
-        activeStyle={{color: 'white', textDecoration: 'none'}}><ListItemText primary="Register" /></NavLink>
-          </ListItem>  
+      {testDetailsOpen ?
+         <NavLink to='/guest/ViewTestDetails' style={listStyle} 
+         style={{color: 'white', textDecoration: 'none'}}
+         activeStyle={{color: 'white', textDecoration: 'none'}}
+      >
+           <ListItemText primary="VIEW TEST DETAILS" />
+           </NavLink> :  <NavLink to='/guest/Register' style={listStyle} 
+         style={{color: 'white', textDecoration: 'none'}}
+         activeStyle={{color: 'white', textDecoration: 'none'}}>
+           <ListItemText primary="REGISTER" />
+           </NavLink>
+      }
+          </ListItem> 
         </List>
       </Collapse>
       </List>
     </div>
   );
+
 
   return (
     <div className={classes.root}>
