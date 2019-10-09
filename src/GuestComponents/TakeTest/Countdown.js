@@ -21,7 +21,8 @@ class Countdown extends Component
             guestId: this.props.location.guestId,
             score: this.props.location.score,
             settingsId: this.props.location.settingsId,
-            userQnsIds: this.props.location.userQnsIds
+            userQnsIds: this.props.location.userQnsIds,
+            timeEnd: 0
         }
     }
     convertSeconds = (s) => 
@@ -75,7 +76,7 @@ class Countdown extends Component
            }
         }, 1000);
     }
-
+   
    render()
     {
         return(
