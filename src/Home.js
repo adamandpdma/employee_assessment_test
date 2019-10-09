@@ -48,9 +48,10 @@ const useStyles = makeStyles(theme => ({
     backgroundImage: "url('https://media.glassdoor.com/l/e6/d0/ec/63/reception.jpg')",
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
-    width: window.innerWidth,
+    backgroundPosition: 'center',
+    minWidth:'100%',
     height: window.innerHeight,
-    paddingTop:"100px",
+    
   
 }
 
