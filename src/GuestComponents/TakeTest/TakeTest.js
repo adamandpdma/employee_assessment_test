@@ -53,6 +53,8 @@ const theme =createMuiTheme({
   },
 });
 
+const floor =require('math-floor')
+
 class TakeTest extends React.Component {
 
   state = {
@@ -138,6 +140,28 @@ nextQuestionHandler = () => {
 };
 
 finishHandler = () => {
+  console.log(this.props.functionCountdown._self.state.counter + " " + "sec")
+  console.log(this.props.functionCountdown._self.state.timeData + " " + "min")
+
+  let timeSecondsInitial = this.props.functionCountdown._self.state.timeData * 60
+  let timeSecondsFinish = this.props.functionCountdown._self.state.counter
+  let completeTime = timeSecondsInitial - timeSecondsFinish
+
+  console.log(completeTime + " " + "completed time")
+
+    let min = floor(completeTime/60);
+    let sec = completeTime % 60
+    if(min < 10)
+    {
+        min = '0' + min
+    }
+    if(sec < 10)
+    {
+        sec = '0' + sec
+    }
+    console.log("Completed time =" + " " + min +":"+ sec)
+  
+
  const values =  {
         correctAns: this.props.correctAns,
         employeeId: this.props.employeeId,
@@ -149,7 +173,6 @@ finishHandler = () => {
         userQnsIds: this.props.userQnsIds
       }
       console.log(values)
-      http://192.168.200.200:8080/backendapi/guest/784/tests/785/submit
   Axios.post('http://192.168.200.200:8080/backendapi/guest/'+localStorage.getItem("GuestId")+'/tests/'+this.state.resultId+'/submit', values)
   .then(res => console.log(res.data))
 

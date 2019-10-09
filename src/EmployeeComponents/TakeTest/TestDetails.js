@@ -86,23 +86,12 @@ export default class TestDetails extends Component {
           
           attemptsData: this.state.attemptsData.concat(res.data)
         })
-<<<<<<< HEAD
         this.setState({
           attemptsDataArray: this.state.attemptsData.split('')
         })
         this.setState({
           attemptsDataFiltered: this.state.attemptsDataArray.filter(values => values !== "9" )
         })
-=======
-     
-  
-        console.log(i)
-        }
-        )
-        
-       }
-      
->>>>>>> 62649a1d0ae5f79bec3ff239fa51d2bd12c4d81c
 
         })
       }

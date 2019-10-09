@@ -54,6 +54,8 @@ const theme =createMuiTheme({
   },
 });
 
+const floor =require('math-floor')
+
 class TakeTest extends React.Component {
 
   state = {
@@ -138,6 +140,27 @@ nextQuestionHandler = () => {
 };
 
 finishHandler = () => {
+  console.log(this.props.functionCountdown._self.state.counter + " " + "sec")
+  console.log(this.props.functionCountdown._self.state.timeData + " " + "min")
+
+  let timeSecondsInitial = this.props.functionCountdown._self.state.timeData * 60
+  let timeSecondsFinish = this.props.functionCountdown._self.state.counter
+  let completeTime = timeSecondsInitial - timeSecondsFinish
+
+  console.log(completeTime + " " + "completed time")
+
+    let min = floor(completeTime/60);
+    let sec = completeTime % 60
+    if(min < 10)
+    {
+        min = '0' + min
+    }
+    if(sec < 10)
+    {
+        sec = '0' + sec
+    }
+    console.log("Completed time =" + " " + min +":"+ sec)
+  
  const values =  {
         correctAns: this.props.correctAns,
         employeeId: this.props.employeeId,
