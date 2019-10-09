@@ -97,11 +97,15 @@ class TakeTest extends React.Component {
     .catch(res => { 
       alert("NO TESTS AVAILABLE !")
       this.props.history.push("/guest/ViewTestDetails")
+      
       //window.location='/guest/ViewTestDetails'
     }); 
   };
+
+  
   
   componentDidMount() {
+   // window.BeforeUnloadEvent(alert("Please do not refresh or your test will be submitted"))
     this.loadQuizData();
   }
 
@@ -118,6 +122,7 @@ class TakeTest extends React.Component {
           });
     })
   }
+ // window.BeforeUnloadEvent(alert("Please do not refresh or your test will be submitted"))
 }
 
 nextQuestionHandler = () => {

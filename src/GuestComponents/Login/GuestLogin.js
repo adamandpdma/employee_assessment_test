@@ -40,6 +40,7 @@ submitValues = ({employeeid,Password,event}) => {
         console.log(res.data)
        { if (res.data === true) {
           return (
+            localStorage.setItem("isAuth", true),
             this.props.history.push('./guest')          
           )}
       else{
