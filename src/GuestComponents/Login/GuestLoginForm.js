@@ -144,7 +144,9 @@ const form = withStyles(styles)(props => {
       </div>
 
       <div>
-      <Button 
+      <Button        
+       onClick={() => {
+          auth.login()}}
         id = "Button"
         type="submit"
         margin="normal"
