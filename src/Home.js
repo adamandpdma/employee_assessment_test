@@ -11,7 +11,7 @@ import { NavLink } from 'react-router-dom'
 const useStyles = makeStyles(theme => ({
     fab: {
     // top:'50px',
-    padding: "100px",
+    padding: "80px",
     backgroundImage: "url('https://media.glassdoor.com/sql/382332/optimum-solutions-singapore-squarelogo-1536802165813.png')",
     margin: theme.spacing(1),
     backgroundSize: "cover",
