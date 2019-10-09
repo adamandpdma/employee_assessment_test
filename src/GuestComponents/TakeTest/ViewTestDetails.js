@@ -9,7 +9,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Grid from '@material-ui/core/Grid';
 import DialogContent from '@material-ui/core/DialogContent';
-
+import { withRouter } from "react-router";
 import Typography from '@material-ui/core/Typography';
 import Start from '../../start.png'
 
@@ -26,7 +26,7 @@ const navStyle = {
   textDecoration: "none",
 }
 
-export default class ViewTestDetails extends Component {
+ class ViewTestDetails extends Component {
   constructor(props) {
     super(props);
 
@@ -268,4 +268,6 @@ export default class ViewTestDetails extends Component {
     )
   }
 }
+
+export default withRouter(ViewTestDetails)
 
