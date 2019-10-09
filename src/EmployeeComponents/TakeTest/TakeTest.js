@@ -165,6 +165,7 @@ finishHandler = () => {
     console.log("Completed time =" + " " + min +":"+ sec)
   
  const values =  {
+        completionTime: CompletedTime.toString(),
         correctAns: this.props.correctAns,
         employeeId: this.props.employeeId,
         guestId: this.props.guestId,
