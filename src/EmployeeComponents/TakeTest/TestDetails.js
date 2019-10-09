@@ -44,7 +44,8 @@ export default class TestDetails extends Component {
         settingsId: [],
         i: 0 ,
         dataTest: '',
-        attemptsDataTest: [],
+        attemptsDataFiltered: [],
+        attemptsDataArray: [],
         openStart: false
 
         
@@ -82,17 +83,22 @@ export default class TestDetails extends Component {
         await axios.get('http://192.168.200.200:8080/backendapi/employee/101/tests/'+i[j]+'/attempts')
         .then( res => { 
         this.setState({
+          
           attemptsData: this.state.attemptsData.concat(res.data)
 
         })
-  
-        console.log(i)
-        }
-        )
-        
-       }
-      
+        this.setState({
+          attemptsDataArray: this.state.attemptsData.split('')
+        })
+        this.setState({
+          attemptsDataFiltered: this.state.attemptsDataArray.filter(values => values !== "9" )
+        })
 
+        })
+      }
+      
+     console.log(this.state.attemptsDataArray)
+     console.log(this.state.attemptsDataFiltered)
   }
   
  
@@ -243,7 +249,6 @@ export default class TestDetails extends Component {
         }
       },
 
-    
   ]
     return (
       <div>
@@ -285,8 +290,8 @@ export default class TestDetails extends Component {
                currentemp.testSubtype,
                currentemp.noOfQns,
                currentemp.timeLimit + "  "+ 'minutes',
-               this.state.attemptsData[i]+'/2',
-               this.TestReview(this.state.attemptsData[i], 
+               this.state.attemptsDataFiltered[i]+'/2',
+               this.TestReview(this.state.attemptsDataFiltered[i], 
                 currentemp.testSubtype,
                  currentemp.timeLimit, 
                  currentemp.noOfQns)

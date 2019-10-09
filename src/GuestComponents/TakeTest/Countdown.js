@@ -70,8 +70,8 @@ class Countdown extends Component
            if(this.state.counter === -1)
            {
                alert("Time out")
-               this.props.history.push("/guest/ViewTestDetails")
-               //window.location='/guest/ViewTestDetails'
+              // this.props.history.push("/guest/ViewTestDetails")
+               window.location='/guest/ViewTestDetails'
            }
         }, 1000);
     }
