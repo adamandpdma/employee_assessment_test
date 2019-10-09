@@ -71,9 +71,6 @@ const Home = () => {
     return(
       <React.Fragment>
       <header style={{"backgroundColor": "black"}}>
-  {/* <svg xmlns="http://www.w3.org/2000/svg" width="515.456" height="72" viewBox="0 0 515.456 72"> */}
-  {/* <g id="CloudBoard_" data-name="CloudBoard " transform="translate(-651.984 -1005)">
-  </g> */}
   <img src = {Logo}
   width="280" height="72"/>
   </header>
@@ -127,6 +124,7 @@ const Home = () => {
       </Popper>
       </Container>
       </Container>
+      <center>
       <footer style={{"backgroundColor": "black"}}>
       <svg xmlns="http://www.w3.org/2000/svg" width= 'window.innerWidth' height="72" viewBox="0 0 515.456 72">
       <g id="CloudBoard_" data-name="CloudBoard " transform="translate(-651.984 -1005)">
@@ -136,6 +134,7 @@ const Home = () => {
       </g>
     </svg>
     </footer>
+    </center>
 
       </React.Fragment> 
 

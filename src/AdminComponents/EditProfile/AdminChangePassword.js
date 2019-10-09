@@ -16,7 +16,7 @@ const validationSchema = Yup.object({
     .min(6, "Password must contain at least 6 characters")
     .required("Enter your password"),
   newPassword: Yup.string("")
-    .matches(alphanumeric, "Password must be alphanumeric")
+    .matches(alphanumeric, "Password must be alphanumeric Eg.Password1!")
     .min(6,"Password must contain at least 6 characters")
     .max(12,"Password cannot have more then 12 characters")
     .notOneOf([Yup.ref("Password")],"Cannot be same as Current Password")

@@ -175,6 +175,7 @@ class Profile extends Component {
   handleClose = () => {
     this.setState({open : false})
     this.setState({dialog : false})
+    this.setState({errorDialog : false})
   }
 
   handleOnclick = () => {
@@ -216,6 +217,8 @@ render(){
   const dialog = this.state.dialog
   const errorDialog =this.state.errorDialog
   const details = this.state.details
+  const name = localStorage.getItem('name')
+
 
   return (
 
@@ -234,7 +237,7 @@ render(){
         </Avatar>
         </Box>
         <Box mx={1.5}>
-          {localStorage.getItem('name')}
+        {name}
         </Box>
       </Box>
 

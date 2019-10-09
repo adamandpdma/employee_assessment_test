@@ -218,6 +218,7 @@ render(){
   const dialog = this.state.dialog
   const details = this.state.details
   const errorDialog = this.state.errorDialog
+  const name = localStorage.getItem('name')
 
   return (
 
@@ -236,7 +237,7 @@ render(){
         </Avatar>
         </Box>
         <Box mx={1.5}>
-          {localStorage.getItem('name')}
+          {name}
         </Box>
       </Box>
 
@@ -297,10 +298,7 @@ render(){
           </Button>
           </div>  
           </form>
-          {/* <div >
-            {$imagePreview}
-          </div> */}
-        </div>
+          </div>
 
         <CardActions>
       <Button
@@ -325,14 +323,6 @@ render(){
             aria-describedby="alert-dialog-description"
             >
             <DialogTitle id="alert-dialog-title">{"Profile Picture has been changed"}</DialogTitle>
-      {/* <Button
-          margin="normal"
-          fullWidth
-          variant="contained"
-          className={classes.button}
-          >
-      <NavLink to={'/hr'}>Okay</NavLink>
-      </Button> */}
       </Dialog>
       <Dialog
             open={errorDialog}

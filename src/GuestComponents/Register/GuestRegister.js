@@ -17,7 +17,7 @@ const validationSchema = Yup.object({
     .min(8, "Name must contain at least 8 characters")
     .required("Enter your name"),
   nric: Yup.string("Enter your Nric")
-    .matches(nricFormat, "Invalid Nric")
+    .matches(nricFormat, "Invalid Nric Eg. S1234567A")
     .required("Enter your Nric"),  
   mobile: Yup.string("")
     .min(8, "Mobile must contain at least 8 numbers")
