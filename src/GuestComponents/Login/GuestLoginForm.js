@@ -35,7 +35,8 @@ const styles = theme => ({
      background: '#FFFFFF',
   },  
   container: {
-    marginTop: theme.spacing(4),
+    position:'relative',
+    top:'80px',
     background: '#FFFFFF',
     paddingLeft:"0px",
     paddingRight:"0px"
@@ -50,12 +51,12 @@ const styles = theme => ({
 });
  const bgStyle = {
    
-     backgroundImage: "url('https://media.glassdoor.com/l/e6/d0/ec/63/reception.jpg')",
-     backgroundSize: "cover",
-     backgroundRepeat: "no-repeat",
-     width: window.innerWidth,
-     height: window.innerHeight,
-     paddingTop:"20px"
+  backgroundImage: "url('https://media.glassdoor.com/l/e6/d0/ec/63/reception.jpg')",
+  backgroundSize: "cover",
+  backgroundRepeat: "no-repeat",
+  backgroundPosition: 'center',
+  minWidth:'100%',
+  height: window.innerHeight,
  }
 
 const form = withStyles(styles)(props => {
