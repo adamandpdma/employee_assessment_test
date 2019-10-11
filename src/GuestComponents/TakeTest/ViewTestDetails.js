@@ -12,6 +12,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import { withRouter } from "react-router";
 import Typography from '@material-ui/core/Typography';
 import Start from '../../start.png'
+import CloseIcon from '@material-ui/icons/Close';
 
 
 
@@ -214,6 +215,8 @@ const navStyle = {
     return (
       <div>
           <Dialog aria-labelledby="customized-dialog-title" open={this.state.open}>
+            {/* <button onClick={this.handleClose}>Close</button> */}
+            <CloseIcon style={{"margin-left":"93%", "margin-top":"10px"}} onClick={this.handleClose}></CloseIcon>
         <DialogTitle id="customized-dialog-title">
           TERMS AND CONDITIONS
         </DialogTitle>
