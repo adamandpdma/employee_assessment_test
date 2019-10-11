@@ -9,7 +9,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Grid from '@material-ui/core/Grid';
 import DialogContent from '@material-ui/core/DialogContent';
-
+import CloseIcon from '@material-ui/icons/Close';
 import Typography from '@material-ui/core/Typography';
 import EmployeeReviewTest from '../ReviewTest/EmployeeReviewTest';
 
@@ -252,6 +252,7 @@ export default class TestDetails extends Component {
     return (
       <div>
           <Dialog aria-labelledby="customized-dialog-title" open={this.state.open}>
+          <CloseIcon style={{"margin-left":"93%", "margin-top":"10px"}} onClick={this.handleClose}></CloseIcon>
         <DialogTitle id="customized-dialog-title">
           TERMS AND CONDITIONS
         </DialogTitle>
