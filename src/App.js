@@ -32,9 +32,9 @@ const App = () => {
           <Route path = '/EmployeeRegister' component = {EmployeeRegister}/>
           <Route path = '/GuestLogin' component = {GuestLogin}/>
           <ProtectedRoute path = '/guest' component = {GuestResponsiveDrawer}/>
-          <Route path = '/admin' component = {ResponsiveDrawer}/>
-          <Route path = '/employee' component = {EmployeeResponsiveDrawer}/>
-          <Route path = '/hr' component = {HrResponsiveDrawer}/>   
+          <ProtectedRoute path = '/admin' component = {ResponsiveDrawer}/>
+          <ProtectedRoute path = '/employee' component = {EmployeeResponsiveDrawer}/>
+          <ProtectedRoute path = '/hr' component = {HrResponsiveDrawer}/>   
           <Route path = '/RegistrationComplete' component = {RegistrationComplete}/>
        
           {/* <ProtectedRoute path = '/HrEditProfile' component = {HrEditProfile} />

@@ -130,8 +130,9 @@ handleClose = () => {
             aria-describedby="alert-dialog-description"
             >
             <DialogTitle id="alert-dialog-title">{"Registration Complete"}</DialogTitle>
-            <NavLink to="/guest/ViewTestDetails" style={{"textDecoration": "none"}}>
-            <Button margin='normal' variant='contain' fullWidth>Continue</Button>
+            <NavLink to={{pathname:"/guest", openBoolean: true}} style={{"textDecoration": "none"}}>
+            <Button margin='normal' variant='contain' fullWidth>
+              Continue</Button>
             </NavLink>
             
       </Dialog>

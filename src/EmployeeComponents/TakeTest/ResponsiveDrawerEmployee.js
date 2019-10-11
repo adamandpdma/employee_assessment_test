@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -118,6 +118,22 @@ const ResponsiveDrawerEmployee = (props) => {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   }
+
+
+  useEffect(() => {
+    if(localStorage.getItem("employeeid") !== null)
+    {
+      localStorage.setItem("isAuth", true)
+      console.log(localStorage.getItem("employeeid"))
+      console.log('True')
+    } else {
+      // localStorage.setItem("isAuth", false)
+      console.log(localStorage.getItem("employeeid"))
+      console.log('False')
+      window.location='/'
+      localStorage.clear()
+    }
+  });
 
   const [open, setOpen] = React.useState(false);
 

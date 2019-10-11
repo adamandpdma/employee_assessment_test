@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import axios from 'axios';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import auth from '../../auth'
 
 
 const validationSchema = Yup.object({
@@ -41,8 +42,9 @@ submitValues = ({employeeid,Password,event}) => {
        { if (res.data === true) {
           return (
             localStorage.setItem("isAuth", true),
-            this.props.history.push('./guest')          
-          )}
+            localStorage.setItem('guestid', employeeid),
+            window.location='/guest' 
+        )}
       else{
         this.setState({open:true})
 

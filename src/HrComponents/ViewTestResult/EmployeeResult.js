@@ -147,6 +147,12 @@ export default class EmployeeResult extends Component {
         }
       },
       {
+        name: "Completed Time",
+        options: {
+          filter: false,
+        }
+      },
+      {
         name: "Percentage",
         options: {
           filter: false,
@@ -194,7 +200,8 @@ export default class EmployeeResult extends Component {
             return [
               currentemp.testType,
               currentemp.testSubtype,
-              currentemp.score+' / '+((currentemp.userQnsIds.split(',').length) - 1),    
+              currentemp.score+' / '+((currentemp.userQnsIds.split(',').length) - 1),  
+              currentemp.completionTime,  
               this.Percentage(currentemp.score, currentemp.userQnsIds),
               this.state.booleanResults[i]      
             ]})}

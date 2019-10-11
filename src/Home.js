@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useState} from "react"
 import { makeStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
 import Container from '@material-ui/core/Container';
@@ -11,7 +11,7 @@ import { NavLink } from 'react-router-dom'
 const useStyles = makeStyles(theme => ({
     fab: {
     // top:'50px',
-    padding: "100px",
+    padding: "80px",
     backgroundImage: "url('https://media.glassdoor.com/sql/382332/optimum-solutions-singapore-squarelogo-1536802165813.png')",
     margin: theme.spacing(1),
     backgroundSize: "cover",
@@ -58,9 +58,9 @@ const useStyles = makeStyles(theme => ({
 
 const Home = () => {
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [open, setOpen] = React.useState(false);
-  const [placement, setPlacement] = React.useState();
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [open, setOpen] = useState(false);
+  const [placement, setPlacement] = useState();
   const classes = useStyles();
 
   const handleClick = newPlacement => event => {
