@@ -103,7 +103,7 @@ this.nextQuestionHandler = this.nextQuestionHandler.bind(this)
     .catch(res => { 
       alert("NO TESTS AVAILABLE !")
       
-      window.location='/guest/ViewTestDetails'
+      window.location='./guest/ViewTestDetails'
     }); 
   };
 

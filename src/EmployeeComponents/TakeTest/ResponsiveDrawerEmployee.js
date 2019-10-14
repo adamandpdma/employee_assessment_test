@@ -130,7 +130,7 @@ const ResponsiveDrawerEmployee = (props) => {
       // localStorage.setItem("isAuth", false)
       console.log(localStorage.getItem("employeeid"))
       console.log('False')
-      window.location='/'
+      window.location='./'
       localStorage.clear()
     }
   });
