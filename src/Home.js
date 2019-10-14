@@ -132,7 +132,7 @@ const Home = () => {
       </Popper>
       </Container>
       </Container>
-      <footer style={{"backgroundColor": "black","position":'absolute',"minWidth":"100%","bottom":"-10%"}}>
+      <footer style={{"backgroundColor": "black","position":'absolute',"minWidth":"100%","bottom":"-15%"}}>
         <center>
       <svg xmlns="http://www.w3.org/2000/svg"  width= 'window.innerWidth' height="72" viewBox="0 0 515.456 72">
       <g id="CloudBoard_" data-name="CloudBoard " transform="translate(-651.984 -1005)">
