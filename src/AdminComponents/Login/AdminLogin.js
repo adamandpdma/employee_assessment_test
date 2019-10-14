@@ -47,16 +47,17 @@ const adminId = employeeid;
          localStorage.setItem('name', res.data.name)
          localStorage.setItem('profile', res.data.profileImg)
          console.log(localStorage.getItem('name'))
+         localStorage.setItem("isAuth", true)
+         localStorage.setItem('adminid', employeeid)
+         console.log(localStorage.getItem('adminid'))
+         localStorage.setItem('password', Password)
+           // localStorage.setItem('profile', this.state.details.profileImg)
+         window.location='./admin'  
       })
-          return (
-            localStorage.setItem("isAuth", true),
-            localStorage.setItem('adminid', employeeid),
-            console.log(localStorage.getItem('adminid')),
-            localStorage.setItem('password', Password),
-              // localStorage.setItem('profile', this.state.details.profileImg)
-            window.location='./admin'  
-            // this.props.history.push('./admin')          
-          )}
+          // return (
+          //   // this.props.history.push('./admin')          
+          // )
+        }
       else{
         return(
         this.setState({open:true}))
