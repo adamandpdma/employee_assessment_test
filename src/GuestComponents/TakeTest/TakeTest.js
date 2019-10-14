@@ -56,8 +56,8 @@ const theme =createMuiTheme({
 const floor =require('math-floor')
 
 class TakeTest extends React.Component {
-
-  state = {
+constructor() {
+  this.state = {
     currentQuestion: 0,
     myAnswer: [],
     testscore: 1,
@@ -78,6 +78,9 @@ class TakeTest extends React.Component {
     disabled: true,
     alignment: '',
   };
+this.finishHandler = this.finishHandler.bind(this)
+this.nextQuestionHandler = this.nextQuestionHandler.bind(this)
+}
 
 
 
