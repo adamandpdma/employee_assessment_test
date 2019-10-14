@@ -34,7 +34,8 @@ const styles = theme => ({
      background: '#FFFFFF',
   },  
   container: {
-    marginTop: theme.spacing(4),
+    position:'relative',
+    top:'80px',
     background: '#FFFFFF',
     paddingLeft:"0px",
     paddingRight:"0px"
@@ -47,15 +48,18 @@ const styles = theme => ({
 
 
 });
- const bgStyle = {
+const bgStyle = {
    
-     backgroundImage: "url('https://media.glassdoor.com/l/e6/d0/ec/63/reception.jpg')",
-     backgroundSize: "cover",
-     backgroundRepeat: "no-repeat",
-     width: window.innerWidth,
-     height: window.innerHeight,
-     paddingTop:"20px"
- }
+  backgroundImage: "url('https://media.glassdoor.com/l/e6/d0/ec/63/reception.jpg')",
+  backgroundSize: "cover",
+  backgroundRepeat: "no-repeat",
+  backgroundPosition: 'center',
+  minWidth:'100%',
+  minHeight:'100%' ,
+  position:'absolute'
+  
+
+}
 
 const form = withStyles(styles)(props => {
   const {
@@ -178,7 +182,7 @@ const form = withStyles(styles)(props => {
     </form>
     </Container>
     <center>
-      <footer style={{"backgroundColor": "black"}}>
+    <footer style={{"backgroundColor": "black","position":'fixed',"minWidth":"100%","bottom":"0%"}}>
       <svg xmlns="http://www.w3.org/2000/svg" width= 'window.innerWidth' height="72" viewBox="0 0 515.456 72">
       <g id="CloudBoard_" data-name="CloudBoard " transform="translate(-651.984 -1005)">
         <text id="CloudBoard_-_Optimum_Solutions_2019" data-name="CloudBoard - Optimum Solutions 2019" transform="translate(702 1005)" fill="#fff" font-size="26" font-family="SegoeUI-Italic, Segoe UI" font-style="italic"><tspan x="0" y="28">CloudBoard - Optimum Solutions 2019</tspan></text>

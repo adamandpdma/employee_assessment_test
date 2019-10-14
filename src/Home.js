@@ -11,12 +11,16 @@ import { NavLink } from 'react-router-dom'
 const useStyles = makeStyles(theme => ({
     fab: {
     // top:'50px',
-    padding: "80px",
+    position:'absolute',
+    // top:'245px',
+    // right:'576px',
+    top:"22%",
+    right:"45%",
+    padding:'6%',
     backgroundImage: "url('https://media.glassdoor.com/sql/382332/optimum-solutions-singapore-squarelogo-1536802165813.png')",
     margin: theme.spacing(1),
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
-  
     },
     button:{
       margin: theme.spacing(1),
@@ -50,7 +54,8 @@ const useStyles = makeStyles(theme => ({
     backgroundRepeat: "no-repeat",
     backgroundPosition: 'center',
     minWidth:'100%',
-    height: window.innerHeight,
+    minHeight:'100%' ,
+    position:'absolute'
     
   
 }
@@ -127,7 +132,7 @@ const Home = () => {
       </Popper>
       </Container>
       </Container>
-      <footer style={{"backgroundColor": "black"}}>
+      <footer style={{"backgroundColor": "black","position":'fixed',"minWidth":"100%","bottom":"0%"}}>
         <center>
       <svg xmlns="http://www.w3.org/2000/svg"  width= 'window.innerWidth' height="72" viewBox="0 0 515.456 72">
       <g id="CloudBoard_" data-name="CloudBoard " transform="translate(-651.984 -1005)">
