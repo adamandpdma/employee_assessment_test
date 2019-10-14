@@ -140,8 +140,8 @@ const openTestCheck = () =>
       // localStorage.setItem("isAuth", false)
       console.log(localStorage.getItem("guestid"))
       console.log('False')
-     window.location='/'
-     localStorage.clear()
+      window.location='./'
+      localStorage.clear()
     //  window.location.reload(true)
     }
   });

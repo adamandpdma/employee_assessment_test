@@ -137,7 +137,7 @@ const ResponsiveDrawerGuest = (props) => {
       // localStorage.setItem("isAuth", false)
       console.log(localStorage.getItem("hrid"))
       console.log('False')
-     window.location='/'
+     window.location='./'
      localStorage.clear()
     //  window.location.reload(true)
     }
