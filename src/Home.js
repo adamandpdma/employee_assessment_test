@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
     // right:'576px',
     top:"22%",
     right:"45%",
-    padding:'80px',
+    padding:'6%',
     backgroundImage: "url('https://media.glassdoor.com/sql/382332/optimum-solutions-singapore-squarelogo-1536802165813.png')",
     margin: theme.spacing(1),
     backgroundSize: "cover",
