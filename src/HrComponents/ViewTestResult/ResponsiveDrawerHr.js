@@ -101,8 +101,8 @@ const listStyle={
   color: 'none'}
   
 const style = {
-  left:850,
-  position:'absolute'
+  right:'2%',
+  position:'fixed'
 }
 const ResponsiveDrawerGuest = (props) => {
   const { container } = props;

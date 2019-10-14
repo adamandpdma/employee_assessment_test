@@ -100,8 +100,8 @@ const listStyle={
 
 const style = {
   //paddingLeft: "730px"
-  left:850,
-  position:'absolute'
+  right:'2%',
+  position:'fixed'
 }
 const ResponsiveDrawerGuest = (props) => {
   const { container } = props;

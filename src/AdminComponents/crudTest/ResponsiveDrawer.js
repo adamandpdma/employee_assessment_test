@@ -115,8 +115,8 @@ const listStyle={
 }
 
 const style = {
-  left:850,
-  position:'absolute'
+  right:'2%',
+  position:'fixed'
 }
 
 const ResponsiveDrawer = (props) => {
