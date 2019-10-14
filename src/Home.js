@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
     position:'absolute',
     // top:'245px',
     // right:'576px',
-    top:"35%",
+    top:"22%",
     right:"45%",
     padding:'80px',
     backgroundImage: "url('https://media.glassdoor.com/sql/382332/optimum-solutions-singapore-squarelogo-1536802165813.png')",
@@ -132,7 +132,7 @@ const Home = () => {
       </Popper>
       </Container>
       </Container>
-      <footer style={{"backgroundColor": "black","position":'absolute',"minWidth":"100%","bottom":"-15%"}}>
+      <footer style={{"backgroundColor": "black","position":'fixed',"minWidth":"100%","bottom":"0%"}}>
         <center>
       <svg xmlns="http://www.w3.org/2000/svg"  width= 'window.innerWidth' height="72" viewBox="0 0 515.456 72">
       <g id="CloudBoard_" data-name="CloudBoard " transform="translate(-651.984 -1005)">
