@@ -187,7 +187,7 @@ const employeeForm = withStyles(styles)(props => {
     </form>
     </Container>
     <center>
-      <footer style={{"backgroundColor": "black","position":'absolute',"minWidth":"100%","bottom":"-15%"}}>
+      <footer style={{"backgroundColor": "black","position":'fixed',"minWidth":"100%","bottom":"0"}}>
       <svg xmlns="http://www.w3.org/2000/svg" width= 'window.innerWidth' height="72" viewBox="0 0 515.456 72">
       <g id="CloudBoard_" data-name="CloudBoard " transform="translate(-651.984 -1005)">
         <text id="CloudBoard_-_Optimum_Solutions_2019" data-name="CloudBoard - Optimum Solutions 2019" transform="translate(702 1005)" fill="#fff" font-size="26" font-family="SegoeUI-Italic, Segoe UI" font-style="italic"><tspan x="0" y="28">CloudBoard - Optimum Solutions 2019</tspan></text>
