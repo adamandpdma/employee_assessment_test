@@ -138,20 +138,20 @@ textfield:{
         value={newPassword}
         onChange={change.bind(null, "newPassword")}
 
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <IconButton
-                edge="end"
-                aria-label="toggle password visibility"
-                onClick={handleClickShowPassword}
-                onMouseDown={handleMouseDownPassword}
-              >
-                {showPassword ? <VisibilityOff /> : <Visibility />}
-              </IconButton>
-            </InputAdornment>
-          )
-        }}
+        // InputProps={{
+        //   endAdornment: (
+        //     <InputAdornment position="end">
+        //       <IconButton
+        //         edge="end"
+        //         aria-label="toggle password visibility"
+        //         onClick={handleClickShowPassword}
+        //         onMouseDown={handleMouseDownPassword}
+        //       >
+        //         {showPassword ? <VisibilityOff /> : <Visibility />}
+        //       </IconButton>
+        //     </InputAdornment>
+        //   )
+        // }}
 
       />
       </div>
