@@ -51,7 +51,7 @@ const hrId = employeeid;
           return (
             localStorage.setItem('hrid', employeeid),
             localStorage.setItem('password', Password),
-            window.location='/hr'
+            window.location='./hr'
           )}
       else{
         this.setState({open:true})

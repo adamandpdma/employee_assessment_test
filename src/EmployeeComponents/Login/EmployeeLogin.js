@@ -56,7 +56,7 @@ class employeeLogin extends Component {
               localStorage.setItem('password', Password),
               auth.login(),
               //localStorage.setItem('isAuth', this.state.authenticated),
-              window.location='/employee'
+              window.location='./employee'
               // this.props.history.push('./employee')          
             )}
         else{

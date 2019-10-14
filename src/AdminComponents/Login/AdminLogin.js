@@ -54,7 +54,7 @@ const adminId = employeeid;
             console.log(localStorage.getItem('adminid')),
             localStorage.setItem('password', Password),
               // localStorage.setItem('profile', this.state.details.profileImg)
-            window.location='/admin'  
+            window.location='./admin'  
             // this.props.history.push('./admin')          
           )}
       else{

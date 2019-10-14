@@ -120,7 +120,7 @@ const ResponsiveDrawerGuest = (props) => {
 const openTestCheck = () => 
 {
   localStorage.setItem("fav", "true");
-  window.location='/guest/ViewTestDetails'
+  window.location='./guest/ViewTestDetails'
   // settestDetailsOpen(true)
 }
 
@@ -195,7 +195,7 @@ const openTestCheck = () =>
         <List component="div" disablePadding>
     <ListItem button className={classes.nested} onClick={navigation}>
       {localStorage.getItem("fav")  === "true"  ?
-         <NavLink to='/guest/ViewTestDetails' style={listStyle} 
+         <NavLink to='./guest/ViewTestDetails' style={listStyle} 
          style={{color: 'white', textDecoration: 'none'}}
          activeStyle={{color: 'white', textDecoration: 'none'}}
       >
@@ -234,7 +234,7 @@ const openTestCheck = () =>
         type="submit"
         onClick={() => {
           auth.logout(() => {
-            window.location = "/"
+            window.location = "./"
           })
           localStorage.clear()
           sessionStorage.clear()

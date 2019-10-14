@@ -234,7 +234,7 @@ const ResponsiveDrawerEmployee = (props) => {
         type="submit"
         onClick={() => {
           auth.logout(() => {
-            window.location = "/"
+            window.location = "./"
           })
           localStorage.clear()
           sessionStorage.clear()

@@ -43,7 +43,7 @@ submitValues = ({employeeid,Password,event}) => {
           return (
             localStorage.setItem("isAuth", true),
             localStorage.setItem('guestid', employeeid),
-            window.location='/guest' 
+            window.location='./guest' 
         )}
       else{
         this.setState({open:true})
