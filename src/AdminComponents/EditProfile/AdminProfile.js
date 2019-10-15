@@ -102,7 +102,7 @@ class Profile extends Component {
 
   _handleSubmit(e) 
   {
-    const adminId = localStorage.getItem('employeeid')
+    const adminId = localStorage.getItem('adminid')
     const password = localStorage.getItem('password')
     e.preventDefault();
     console.log('handle uploading-', this.state.file);
