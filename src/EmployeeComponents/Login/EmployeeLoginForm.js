@@ -49,7 +49,7 @@ const styles = theme => ({
 
   },
   register: {
-    left:640
+    right:'2%'
   }
 
 });
