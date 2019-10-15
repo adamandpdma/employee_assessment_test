@@ -100,8 +100,8 @@ const listStyle={
 
 const style = {
   //paddingLeft: "730px"
-  left:850,
-  position:'absolute'
+  right:'2%',
+  position:'fixed'
 }
 const ResponsiveDrawerGuest = (props) => {
   const { container } = props;
@@ -120,7 +120,7 @@ const ResponsiveDrawerGuest = (props) => {
 const openTestCheck = () => 
 {
   localStorage.setItem("fav", "true");
-  window.location='/guest/ViewTestDetails'
+  window.location='./guest/ViewTestDetails'
   // settestDetailsOpen(true)
 }
 
@@ -140,8 +140,8 @@ const openTestCheck = () =>
       // localStorage.setItem("isAuth", false)
       console.log(localStorage.getItem("guestid"))
       console.log('False')
-     window.location='/'
-     localStorage.clear()
+      window.location='./'
+      localStorage.clear()
     //  window.location.reload(true)
     }
   });
@@ -195,7 +195,7 @@ const openTestCheck = () =>
         <List component="div" disablePadding>
     <ListItem button className={classes.nested} onClick={navigation}>
       {localStorage.getItem("fav")  === "true"  ?
-         <NavLink to='/guest/ViewTestDetails' style={listStyle} 
+         <NavLink to='./guest/ViewTestDetails' style={listStyle} 
          style={{color: 'white', textDecoration: 'none'}}
          activeStyle={{color: 'white', textDecoration: 'none'}}
       >
@@ -234,7 +234,7 @@ const openTestCheck = () =>
         type="submit"
         onClick={() => {
           auth.logout(() => {
-            window.location = "/"
+            window.location = "./"
           })
           localStorage.clear()
           sessionStorage.clear()

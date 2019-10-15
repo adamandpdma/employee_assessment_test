@@ -101,8 +101,8 @@ const useStyles = makeStyles(theme => ({
   // }
 }));
 const style = {
-  left:850,
-  position:'absolute'
+  right:'2%',
+  position:'fixed'
 }
 const listStyle={
   textDecoration: "none",
@@ -130,7 +130,7 @@ const ResponsiveDrawerEmployee = (props) => {
       // localStorage.setItem("isAuth", false)
       console.log(localStorage.getItem("employeeid"))
       console.log('False')
-      window.location='/'
+      window.location='./'
       localStorage.clear()
     }
   });
@@ -234,7 +234,7 @@ const ResponsiveDrawerEmployee = (props) => {
         type="submit"
         onClick={() => {
           auth.logout(() => {
-            window.location = "/"
+            window.location = "./"
           })
           localStorage.clear()
           sessionStorage.clear()

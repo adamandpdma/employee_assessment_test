@@ -47,12 +47,14 @@ const hrId = employeeid;
          localStorage.setItem('name', res.data.name)
          localStorage.setItem('profile', res.data.profileImg)
          console.log(localStorage.getItem('name'))
+         
+         localStorage.setItem('hrid', employeeid)
+         localStorage.setItem('password', Password)
+         window.location='./hr'
       })
-          return (
-            localStorage.setItem('hrid', employeeid),
-            localStorage.setItem('password', Password),
-            window.location='/hr'
-          )}
+          // return (
+          // )
+        }
       else{
         this.setState({open:true})
 
