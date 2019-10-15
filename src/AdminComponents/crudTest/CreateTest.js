@@ -443,7 +443,10 @@ validate = () =>
                           <div style={errorColor}>{this.state.numberofquestionsError}</div>
                         </FormControl><br/><br/>
                       
-                       <InputLabel style={InputLabelStyle}>TIME LIMIT</InputLabel>
+                       <InputLabel style={InputLabelStyle}>TIME LIMIT
+                       <p style={{color: "blue"}}> In Minutes</p>
+                       </InputLabel>
+                     
                       <FormControl>
                           <TextField 
                            style={fieldStyle}
@@ -451,7 +454,9 @@ validate = () =>
                        type="number"
                        onChange={this.timeLimitOnChangeHandler}
                        value={this.state.timeLimit}
-                       errorText={this.state.timelimitError}></TextField>
+                       errorText={this.state.timelimitError}>
+                       </TextField>
+
                        <div style={errorColor}>{this.state.timelimitError}</div>
                       </FormControl><br/><br/>
                       <br/>

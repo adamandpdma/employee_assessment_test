@@ -12,6 +12,8 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TestRows from './TestRows';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 
    const style = {
     margin: "20px",
@@ -108,7 +110,7 @@ class UploadTestBank extends Component
      }
      if(this.state.category === ''){
          isError = true;
-         errors.categoryError= "Enter Test Category";
+         errors.categoryError= "Select Test Category";
      }
      
      if(this.state.typeoftest === ''){
@@ -184,6 +186,7 @@ class UploadTestBank extends Component
           }
       )
   }
+
   typeOfTestOnChangeHandler = (event) => 
   {
       this.setState(
@@ -200,6 +203,7 @@ class UploadTestBank extends Component
           }
       )
   }
+
   navigateBack = () => 
   {
       if(this.state.domain === "Technical")
@@ -219,7 +223,7 @@ class UploadTestBank extends Component
             </Grid>
           )
       }
-  }
+  } 
     render()
     {
         return(
@@ -235,28 +239,52 @@ class UploadTestBank extends Component
                 justify="center"
                 style={{ minHeight: '100vh' }}
                 >
+
                 <Grid item xs={12}>
                 <form onSubmit={this.onSubmitHandler} style={style}>
-      
-              {this.state.domain === "Technical" && (
-                 <InputLabel style={InputLabelStyle}>CATEGORY
-                 <p style={{"color": "blue"}}>Ex: Programming, Agile, DevOps</p></InputLabel>
-              )}
-              {this.state.domain === "Non-Technical" && (
-                 <InputLabel style={InputLabelStyle}>CATEGORY
-                 </InputLabel>
-              )}
-              <FormControl>
-                  <TextField
-                  style={fieldStyle}
-                  required 
-                  onChange={this.categoryOnChangeHandler} 
-                  value={this.state.category}
-                  errorText={this.state.categoryError}>
-              </TextField><br/>
-              <div style={errorColor}>{this.state.categoryError}</div>
-              </FormControl><br/>
-           
+        <InputLabel htmlFor="age-simple">Category</InputLabel>
+        <FormControl>
+        {this.state.domain === "Technical" && (
+        <Select
+          required
+          value={this.state.category}
+          ref="userInput" 
+          onChange={this.categoryOnChangeHandler}
+          errorText={this.state.categoryError}
+          style={fieldStyle}
+        >
+          <option value="Programming">Programming</option>
+          <option value="Agile">Agile</option>
+          <option value="DevOps">DevOps</option>
+        </Select>)}
+        {this.state.domain === "Non-Technical" && (
+        <Select
+          required
+          value={this.state.category}
+          ref="userInput" 
+          onChange={this.categoryOnChangeHandler}
+          errorText={this.state.categoryError}
+          style={fieldStyle}
+        >
+          <option value="Logical">Logical</option>
+          <option value="Aptitude">Aptitude</option>
+          <option value="Data Interpretation">Data Interpretation</option>
+        </Select>)}
+        {this.state.domain === undefined &&( 
+        <Select
+          required
+          value={this.state.category}
+          ref="userInput" 
+          onChange={this.categoryOnChangeHandler}
+          errorText={this.state.categoryError}
+          style={fieldStyle}
+        >
+          <option value="Logical"></option>
+          <option value="Aptitude"></option>
+          <option value="Data Interpretation"></option>
+        </Select>)}
+        <div style={errorColor}>{this.state.categoryError}</div>
+      </FormControl>  
               <InputLabel style={InputLabelStyle}>TYPE OF TEST</InputLabel>
               <FormControl>                  
                   <TextField 
@@ -317,3 +345,7 @@ class UploadTestBank extends Component
 }
 export default UploadTestBank;
 
+
+
+
+     
