@@ -50,7 +50,8 @@ class Technical extends Component
            poolId: this.props.location.poolId,
            numberofquestions: this.props.numberofquestions,
            category: this.props.location.category,
-           typeoftest: this.props.location.typeoftest}}  
+           typeoftest: this.props.location.typeoftest,
+           disabled: this.props.location.disabled}}  
            style={buttonStyle}>
              <Button variant="contained" style={buttonStyle}>
                Create Test

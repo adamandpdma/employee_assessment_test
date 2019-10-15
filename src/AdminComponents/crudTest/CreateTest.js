@@ -80,7 +80,9 @@ class CreateTest extends Component
           isHidden: false,
           settingsId: 0,
           poolId: this.props.location.poolId,
-          numberofquestions: this.props.location.numberofquestions
+          numberofquestions: this.props.location.numberofquestions,
+          disabled: true,
+          disabledFalse: this.props.location.disabled
      }
  }
 
@@ -387,6 +389,7 @@ validate = () =>
 
     render()
     {
+
         const uniqueValuesType =  this.state.testBankCategories.map(categoriess => categoriess.poolType)
         const uniqueType = [...new Set(uniqueValuesType)]; 
         console.log(uniqueType)
@@ -461,7 +464,14 @@ validate = () =>
                       </FormControl><br/><br/>
                       <br/>
                       <div>
-      <Button variant="contained" type='submit' style={buttonStyle}>CREATE TEST</Button>
+                          {(this.state.disabled === true && this.state.disabledFalse === undefined) && (
+    <Button variant="contained" type='submit' style={{color: "grey"}} disabled={this.state.disabled}>
+    CREATE TEST</Button>
+                          )}
+                                                  {this.state.disabledFalse === false && (
+    <Button variant="contained" type='submit' style={{color: "black"}} disabled={this.state.disabledFalse}>
+    CREATE TEST</Button>
+                          )}
       <Dialog
         open={this.state.open}
         onClose={this.handleClose}

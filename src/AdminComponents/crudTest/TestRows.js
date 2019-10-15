@@ -250,7 +250,8 @@ handleChange = (index, newAlignment) => {
           poolId: this.state.poolId,
           numberofquestions: this.state.numberofquestions,
           category: this.state.category,
-          typeoftest: this.state.typeoftest,}} style={buttonStyle}>
+          typeoftest: this.state.typeoftest,
+          disabled: false}} style={buttonStyle}>
             <Button>
           OKAY, Now proceed to Create Test
           </Button>
@@ -265,7 +266,8 @@ handleChange = (index, newAlignment) => {
              poolId: this.state.poolId, 
              numberofquestions: this.state.numberofquestions,
              category: this.state.category,
-             typeoftest: this.state.typeoftest}} style={buttonStyle}>
+             typeoftest: this.state.typeoftest,
+             disabled: false}} style={buttonStyle}>
              <Button>
           OKAY, Now proceed to Create Test
           </Button>
