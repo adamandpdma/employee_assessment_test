@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import {BrowserRouter} from "react-router-dom";
 import AdminLogin from './AdminComponents/Login/AdminLogin'
 import HrLogin from './HrComponents/Login/HrLogin'
 import EmployeeLogin from './EmployeeComponents/Login/EmployeeLogin'
@@ -23,8 +24,9 @@ const App = () => {
     
     return(
    <div>
-  <Router>
-      
+     
+     
+  <Router basename={process.env.REACT_APP_ROUTER_BASE || ''}>
           <Route exact path = '/' component = {Home} />
           <Route exact path = '/AdminLogin' component = {AdminLogin} />
           <Route path = '/HrLogin' component = {HrLogin} />

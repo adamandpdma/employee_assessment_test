@@ -1,5 +1,6 @@
 {
   "name": "employee_dashboard",
+  "homepage": "http://192.168.200.200:8080/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

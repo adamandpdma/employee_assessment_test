@@ -115,8 +115,8 @@ const listStyle={
 }
 
 const style = {
-  left:850,
-  position:'absolute'
+  right:'2%',
+  position:'fixed'
 }
 
 const ResponsiveDrawer = (props) => {
@@ -152,7 +152,7 @@ const ResponsiveDrawer = (props) => {
       // localStorage.setItem("isAuth", false)
       console.log(localStorage.getItem("adminid"))
       console.log('False')
-     window.location='/'
+     window.location='./'
      localStorage.clear()
     //  window.location.reload(true)
     }
@@ -238,7 +238,7 @@ const ResponsiveDrawer = (props) => {
         type="submit"
         onClick={() => {
           auth.logout(() => {
-            window.location = "/"
+            window.location = "./"
           })
           localStorage.clear()
           sessionStorage.clear()
