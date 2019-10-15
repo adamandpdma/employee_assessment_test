@@ -121,11 +121,7 @@ class Profile extends Component {
     let i = parseInt(Math.floor(Math.log(this.state.file.size) / Math.log(1024)));
     let KB=  Math.round(this.state.file.size / Math.pow(1024, i), 2);
 
-      if(KB > 64)
-      {
-      this.setState({errorDialog:true}) 
-      }  
-      else if(KB <= 64)
+      if(KB <= 64)
       {
         axios.post("http://192.168.200.200:8080/backendapi/admin/"+ adminId +"/profile-image", values)
         .then((res => {
@@ -138,9 +134,11 @@ class Profile extends Component {
           
         }}
       }))   
-    } else {
-      console.log("Image size should be at least 1KB.")
     }
+    else
+    {
+      this.setState({errorDialog:true}) 
+      }  
   }
 
   _handleImageChange(e) {
