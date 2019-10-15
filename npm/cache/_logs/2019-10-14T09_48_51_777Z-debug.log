@@ -1,13 +1,13 @@
 0 info it worked if it ends with ok
 1 verbose cli [ '/usr/local/bin/node', '/usr/local/bin/npm', 'run', 'build' ]
 2 info using npm@6.9.0
-3 info using node@v10.16.2
+3 info using node@v10.16.3
 4 verbose run-script [ 'prebuild', 'build', 'postbuild' ]
 5 info lifecycle employee_dashboard@0.1.0~prebuild: employee_dashboard@0.1.0
 6 info lifecycle employee_dashboard@0.1.0~build: employee_dashboard@0.1.0
 7 verbose lifecycle employee_dashboard@0.1.0~build: unsafe-perm in lifecycle true
-8 verbose lifecycle employee_dashboard@0.1.0~build: PATH: /usr/local/lib/node_modules/npm/node_modules/npm-lifecycle/node-gyp-bin:/Users/gabriel/Desktop/clt6/front_end/testing/testWar/node_modules/.bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Frameworks/Mono.framework/Versions/Current/Commands
-9 verbose lifecycle employee_dashboard@0.1.0~build: CWD: /Users/gabriel/Desktop/clt6/front_end/testing/testWar
+8 verbose lifecycle employee_dashboard@0.1.0~build: PATH: /usr/local/lib/node_modules/npm/node_modules/npm-lifecycle/node-gyp-bin:/Users/fahema/Employee clone/employee_assesment_test-master/employee_assesment_test/node_modules/.bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+9 verbose lifecycle employee_dashboard@0.1.0~build: CWD: /Users/fahema/Employee clone/employee_assesment_test-master/employee_assesment_test
 10 silly lifecycle employee_dashboard@0.1.0~build: Args: [ '-c', 'react-scripts build' ]
 11 silly lifecycle employee_dashboard@0.1.0~build: Returned: code: 1  signal: null
 12 info lifecycle employee_dashboard@0.1.0~build: Failed to exec build script
@@ -20,10 +20,10 @@
 13 verbose stack     at maybeClose (internal/child_process.js:982:16)
 13 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:259:5)
 14 verbose pkgid employee_dashboard@0.1.0
-15 verbose cwd /Users/gabriel/Desktop/clt6/front_end/testing/testWar
-16 verbose Darwin 18.7.0
+15 verbose cwd /Users/fahema/Employee clone/employee_assesment_test-master/employee_assesment_test
+16 verbose Darwin 16.7.0
 17 verbose argv "/usr/local/bin/node" "/usr/local/bin/npm" "run" "build"
-18 verbose node v10.16.2
+18 verbose node v10.16.3
 19 verbose npm  v6.9.0
 20 error code ELIFECYCLE
 21 error errno 1
