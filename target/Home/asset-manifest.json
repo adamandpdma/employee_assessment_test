@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "http://192.168.200.200:8080/Home/static/css/main.cfedc1ed.chunk.css",
+    "main.js": "http://192.168.200.200:8080/Home/static/js/main.c5faa891.chunk.js",
+    "main.js.map": "http://192.168.200.200:8080/Home/static/js/main.c5faa891.chunk.js.map",
+    "runtime~main.js": "http://192.168.200.200:8080/Home/static/js/runtime~main.68efbd26.js",
+    "runtime~main.js.map": "http://192.168.200.200:8080/Home/static/js/runtime~main.68efbd26.js.map",
+    "static/css/2.fda59cef.chunk.css": "http://192.168.200.200:8080/Home/static/css/2.fda59cef.chunk.css",
+    "static/js/2.67927885.chunk.js": "http://192.168.200.200:8080/Home/static/js/2.67927885.chunk.js",
+    "static/js/2.67927885.chunk.js.map": "http://192.168.200.200:8080/Home/static/js/2.67927885.chunk.js.map",
+    "index.html": "http://192.168.200.200:8080/Home/index.html",
+    "precache-manifest.de1564774dbb8c9b77a814c082d72627.js": "http://192.168.200.200:8080/Home/precache-manifest.de1564774dbb8c9b77a814c082d72627.js",
+    "service-worker.js": "http://192.168.200.200:8080/Home/service-worker.js",
+    "static/css/2.fda59cef.chunk.css.map": "http://192.168.200.200:8080/Home/static/css/2.fda59cef.chunk.css.map",
+    "static/css/main.cfedc1ed.chunk.css.map": "http://192.168.200.200:8080/Home/static/css/main.cfedc1ed.chunk.css.map",
+    "static/media/OptimumLogo.jpeg": "http://192.168.200.200:8080/Home/static/media/OptimumLogo.6265d7a3.jpeg",
+    "static/media/start.png": "http://192.168.200.200:8080/Home/static/media/start.c4d3082f.png"
+  }
+}
