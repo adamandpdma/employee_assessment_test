@@ -148,40 +148,14 @@ nextQuestionHandler = () => {
   console.log(this.state.currentQuestion);
 };
 
-timeCaluculation = () => {
-
-  let timeSecondsInitial = this.props.functionCountdown._self.state.timeData * 60
-  let timeSecondsFinish = this.props.functionCountdown._self.state.counter
-  let completeTime = timeSecondsInitial - timeSecondsFinish
-
-  console.log(completeTime + " " + "completed time")
-
-    let min = floor(completeTime/60);
-    let sec = completeTime % 60
-    if(min < 10)
-    {
-        min = '0' + min
-    }
-    if(sec < 10)
-    {
-        sec = '0' + sec
-    }
-
-    this.setState(
-      {
-        CompletedTime:  min +":"+ sec
-      }
-    )
-    return this.state.CompletedTime.toString()
-}
-
 finishHandler = () => {
 
+  console.log(this.props.functionCountdown)
+
+  
     const values =  {
         
-        completionTime: "78",
-        // this.timeCaluculation(),
-        // CompletedTime.toString(),
+        completionTime: ((this.props.functionCountdown._owner.memoizedState.timeData * 60) - (this.props.functionCountdown._owner.memoizedState.counter)).toString(),
         correctAns: this.props.correctAns,
         employeeId: this.props.employeeId,
         guestId: this.props.guestId,
@@ -189,7 +163,7 @@ finishHandler = () => {
         score: this.props.score,
         settingsId: this.props.settingsId,
         userAns: this.state.alignment.toString()+',',
-        userQnsIds: this.props.userQnsIds
+        userQnsIds: this.props.userQnsIdss
       }
       console.log(values)
     Axios.post('http://192.168.200.200:8080/backendapi/guest/'+localStorage.getItem("GuestId")+'/tests/'+this.state.resultId+'/submit', values)
@@ -389,29 +363,6 @@ popOverPkay = () =>
 export default withRouter(TakeTest);
 
 
-  // console.log(this.props.functionCountdown._self.state.counter + " " + "sec")
-  // console.log(this.props.functionCountdown._self.state.timeData + " " + "min")
-
-  // let timeSecondsInitial = this.props.functionCountdown._self.state.timeData * 60
-  // let timeSecondsFinish = this.props.functionCountdown._self.state.counter
-  // let completeTime = timeSecondsInitial - timeSecondsFinish
-
-  // console.log(completeTime + " " + "completed time")
-
-  //   let min = floor(completeTime/60);
-  //   let sec = completeTime % 60
-  //   if(min < 10)
-  //   {
-  //       min = '0' + min
-  //   }
-  //   if(sec < 10)
-  //   {
-  //       sec = '0' + sec
-  //   }
-
-  //   let CompletedTime = min +":"+ sec
-  //   console.log(CompletedTime.toString())
-  //   console.log("Completed time =" + " " + min +":"+ sec)
 
 
 
@@ -420,3 +371,27 @@ export default withRouter(TakeTest);
 
 
 
+
+// console.log(this.props.functionCountdown._self.state.counter + " " + "sec")
+// console.log(this.props.functionCountdown._self.state.timeData + " " + "min")
+
+// let timeSecondsInitial = this.props.functionCountdown._self.state.timeData * 60
+// let timeSecondsFinish = this.props.functionCountdown._self.state.counter
+// let completeTime = timeSecondsInitial - timeSecondsFinish
+
+// console.log(completeTime + " " + "completed time")
+
+//   let min = floor(completeTime/60);
+//   let sec = completeTime % 60
+//   if(min < 10)
+//   {
+//       min = '0' + min
+//   }
+//   if(sec < 10)
+//   {
+//       sec = '0' + sec
+//   }
+
+//   let CompletedTime = min +":"+ sec
+//   console.log(CompletedTime.toString())
+//   console.log("Completed time =" + " " + min +":"+ sec)
