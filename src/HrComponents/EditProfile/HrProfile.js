@@ -99,7 +99,7 @@ class Profile extends Component {
 
   _handleSubmit(e) 
   {
-    const hrId = localStorage.getItem('employeeid')
+    const hrId = localStorage.getItem('hrid')
     const password = localStorage.getItem('password')
     e.preventDefault();
     console.log('handle uploading-', this.state.file);
@@ -186,7 +186,7 @@ class Profile extends Component {
   }
 
 componentDidMount(){
-const hrId = localStorage.getItem('employeeid')
+const hrId = localStorage.getItem('hrid')
 if(hrId != null){
 axios.get("http://192.168.200.200:8080/backendapi/human-resources/" + hrId + "/profile")
 .then(res => {
