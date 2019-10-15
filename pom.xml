@@ -3,7 +3,7 @@
   
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.frugalis</groupId>
-    <artifactId>HomeTesting</artifactId>
+    <artifactId>Home</artifactId>
     <version>1.0</version>
     <packaging>war</packaging>
 
