@@ -132,7 +132,10 @@ class Profile extends Component {
           // this.setState({defaultPic:false})
           localStorage.setItem('profile', this.state.imagePreviewUrl.split(',')[1])
           
-        }}
+        }
+      else{
+        this.setState({errorDialog:true})
+      }}
       }))   
     }
     else
