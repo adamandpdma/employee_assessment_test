@@ -58,7 +58,6 @@ const floor =require('math-floor')
 class TakeTest extends React.Component {
 constructor(props) {
   super(props);
-  
   this.state = {
     currentQuestion: 0,
     myAnswer: [],
@@ -79,6 +78,7 @@ constructor(props) {
     correctAns: '',
     disabled: true,
     alignment: '',
+    CompletedTime: ""
   };
 this.finishHandler = this.finishHandler.bind(this)
 this.nextQuestionHandler = this.nextQuestionHandler.bind(this)
@@ -148,9 +148,7 @@ nextQuestionHandler = () => {
   console.log(this.state.currentQuestion);
 };
 
-finishHandler = () => {
-  console.log(this.props.functionCountdown._self.state.counter + " " + "sec")
-  console.log(this.props.functionCountdown._self.state.timeData + " " + "min")
+timeCaluculation = () => {
 
   let timeSecondsInitial = this.props.functionCountdown._self.state.timeData * 60
   let timeSecondsFinish = this.props.functionCountdown._self.state.counter
@@ -169,13 +167,21 @@ finishHandler = () => {
         sec = '0' + sec
     }
 
-    let CompletedTime = min +":"+ sec
-    console.log(CompletedTime.toString())
-    console.log("Completed time =" + " " + min +":"+ sec)
+    this.setState(
+      {
+        CompletedTime:  min +":"+ sec
+      }
+    )
+    return this.state.CompletedTime.toString()
+}
+
+finishHandler = () => {
 
     const values =  {
         
-        completionTime: CompletedTime.toString(),
+        completionTime: "78",
+        // this.timeCaluculation(),
+        // CompletedTime.toString(),
         correctAns: this.props.correctAns,
         employeeId: this.props.employeeId,
         guestId: this.props.guestId,
@@ -383,7 +389,29 @@ popOverPkay = () =>
 export default withRouter(TakeTest);
 
 
+  // console.log(this.props.functionCountdown._self.state.counter + " " + "sec")
+  // console.log(this.props.functionCountdown._self.state.timeData + " " + "min")
 
+  // let timeSecondsInitial = this.props.functionCountdown._self.state.timeData * 60
+  // let timeSecondsFinish = this.props.functionCountdown._self.state.counter
+  // let completeTime = timeSecondsInitial - timeSecondsFinish
+
+  // console.log(completeTime + " " + "completed time")
+
+  //   let min = floor(completeTime/60);
+  //   let sec = completeTime % 60
+  //   if(min < 10)
+  //   {
+  //       min = '0' + min
+  //   }
+  //   if(sec < 10)
+  //   {
+  //       sec = '0' + sec
+  //   }
+
+  //   let CompletedTime = min +":"+ sec
+  //   console.log(CompletedTime.toString())
+  //   console.log("Completed time =" + " " + min +":"+ sec)
 
 
 
