@@ -68,7 +68,7 @@ const bgStyle = {
   backgroundSize: "cover",
   backgroundRepeat: "no-repeat",
   minWidth:'100%',
-    minHeight:'130%' ,
+    minHeight:'100%' ,
     position:'absolute'
 }
 
@@ -133,7 +133,7 @@ const change = (name, e) => {
       </Typography>
       </div>
 
-      <Container>
+      <Container style={{"marginBottom":"15%"}}>
       <div>
       <FormControl
               variant="outlined"
@@ -244,6 +244,8 @@ const change = (name, e) => {
       </Container>
     </form>   
     </Container>
+
+    
     <footer style={{"backgroundColor": "black","position":'fixed',"minWidth":"100%","bottom":"-0%"}}>
       <svg xmlns="http://www.w3.org/2000/svg" width= 'window.innerWidth' height="72" viewBox="0 0 515.456 72">
       <g id="CloudBoard_" data-name="CloudBoard " transform="translate(-651.984 -1005)">
