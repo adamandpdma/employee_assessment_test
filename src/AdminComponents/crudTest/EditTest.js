@@ -108,7 +108,6 @@ class EditTest extends Component
 
  validate = () => 
 {
-    console.log(this.state.dataValues[0].noOfQnsInPool)
     let isError = false;
     const errors ={};
 
@@ -142,6 +141,7 @@ class EditTest extends Component
 
  onSubmitHandler = (event) =>
  {
+     console.log("Hello this is submit")
      event.preventDefault();
 
     const err = this.validate();
@@ -165,8 +165,6 @@ class EditTest extends Component
     axios.post("http://192.168.200.200:8080/backendapi/admin/test-detail/update",values)
     .then((res) => console.log(res.data))
     .then(this.handleClickOpen())
-
-
  }
 }
 
