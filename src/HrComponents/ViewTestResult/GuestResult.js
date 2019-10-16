@@ -6,6 +6,7 @@ import Fab from '@material-ui/core/Fab';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 
 const ceil =require('math-ceil')
+const floor =require('math-floor')
 
 export default class GuestResult extends Component {
   constructor(props) {
@@ -109,7 +110,23 @@ export default class GuestResult extends Component {
          )
        }
   }
- 
+  timeCalculation = (time) => 
+  {
+  let min = floor(time/60);
+  let sec = time % 60
+  if(min < 10)
+  {
+      min = '0' + min
+  }
+  if(sec < 10)
+  {
+      sec = '0' + sec
+  }
+
+  return(
+    <p>{min} : {sec}</p>
+  )
+  }
 
   render() {
     const options = {
@@ -199,7 +216,7 @@ export default class GuestResult extends Component {
               currentemp.testType,
               currentemp.testSubtype,
               currentemp.score+' / '+((currentemp.userQnsIds.split(',').length) - 1),  
-              currentemp.completionTime,
+              this.timeCalculation(currentemp.completionTime),
               this.Percentage(currentemp.score, currentemp.userQnsIds) ,
               this.state.booleanResults[i]        
             ]})}

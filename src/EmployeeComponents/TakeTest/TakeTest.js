@@ -85,7 +85,7 @@ class TakeTest extends React.Component {
   loadQuizData = () => {
 
     console.log(this.state.resultId)
-    Axios.get('http://192.168.200.200:8080/backendapi/employee/101/tests/'+this.state.resultId+'/question-list')
+    Axios.get('http://192.168.200.200:8080/backendapi/employee/'+localStorage.getItem('employeeid')+'/tests/'+this.state.resultId+'/question-list')
     .then(res => { 
       this.setState(() => {
             return {
@@ -110,7 +110,7 @@ class TakeTest extends React.Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state.currentQuestion !== prevState.currentQuestion) {
-    Axios.get('http://192.168.200.200:8080/backendapi/employee/101/tests/'+this.state.resultId+'/question-list')
+    Axios.get('http://192.168.200.200:8080/backendapi/employee/'+localStorage.getItem('employeeid')+'/tests/'+this.state.resultId+'/question-list')
     .then(res => { console.log(res.data)
         this.setState(() => {
             return {
@@ -140,32 +140,9 @@ nextQuestionHandler = () => {
 };
 
 finishHandler = () => {
-  console.log(this.props.functionCountdown._self.state.counter + " " + "sec")
-  console.log(this.props.functionCountdown._self.state.timeData + " " + "min")
-
-  let timeSecondsInitial = this.props.functionCountdown._self.state.timeData * 60
-  let timeSecondsFinish = this.props.functionCountdown._self.state.counter
-  let completeTime = timeSecondsInitial - timeSecondsFinish
-
-  console.log(completeTime + " " + "completed time")
-
-    let min = floor(completeTime/60);
-    let sec = completeTime % 60
-    if(min < 10)
-    {
-        min = '0' + min
-    }
-    if(sec < 10)
-    {
-        sec = '0' + sec
-    }
-
-    let CompletedTime = min +":"+ sec
-    console.log(CompletedTime.toString())
-    console.log("Completed time =" + " " + min +":"+ sec)
   
  const values =  {
-        completionTime: CompletedTime.toString(),
+        completionTime: ((this.props.functionCountdown._owner.memoizedState.timeData * 60) - (this.props.functionCountdown._owner.memoizedState.counter)).toString(),
         correctAns: this.props.correctAns,
         employeeId: this.props.employeeId,
         guestId: this.props.guestId,
@@ -176,7 +153,7 @@ finishHandler = () => {
         userQnsIds: this.props.userQnsIds
       }
       console.log(values)
-  Axios.post('http://192.168.200.200:8080/backendapi/employee/101/tests/'+this.state.resultId+'/submit', values)
+  Axios.post('http://192.168.200.200:8080/backendapi/employee/'+localStorage.getItem('employeeid')+'/tests/'+this.state.resultId+'/submit', values)
   .then(res => console.log(res.data))
 
     if (this.state.currentQuestion === this.state.data.length - 1) {

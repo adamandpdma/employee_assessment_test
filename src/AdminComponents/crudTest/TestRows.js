@@ -20,6 +20,10 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import {NavLink} from 'react-router-dom';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 const ObjectRow = (props) => {
     return(
@@ -39,13 +43,13 @@ const ObjectRow = (props) => {
         
         <TableCell> 
         <ThemeProvider theme={theme}>
-        <ToggleButtonGroup 
+        <RadioGroup 
          value={props.alignment[props.keyData]} key={props.keyData}
          exclusive 
          onChange={(e) => props.handleChange(props.keyData, e.target.value)} 
          aria-label="text alignment">
              {props.children}
-            </ToggleButtonGroup>
+            </RadioGroup>
             </ThemeProvider>
             </TableCell>
     </div>)
@@ -222,18 +226,18 @@ handleChange = (index, newAlignment) => {
 }
 
   children = [
-    <ToggleButton key={1} value="A" aria-label="left aligned">
-     A
-    </ToggleButton>,
-    <ToggleButton  key={2} value="B">
-     B
-    </ToggleButton>,
-    <ToggleButton  key={3} value="C">
-     C
-    </ToggleButton>,
-    <ToggleButton key={4} value="D">
-      D
-    </ToggleButton>,
+    <FormControlLabel value="A" control={<Radio color="green"/>} label="A" />,
+    <FormControlLabel value="B" control={<Radio color="green"/>} label="B"/>,
+    <FormControlLabel value="C" control={<Radio color="green"/>} label="C" />,
+    <FormControlLabel value="D" control={<Radio color="green"/>} label="D" />
+    // <ToggleButton key={1} value="A" aria-label="left aligned" label="A">
+    // </ToggleButton>,
+    // <ToggleButton  key={2} value="B">
+    // </ToggleButton>,
+    // <ToggleButton  key={3} value="C">
+    // </ToggleButton>,
+    // <ToggleButton key={4} value="D">
+    // </ToggleButton>,
   ];
   popOverPkay = () => 
   {
@@ -246,7 +250,8 @@ handleChange = (index, newAlignment) => {
           poolId: this.state.poolId,
           numberofquestions: this.state.numberofquestions,
           category: this.state.category,
-          typeoftest: this.state.typeoftest,}} style={buttonStyle}>
+          typeoftest: this.state.typeoftest,
+          disabled: false}} style={buttonStyle}>
             <Button>
           OKAY, Now proceed to Create Test
           </Button>
@@ -261,7 +266,8 @@ handleChange = (index, newAlignment) => {
              poolId: this.state.poolId, 
              numberofquestions: this.state.numberofquestions,
              category: this.state.category,
-             typeoftest: this.state.typeoftest}} style={buttonStyle}>
+             typeoftest: this.state.typeoftest,
+             disabled: false}} style={buttonStyle}>
              <Button>
           OKAY, Now proceed to Create Test
           </Button>

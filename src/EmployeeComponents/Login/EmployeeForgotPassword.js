@@ -133,7 +133,7 @@ const handleSubmit = (e) =>{
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
             >
-            <DialogTitle id="alert-dialog-title">{"An email has been send to you!"}</DialogTitle>
+            <DialogTitle id="alert-dialog-title">{"An email containing your reset password has been sent to your registered email address."}</DialogTitle>
       </Dialog>
       
       <Dialog
