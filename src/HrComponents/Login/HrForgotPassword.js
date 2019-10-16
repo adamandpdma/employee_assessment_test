@@ -131,7 +131,6 @@ const handleSubmit = (e) =>{
             open={message}
             onClose={handleClose}
             aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
             >
             <DialogTitle id="alert-dialog-title">{"An email containing your reset password has been sent to your registered email address."}</DialogTitle>
       </Dialog>
@@ -140,7 +139,6 @@ const handleSubmit = (e) =>{
             open={errorMessage}
             onClose={handleClose}
             aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
             >
             <DialogTitle id="alert-dialog-title">{"Invalid Email, Please try again"}</DialogTitle>
       </Dialog>

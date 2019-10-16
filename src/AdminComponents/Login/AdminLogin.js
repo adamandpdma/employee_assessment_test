@@ -6,7 +6,6 @@ import axios from 'axios';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from "@material-ui/core/Button";
-import {NavLink} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { withStyles } from "@material-ui/core/styles";
 
@@ -15,7 +14,7 @@ const styles = theme => ({
     background: '#03f0fc',
     color: 'white',
   },
-
+ 
 })
 
 const validationSchema = Yup.object({
@@ -93,7 +92,7 @@ handleClose = () => {
 }
 
   render() {
-    const {classes} = this.props;
+    const { classes } = this.props;
     const { employeeid } = this.state;
     const { Password } = this.state;
   
@@ -114,7 +113,6 @@ handleClose = () => {
             open={this.state.open}
             // onClose={this.handleClose}
             aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
             >
             <DialogTitle id="alert-dialog-title">{"Invalid Credentials, Please try again"}</DialogTitle>
             <Button
