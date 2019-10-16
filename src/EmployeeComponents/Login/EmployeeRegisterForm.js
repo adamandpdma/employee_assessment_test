@@ -133,7 +133,7 @@ const change = (name, e) => {
       </Typography>
       </div>
 
-      <Container style={{"marginBottom":"15%"}}>
+      <Container style={{"marginBottom":"25%"}}>
       <div>
       <FormControl
               variant="outlined"
