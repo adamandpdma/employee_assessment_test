@@ -68,7 +68,7 @@ const bgStyle = {
   backgroundSize: "cover",
   backgroundRepeat: "no-repeat",
   minWidth:'100%',
-    minHeight:'130%' ,
+    minHeight:'140%' ,
     position:'absolute'
 }
 
