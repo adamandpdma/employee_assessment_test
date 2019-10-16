@@ -60,7 +60,7 @@ const styles = theme => ({
   backgroundRepeat: "no-repeat",
   backgroundPosition: 'center',
   minWidth:'100%',
-    minHeight:'100%' ,
+    minHeight:'110%' ,
     position:'absolute'
  }
 
