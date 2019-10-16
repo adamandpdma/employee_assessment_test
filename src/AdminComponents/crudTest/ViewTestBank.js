@@ -33,7 +33,8 @@ export default class ViewTestBank extends Component {
         testCat: this.props.location.domain,
         open: false,
         openConfirmation: false,
-        settingsIdData: 0
+        settingsIdData: 0,
+        testBank: ''
       
   }
 }
@@ -100,12 +101,13 @@ handleClose = () => {
         }
     )
 }
-  deleteTest = (id) => 
+  deleteTest = (id,subtype) => 
   {
     this.setState(
       {
         settingsIdData: id,
-        open: true
+        open: true,
+        testBank: subtype
       }
     )
   }
@@ -215,7 +217,7 @@ data={this.state.data.map(currentemp => {
        currentemp.poolSubtype,
        currentemp.noOfQnsInPool,
        <TableCell> 
-       <Button variant="contained" href="#" onClick = {() => this.deleteTest(currentemp.poolId)} style={style}>
+       <Button variant="contained" href="#" onClick = {() => this.deleteTest(currentemp.poolId,currentemp.poolSubtype)} style={style}>
         DELETE</Button></TableCell>
 
     ]})}
@@ -230,7 +232,7 @@ onClose={this.handleClose}
 aria-labelledby="alert-dialog-title"
 aria-describedby="alert-dialog-description"
 >
-<DialogTitle id="alert-dialog-title">{"Are you sure you want to delete the Question Bank ? "}</DialogTitle>
+<DialogTitle id="alert-dialog-title">{"Are you sure you want to delete "+ " " +this.state.testBank + " " +"? "}</DialogTitle>
 
 <DialogActions>
 <Button onClick ={this.handleClose}>

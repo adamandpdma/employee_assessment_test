@@ -33,7 +33,8 @@ export default class ViewTest extends Component {
         testCat: this.props.location.domain,
         open: false,
         openConfirmation: false,
-        settingsIdData: 0
+        settingsIdData: 0,
+        testBank: ''
       
   }
 }
@@ -98,12 +99,13 @@ handleClose = () => {
         }
     )
 }
-  deleteTest = (id) => 
+  deleteTest = (id,subtype) => 
   {
     this.setState(
       {
         settingsIdData: id,
-        open: true
+        open: true,
+        testBank: subtype
       }
     )
   }
@@ -222,7 +224,7 @@ data={this.state.data.map(currentemp => {
        aboutpropsTwo: currentemp.settingsId}} style={Navstyle}>
             <Button variant="contained"  style={style}>EDIT</Button>
             </NavLink> 
-            <Button variant="contained" href="#" onClick = {() => this.deleteTest(currentemp.settingsId)}  style={style}>
+            <Button variant="contained" href="#" onClick = {() => this.deleteTest(currentemp.settingsId,currentemp.testSubtype)}  style={style}>
                 DELETE</Button></TableCell>
 
     ]})}
@@ -237,7 +239,7 @@ onClose={this.handleClose}
 aria-labelledby="alert-dialog-title"
 aria-describedby="alert-dialog-description"
 >
-<DialogTitle id="alert-dialog-title">{"Are you sure you want to delete the Test ?"}</DialogTitle>
+<DialogTitle id="alert-dialog-title">{"Are you sure you want to delete "+ " " +this.state.testBank + " " +"? "}</DialogTitle>
 
 <DialogActions>
 <Button onClick ={this.handleClose}>
