@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
   },
   closeButton: {
     background: '#03f0fc',
-    left:'62%'
+    left:'63%'
   },
   link:{
     display: 'flex',
