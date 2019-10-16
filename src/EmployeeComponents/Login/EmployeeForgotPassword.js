@@ -8,6 +8,7 @@ import Modal from '@material-ui/core/Modal';
 import axios from 'axios'
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Close from '../../close.png';
 
 
 const useStyles = makeStyles(theme => ({
@@ -25,6 +26,11 @@ const useStyles = makeStyles(theme => ({
   },
   button: {
     background: '#03f0fc',
+    color:'white'
+  },
+  closeButton: {
+    background: '#03f0fc',
+    left:'62%'
   },
   link:{
     display: 'flex',
@@ -96,13 +102,15 @@ const handleSubmit = (e) =>{
       </Link>
       <Modal
         open={open}
-        onClose={handleClose}
         className={classes.modal}
       >
       <Typography 
           fullWidth
           className={classes.paper}>
           Enter Email
+          <Button onClick={handleClose} className={classes.closeButton}>
+          <img src={Close}/>	
+          </Button>
           <TextField
           variant="outlined"
           margin="normal"
@@ -129,20 +137,31 @@ const handleSubmit = (e) =>{
     
       <Dialog
             open={message}
-            onClose={handleClose}
             aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
             >
             <DialogTitle id="alert-dialog-title">{"An email containing your reset password has been sent to your registered email address."}</DialogTitle>
+            <Button
+          className= {classes.button}
+          margin="normal"
+          fullWidth
+          variant="contained"
+      onClick={handleClose}>
+        Okay</Button>
       </Dialog>
       
       <Dialog
             open={errorMessage}
-            onClose={handleClose}
             aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
             >
             <DialogTitle id="alert-dialog-title">{"Invalid Email, Please try again"}</DialogTitle>
+            <Button
+          className= {classes.button}
+          margin="normal"
+          fullWidth
+          variant="contained"
+      onClick={handleClose}>
+        Okay
+      </Button>
       </Dialog>
   
 </React.Fragment>
