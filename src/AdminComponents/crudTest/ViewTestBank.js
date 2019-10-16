@@ -210,7 +210,7 @@ handleClose = () => {
              <MUIDataTable 
 
 title={"Question Pool Details"}
-data={this.state.data.map(currentemp => {
+data={this.state.data.concat().reverse().map(currentemp => {
     return [
        currentemp.poolCat,
        currentemp.poolType,

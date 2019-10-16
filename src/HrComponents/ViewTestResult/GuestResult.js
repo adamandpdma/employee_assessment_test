@@ -220,7 +220,7 @@ export default class GuestResult extends Component {
     <MUIDataTable 
   
         title={"Guest Test Result"}
-        data={this.state.guests.map((currentemp,i) => {
+        data={this.state.guests.reverse().map((currentemp,i) => {
             return [
               currentemp.testType,
               currentemp.testSubtype,

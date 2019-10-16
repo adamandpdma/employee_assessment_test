@@ -119,7 +119,7 @@ export default class GuestList extends Component {
     <MUIDataTable 
   
         title={"Guest Database"}
-        data={this.state.guests.map(currentemp => {
+        data={this.state.guests.reverse().map(currentemp => {
             return [
               currentemp.guestId,
               currentemp.name,

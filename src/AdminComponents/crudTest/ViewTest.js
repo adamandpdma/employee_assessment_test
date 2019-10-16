@@ -212,7 +212,7 @@ handleClose = () => {
  <MUIDataTable 
 
 title={"Test Details"}
-data={this.state.data.map(currentemp => {
+data={this.state.data.concat().reverse().map(currentemp => {
     return [
        currentemp.testCat,
        currentemp.testType,

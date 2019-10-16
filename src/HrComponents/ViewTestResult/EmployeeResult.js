@@ -219,7 +219,7 @@ export default class EmployeeResult extends Component {
   
         title={"Employee Test Result"}
         
-        data={this.state.employees.map((currentemp,i) => {
+        data={this.state.employees.reverse().map((currentemp,i) => {
             return [
               currentemp.testType,
               currentemp.testSubtype,

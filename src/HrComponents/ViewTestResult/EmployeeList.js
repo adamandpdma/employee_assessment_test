@@ -125,7 +125,7 @@ export default class EmployeesList1 extends Component {
     <MUIDataTable 
   
         title={"Employee Database"}
-        data={this.state.employees.map(currentemp => {
+        data={this.state.employees.concat().reverse().map(currentemp => {
             return [
               <img style={{width: 85, height: 85, borderRadius: 85/ 2}} src={`data:image/jpeg;base64,${currentemp.profileImg}`} />,
              
