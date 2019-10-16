@@ -102,6 +102,11 @@ class EditTest extends Component
                         el.poolCat === this.state.testCat )
                       }
                   )
+                  this.setState(
+                      {
+                          value: this.state.dataValues[0].noOfQnsInPool
+                      }
+                  )
               })
         })
  }
@@ -115,16 +120,13 @@ class EditTest extends Component
         isError = true;
         errors.numberofquestionsError= "Enter a number";
     }
-    if(this.state.noOfQns > this.state.dataValues[0].noOfQnsInPool)
+    if(this.state.noOfQns > this.state.value)
     {
         isError = true;
-        errors.numberofquestionsError= "Number cannot exceed" + " "+ this.state.dataValues[0].noOfQnsInPool;
+        errors.numberofquestionsError= "Number cannot exceed" + " "+ this.state.value;
 
     }
-    if(this.state.noOfQns< this.state.previousNumberOfquestions){
-        isError = true;
-        errors.numberofquestionsError= "Enter a number >" + this.state.previousNumberOfquestions;
-    }
+  
     if(this.state.timeLimit === ''){
         isError = true;
         errors.timelimitError= "Enter a number";
@@ -320,16 +322,17 @@ class EditTest extends Component
                 </FormControl><br/>
 
                 <InputLabel style={InputLabelStyle}>NO OF QUESTIONS</InputLabel>
-                <FormControl>
+                      <FormControl>
                     <TextField
                      style={fieldStyle}
                     variant="outlined"
                 type="number"
                 onChange={this.noOfQuestionsOnChangeHandler}
-                value={this.state.noOfQns
-                }></TextField>
-                 <div style={errorColor}>{this.state.numberofquestionsError}</div>
-                 </FormControl><br/><br/>
+                value={this.state.noOfQns}
+                >
+                </TextField>
+                  <div style={errorColor}>{this.state.numberofquestionsError}</div>
+                  </FormControl>   
                
                 <InputLabel style={InputLabelStyle}>TIME LIMIT</InputLabel>
                <FormControl>

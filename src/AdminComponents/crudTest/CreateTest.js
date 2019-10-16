@@ -437,7 +437,7 @@ validate = () =>
                        </FormControl><br/>
        
                        <InputLabel style={InputLabelStyle}>NO OF QUESTIONS</InputLabel>
-                       <FormControl>
+                     <FormControl>
                            <TextField 
                             style={fieldStyle}
                            variant="outlined"
@@ -447,8 +447,7 @@ validate = () =>
                        }
                        errorText={this.state.numberofquestionsError}></TextField>
                           <div style={errorColor}>{this.state.numberofquestionsError}</div>
-                        </FormControl><br/><br/>
-                      
+                        </FormControl>      
                        <InputLabel style={InputLabelStyle}>TIME LIMIT
                        <p style={{color: "blue"}}> In Minutes</p>
                        </InputLabel>
