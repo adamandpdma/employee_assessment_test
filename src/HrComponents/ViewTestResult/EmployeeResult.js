@@ -14,6 +14,7 @@ export default class EmployeeResult extends Component {
 
     this.state = {
         employeeId: this.props.location.employeeId,
+        name: this.props.location.name,
         employees: [],
         score: [],
         qnsNo: [],
@@ -211,9 +212,13 @@ export default class EmployeeResult extends Component {
 
     return (
      <MuiThemeProvider theme={this.getMuiTheme()}>
+      <h3>Employee Name: {this.state.name} </h3>
+      <h3>Employee ID: {this.state.employeeId} </h3>
+    
     <MUIDataTable 
   
         title={"Employee Test Result"}
+        
         data={this.state.employees.map((currentemp,i) => {
             return [
               currentemp.testType,
