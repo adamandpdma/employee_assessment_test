@@ -80,7 +80,9 @@ class CreateTest extends Component
           isHidden: false,
           settingsId: 0,
           poolId: this.props.location.poolId,
-          numberofquestions: this.props.location.numberofquestions
+          numberofquestions: this.props.location.numberofquestions,
+          disabled: true,
+          disabledFalse: this.props.location.disabled
      }
  }
 
@@ -387,6 +389,7 @@ validate = () =>
 
     render()
     {
+
         const uniqueValuesType =  this.state.testBankCategories.map(categoriess => categoriess.poolType)
         const uniqueType = [...new Set(uniqueValuesType)]; 
         console.log(uniqueType)
@@ -399,7 +402,10 @@ validate = () =>
             <div>
                 <Container maxWidth="sm" style={containerStyle}>
                    
-                	{this.navigateBack()}			
+                	{this.navigateBack()}	
+                    {(this.state.disabled === true && this.state.disabledFalse === undefined) && (
+                        <p style={{color: "red"}}>UPLOAD TEST BANK TO CREATE TEST !</p>
+                    )}		
                 <Grid
                 container
                 spacing={0}
@@ -443,7 +449,10 @@ validate = () =>
                           <div style={errorColor}>{this.state.numberofquestionsError}</div>
                         </FormControl><br/><br/>
                       
-                       <InputLabel style={InputLabelStyle}>TIME LIMIT</InputLabel>
+                       <InputLabel style={InputLabelStyle}>TIME LIMIT
+                       <p style={{color: "blue"}}> In Minutes</p>
+                       </InputLabel>
+                     
                       <FormControl>
                           <TextField 
                            style={fieldStyle}
@@ -451,12 +460,21 @@ validate = () =>
                        type="number"
                        onChange={this.timeLimitOnChangeHandler}
                        value={this.state.timeLimit}
-                       errorText={this.state.timelimitError}></TextField>
+                       errorText={this.state.timelimitError}>
+                       </TextField>
+
                        <div style={errorColor}>{this.state.timelimitError}</div>
                       </FormControl><br/><br/>
                       <br/>
                       <div>
-      <Button variant="contained" type='submit' style={buttonStyle}>CREATE TEST</Button>
+                          {(this.state.disabled === true && this.state.disabledFalse === undefined) && (
+    <Button variant="contained" type='submit' style={{color: "grey"}} disabled={this.state.disabled}>
+    CREATE TEST</Button>
+                          )}
+                                                  {this.state.disabledFalse === false && (
+    <Button variant="contained" type='submit' style={{color: "black"}} disabled={this.state.disabledFalse}>
+    CREATE TEST</Button>
+                          )}
       <Dialog
         open={this.state.open}
         onClose={this.handleClose}

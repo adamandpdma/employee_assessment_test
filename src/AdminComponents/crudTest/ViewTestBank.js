@@ -51,7 +51,7 @@ export default class ViewTestBank extends Component {
              )
              this.setState(
                 {
-                    data: this.state.data.filter(el => el.hidden === false && el.poolCat === "Technical"
+                    data: this.state.data.filter(el => el.hidden !== true && el.poolCat === "Technical"
                     && el.noOfQnsInPool !== 0 && el.poolType !== "" && el.poolSubtype !== ""),
                 }
             )
@@ -69,7 +69,7 @@ export default class ViewTestBank extends Component {
              )
              this.setState(
                 {
-                    data: this.state.data.filter(el => el.hidden === false && el.poolCat === "Non-Technical" 
+                    data: this.state.data.filter(el => el.hidden !== true && el.poolCat === "Non-Technical" 
                     && el.noOfQnsInPool !== 0 && el.poolType !== "" && el.poolSubtype !== "" ),
                 }
             )
@@ -80,30 +80,32 @@ export default class ViewTestBank extends Component {
   handleclickopen = () => {
       this.setState(
           {
-              open: true
+              open: true,
+           
           }
       )
   }
   handleClose = () => {
       this.setState(
           {
-              open: false
+              open: false,
           }
       )
   }
   deleteTest = (id) => 
   {
-  console.log(id)
-   axios.post('http://192.168.200.200:8080/backendapi/admin/questionpool/set-hidden/'+id)
+      console.log(id)
+   axios.put('http://192.168.200.200:8080/backendapi/admin/questionpool/set-hidden/'+id)
    .then((res) => console.log(res.data)) 
    .then(this.handleclickopen())
 
    this.setState(
        {
-           data: this.state.data.filter(el => el.poolId !== id) ,
-           isHidden: true
+        data: this.state.data.filter(el => el.poolId !== id),
+        hidden: true
        }
    )
+
   }
         navigateBack = () => 
       {
@@ -170,13 +172,13 @@ export default class ViewTestBank extends Component {
           }
         },
      
-        // {
-        //     name: "Action",
-        //     options: {
-        //       filter: false,
+        {
+            name: "Action",
+            options: {
+              filter: false,
 
-        //     }
-        // }
+            }
+        }
     
   ]
 
@@ -191,9 +193,9 @@ data={this.state.data.map(currentemp => {
        currentemp.poolType,
        currentemp.poolSubtype,
        currentemp.noOfQnsInPool,
-    //    <TableCell> 
-    //         <Button variant="contained" href="#" onClick = {() => this.deleteTest(currentemp.poolId)}  style={style}>
-    //             DELETE</Button></TableCell>
+       <TableCell> 
+       <Button variant="contained" href="#" onClick = {() => this.deleteTest(currentemp.poolId)} style={style}>
+        DELETE</Button></TableCell>
 
     ]})}
 
