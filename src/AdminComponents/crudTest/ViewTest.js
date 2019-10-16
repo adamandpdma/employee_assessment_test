@@ -31,7 +31,9 @@ export default class ViewTest extends Component {
     this.state = {
         data: [],
         testCat: this.props.location.domain,
-        open: false
+        open: false,
+        openConfirmation: false,
+        settingsIdData: 0
       
   }
 }
@@ -78,9 +80,16 @@ export default class ViewTest extends Component {
   handleclickopen = () => {
     this.setState(
         {
-            open: true
+            openConfirmation: true
         }
     )
+}
+handleCloseConfirmation = () => {
+  this.setState(
+      {
+          openConfirmation: false
+      }
+  )
 }
 handleClose = () => {
     this.setState(
@@ -91,14 +100,27 @@ handleClose = () => {
 }
   deleteTest = (id) => 
   {
-  console.log(id)
-   axios.post('http://192.168.200.200:8080/backendapi/admin/test-detail/hide/'+id)
+    this.setState(
+      {
+        settingsIdData: id,
+        open: true
+      }
+    )
+  }
+  deleteData = () => {
+    this.setState(
+      {
+        open: false
+      }
+    )
+
+   axios.post('http://192.168.200.200:8080/backendapi/admin/test-detail/hide/'+this.state.settingsIdData)
    .then((res) => console.log(res.data)) 
    .then(this.handleclickopen)
 
    this.setState(
        {
-           data: this.state.data.filter(el => el.settingsId !== id) ,
+           data: this.state.data.filter(el => el.settingsId !== this.state.settingsIdData) ,
            isHidden: true
        }
    )
@@ -215,10 +237,28 @@ onClose={this.handleClose}
 aria-labelledby="alert-dialog-title"
 aria-describedby="alert-dialog-description"
 >
-<DialogTitle id="alert-dialog-title">{"You have successfully deleted the Test !!"}</DialogTitle>
+<DialogTitle id="alert-dialog-title">{"Are you sure you want to delete the Test ?"}</DialogTitle>
 
 <DialogActions>
 <Button onClick ={this.handleClose}>
+CANCEL
+</Button>
+<Button onClick ={this.deleteData}>
+CONFIRM
+</Button>
+</DialogActions>
+</Dialog>
+
+<Dialog
+open={this.state.openConfirmation}
+onClose={this.handleClose}
+aria-labelledby="alert-dialog-title"
+aria-describedby="alert-dialog-description"
+>
+<DialogTitle id="alert-dialog-title">{"Successfully Deleted the test !"}</DialogTitle>
+
+<DialogActions>
+<Button onClick ={this.handleCloseConfirmation}>
 OKAY
 </Button>
 </DialogActions>
