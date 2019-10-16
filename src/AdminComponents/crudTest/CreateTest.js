@@ -93,8 +93,6 @@ class CreateTest extends Component
      console.log(this.state.poolId + "POOL ID")
     if(this.state.testCat === "Non-Technical")
     {
-        // axios.get('http://localhost:5000/TestBank/')
-        // axios.get('http://192.168.200.200:8080/backendapi/admin/test-detail/category/'+"Non-Technical")
         axios.get("http://192.168.200.200:8080/backendapi/admin/questionpool")
         .then(res => { 
                 this.setState(
@@ -160,8 +158,8 @@ class CreateTest extends Component
 validate = () => 
 {
 
-    console.log(this.state.noOfQns)
-    console.log(this.state.numberofquestions)
+    console.log(this.state.noOfQns) //17
+    console.log(this.state.numberofquestions)  //2
     let isError = false;
     const errors ={};
 
@@ -173,7 +171,7 @@ validate = () =>
         isError = true;
         errors.numberofquestionsError= "Number should be < or =" + this.state.numberofquestions;
     }
-    if(this.state.noOfQns > this.state.numberofquestions+"0"){
+    if(this.state.noOfQns > this.state.numberofquestions){
         isError = true;
         errors.numberofquestionsError= "Number should be < or =" + this.state.numberofquestions;
     }  
@@ -182,23 +180,17 @@ validate = () =>
     {
         errors.numberofquestionsError=""
     }
+
     if(this.state.timeLimit.match("[0-9]"))
     {
         errors.timelimitError= " ";
     }
+
     if(this.state.timeLimit === ''){
         isError = true;
         errors.timelimitError= "Enter a number";
     }
-    if(this.state.testType === ''){
-        isError = true;
-        errors.categoryError= "Select category type";
-    }
-    
-    if(this.state.testSubtype === ''){
-        isError = true;
-        errors.typeoftestError= "Select type of test";
-    }
+ 
     if(this.state.timeLimit.length >= 1)
     {
         this.setState(
@@ -207,22 +199,7 @@ validate = () =>
             }
         )
     }
-    if(this.state.selectCategory === true)
-    {
-        this.setState(
-            {
-               categoryError: ""
-            }
-        )
-    }
-    if(this.state.testType.match("^[A-z 0-9]+$" ))
-    {
-        this.setState(
-            {
-               typeoftestError: ""
-            }
-        )
-    }
+
     
     if(isError){
         this.setState(
