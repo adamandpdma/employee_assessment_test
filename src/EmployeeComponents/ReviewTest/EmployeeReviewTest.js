@@ -39,7 +39,7 @@ class EmployeeReviewTest extends React.Component {
     }
     
     componentDidMount() {
-       axios.get("http://192.168.200.200:8080/backendapi/employee/101/tests/" + this.state.testDetailID + "/question-list")   
+       axios.get("http://192.168.200.200:8080/backendapi/employee/"+localStorage.getItem('employeeid')+"/tests/" + this.state.testDetailID + "/question-list")   
        .then(response => {
             this.setState({ testData: response.data })
             
