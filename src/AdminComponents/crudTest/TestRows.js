@@ -137,7 +137,7 @@ class TestRows extends React.Component {
             i: 0,
             disable: true,
             openEmpty: false,
-            openImage: false
+            openImage: false,
 
         }
     }
@@ -163,50 +163,44 @@ class TestRows extends React.Component {
            }
        )})
     }    
-   
+   handleOpen = () => {
+     this.setState(
+       {
+        TrueFalse: true
+       }
+     )
+   }
     QnsImageArray = (index, newDisable) => { 
+  
+        if(this.props.location.testtwo === undefined || this.props.location.testtwo === "")
+        {
+          this.setState(
+            {
+              openImage: true
+            }
+          )
+        }
+           else{
+          i = i + 1
+          const values = {
+          correctAns: this.state.alignment[this.state.i],
+          poolId: this.state.poolId,
+          qns: this.props.location.testtwo.split(',')[1]
+        }   
+      
+      qnsImg.push(values)
+      console.log(qnsImg)
+  
       this.setState(
         {
-          ImageData: this.props.location.testtwo
+          i: this.state.i +1,
+          disable: true,
         }
       )
-      if(this.state.ImageData === undefined)
-      {
-        this.setState(
-          {
-            openImage: true
-          }
-        )
-      }
-      else if(this.state.ImageData === "")
-      {
-        this.setState(
-          {
-            openImage: true
-          }
-        )
-      }
-      else{
-        i = i + 1
-        const values = {
-        correctAns: this.state.alignment[this.state.i],
-        poolId: this.state.poolId,
-        qns: this.props.location.testtwo.split(',')[1]
-      }   
-    
-    qnsImg.push(values)
-    console.log(qnsImg)
-
-    this.setState(
-      {
-        i: this.state.i +1,
-        disable: true,
-        ImageData: ""
-      }
-    )
-      }
- 
-    
+      delete this.props.location.testtwo
+        }
+      
+   
     }
     handleCloseImage = () => 
     {
