@@ -25,6 +25,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
+let i = 1
 const ObjectRow = (props) => {
 
 
@@ -36,11 +37,13 @@ const ObjectRow = (props) => {
 
         <TableCell>
          <ImageUpload numberofquestions={props.numberofquestions} alignment={props.alignment[props.keyData]}/>
-         <Button variant="contained" 
-         onClick={(event) => props.QnsImageArray(event)}
-         style={{"fontSize": "10px"}}
-         disabled={props.disable}
-         >DONE</Button>
+         {props.keyValue === i && (
+            <Button variant="contained" 
+            onClick={(event) => props.QnsImageArray(event)}
+            style={{"fontSize": "10px"}}
+            disabled={props.disable}
+            >DONE</Button>
+         )}
         </TableCell>
         
         <TableCell> 
@@ -160,6 +163,7 @@ class TestRows extends React.Component {
     }    
    
     QnsImageArray = (index, newDisable) => { 
+      i = i + 1
           const values = {
           correctAns: this.state.alignment[this.state.i],
           poolId: this.state.poolId,
