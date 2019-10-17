@@ -26,6 +26,8 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 const ObjectRow = (props) => {
+
+
     return(
         <div>
         <TableCell>
@@ -46,7 +48,7 @@ const ObjectRow = (props) => {
         <RadioGroup 
          value={props.alignment[props.keyData]} key={props.keyData}
          exclusive 
-         onChange={(e) => props.handleChange(props.keyData, e.target.value)} 
+         onChange={(e) => props.handleChange(props.keyData,e.target.value)} 
          aria-label="text alignment">
              {props.children}
             </RadioGroup>
@@ -157,10 +159,7 @@ class TestRows extends React.Component {
        )})
     }    
    
-    QnsImageArray = (event) => {
-    
-   
-      event.target.disabled = true
+    QnsImageArray = (index, newDisable) => { 
           const values = {
           correctAns: this.state.alignment[this.state.i],
           poolId: this.state.poolId,
@@ -172,10 +171,11 @@ class TestRows extends React.Component {
       this.setState(
         {
           i: this.state.i +1,
-          disable: true
+          disable: true,
         }
       )
     }
+
 rows = () => 
 {
     let rows = [];
@@ -201,7 +201,7 @@ handleChange = (index, newAlignment) => {
     updatedAlignment[index] = newAlignment
     this.setState({
       alignment: updatedAlignment,
-      disable: false
+      disable: false,
     }, () => {
       console.log(this.state.alignment)
     },)
@@ -239,6 +239,7 @@ handleChange = (index, newAlignment) => {
     // <ToggleButton key={4} value="D">
     // </ToggleButton>,
   ];
+
   popOverPkay = () => 
   {
       if(this.state.domain === "Technical")

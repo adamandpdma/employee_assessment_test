@@ -125,7 +125,7 @@ export default class EmployeesList1 extends Component {
     <MUIDataTable 
   
         title={"Employee Database"}
-        data={this.state.employees.map(currentemp => {
+        data={this.state.employees.concat().reverse().map(currentemp => {
             return [
               <img style={{width: 85, height: 85, borderRadius: 85/ 2}} src={`data:image/jpeg;base64,${currentemp.profileImg}`} />,
              
@@ -135,7 +135,8 @@ export default class EmployeesList1 extends Component {
               currentemp.department,
               
               <Link to={{pathname:'/hr/EmployeeResult',
-               employeeId: currentemp.employeeId}}
+               employeeId: currentemp.employeeId,
+               name: currentemp.name}}
                 style={{"textDecoration": "none"}}>
               <Fab variant="contained" 
               style={{width: "120px", height:"60px", "text-transform": "none", padding: "5px", textDecoration: "none"}}>

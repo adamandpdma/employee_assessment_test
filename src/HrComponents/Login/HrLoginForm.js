@@ -40,7 +40,8 @@ const styles = theme => ({
     top:'80px',
     background: '#FFFFFF',
     paddingLeft:"0px",
-    paddingRight:"0px"
+    paddingRight:"0px",
+    marginBottom:"25%"
   },
   switch:{
     marginTop: theme.spacing(2),
@@ -57,7 +58,7 @@ const bgStyle = {
   backgroundRepeat: "no-repeat",
   backgroundPosition: 'center',
   minWidth:'100%',
-  minHeight:'100%' ,
+  minHeight:'110%' ,
   position:'absolute'
   
 

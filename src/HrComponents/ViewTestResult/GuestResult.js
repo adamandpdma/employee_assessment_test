@@ -14,6 +14,10 @@ export default class GuestResult extends Component {
 
     this.state = {
         guestId: this.props.location.guestId,
+        name: this.props.location.name,
+        mobileNo: this.props.location.mobileNo,
+        email: this.props.location.email,
+        nric: this.props.location.nric,
         guests: [],
         score: [],
         qnsNo: [],
@@ -208,10 +212,15 @@ export default class GuestResult extends Component {
 
     return (
      <MuiThemeProvider theme={this.getMuiTheme()}>
+        <h3>Name: {this.state.name} </h3>
+      <h3>Guest ID: {this.state.guestId} </h3>
+      <h3>Mobile No: {this.state.mobileNo} </h3>
+      <h3>Email: {this.state.email} </h3>
+      <h3>NRIC: {this.state.nric} </h3>
     <MUIDataTable 
   
         title={"Guest Test Result"}
-        data={this.state.guests.map((currentemp,i) => {
+        data={this.state.guests.reverse().map((currentemp,i) => {
             return [
               currentemp.testType,
               currentemp.testSubtype,

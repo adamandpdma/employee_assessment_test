@@ -31,7 +31,10 @@ export default class ViewTest extends Component {
     this.state = {
         data: [],
         testCat: this.props.location.domain,
-        open: false
+        open: false,
+        openConfirmation: false,
+        settingsIdData: 0,
+        testBank: ''
       
   }
 }
@@ -78,9 +81,16 @@ export default class ViewTest extends Component {
   handleclickopen = () => {
     this.setState(
         {
-            open: true
+            openConfirmation: true
         }
     )
+}
+handleCloseConfirmation = () => {
+  this.setState(
+      {
+          openConfirmation: false
+      }
+  )
 }
 handleClose = () => {
     this.setState(
@@ -89,16 +99,30 @@ handleClose = () => {
         }
     )
 }
-  deleteTest = (id) => 
+  deleteTest = (id,subtype) => 
   {
-  console.log(id)
-   axios.post('http://192.168.200.200:8080/backendapi/admin/test-detail/hide/'+id)
+    this.setState(
+      {
+        settingsIdData: id,
+        open: true,
+        testBank: subtype
+      }
+    )
+  }
+  deleteData = () => {
+    this.setState(
+      {
+        open: false
+      }
+    )
+
+   axios.post('http://192.168.200.200:8080/backendapi/admin/test-detail/hide/'+this.state.settingsIdData)
    .then((res) => console.log(res.data)) 
    .then(this.handleclickopen)
 
    this.setState(
        {
-           data: this.state.data.filter(el => el.settingsId !== id) ,
+           data: this.state.data.filter(el => el.settingsId !== this.state.settingsIdData) ,
            isHidden: true
        }
    )
@@ -188,7 +212,7 @@ handleClose = () => {
  <MUIDataTable 
 
 title={"Test Details"}
-data={this.state.data.map(currentemp => {
+data={this.state.data.concat().reverse().map(currentemp => {
     return [
        currentemp.testCat,
        currentemp.testType,
@@ -200,7 +224,7 @@ data={this.state.data.map(currentemp => {
        aboutpropsTwo: currentemp.settingsId}} style={Navstyle}>
             <Button variant="contained"  style={style}>EDIT</Button>
             </NavLink> 
-            <Button variant="contained" href="#" onClick = {() => this.deleteTest(currentemp.settingsId)}  style={style}>
+            <Button variant="contained" href="#" onClick = {() => this.deleteTest(currentemp.settingsId,currentemp.testSubtype)}  style={style}>
                 DELETE</Button></TableCell>
 
     ]})}
@@ -215,10 +239,28 @@ onClose={this.handleClose}
 aria-labelledby="alert-dialog-title"
 aria-describedby="alert-dialog-description"
 >
-<DialogTitle id="alert-dialog-title">{"You have successfully deleted the Test !!"}</DialogTitle>
+<DialogTitle id="alert-dialog-title">{"Are you sure you want to delete "+ " " +this.state.testBank + " " +"? "}</DialogTitle>
 
 <DialogActions>
 <Button onClick ={this.handleClose}>
+CANCEL
+</Button>
+<Button onClick ={this.deleteData}>
+CONFIRM
+</Button>
+</DialogActions>
+</Dialog>
+
+<Dialog
+open={this.state.openConfirmation}
+onClose={this.handleClose}
+aria-labelledby="alert-dialog-title"
+aria-describedby="alert-dialog-description"
+>
+<DialogTitle id="alert-dialog-title">{"Successfully Deleted the test !"}</DialogTitle>
+
+<DialogActions>
+<Button onClick ={this.handleCloseConfirmation}>
 OKAY
 </Button>
 </DialogActions>
