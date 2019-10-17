@@ -34,16 +34,16 @@ const ObjectRow = (props) => {
         <TableCell>
             {props.keyValue}
         </TableCell>
-
+        {/* && props.alignment[props.keyData]) */}
         <TableCell>
          <ImageUpload numberofquestions={props.numberofquestions} alignment={props.alignment[props.keyData]}/>
-         {props.keyValue === i && (
+         {(props.keyValue === i && (
             <Button variant="contained" 
             onClick={(event) => props.QnsImageArray(event)}
             style={{"fontSize": "10px"}}
             disabled={props.disable}
             >DONE</Button>
-         )}
+         ))}
         </TableCell>
         
         <TableCell> 
@@ -136,7 +136,9 @@ class TestRows extends React.Component {
             indexImg: 0,
             i: 0,
             disable: true,
-            openEmpty: false
+            openEmpty: false,
+            openImage: false
+
         }
     }
  
@@ -163,19 +165,54 @@ class TestRows extends React.Component {
     }    
    
     QnsImageArray = (index, newDisable) => { 
-      i = i + 1
-          const values = {
-          correctAns: this.state.alignment[this.state.i],
-          poolId: this.state.poolId,
-          qns: this.props.location.testtwo.split(',')[1]
-        }   
-      
-      qnsImg.push(values)
-      console.log(qnsImg)
       this.setState(
         {
-          i: this.state.i +1,
-          disable: true,
+          ImageData: this.props.location.testtwo
+        }
+      )
+      if(this.state.ImageData === undefined)
+      {
+        this.setState(
+          {
+            openImage: true
+          }
+        )
+      }
+      else if(this.state.ImageData === "")
+      {
+        this.setState(
+          {
+            openImage: true
+          }
+        )
+      }
+      else{
+        i = i + 1
+        const values = {
+        correctAns: this.state.alignment[this.state.i],
+        poolId: this.state.poolId,
+        qns: this.props.location.testtwo.split(',')[1]
+      }   
+    
+    qnsImg.push(values)
+    console.log(qnsImg)
+
+    this.setState(
+      {
+        i: this.state.i +1,
+        disable: true,
+        ImageData: ""
+      }
+    )
+      }
+ 
+    
+    }
+    handleCloseImage = () => 
+    {
+      this.setState(
+        {
+          openImage: false
         }
       )
     }
@@ -400,6 +437,21 @@ handleChange = (index, newAlignment) => {
 
         <DialogActions>
         <Button onClick ={this.handleCloseEmpty}>
+          OKAY
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog
+        open={this.state.openImage}
+        onClose={this.handleCloseImage}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Upload the Image!"}</DialogTitle>
+
+        <DialogActions>
+        <Button onClick ={this.handleCloseImage}>
           OKAY
           </Button>
         </DialogActions>
