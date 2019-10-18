@@ -8,7 +8,10 @@ import Modal from '@material-ui/core/Modal';
 import axios from 'axios'
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
 import Close from '../../close.png';
+import LoadingIcon from '../../Loading.gif';
 
 
 const useStyles = makeStyles(theme => ({
@@ -32,11 +35,14 @@ const useStyles = makeStyles(theme => ({
     background: '#03f0fc',
     left:'63%'
   },
+  loadinCloseButton: {
+    background: '#03f0fc',
+    left:'75%'
+  },
   link:{
     display: 'flex',
     justifyContent: 'flex-end',
     padding: theme.spacing(1),
-
   },
 
 }));
@@ -48,6 +54,7 @@ const classes = useStyles();
 const [open, setOpen] = useState(false);
 const [message, setMessage] = useState(false);
 const [errorMessage, setErrorMessage] = useState(false);
+const [loading, setLoading] = useState(false);
 const [email, setEmail] = useState("");
 
 const handleOpen = () => {
@@ -58,6 +65,7 @@ const handleClose = () => {
     setOpen(false);
     setMessage(false);
     setErrorMessage(false);
+    setLoading(false);
   }
 
 const handleUserInput = (e) => {
@@ -65,6 +73,8 @@ const handleUserInput = (e) => {
   }
 
 const handleSubmit = (e) =>{
+
+  setLoading(true);
 
   console.log(email)
   const postValue = {
@@ -80,9 +90,11 @@ const handleSubmit = (e) =>{
     .then((res => {
       console.log(res.data)
      { if (res.data === true) {
+      setLoading(false);
       setMessage(true);
     }
       else{
+      setLoading(false);
       setErrorMessage(true);
       }}
     }))    
@@ -131,6 +143,25 @@ const handleSubmit = (e) =>{
 
       </Modal>
       </div>  
+
+      <Dialog
+            open={loading}
+            onClose={loading}
+            >
+            <DialogTitle>{         
+            <Button onClick={handleClose} className={classes.loadinCloseButton}>
+            <img src={Close}/>	
+            </Button>}
+            </DialogTitle>
+            <DialogContent>
+            <center>
+          <DialogContentText >{"Loading... This may take a while."}</DialogContentText>    
+          <DialogContentText >
+            <img src = {LoadingIcon}></img>
+          </DialogContentText>
+          </center>  
+        </DialogContent>
+      </Dialog>
 
     
       <Dialog
