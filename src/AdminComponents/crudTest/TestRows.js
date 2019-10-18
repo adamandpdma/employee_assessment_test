@@ -25,20 +25,25 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
+let i = 1
 const ObjectRow = (props) => {
+
+
     return(
         <div>
         <TableCell>
             {props.keyValue}
         </TableCell>
-
+        {/* && props.alignment[props.keyData]) */}
         <TableCell>
          <ImageUpload numberofquestions={props.numberofquestions} alignment={props.alignment[props.keyData]}/>
-         <Button variant="contained" 
-         onClick={(event) => props.QnsImageArray(event)}
-         style={{"fontSize": "10px"}}
-         disabled={props.disable}
-         >DONE</Button>
+         {(props.keyValue === i && (
+            <Button variant="contained" 
+            onClick={(event) => props.QnsImageArray(event)}
+            style={{"fontSize": "10px"}}
+            disabled={props.disable}
+            >DONE</Button>
+         ))}
         </TableCell>
         
         <TableCell> 
@@ -46,7 +51,7 @@ const ObjectRow = (props) => {
         <RadioGroup 
          value={props.alignment[props.keyData]} key={props.keyData}
          exclusive 
-         onChange={(e) => props.handleChange(props.keyData, e.target.value)} 
+         onChange={(e) => props.handleChange(props.keyData,e.target.value)} 
          aria-label="text alignment">
              {props.children}
             </RadioGroup>
@@ -131,7 +136,9 @@ class TestRows extends React.Component {
             indexImg: 0,
             i: 0,
             disable: true,
-            openEmpty: false
+            openEmpty: false,
+            openImage: false,
+
         }
     }
  
@@ -156,11 +163,25 @@ class TestRows extends React.Component {
            }
        )})
     }    
-   
-    QnsImageArray = (event) => {
-    
-   
-      event.target.disabled = true
+   handleOpen = () => {
+     this.setState(
+       {
+        TrueFalse: true
+       }
+     )
+   }
+    QnsImageArray = (index, newDisable) => { 
+  
+        if(this.props.location.testtwo === undefined || this.props.location.testtwo === "")
+        {
+          this.setState(
+            {
+              openImage: true
+            }
+          )
+        }
+           else{
+          i = i + 1
           const values = {
           correctAns: this.state.alignment[this.state.i],
           poolId: this.state.poolId,
@@ -169,13 +190,27 @@ class TestRows extends React.Component {
       
       qnsImg.push(values)
       console.log(qnsImg)
+  
       this.setState(
         {
           i: this.state.i +1,
-          disable: true
+          disable: true,
+        }
+      )
+      delete this.props.location.testtwo
+        }
+      
+   
+    }
+    handleCloseImage = () => 
+    {
+      this.setState(
+        {
+          openImage: false
         }
       )
     }
+
 rows = () => 
 {
     let rows = [];
@@ -201,7 +236,7 @@ handleChange = (index, newAlignment) => {
     updatedAlignment[index] = newAlignment
     this.setState({
       alignment: updatedAlignment,
-      disable: false
+      disable: false,
     }, () => {
       console.log(this.state.alignment)
     },)
@@ -239,6 +274,7 @@ handleChange = (index, newAlignment) => {
     // <ToggleButton key={4} value="D">
     // </ToggleButton>,
   ];
+
   popOverPkay = () => 
   {
       if(this.state.domain === "Technical")
@@ -395,6 +431,21 @@ handleChange = (index, newAlignment) => {
 
         <DialogActions>
         <Button onClick ={this.handleCloseEmpty}>
+          OKAY
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog
+        open={this.state.openImage}
+        onClose={this.handleCloseImage}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Upload the Image!"}</DialogTitle>
+
+        <DialogActions>
+        <Button onClick ={this.handleCloseImage}>
           OKAY
           </Button>
         </DialogActions>

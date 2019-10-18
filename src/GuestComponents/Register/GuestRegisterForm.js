@@ -6,7 +6,7 @@ import LockIcon from "@material-ui/icons/Lock";
 import Container from '@material-ui/core/Container';
 import { TextField, Typography } from '@material-ui/core';
 import '../../Form.css'
-import Logo from '../../OptimumLogoRegister.png'
+import Logo from '../../optimumClearRegister.png'
 import withStyles from "@material-ui/core/styles/withStyles";
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
