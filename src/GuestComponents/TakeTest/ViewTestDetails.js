@@ -148,7 +148,7 @@ const navStyle = {
               timeLimit, noOfQns,element)} 
                variant="contained" 
                disabled={true}
-               style={{"height": "35px", "backgroundColor": "#F5F5F5"}}></Button>
+               style={{"height": "35px", "backgroundColor": "#F67B7B"}}></Button>
         
         )
     } else {
@@ -156,7 +156,7 @@ const navStyle = {
             <Button  src={Start}  className="btn"  id={id}  
             onClick={(element) => this.handleClickOpen(testSubtype, 
               timeLimit, noOfQns,element)} 
-           variant="contained" style={{"height": "35px", "backgroundColor": "powderblue"}}></Button>
+           variant="contained" style={{"height": "35px", "backgroundColor": "green"}}></Button>
         
         )
     }
