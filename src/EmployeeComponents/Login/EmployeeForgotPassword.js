@@ -40,6 +40,7 @@ const useStyles = makeStyles(theme => ({
     left:'75%'
   },
   link:{
+    cursor: "pointer",
     display: 'flex',
     justifyContent: 'flex-end',
     padding: theme.spacing(1),

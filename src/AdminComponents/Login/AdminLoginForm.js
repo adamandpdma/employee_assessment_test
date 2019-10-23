@@ -30,6 +30,9 @@ const styles = theme => ({
     marginBottom: theme.spacing(1),
 
     },
+  link:{
+    cursor: "pointer"
+  },  
   navbar:{
      background: '#FFFFFF',
   },  

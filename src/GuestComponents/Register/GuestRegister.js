@@ -26,7 +26,7 @@ const validationSchema = Yup.object({
     .required("Select your Education"),
   gpa: Yup.number("")
     .required("Enter your GPA")
-    .lessThan(4.01,"GPA cannot be higher than 4")
+    // .lessThan(4.01,"GPA cannot be higher than 4")
     .moreThan(0,"GPA must be more than 0"),
   graduationYear: Yup.number("")
     .lessThan(2020, "Year of Graduation should be within the last 4 years!")
@@ -41,6 +41,8 @@ class InputForm extends Component {
     this.state = {
       Id: "",
       errorMessage:false,
+      errorPoly:false,
+      errorUni:false,
       message:false
   };
   }
@@ -49,6 +51,17 @@ class InputForm extends Component {
   
 submitValues = ({name, nric, mobile, educationLevel, gpa, graduationYear}) => {
 
+  if(educationLevel === 'University' && gpa > 5){
+    this.setState({
+      errorUni:true
+    })
+  }
+  else if(educationLevel === 'Polytechnic' && gpa > 4){
+    this.setState({
+      errorPoly:true
+    })
+  }
+  else{
 
   const guest ={
     name: name,
@@ -79,6 +92,7 @@ submitValues = ({name, nric, mobile, educationLevel, gpa, graduationYear}) => {
           
 );
 }
+}
 
 handleClose = () => {
   this.setState({errorMessage:false})
@@ -94,6 +108,8 @@ handleClose = () => {
     const { graduationYear } = this.state;
     const handleClose = this.handleClose;
     const errorMessage = this.state.errorMessage;
+    const errorPoly = this.state.errorPoly;
+    const errorUni = this.state.errorUni;
     const message = this.state.message;
 
 
@@ -117,17 +133,52 @@ handleClose = () => {
             />      
       <Dialog
             open={errorMessage}
-            onClose={handleClose}
+            // onClose={handleClose}
             aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
             >
             <DialogTitle id="alert-dialog-title">{"NRIC has been registered once"}</DialogTitle>
+            <Button
+          margin="normal"
+          fullWidth
+          variant="contained"
+      onClick={handleClose}>
+        Okay
+      </Button>
+
+      </Dialog>
+      <Dialog
+            open={errorUni}
+            // onClose={handleClose}
+            aria-labelledby="alert-dialog-title"
+            >
+            <DialogTitle id="alert-dialog-title">{"University GPA cannot be more than 5."}</DialogTitle>
+            <Button
+          margin="normal"
+          fullWidth
+          variant="contained"
+      onClick={handleClose}>
+        Okay
+      </Button>
+
+      </Dialog>
+      <Dialog
+            open={errorPoly}
+            aria-labelledby="alert-dialog-title"
+            >
+            <DialogTitle id="alert-dialog-title">{"Polytechnic GPA cannot be more than 4"}</DialogTitle>
+      <Button
+          margin="normal"
+          fullWidth
+          variant="contained"
+      onClick={handleClose}>
+        Okay
+      </Button>
+
       </Dialog>
       <Dialog
             open={message}
-            onClose={handleClose}
+            // onClose={handleClose}
             aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
             >
             <DialogTitle id="alert-dialog-title">{"Registration Complete"}</DialogTitle>
             <NavLink to={{pathname:"/guest", openBoolean: true}} style={{"textDecoration": "none"}}>
@@ -136,8 +187,6 @@ handleClose = () => {
             </NavLink>
             
       </Dialog>
-
-
 
       </React.Fragment>
     );
