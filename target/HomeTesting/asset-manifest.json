@@ -1,18 +1,19 @@
 {
   "files": {
     "main.css": "http://192.168.200.200:8080/HomeTesting/static/css/main.cfedc1ed.chunk.css",
-    "main.js": "http://192.168.200.200:8080/HomeTesting/static/js/main.86a671dd.chunk.js",
-    "main.js.map": "http://192.168.200.200:8080/HomeTesting/static/js/main.86a671dd.chunk.js.map",
+    "main.js": "http://192.168.200.200:8080/HomeTesting/static/js/main.5ad18d3e.chunk.js",
+    "main.js.map": "http://192.168.200.200:8080/HomeTesting/static/js/main.5ad18d3e.chunk.js.map",
     "runtime~main.js": "http://192.168.200.200:8080/HomeTesting/static/js/runtime~main.3d8bee29.js",
     "runtime~main.js.map": "http://192.168.200.200:8080/HomeTesting/static/js/runtime~main.3d8bee29.js.map",
     "static/css/2.0965f1b7.chunk.css": "http://192.168.200.200:8080/HomeTesting/static/css/2.0965f1b7.chunk.css",
-    "static/js/2.b4e38e41.chunk.js": "http://192.168.200.200:8080/HomeTesting/static/js/2.b4e38e41.chunk.js",
-    "static/js/2.b4e38e41.chunk.js.map": "http://192.168.200.200:8080/HomeTesting/static/js/2.b4e38e41.chunk.js.map",
+    "static/js/2.9adf5f29.chunk.js": "http://192.168.200.200:8080/HomeTesting/static/js/2.9adf5f29.chunk.js",
+    "static/js/2.9adf5f29.chunk.js.map": "http://192.168.200.200:8080/HomeTesting/static/js/2.9adf5f29.chunk.js.map",
     "index.html": "http://192.168.200.200:8080/HomeTesting/index.html",
-    "precache-manifest.0db0749773b7e94ca97d3b3e921d99e2.js": "http://192.168.200.200:8080/HomeTesting/precache-manifest.0db0749773b7e94ca97d3b3e921d99e2.js",
+    "precache-manifest.f381f4b63590418f67221becc5b31e3c.js": "http://192.168.200.200:8080/HomeTesting/precache-manifest.f381f4b63590418f67221becc5b31e3c.js",
     "service-worker.js": "http://192.168.200.200:8080/HomeTesting/service-worker.js",
     "static/css/2.0965f1b7.chunk.css.map": "http://192.168.200.200:8080/HomeTesting/static/css/2.0965f1b7.chunk.css.map",
     "static/css/main.cfedc1ed.chunk.css.map": "http://192.168.200.200:8080/HomeTesting/static/css/main.cfedc1ed.chunk.css.map",
+    "static/media/Loading.gif": "http://192.168.200.200:8080/HomeTesting/static/media/Loading.1bc91803.gif",
     "static/media/OptimumLogo.jpeg": "http://192.168.200.200:8080/HomeTesting/static/media/OptimumLogo.cae4c860.jpeg",
     "static/media/start.png": "http://192.168.200.200:8080/HomeTesting/static/media/start.c4d3082f.png"
   }

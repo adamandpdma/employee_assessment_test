@@ -148,7 +148,7 @@ const navStyle = {
               timeLimit, noOfQns,element)} 
                variant="contained" 
                disabled={true}
-               style={{"height": "35px"}}>START</Button>
+               style={{"height": "35px", "backgroundColor": "#F67B7B"}}></Button>
         
         )
     } else {
@@ -156,7 +156,7 @@ const navStyle = {
             <Button  src={Start}  className="btn"  id={id}  
             onClick={(element) => this.handleClickOpen(testSubtype, 
               timeLimit, noOfQns,element)} 
-           variant="contained" style={{"height": "35px"}}>START</Button>
+           variant="contained" style={{"height": "35px", "backgroundColor": "green"}}></Button>
         
         )
     }
@@ -203,7 +203,7 @@ const navStyle = {
           }
         },
       {
-        name: "",
+        name: "Start Test",
         options: {
           filter: false,
     
@@ -216,7 +216,7 @@ const navStyle = {
       <div>
           <Dialog aria-labelledby="customized-dialog-title" open={this.state.open}>
             {/* <button onClick={this.handleClose}>Close</button> */}
-            <CloseIcon style={{"margin-left":"93%", "margin-top":"10px"}} onClick={this.handleClose}></CloseIcon>
+            {/* <CloseIcon style={{"margin-left":"93%", "margin-top":"10px"}} onClick={this.handleClose}></CloseIcon> */}
         <DialogTitle id="customized-dialog-title">
           TERMS AND CONDITIONS
         </DialogTitle>
