@@ -18,6 +18,7 @@ import ImageUpload from './ImageUpload';
 import axios from 'axios';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import {NavLink} from 'react-router-dom';
 import Radio from '@material-ui/core/Radio';
@@ -37,13 +38,13 @@ const ObjectRow = (props) => {
         {/* && props.alignment[props.keyData]) */}
         <TableCell>
          <ImageUpload numberofquestions={props.numberofquestions} alignment={props.alignment[props.keyData]}/>
-         {(props.keyValue === i && (
+         {(props.keyValue === i && props.alignment[props.keyData])&& (
             <Button variant="contained" 
             onClick={(event) => props.QnsImageArray(event)}
             style={{"fontSize": "10px"}}
             disabled={props.disable}
             >DONE</Button>
-         ))}
+         )}
         </TableCell>
         
         <TableCell> 
@@ -401,8 +402,9 @@ handleChange = (index, newAlignment) => {
                     1) Click on choose file and Choose an Image. <br/>
                     (Image size cannot exceed 64kb).<br/>
                     2) Click on upload Image.<br/>
-                    3) Choose correct Option for the question Image.<br/>
-                    4) Click on Done.<br/><br/>
+                    3) Choose Option for the question Image.<br/>
+                    4) Done Button appears when once the image<br/>
+                    and option is selected, Click on done.<br/><br/>
                   </p>
                {this.rows()}
               </TableBody>
@@ -427,8 +429,22 @@ handleChange = (index, newAlignment) => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"Upload questions, Cannot leave blank!!"}</DialogTitle>
-
+        <DialogTitle id="alert-dialog-title">{"Upload questions, Cannot leave blank!"}</DialogTitle>
+        <DialogContent dividers>
+          <Typography>
+            <ol>
+                <li>
+                 Make sure all done button is clicked. (Done Button appears when once the image and option is selected)
+                </li>
+                <li>
+                Make sure all Images are uploaded (upload Image button should be disabled).
+                </li>
+                <li>
+                Make sure option for each question is clicked.
+                </li>
+            </ol>          
+          </Typography>
+        </DialogContent>
         <DialogActions>
         <Button onClick ={this.handleCloseEmpty}>
           OKAY
