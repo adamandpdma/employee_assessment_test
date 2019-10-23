@@ -148,7 +148,7 @@ const navStyle = {
               timeLimit, noOfQns,element)} 
                variant="contained" 
                disabled={true}
-               style={{"height": "35px", "backgroundColor": "grey"}}></Button>
+               style={{"height": "35px", "backgroundColor": "#F5F5F5"}}></Button>
         
         )
     } else {
