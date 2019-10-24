@@ -229,7 +229,7 @@ const navStyle = {
                     Do not refresh (or press F5) or close the tab/browser.
                 </li>
                 <li>
-                    You have only 2 attempts for this test.
+                    You have only 1 attempt for this test. Accept the terms and conditions and Start the test cannot quit.
                 </li>
                 <li>
                     Test would be automatically submitted once the time is up.
