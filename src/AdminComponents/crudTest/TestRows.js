@@ -26,7 +26,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
-let i = 1
+let ij = 1
 const ObjectRow = (props) => {
 
 
@@ -38,7 +38,8 @@ const ObjectRow = (props) => {
         {/* && props.alignment[props.keyData]) */}
         <TableCell>
          <ImageUpload numberofquestions={props.numberofquestions} alignment={props.alignment[props.keyData]}/>
-         {(props.keyValue === i && props.alignment[props.keyData])&& (
+         {(props.keyValue === ij  && props.alignment[props.keyData])&& (
+            //
             <Button variant="contained" 
             onClick={(event) => props.QnsImageArray(event)}
             style={{"fontSize": "10px"}}
@@ -182,7 +183,7 @@ class TestRows extends React.Component {
           )
         }
            else{
-          i = i + 1
+          ij = ij + 1
           const values = {
           correctAns: this.state.alignment[this.state.i],
           poolId: this.state.poolId,
@@ -319,6 +320,7 @@ handleChange = (index, newAlignment) => {
   handleClickOpen = () => {
 
     qnsImg =[]
+    ij = 1
 
     this.setState(
         {
