@@ -83,21 +83,21 @@ export default class EmployeesList1 extends Component {
         {
           name: "Employee ID",
           options: {
-            filter: true,
+            filter: false,
           
           }
         },
         {
           name: "Username",   
           options: {
-            filter: true,
+            filter: false,
            
           }
         },
         {
           name: "Email",
           options: {
-            filter: true,
+            filter: false,
            
           }
         },

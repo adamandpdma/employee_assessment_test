@@ -55,7 +55,7 @@ class EmployeeReviewTest extends React.Component {
           .then(response => {
             console.log(response.data)
             if(response.data.userAns === null){
-              window.location="/employee/reviewError"
+              window.location="./reviewError"
             }
             else{
             this.setState({ 

@@ -64,7 +64,7 @@ className = {classes.button}
 margin="normal"
 fullWidth
 >
-<NavLink to ='/employee/reviewAll' style={{color: 'black', textDecoration: 'none'}}>Okay</NavLink>
+<NavLink to ='./reviewAll' style={{color: 'black', textDecoration: 'none'}}>Okay</NavLink>
 </Button>  
 </Container>
 </React.Fragment>
