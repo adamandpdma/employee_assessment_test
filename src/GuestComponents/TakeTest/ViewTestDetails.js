@@ -61,7 +61,7 @@ const navStyle = {
         .then(res => {
             this.setState (
                 {
-                    data: res.data
+                    data: res.data,
                 },
              )
              console.log(res.data)
@@ -202,6 +202,13 @@ const navStyle = {
            
           }
         },
+        {
+          name: "Pass Percentage",
+          options: {
+            filter: false,
+           
+          }
+        },
       {
         name: "Start Test",
         options: {
@@ -255,12 +262,12 @@ const navStyle = {
                currentemp.testSubtype,
                currentemp.noOfQns,
                currentemp.timeLimit + "  "+ 'minutes',
-               <TableCell>
-              {this.displayButtons(currentemp.settingsId,
+               currentemp.pass_percent + " "+"%",
+               this.displayButtons(currentemp.settingsId,
               currentemp.testSubtype, 
             currentemp.timeLimit,
-             currentemp.noOfQns)}
-               </TableCell>
+             currentemp.noOfQns)
+            
                      ]})}
 
         columns={columns}
