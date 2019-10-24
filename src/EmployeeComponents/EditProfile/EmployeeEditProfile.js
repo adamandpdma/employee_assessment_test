@@ -31,14 +31,18 @@ class EmployeeEditProfile extends Component{
 
       <React.Fragment>
         <Grid container spacing={3}>
-        <Grid item xs={6}> 
+        <Grid > 
         <ChangePasswordInput/> 
         {/* <UploadTest/> */}
         </Grid>
-        <Grid item xs={6}>
+        {/* <Grid item xs={6}>
+        <ChangeNameInput/>
+        </Grid> */}
+        </Grid>
+        <Grid style={{paddingTop: 20}}>
         <ChangeNameInput/>
         </Grid>
-        </Grid>
+
         </React.Fragment>
     )
 }}

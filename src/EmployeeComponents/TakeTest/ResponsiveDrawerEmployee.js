@@ -33,7 +33,7 @@ import auth from "../../auth"
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import EmployeeEditProfile from '../EditProfile/EmployeeEditProfile';
 import {ProtectedRoute} from "../../Protected.Route";
-
+import ReviewError from "../ReviewTest/ReviewError"
 
 const drawerWidth = 300;
 
@@ -289,6 +289,7 @@ const ResponsiveDrawerEmployee = (props) => {
           <ProtectedRoute path='/employee/review' component={EmployeeReviewTest}/>
           <ProtectedRoute path='/employee/reviewAll' component={ReviewAllTests}/>
           <ProtectedRoute path='/employee/editProfile' component={EmployeeEditProfile}/>
+          <ProtectedRoute path='/employee/reviewError' component={ReviewError}/>
    
         </Grid>
       </main>
