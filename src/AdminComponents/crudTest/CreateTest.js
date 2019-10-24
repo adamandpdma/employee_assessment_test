@@ -174,6 +174,10 @@ validate = () =>
         isError = true;
         errors.percentageError= "Enter a number";
     }
+    if(this.state.percentage > 100){
+        isError = true;
+        errors.percentageError= "Percentage cannot be greater than 100";
+    }
     if(this.state.noOfQns > this.state.numberofquestions){
         isError = true;
         errors.numberofquestionsError= "Number should be < or =" + this.state.numberofquestions;
@@ -193,6 +197,11 @@ validate = () =>
         errors.timelimitError= " ";
     }
 
+
+    if(this.state.percentage.match("[0-9]") && !(this.state.percentage > 100))
+    {
+        errors.percentageError= " ";
+    }
     if(this.state.timeLimit === ''){
         isError = true;
         errors.timelimitError= "Enter a number";
