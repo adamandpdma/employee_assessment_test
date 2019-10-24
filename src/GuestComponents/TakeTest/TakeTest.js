@@ -275,7 +275,8 @@ popOverPkay = () =>
               <PopupState variant="popover" popupId="demo-popup-popover">
                     {popupState => (
                       <div>
-                        <img id="myImg" src={`data:image/jpeg;base64,${this.state.questions}`} alt="Test" style={{"width":"100%","max-width":"300px"}} {...bindTrigger(popupState)}  /> 
+                        <img id="myImg" src={`data:image/jpeg;base64,${this.state.questions}`} alt="Test"
+                         style={{"width":"100%","max-width":"300px"}} {...bindTrigger(popupState)}  /> 
                         <Popover
                           {...bindPopover(popupState)}
                           anchorOrigin={{
