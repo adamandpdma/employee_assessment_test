@@ -196,6 +196,13 @@ handleClose = () => {
     
         }
       },
+      {
+        name: "Pass Percentage",
+        options: {
+          filter: false,
+    
+        }
+      },
      
         {
             name: "Action",
@@ -219,9 +226,11 @@ data={this.state.data.concat().reverse().map(currentemp => {
        currentemp.testSubtype,
        currentemp.noOfQns,
        currentemp.timeLimit,
+       currentemp.pass_percent + " " +"%",
        <TableCell><NavLink to={{pathname: '/admin/editTest/'+currentemp.settingsId, 
        aboutprops: currentemp.testCat, 
-       aboutpropsTwo: currentemp.settingsId}} style={Navstyle}>
+       aboutpropsTwo: currentemp.settingsId,
+       }} style={Navstyle}>
             <Button variant="contained"  style={style}>EDIT</Button>
             </NavLink> 
             <Button variant="contained" href="#" onClick = {() => this.deleteTest(currentemp.settingsId,currentemp.testSubtype)}  style={style}>
