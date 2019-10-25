@@ -68,6 +68,14 @@ class Countdown extends Component
                    counter: this.state.counter-1,
                }
            )
+           if(this.state.counter === 60){
+          
+            alert("Hurry Up! Only one minute left!")
+            this.setState(
+             {
+                 counter: this.state.counter-1,
+             })
+        }
            if(this.state.counter === -1)
            {
                alert("Time out")
