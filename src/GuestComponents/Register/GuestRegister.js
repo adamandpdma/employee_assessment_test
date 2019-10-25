@@ -96,7 +96,8 @@ submitValues = ({name, nric, mobile, educationLevel, gpa, graduationYear}) => {
 
 handleClose = () => {
   this.setState({errorMessage:false})
-
+  this.setState({errorPoly:false})
+  this.setState({errorUni:false})
 }
 
   render() {

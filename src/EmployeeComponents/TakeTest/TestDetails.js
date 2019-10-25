@@ -233,8 +233,16 @@ export default class TestDetails extends Component {
            
           }
         },
+
         {
           name: "Attempts",
+          options: {
+            filter: false,
+           
+          }
+        },
+        {
+          name: "Pass Percentage",
           options: {
             filter: false,
            
@@ -291,6 +299,7 @@ export default class TestDetails extends Component {
                currentemp.noOfQns,
                currentemp.timeLimit + "  "+ 'minutes',
                this.state.attemptsDataFiltered[i]+'/2',
+               currentemp.pass_percent + " "+"%",
                this.TestReview(this.state.attemptsDataFiltered[i], 
                 currentemp.testSubtype,
                  currentemp.timeLimit, 
