@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import TakeTest from './TakeTest'
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Button from "@material-ui/core/Button";
 
 
 const floor =require('math-floor')
@@ -20,7 +23,8 @@ class Countdown extends Component
             guestId: this.props.location.guestId,
             score: this.props.location.score,
             settingsId: this.props.location.settingsId,
-            userQnsIds: this.props.location.userQnsIds
+            userQnsIds: this.props.location.userQnsIds,
+            message:false,
         }
     }
 
@@ -68,13 +72,11 @@ class Countdown extends Component
                    counter: this.state.counter-1,
                }
            )
-           if(this.state.counter === 60){
-          
-               alert("Left 1 minute")
-               this.setState(
-                {
-                    counter: this.state.counter-1,
-                })
+           if(this.state.counter === 60)
+           {
+            this.setState({
+                message:true
+            })
            }
            if(this.state.counter === -1)
            {
@@ -83,7 +85,11 @@ class Countdown extends Component
            }
         }, 1000);
     }
-
+    handleClose = () => {
+        this.setState({message:false})
+    
+      }
+   
    render()
     {
         return(
@@ -99,6 +105,14 @@ class Countdown extends Component
           score= {this.state.score}
           settingsId= {this.state.settingsId}
           userQnsIds= {this.state.userQnsIds}/>
+           <Dialog
+            open={this.state.message}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+            >
+            <DialogTitle id="alert-dialog-title">{"1 minute remaining."}</DialogTitle>
+            <Button onClick={this.handleClose}>Okay</Button>
+            </Dialog>
             </div>
         )
     }
