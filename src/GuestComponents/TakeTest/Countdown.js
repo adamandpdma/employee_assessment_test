@@ -22,7 +22,8 @@ class Countdown extends Component
             score: this.props.location.score,
             settingsId: this.props.location.settingsId,
             userQnsIds: this.props.location.userQnsIds,
-            timeEnd: 0
+            timeEnd: 0,
+            message:false,
         }
     }
     convertSeconds = (s) => 
@@ -76,6 +77,12 @@ class Countdown extends Component
                  counter: this.state.counter-1,
              })
         }
+        if(this.state.counter === 60)
+        {
+         this.setState({
+             message:true
+         })
+        }
            if(this.state.counter === -1)
            {
                alert("Time out")
@@ -83,6 +90,11 @@ class Countdown extends Component
                window.location='./ViewTestDetails'
            }
         }, 1000);
+
+        handleClose = () => {
+            this.setState({message:false})
+        
+          }
     }
    
    render()
@@ -100,6 +112,14 @@ class Countdown extends Component
           score= {this.state.score}
           settingsId= {this.state.settingsId}
           userQnsIds= {this.state.userQnsIds}/>
+           <Dialog
+            open={this.state.message}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+            >
+            <DialogTitle id="alert-dialog-title">{"1 minute remaining."}</DialogTitle>
+            <Button onClick={this.handleClose}>Okay</Button>
+            </Dialog>
             </div>
         )
     }
