@@ -1,6 +1,9 @@
 import React, {Component} from 'react';
 import TakeTest from './TakeTest';
-import { withRouter } from "react-router"
+import { withRouter } from "react-router";
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Button from "@material-ui/core/Button";
 
 
 const floor =require('math-floor')
@@ -69,14 +72,14 @@ class Countdown extends Component
                    counter: this.state.counter-1,
                }
            )
-           if(this.state.counter === 60){
+        //    if(this.state.counter === 60){
           
-            alert("Hurry Up! Only one minute left!")
-            this.setState(
-             {
-                 counter: this.state.counter-1,
-             })
-        }
+        //     alert("Hurry Up! Only one minute left!")
+        //     this.setState(
+        //      {
+        //          counter: this.state.counter-1,
+        //      })
+        // }
         if(this.state.counter === 60)
         {
          this.setState({
@@ -91,11 +94,10 @@ class Countdown extends Component
            }
         }, 1000);
 
-        handleClose = () => {
-            this.setState({message:false})
-        
-          }
     }
+    handleClose = () => {
+        this.setState({message:false})
+      }
    
    render()
     {
@@ -117,7 +119,7 @@ class Countdown extends Component
             aria-labelledby="alert-dialog-title"
             aria-describedby="alert-dialog-description"
             >
-            <DialogTitle id="alert-dialog-title">{"1 minute remaining."}</DialogTitle>
+            <DialogTitle id="alert-dialog-title">{"Hurry up only 1 minute Left!"}</DialogTitle>
             <Button onClick={this.handleClose}>Okay</Button>
             </Dialog>
             </div>
