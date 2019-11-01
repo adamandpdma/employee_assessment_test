@@ -223,7 +223,15 @@ const ResponsiveDrawer = (props) => {
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
-   
+        <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+            className={classes.menuButton}
+          >
+            <MenuIcon />
+          </IconButton>
         <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -232,6 +240,11 @@ const ResponsiveDrawer = (props) => {
           >
           <Profile/>  
           </IconButton>
+
+  
+        
+    
+     
 
         <Button
         color="inherit"

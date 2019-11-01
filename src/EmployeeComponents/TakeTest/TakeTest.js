@@ -304,6 +304,8 @@ popOverPkay = () =>
       return (
         <div className="result">
           <h3> Thanks for taking the Test, Your test is submitted.</h3>
+          <NavLink to='/employee/DashBoardEmployee' style={{"textDecoration": "none"}}>
+            <Button variant="contained">Back to DashBoard</Button></NavLink>
         </div>
       );
     }
