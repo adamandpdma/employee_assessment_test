@@ -20,11 +20,10 @@ import {Route} from 'react-router-dom';
 import {NavLink} from 'react-router-dom';
 import DashBoardEmployee from './DashBoardEmployee';
 import TestDetails from './TestDetails';
-// import TakeTest from '../TakeTest';
+import TakeTest from './TakeTest';
 import Agile from './Agile';
 import ProgrammingAndFramework from './ProgrammingAndFramework';
 import DevOps from './DevOps';
-import Countdown from './Countdown';
 import EmployeeReviewTest from '../ReviewTest/EmployeeReviewTest'
 import ReviewAllTests from '../ReviewTest/ReviewAllTests'
 import Profile from '../EditProfile/EmployeeProfile'
@@ -34,6 +33,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import EmployeeEditProfile from '../EditProfile/EmployeeEditProfile';
 import {ProtectedRoute} from "../../Protected.Route";
 import ReviewError from "../ReviewTest/ReviewError"
+
 
 const drawerWidth = 300;
 
@@ -220,6 +220,15 @@ const ResponsiveDrawerEmployee = (props) => {
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
+        <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+            className={classes.menuButton}
+          >
+            <MenuIcon />
+          </IconButton>
    
         <IconButton
             color="inherit"
@@ -285,7 +294,7 @@ const ResponsiveDrawerEmployee = (props) => {
           <ProtectedRoute path='/employee/Agile' component={Agile}/>
           <ProtectedRoute path='/employee/ProgrammingAndFramework' component={ProgrammingAndFramework}/>
           <ProtectedRoute path='/employee/DevOps' component={DevOps}/>
-          <ProtectedRoute path='/employee/takeTest' component={Countdown}/>
+          <ProtectedRoute path='/employee/takeTest' component={TakeTest}/>
           <ProtectedRoute path='/employee/Test' component={TestDetails}/>
           <ProtectedRoute path='/employee/review' component={EmployeeReviewTest}/>
           <ProtectedRoute path='/employee/reviewAll' component={ReviewAllTests}/>

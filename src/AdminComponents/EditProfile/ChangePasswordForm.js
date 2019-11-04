@@ -47,8 +47,8 @@ button:{
 
 textfield:{
       height:40,
-      marginBottom: theme.spacing(4), 
-      width: "50%"      
+      marginBottom: theme.spacing(4),       
+      
     }
 
   });

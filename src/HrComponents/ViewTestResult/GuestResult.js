@@ -179,6 +179,12 @@ export default class GuestResult extends Component {
         }
       },
       {
+        name: "Pass Percentage",
+        options: {
+          filter: false,
+        }
+      },
+      {
         name: "Pass/Fail",
         options: {
           filter: true,
@@ -227,6 +233,7 @@ export default class GuestResult extends Component {
               currentemp.score+' / '+((currentemp.userQnsIds.split(',').length) - 1),  
               this.timeCalculation(currentemp.completionTime),
               this.Percentage(currentemp.score, currentemp.userQnsIds) ,
+              currentemp.pass_percent + " "+"%",
               this.state.booleanResults[i]        
             ]})}
 

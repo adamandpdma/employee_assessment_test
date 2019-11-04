@@ -20,7 +20,6 @@ import {Route} from 'react-router-dom';
 import {NavLink} from 'react-router-dom';
 import DashBoardGuest from './DashBoardGuest';
 import ViewTestDetails from './ViewTestDetails'
-import Countdown from './Countdown';
 import GuestRegister from '../Register/GuestRegister'
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import { Button } from '@material-ui/core';
@@ -28,6 +27,7 @@ import auth from "../../auth"
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import {ProtectedRoute} from "../../Protected.Route";
 import { useEffect, useState } from 'react';
+import TakeTest from './TakeTest';
 
 
 const drawerWidth = 300;
@@ -280,7 +280,7 @@ const openTestCheck = () =>
         <Grid>
           <ProtectedRoute path='/guest/DashBoardGuest' component={DashBoardGuest}/>
           <ProtectedRoute path='/guest/ViewTestDetails' component={ViewTestDetails}/>
-          <ProtectedRoute path='/guest/takeTest' component={Countdown}/>
+          <ProtectedRoute path='/guest/takeTest' component={TakeTest}/>
           <ProtectedRoute path='/guest/register' component={GuestRegister}/>
         </Grid>
       </main>

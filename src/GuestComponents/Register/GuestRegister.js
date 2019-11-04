@@ -29,8 +29,8 @@ const validationSchema = Yup.object({
     // .lessThan(4.01,"GPA cannot be higher than 4")
     .moreThan(0,"GPA must be more than 0"),
   graduationYear: Yup.number("")
-    .lessThan(2020, "Year of Graduation should be within the last 4 years!")
-    .moreThan(2015, "Year of Graduation should be within the last 4 years!")
+    .lessThan(new Date().getFullYear()+ 1, "Year of Graduation should be within the last 3 years!")
+    .moreThan(new Date().getFullYear()-3, "Year of Graduation should be within the last 3 years!")
     .required("Enter your Year of Graduation"),  
   
 });

@@ -190,6 +190,12 @@ const GuestRegisterForm = withStyles(styles)(props => {
         margin="normal"
         fullWidth
       />
+       {educationLevel === "University" &&(
+            <p style={{"color": "blue"}}> Maximum GPA: 5</p>
+          )}
+           {educationLevel === "Polytechnic" &&(
+            <p style={{"color": "blue"}}>Maximum GPA: 4</p>
+          )}
         </Grid>
         </Grid>
         </div>

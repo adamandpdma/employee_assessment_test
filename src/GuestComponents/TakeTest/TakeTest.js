@@ -1,6 +1,5 @@
 import React from "react";
 import Axios from 'axios';
-import Countdown from './Countdown'
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -23,6 +22,7 @@ import Popover from '@material-ui/core/Popover';
 import Typography from '@material-ui/core/Typography';
 
 
+const floor =require('math-floor')
 
 const buttonStyle = { 
 padding: "20px",
@@ -53,8 +53,6 @@ const theme =createMuiTheme({
   },
 });
 
-const floor =require('math-floor')
-
 class TakeTest extends React.Component {
 constructor(props) {
   super(props);
@@ -69,21 +67,85 @@ constructor(props) {
     userAns: '',
     correctAnswer: '',
     qnsId: [],
-    resultId: this.props.resultId,
-    employeeId: 0,
-    guestId: 0,
-    score: 0,
-    settingsId: 0,
-    userQnsIds: '',
-    correctAns: '',
     disabled: true,
     alignment: '',
-    CompletedTime: ""
+    CompletedTime: "",
+    message: false,
+
+    counter: this.props.location.timeData * 60,
+    testSubtypeData: this.props.location.testSubtypeData,
+    resultId: this.props.location.resultId,
+    timeData: this.props.location.timeData,
+    correctAns: this.props.location.correctAns,
+    employeeId: this.props.location.employeeId,
+    guestId: this.props.location.guestId,
+    score: this.props.location.score,
+    settingsId: this.props.location.settingsId,
+    userQnsIds: this.props.location.userQnsIds,
+    timeEnd: 0,
   };
 this.finishHandler = this.finishHandler.bind(this)
 this.nextQuestionHandler = this.nextQuestionHandler.bind(this)
+this.TimerFunction = this.TimerFunction.bind(this)
 }
 
+convertSeconds = (s) => 
+{  
+    let min = floor(s/60);
+    let sec = s % 60
+    if(min < 10)
+    {
+        min = '0' + min
+    }
+    if(sec < 10)
+    {
+        sec = '0' + sec
+    }
+    return(
+        <div>
+         <table>
+            <tbody>							
+            <tr>
+            <th>       
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+        <path d="M15 1H9v2h6V1zm-4 13h2V8h-2v6zm8.03-6.61l1.42-1.42c-.43-.51-.9-.99-1.41-1.41l-1.42 1.42C16.07 4.74 14.12 4 12 4c-4.97 0-9 4.03-9 9s4.02 9 9 9 9-4.03 9-9c0-2.12-.74-4.07-1.97-5.61zM12 20c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>	</th>
+            <th> {min} : </th>
+            <th> {sec} </th>
+           
+            </tr>
+            <tr>
+            </tr> 
+            </tbody>
+            </table>
+        </div>
+
+    )
+}
+ TimerFunction = () => {
+  console.log(this.state.testSubtypeData)
+  console.log(this.state.counter)
+  this.interval = setInterval(() => {
+     this.setState(
+         {
+             counter: this.state.counter-1,
+         }
+     )
+  if(this.state.counter === 60)
+  {
+   this.setState({
+       message:true
+   })
+  }
+     if(this.state.counter === -1)
+     {
+         alert("Time out")
+         this.finishHandler()
+     }
+  }, 1000);
+}
+handleClose12 = () => {
+  this.setState({message:false})
+}
 
 
   loadQuizData = () => {
@@ -111,8 +173,8 @@ this.nextQuestionHandler = this.nextQuestionHandler.bind(this)
   
   
   componentDidMount() {
-   // window.BeforeUnloadEvent(alert("Please do not refresh or your test will be submitted"))
     this.loadQuizData();
+    this.TimerFunction();
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -128,7 +190,6 @@ this.nextQuestionHandler = this.nextQuestionHandler.bind(this)
           });
     })
   }
- // window.BeforeUnloadEvent(alert("Please do not refresh or your test will be submitted"))
 }
 
 nextQuestionHandler = () => {
@@ -150,20 +211,19 @@ nextQuestionHandler = () => {
 
 finishHandler = () => {
 
-  console.log(this.props.functionCountdown)
+  console.log(this.convertSeconds)
 
-  
     const values =  {
         
-        completionTime: ((this.props.functionCountdown._owner.memoizedState.timeData * 60) - (this.props.functionCountdown._owner.memoizedState.counter)).toString(),
-        correctAns: this.props.correctAns,
-        employeeId: this.props.employeeId,
-        guestId: this.props.guestId,
-        resultId: this.props.resultId,
-        score: this.props.score,
-        settingsId: this.props.settingsId,
+        completionTime: ((this.state.timeData * 60) - (this.state.counter)).toString(),
+        correctAns: this.state.correctAns,
+        employeeId: this.state.employeeId,
+        guestId: this.state.guestId,
+        resultId: this.state.resultId,
+        score: this.state.score,
+        settingsId: this.state.settingsId,
         userAns: this.state.alignment.toString()+',',
-        userQnsIds: this.props.userQnsIdss
+        userQnsIds: this.state.userQnsIdss
       }
       console.log(values)
     Axios.post('http://192.168.200.200:8080/backendapi/guest/'+localStorage.getItem("GuestId")+'/tests/'+this.state.resultId+'/submit', values)
@@ -247,17 +307,17 @@ popOverPkay = () =>
 
     if (isEnd) {
       return (
-        // this.handleClickOpen();
         <div className="result">
           <h3> Thanks for taking the Test, Your test is submitted.</h3>
-          <NavLink to='/guest/ViewTestDetails' style={{"textDecoration": "none"}}><Button variant="contained">Back to DashBoard</Button></NavLink>
+          <NavLink to='/guest/ViewTestDetails' style={{"textDecoration": "none"}}>
+            <Button variant="contained">Back to DashBoard</Button></NavLink>
         </div>
       );
     }
      else {
       return (
         <div className="App">
-          <h3>{this.props.functionCountdown}</h3>
+          <h3>{this.convertSeconds(this.state.counter)}</h3>
           <Table>
             <TableHead>
             <TableRow>
@@ -269,14 +329,12 @@ popOverPkay = () =>
             <TableBody>
               <TableRow>
               <TableCell>{this.state.questionNumber}</TableCell>
-              {/* <TableCell> <img style={{"height": "300px", "width": "300px"}} src= {`data:image/jpeg;base64,${this.state.questions}`} />
-              </TableCell> */}
              <TableCell>
               <PopupState variant="popover" popupId="demo-popup-popover">
                     {popupState => (
                       <div>
                         <img id="myImg" src={`data:image/jpeg;base64,${this.state.questions}`} alt="Test"
-                         style={{"width":"100%","max-width":"300px"}} {...bindTrigger(popupState)}  /> 
+                         style={{"width":"70%","max-width":"250px"}} {...bindTrigger(popupState)}  /> 
                         <Popover
                           {...bindPopover(popupState)}
                           anchorOrigin={{
@@ -300,13 +358,11 @@ popOverPkay = () =>
 
 
               <TableCell> 
-              {/* <ThemeProvider theme={theme}> */}
               <ToggleButtonGroup 
          value={this.state.alignment[this.state.currentQuestion]} key={this.state.currentQuestion}
          exclusive onChange={(e) => this.handleChange(this.state.currentQuestion, e.target.value)} 
          aria-label="text alignment"
          onClick={this.checkAnswer}
-        //  style={theme}
          >
              {this.children}
             </ToggleButtonGroup><br/>
@@ -317,7 +373,6 @@ popOverPkay = () =>
             <p  style={{"float": "left", "paddingRight": "18px"}}>D</p>
             <p  style={{"float": "left", "paddingRight": "18px"}}>E</p>
             </div>
-            {/* </ThemeProvider> */}
          </TableCell>
               </TableRow>
             </TableBody>
@@ -355,6 +410,14 @@ popOverPkay = () =>
           {this.popOverPkay()}
         </DialogActions>
       </Dialog>
+      <Dialog
+            open={this.state.message}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+            >
+            <DialogTitle id="alert-dialog-title">{"Hurry up only 1 minute Left!"}</DialogTitle>
+            <Button onClick={this.handleClose12}>Okay</Button>
+            </Dialog>
         </div>
       );
     }
