@@ -124,6 +124,7 @@ const ResponsiveDrawerEmployee = (props) => {
     if(localStorage.getItem("employeeid") !== null)
     {
       localStorage.setItem("isAuth", true)
+      localStorage.setItem('timeUp',false)
       console.log(localStorage.getItem("employeeid"))
       console.log('True')
     } else {

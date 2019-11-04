@@ -19,6 +19,7 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    outline: 0,
   },
   paper: {
     width: 400,
