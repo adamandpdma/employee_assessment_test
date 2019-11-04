@@ -201,7 +201,7 @@ const ResponsiveDrawerGuest = (props) => {
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
-        <IconButton
+        {/* <IconButton
             color="inherit"
             aria-label="open drawer"
             edge="start"
@@ -209,7 +209,7 @@ const ResponsiveDrawerGuest = (props) => {
             className={classes.menuButton}
           >
             <MenuIcon />
-          </IconButton>
+          </IconButton> */}
    
         <IconButton
             color="inherit"

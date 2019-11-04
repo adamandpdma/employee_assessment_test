@@ -219,7 +219,7 @@ const openTestCheck = () =>
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
-          <IconButton
+          {/* <IconButton
             color="inherit"
             aria-label="open drawer"
             edge="start"
@@ -227,7 +227,7 @@ const openTestCheck = () =>
             className={classes.menuButton}
           >
             <MenuIcon />
-          </IconButton>
+          </IconButton> */}
 
           <Button
         color="inherit"
