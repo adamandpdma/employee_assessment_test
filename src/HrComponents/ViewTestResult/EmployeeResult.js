@@ -61,7 +61,8 @@ export default class EmployeeResult extends Component {
         this.setState(
           {
           score: this.state.employees.map(el => el.score),
-          qnsNo: this.state.employees.map(el => el.userQnsIds)
+          qnsNo: this.state.employees.map(el => el.userQnsIds),
+          passPercentage:this.state.employees.map(el => el.pass_percent)
           }
       ) 
         this.setState(
@@ -70,8 +71,8 @@ export default class EmployeeResult extends Component {
             }
         )
 
-        for(let i=0, j=0; i<this.state.score.length, j<this.state.qnsNo.length; i++, j++){
-          if(ceil((this.state.score[i]/((this.state.qnsNo[j].split(',').length) - 1))*100) >= 50)
+        for(let i=0, j=0,k=0; i<this.state.score.length, j<this.state.qnsNo.length, k<this.state.passPercentage.length; i++, j++,k++){
+          if(ceil((this.state.score[i]/((this.state.qnsNo[j].split(',').length) - 1))*100) >= this.state.passPercentage[k])
           {
             this.setState({
               pass: "true"

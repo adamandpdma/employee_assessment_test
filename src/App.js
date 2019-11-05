@@ -32,6 +32,7 @@ const App = () => {
           <Route path = '/HrLogin' component = {HrLogin} />
           <Route path = '/EmployeeLogin' component = {EmployeeLogin}/>
           <Route path = '/EmployeeRegister' component = {EmployeeRegister}/>
+          
           <Route path = '/GuestLogin' component = {GuestLogin}/>
           <ProtectedRoute path = '/guest' component = {GuestResponsiveDrawer}/>
           <ProtectedRoute path = '/admin' component = {ResponsiveDrawer}/>

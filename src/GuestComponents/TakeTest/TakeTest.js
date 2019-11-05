@@ -259,8 +259,6 @@ children = [
   </ToggleButton>,
   <ToggleButton key={4} value="D">
   </ToggleButton>,
-    <ToggleButton key={5} value="E">
-  </ToggleButton>,
 ];
 
 popOverPkay = () => 
@@ -371,7 +369,6 @@ popOverPkay = () =>
             <p  style={{"float": "left", "paddingRight": "18px"}}>B</p>
             <p  style={{"float": "left", "paddingRight": "18px"}}>C</p>
             <p  style={{"float": "left", "paddingRight": "18px"}}>D</p>
-            <p  style={{"float": "left", "paddingRight": "18px"}}>E</p>
             </div>
          </TableCell>
               </TableRow>
