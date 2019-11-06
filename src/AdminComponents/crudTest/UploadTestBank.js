@@ -260,6 +260,7 @@ class UploadTestBank extends Component
           <option value="Programming"style={{cursor: "pointer"}}>Programming</option>
           <option value="Agile" style={{cursor: "pointer"}}>Agile</option>
           <option value="DevOps"style={{cursor: "pointer"}}>DevOps</option>
+          <option value="Aptitude"style={{cursor: "pointer"}}>Aptitude</option>
         </Select>)}
         {this.state.domain === "Non-Technical" && (
         <Select

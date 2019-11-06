@@ -23,6 +23,7 @@ import TestDetails from './TestDetails';
 import TakeTest from './TakeTest';
 import Agile from './Agile';
 import ProgrammingAndFramework from './ProgrammingAndFramework';
+import Aptitude from './Aptitude'
 import DevOps from './DevOps';
 import EmployeeReviewTest from '../ReviewTest/EmployeeReviewTest'
 import ReviewAllTests from '../ReviewTest/ReviewAllTests'
@@ -199,6 +200,11 @@ const ResponsiveDrawerEmployee = (props) => {
                style={{color: 'white', textDecoration: 'none'}}
                activeStyle={{color: 'white', textDecoration: 'none'}}><ListItemText primary="DevOps"/></NavLink>
           </ListItem>
+          <ListItem button className={classes.nested}>
+            <NavLink to='/employee/Aptitude'
+               style={{color: 'white', textDecoration: 'none'}}
+               activeStyle={{color: 'white', textDecoration: 'none'}}><ListItemText primary="Aptitude"/></NavLink>
+          </ListItem>
         </List>
       </Collapse>
       <ListItem button>
@@ -293,6 +299,7 @@ const ResponsiveDrawerEmployee = (props) => {
           <ProtectedRoute path='/employee/DashBoardEmployee' component={DashBoardEmployee}/>
           <ProtectedRoute path='/employee/Agile' component={Agile}/>
           <ProtectedRoute path='/employee/ProgrammingAndFramework' component={ProgrammingAndFramework}/>
+          <ProtectedRoute path='/employee/Aptitude' component={Aptitude}/>
           <ProtectedRoute path='/employee/DevOps' component={DevOps}/>
           <ProtectedRoute path='/employee/takeTest' component={TakeTest}/>
           <ProtectedRoute path='/employee/Test' component={TestDetails}/>
