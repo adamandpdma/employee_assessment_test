@@ -43,8 +43,6 @@ class Technical extends Component
                     <Grid item xs={12} style={style}>
            <NavLink to={{pathname: '/admin/uploadTestBank', 
            domain: 'Technical'}} style={buttonStyle}><Button variant="contained" style={buttonStyle}>Upload Test Bank</Button></NavLink> 
-           <NavLink to={{pathname: '/admin/viewTestBank', 
-           domain: 'Technical'}} style={buttonStyle}><Button variant="contained" style={buttonStyle}>View Test Bank</Button></NavLink>
              <NavLink to={{pathname: '/admin/createTest', 
            domain: 'Technical', 
            poolId: this.props.location.poolId,
@@ -57,6 +55,8 @@ class Technical extends Component
                Create Test
                </Button>
              </NavLink>
+             <NavLink to={{pathname: '/admin/viewTestBank', 
+           domain: 'Technical'}} style={buttonStyle}><Button variant="contained" style={buttonStyle}>View Test Bank</Button></NavLink>
            <NavLink to={{pathname: '/admin/viewTest', 
            domain: 'Technical'}} style={buttonStyle}><Button variant="contained" style={buttonStyle}>View Test</Button></NavLink>
           </Grid>

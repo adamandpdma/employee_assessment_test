@@ -76,7 +76,7 @@ class CreateTest extends Component
           testBankTypeOfTests: [],
           dataCategories: [],
           dataTypeOfTests: [],
-        //   poolId: [],
+          poolId: [],
           selectCategory: false,
           selectTypeoftest: false,
           isHidden: false,
@@ -85,7 +85,6 @@ class CreateTest extends Component
           numberofquestions: this.props.location.numberofquestions,
           disabled: true,
           disabledFalse: this.props.location.disabled,
-          openTwo: false
 
      }
  }
@@ -368,23 +367,30 @@ validate = () =>
 
 
   handleClickOpen = () => {
-      if(this.state.datavalue === true)
-      {
-        this.setState(
-            {
-                open: true
-            }
-        )
-      }
-      else{
-        this.setState(
-            {
-                openTwo: true
-            }
-        )
-      }
-   
-  }
+    if(this.state.datavalue === true)
+    {
+      this.setState(
+          {
+              open: true
+          }
+      )
+    }
+    else{
+      this.setState(
+          {
+              openTwo: true
+          }
+      )
+    }
+ 
+}
+handleCloseTwo = () => {
+    this.setState(
+        {
+            openTwo: false
+        })
+    }
+        
 
   handleClose = () => {
    this.setState(
@@ -403,13 +409,6 @@ validate = () =>
         }
     )
    )
-  }
-
-  handleCloseTwo = () =>{
-    this.setState(
-        {
-            openTwo: false
-        } )
   }
 
     render()
@@ -516,7 +515,7 @@ validate = () =>
     <Button variant="contained" type='submit' style={{color: "black"}} disabled={this.state.disabledFalse}>
     CREATE TEST</Button>
                           )}
-                          {this.state.datavalue=== true && (
+      {this.state.datavalue === true && (
   <Dialog
   open={true}
   onClose={this.handleClose}
@@ -529,7 +528,7 @@ validate = () =>
     {this.popOverPkay()}
   </DialogActions>
 </Dialog>
-                          )}
+      )}   
 
 {this.state.datavalue === false && (
 <Dialog

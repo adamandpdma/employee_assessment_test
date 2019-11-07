@@ -284,7 +284,8 @@ handleChange = (index, newAlignment) => {
           return(
             <Grid>
          
-          <NavLink to={{pathname: '/admin/Technical', 
+          <NavLink to={{pathname: '/admin/createTest', 
+           domain: 'Technical', 
           poolId: this.state.poolId,
           numberofquestions: this.state.numberofquestions,
           category: this.state.category,
@@ -300,7 +301,8 @@ handleChange = (index, newAlignment) => {
       else{
             return(
                 <Grid>
-             <NavLink to={{pathname: '/admin/NonTechnical', 
+             <NavLink to={{pathname: '/admin/createTestN', 
+             domain: 'Non-Technical', 
              poolId: this.state.poolId, 
              numberofquestions: this.state.numberofquestions,
              category: this.state.category,

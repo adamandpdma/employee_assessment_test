@@ -24,6 +24,7 @@ import Dashboard from './Dashboard';
 import EmployeesList from '../EmployeesDatabase/EmployeesList';
 import EditEmployeesData from '../EmployeesDatabase/EditEmployeesData'
 import CreateTest from './CreateTest';
+import CreateTestN from './CreateTestN';
 import UploadTestBank from './UploadTestBank';
 import EditTest from './EditTest';
 import ViewTest from './ViewTest';
@@ -299,6 +300,7 @@ const ResponsiveDrawer = (props) => {
         <Grid>
           <Route path='/admin/Technical' component={Technical}></Route>
           <Route path='/admin/createTest' component={CreateTest}></Route>
+          <Route path='/admin/createTestN' component={CreateTestN}></Route>
           <Route path='/admin/uploadTestBank' component={UploadTestBank}></Route>
           <Route path='/admin/viewTest' component={ViewTest}></Route>
           <Route path='/admin/editTest/:id' component={EditTest}></Route>
