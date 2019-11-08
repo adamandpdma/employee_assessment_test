@@ -59,6 +59,8 @@ class EditTest extends Component
           testSubtype:'',
           noOfQns:0,
           numberofquestionsError: '',
+          pass_percent: 0,
+          pass_percentError: '',
           timeLimit:0,
           timelimitError: '',
           testBankCategories:[],
@@ -83,6 +85,7 @@ class EditTest extends Component
                   testType: testByID.data.testType,
                   testSubtype: testByID.data.testSubtype,
                   noOfQns: testByID.data.noOfQns,
+                  pass_percent: testByID.data.pass_percent,
                   timeLimit: testByID.data.timeLimit,
                   previousNumberOfquestions: testByID.data.noOfQns,
                   poolId: testByID.data.poolId,
@@ -102,6 +105,11 @@ class EditTest extends Component
                         el.poolCat === this.state.testCat )
                       }
                   )
+                  this.setState(
+                      {
+                          value: this.state.dataValues[0].noOfQnsInPool
+                      }
+                  )
               })
         })
  }
@@ -115,16 +123,30 @@ class EditTest extends Component
         isError = true;
         errors.numberofquestionsError= "Enter a number";
     }
-    if(this.state.noOfQns > this.state.dataValues[0].noOfQnsInPool)
+    if(this.state.pass_percent === '' || 0){
+        isError = true;
+        errors.pass_percentError= "Enter the percentage";
+    }
+    // if(this.state.pass_percent.match("[0-9]") && !(this.state.pass_percent > 100))
+    // {
+    //     errors.pass_percentError= " ";
+    // }
+    if(this.state.pass_percent > 100){
+        isError = true;
+        errors.pass_percentError= "Percentage cannot be greater than 100";
+    }
+    if(this.state.pass_percent === 0){
+        isError = true;
+        errors.pass_percentError= "Percentage cannot be 0";
+    }
+  
+    if(this.state.noOfQns > this.state.value)
     {
         isError = true;
-        errors.numberofquestionsError= "Number cannot exceed" + " "+ this.state.dataValues[0].noOfQnsInPool;
+        errors.numberofquestionsError= "Number cannot exceed" + " "+ this.state.value;
 
     }
-    if(this.state.noOfQns< this.state.previousNumberOfquestions){
-        isError = true;
-        errors.numberofquestionsError= "Enter a number >" + this.state.previousNumberOfquestions;
-    }
+  
     if(this.state.timeLimit === ''){
         isError = true;
         errors.timelimitError= "Enter a number";
@@ -151,6 +173,7 @@ class EditTest extends Component
         const values = {
             isHidden: this.state.isHidden,
             noOfQns: this.state.noOfQns,
+            pass_percent: this.state.pass_percent,
             poolId: this.state.poolId,
             settingsId: this.state.id,
             testCat: this.state.testCat,
@@ -183,6 +206,13 @@ class EditTest extends Component
               timeLimit: event.target.value
           }
       )
+  }
+  pass_percentHandler = (event) =>{
+this.setState(
+    {
+        pass_percent: event.target.value
+    }
+)
   }
   navigateBack = () => 
   {
@@ -256,6 +286,7 @@ class EditTest extends Component
         testSubtype: '',
         noOfQns: '',
         timeLimit: '',
+        pass_percent: 0,
         open: false
         }
     )
@@ -320,16 +351,17 @@ class EditTest extends Component
                 </FormControl><br/>
 
                 <InputLabel style={InputLabelStyle}>NO OF QUESTIONS</InputLabel>
-                <FormControl>
+                      <FormControl>
                     <TextField
                      style={fieldStyle}
                     variant="outlined"
                 type="number"
                 onChange={this.noOfQuestionsOnChangeHandler}
-                value={this.state.noOfQns
-                }></TextField>
-                 <div style={errorColor}>{this.state.numberofquestionsError}</div>
-                 </FormControl><br/><br/>
+                value={this.state.noOfQns}
+                >
+                </TextField>
+                  <div style={errorColor}>{this.state.numberofquestionsError}</div>
+                  </FormControl>   
                
                 <InputLabel style={InputLabelStyle}>TIME LIMIT</InputLabel>
                <FormControl>
@@ -340,7 +372,18 @@ class EditTest extends Component
                 onChange={this.timeLimitOnChangeHandler}
                 value={this.state.timeLimit}></TextField>
                  <div style={errorColor}>{this.state.timelimitError}</div>
-               </FormControl><br/><br/>
+               </FormControl>
+               <InputLabel style={InputLabelStyle}>PASS PERCENTAGE</InputLabel>
+               <FormControl>
+                   <TextField
+                    style={fieldStyle}
+                variant="outlined"
+                type="number"
+                onChange={this.pass_percentHandler}
+                value={this.state.pass_percent}></TextField>
+                 <div style={errorColor}>{this.state.pass_percentError}</div>
+               </FormControl>
+               <br/><br/>
                <br/>
                <div>
       <Button variant="contained" type='submit' style={buttonStyle}>SAVE CHANGES</Button>

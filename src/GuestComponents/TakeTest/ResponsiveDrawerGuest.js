@@ -20,7 +20,6 @@ import {Route} from 'react-router-dom';
 import {NavLink} from 'react-router-dom';
 import DashBoardGuest from './DashBoardGuest';
 import ViewTestDetails from './ViewTestDetails'
-import Countdown from './Countdown';
 import GuestRegister from '../Register/GuestRegister'
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import { Button } from '@material-ui/core';
@@ -28,6 +27,7 @@ import auth from "../../auth"
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import {ProtectedRoute} from "../../Protected.Route";
 import { useEffect, useState } from 'react';
+import TakeTest from './TakeTest';
 
 
 const drawerWidth = 300;
@@ -195,7 +195,7 @@ const openTestCheck = () =>
         <List component="div" disablePadding>
     <ListItem button className={classes.nested} onClick={navigation}>
       {localStorage.getItem("fav")  === "true"  ?
-         <NavLink to='./guest/ViewTestDetails' style={listStyle} 
+         <NavLink to='/guest/ViewTestDetails' style={listStyle} 
          style={{color: 'white', textDecoration: 'none'}}
          activeStyle={{color: 'white', textDecoration: 'none'}}
       >
@@ -219,7 +219,7 @@ const openTestCheck = () =>
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
-          <IconButton
+          {/* <IconButton
             color="inherit"
             aria-label="open drawer"
             edge="start"
@@ -227,7 +227,7 @@ const openTestCheck = () =>
             className={classes.menuButton}
           >
             <MenuIcon />
-          </IconButton>
+          </IconButton> */}
 
           <Button
         color="inherit"
@@ -280,7 +280,7 @@ const openTestCheck = () =>
         <Grid>
           <ProtectedRoute path='/guest/DashBoardGuest' component={DashBoardGuest}/>
           <ProtectedRoute path='/guest/ViewTestDetails' component={ViewTestDetails}/>
-          <ProtectedRoute path='/guest/takeTest' component={Countdown}/>
+          <ProtectedRoute path='/guest/takeTest' component={TakeTest}/>
           <ProtectedRoute path='/guest/register' component={GuestRegister}/>
         </Grid>
       </main>

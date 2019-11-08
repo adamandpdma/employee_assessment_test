@@ -18,15 +18,16 @@ const styles = theme => ({
     typographyOne:{
             display: "inline-block",
             margin: theme.spacing(2.5),        
-            marginRight: theme.spacing(4),
+            marginRight: theme.spacing(11),
           },
           button:{
             margin: theme.spacing(2),        
-            marginLeft: theme.spacing(12),
+            marginLeft: theme.spacing(15),
             marginTop: theme.spacing(5),
           },
-              textfield:{
-      height:40
+      textfield:{
+      height:40,
+      width: "50%"      
     }
 
   });
@@ -76,7 +77,7 @@ const styles = theme => ({
         error={touched.name && Boolean(errors.name)}
         value={name}
         onChange={change.bind(null, "name")}
-        variant="outlined"
+        // variant="outlined"
         margin="normal"
       />
       </div>  

@@ -14,6 +14,7 @@ export default class EmployeeResult extends Component {
 
     this.state = {
         employeeId: this.props.location.employeeId,
+        name: this.props.location.name,
         employees: [],
         score: [],
         qnsNo: [],
@@ -60,7 +61,8 @@ export default class EmployeeResult extends Component {
         this.setState(
           {
           score: this.state.employees.map(el => el.score),
-          qnsNo: this.state.employees.map(el => el.userQnsIds)
+          qnsNo: this.state.employees.map(el => el.userQnsIds),
+          passPercentage:this.state.employees.map(el => el.pass_percent)
           }
       ) 
         this.setState(
@@ -69,8 +71,8 @@ export default class EmployeeResult extends Component {
             }
         )
 
-        for(let i=0, j=0; i<this.state.score.length, j<this.state.qnsNo.length; i++, j++){
-          if(ceil((this.state.score[i]/((this.state.qnsNo[j].split(',').length) - 1))*100) >= 50)
+        for(let i=0, j=0,k=0; i<this.state.score.length, j<this.state.qnsNo.length, k<this.state.passPercentage.length; i++, j++,k++){
+          if(ceil((this.state.score[i]/((this.state.qnsNo[j].split(',').length) - 1))*100) >= this.state.passPercentage[k])
           {
             this.setState({
               pass: "true"
@@ -177,6 +179,12 @@ export default class EmployeeResult extends Component {
         }
       },
       {
+        name: "Pass Percentage",
+        options: {
+          filter: false,
+        }
+      },
+      {
         name: "Pass/Fail",
         options: {
           filter: true,
@@ -211,16 +219,21 @@ export default class EmployeeResult extends Component {
 
     return (
      <MuiThemeProvider theme={this.getMuiTheme()}>
+      <h3>Employee Name: {this.state.name} </h3>
+      <h3>Employee ID: {this.state.employeeId} </h3>
+    
     <MUIDataTable 
   
         title={"Employee Test Result"}
-        data={this.state.employees.map((currentemp,i) => {
+        
+        data={this.state.employees.reverse().map((currentemp,i) => {
             return [
               currentemp.testType,
               currentemp.testSubtype,
               currentemp.score+' / '+((currentemp.userQnsIds.split(',').length) - 1),  
               this.timeCalculation(currentemp.completionTime),
               this.Percentage(currentemp.score, currentemp.userQnsIds),
+              currentemp.pass_percent + " " +"%",
               this.state.booleanResults[i]      
             ]})}
 

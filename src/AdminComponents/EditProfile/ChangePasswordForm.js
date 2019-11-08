@@ -37,6 +37,7 @@ const styles = theme => ({
       margin: theme.spacing(2),        
       marginRight: theme.spacing(2),
 },
+
 button:{
   margin: theme.spacing(2), 
   marginLeft: theme.spacing(15),       
@@ -47,7 +48,7 @@ button:{
 textfield:{
       height:40,
       marginBottom: theme.spacing(4),       
-
+      
     }
 
   });
@@ -109,7 +110,7 @@ textfield:{
         className= {classes.textfield}
         helperText={touched.Password ? errors.Password : ""}
         error={touched.Password && Boolean(errors.Password)}
-        variant="outlined"
+        // variant="outlined"
         margin="normal"
         type="Password"
         value={Password}
@@ -131,7 +132,7 @@ textfield:{
         className= {classes.textfield}
         helperText={touched.newPassword ? errors.newPassword : ""}
         error={touched.newPassword && Boolean(errors.newPassword)}
-        variant="outlined"
+        // variant="outlined"
         margin="normal"
         //type="Password"
         type={showPassword ? "text" : "password"}
@@ -169,7 +170,7 @@ textfield:{
         className= {classes.textfield}
         helperText={touched.retypePassword ? errors.retypePassword : ""}
         error={touched.retypePassword && Boolean(errors.retypePassword)}
-        variant="outlined"
+        // variant="outlined"
         margin="normal"
         type="Password"
         value={retypePassword}

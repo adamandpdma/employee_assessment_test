@@ -31,7 +31,10 @@ export default class ViewTestBank extends Component {
     this.state = {
         data: [],
         testCat: this.props.location.domain,
-        open: false
+        open: false,
+        openConfirmation: false,
+        settingsIdData: 0,
+        testBank: ''
       
   }
 }
@@ -78,35 +81,55 @@ export default class ViewTestBank extends Component {
     }
   }
   handleclickopen = () => {
-      this.setState(
-          {
-              open: true,
-           
-          }
-      )
-  }
-  handleClose = () => {
-      this.setState(
-          {
-              open: false,
-          }
-      )
-  }
-  deleteTest = (id) => 
+    this.setState(
+        {
+            openConfirmation: true
+        }
+    )
+}
+handleCloseConfirmation = () => {
+  this.setState(
+      {
+          openConfirmation: false
+      }
+  )
+}
+handleClose = () => {
+    this.setState(
+        {
+            open: false
+        }
+    )
+}
+  deleteTest = (id,subtype) => 
   {
-      console.log(id)
-   axios.put('http://192.168.200.200:8080/backendapi/admin/questionpool/set-hidden/'+id)
-   .then((res) => console.log(res.data)) 
-   .then(this.handleclickopen())
-
-   this.setState(
-       {
-        data: this.state.data.filter(el => el.poolId !== id),
-        hidden: true
-       }
-   )
-
+    this.setState(
+      {
+        settingsIdData: id,
+        open: true,
+        testBank: subtype
+      }
+    )
   }
+  deleteData = () => {
+    this.setState(
+      {
+        open: false
+      }
+    )
+
+    axios.put('http://192.168.200.200:8080/backendapi/admin/questionpool/set-hidden/'+this.state.settingsIdData)
+    .then((res) => console.log(res.data)) 
+    .then(this.handleclickopen())
+ 
+    this.setState(
+        {
+         data: this.state.data.filter(el => el.poolId !== this.state.settingsIdData),
+         hidden: true
+        }
+    )
+  }
+
         navigateBack = () => 
       {
           if(this.state.testCat === "Technical")
@@ -187,14 +210,14 @@ export default class ViewTestBank extends Component {
              <MUIDataTable 
 
 title={"Question Pool Details"}
-data={this.state.data.map(currentemp => {
+data={this.state.data.concat().reverse().map(currentemp => {
     return [
        currentemp.poolCat,
        currentemp.poolType,
        currentemp.poolSubtype,
        currentemp.noOfQnsInPool,
        <TableCell> 
-       <Button variant="contained" href="#" onClick = {() => this.deleteTest(currentemp.poolId)} style={style}>
+       <Button variant="contained" href="#" onClick = {() => this.deleteTest(currentemp.poolId,currentemp.poolSubtype)} style={style}>
         DELETE</Button></TableCell>
 
     ]})}
@@ -209,15 +232,32 @@ onClose={this.handleClose}
 aria-labelledby="alert-dialog-title"
 aria-describedby="alert-dialog-description"
 >
-<DialogTitle id="alert-dialog-title">{"You have successfully deleted the question Bank !!"}</DialogTitle>
+<DialogTitle id="alert-dialog-title">{"Are you sure you want to delete "+ " " +this.state.testBank + " " +"? "}</DialogTitle>
 
 <DialogActions>
- <Button onClick ={this.handleClose}>
-     OKAY
- </Button>
+<Button onClick ={this.handleClose}>
+CANCEL
+</Button>
+<Button onClick ={this.deleteData}>
+CONFIRM
+</Button>
 </DialogActions>
 </Dialog>
 
+<Dialog
+open={this.state.openConfirmation}
+onClose={this.handleClose}
+aria-labelledby="alert-dialog-title"
+aria-describedby="alert-dialog-description"
+>
+<DialogTitle id="alert-dialog-title">{"Successfully Deleted the Question Bank !"}</DialogTitle>
+
+<DialogActions>
+<Button onClick ={this.handleCloseConfirmation}>
+OKAY
+</Button>
+</DialogActions>
+</Dialog>
         </div>
 
     )

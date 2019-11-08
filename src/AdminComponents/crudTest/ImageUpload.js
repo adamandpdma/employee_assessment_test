@@ -25,7 +25,9 @@ class ImageUpload extends React.Component {
         backgroundColor: "",
         open: false,
         openSuccess: false,
-        openChooseFile: false
+        openChooseFile: false,
+        uploadCount: 0,
+        alreadyUpload: false
             }
     }
     _handleSubmit(e) 
@@ -73,7 +75,8 @@ class ImageUpload extends React.Component {
     handleCloseSuccess = () => {
       this.setState(
         {
-          openSuccess: false
+          openSuccess: false,
+          alreadyUpload: false
         }
       )
     }
@@ -98,13 +101,21 @@ class ImageUpload extends React.Component {
          )
        }  
        else if(KB <= 64)
-       {
+       {if (this.state.uploadCount ===0){
         this.setState(
           {
-           openSuccess: true
+           openSuccess: true,
+           uploadCount: +1
           }
         )
         event.target.style.color= "grey";
+       }
+        else {
+          this.setState({
+            alreadyUpload: true
+          })
+        }
+        
        }
        else{
         this.setState(
@@ -172,6 +183,32 @@ class ImageUpload extends React.Component {
         <DialogTitle id="alert-dialog-title">{"Image uploaded successfully!"}</DialogTitle>
         <DialogActions>
             <Button onClick={this.handleCloseSuccess} color="primary" autoFocus>
+         OKAY
+        </Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog
+        open={this.state.alreadyUpload}
+        onClose={this.handleCloseSuccess}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Image already uploaded"}</DialogTitle>
+        <DialogActions>
+            <Button onClick={this.handleCloseSuccess} color="primary" autoFocus>
+         OKAY
+        </Button>
+        </DialogActions>
+      </Dialog>
+      <Dialog
+        open={this.state.openChooseFile}
+        onClose={this.handleCloseChooseFile}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Choose a file to upload an image!"}</DialogTitle>
+        <DialogActions>
+            <Button onClick={this.handleCloseChooseFile} color="primary" autoFocus>
          OKAY
         </Button>
         </DialogActions>

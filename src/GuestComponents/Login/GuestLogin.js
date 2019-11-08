@@ -5,7 +5,17 @@ import * as Yup from "yup";
 import axios from 'axios';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import auth from '../../auth'
+import Button from "@material-ui/core/Button";
+import PropTypes from 'prop-types';
+import { withStyles } from "@material-ui/core/styles";
+
+const styles = theme => ({ 
+  button: {
+    background: '#03f0fc',
+    color: 'white',
+  },
+ 
+})
 
 
 const validationSchema = Yup.object({
@@ -70,6 +80,7 @@ handleClose = () => {
 
 
   render() {
+    const { classes } = this.props;
     const { employeeid } = this.state;
     const { Password } = this.state;
   
@@ -88,16 +99,26 @@ handleClose = () => {
             />
             <Dialog
             open={this.state.open}
-            onClose={this.handleClose}
             aria-labelledby="alert-dialog-title"
-            aria-describedby="alert-dialog-description"
             >
             <DialogTitle id="alert-dialog-title">{"Invalid Credentials, Please try again"}</DialogTitle>
-            </Dialog>
+            <Button
+          className= {classes.button}
+          margin="normal"
+          fullWidth
+          variant="contained"
+      onClick={this.handleClose}>
+        Okay
+      </Button>
 
+            </Dialog>
       </React.Fragment>
-    );
+    ); 
   }
 }
 
-export default InputForm;
+InputForm.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(InputForm);

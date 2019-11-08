@@ -1,6 +1,5 @@
 import React from "react";
 import Axios from 'axios';
-import Countdown from './Countdown'
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -69,15 +68,20 @@ class TakeTest extends React.Component {
     userAns: '',
     correctAnswer: '',
     qnsId: [],
-    resultId: this.props.resultId,
-    employeeId: 0,
-    guestId: 0,
-    score: 0,
-    settingsId: 0,
-    userQnsIds: '',
-    correctAns: '',
     disabled: true,
     alignment: '',
+    message: false,
+
+    counter: this.props.location.timeData * 60,
+    testSubtypeData: this.props.location.testSubtypeData,
+    timeData: this.props.location.timeData,
+    resultId: this.props.location.resultId,
+    correctAns: this.props.location.correctAns,
+    employeeId: this.props.location.employeeId,
+    guestId: this.props.location.guestId,
+    score: this.props.location.score,
+    settingsId: this.props.location.settingsId,
+    userQnsIds: this.props.location.userQnsIds,
   };
 
 
@@ -103,9 +107,73 @@ class TakeTest extends React.Component {
       //window.location='/employee/DashBoardEmployee'
     }); 
   };
+
+  TimerFunction = () => { 
+    console.log(this.state.testSubtypeData)
+    console.log(this.state.counter)
+    this.interval = setInterval(() => {
+       this.setState(
+           {
+               counter: this.state.counter-1,
+           }
+       )
+       if(this.state.counter === 60)
+       {
+        this.setState({
+            message:true
+        })
+       }
+       if(this.state.counter === -1)
+       {
+           alert("Time out")
+           this.finishHandler()
+          //  window.location='./DashBoardEmployee'
+       }
+    }, 1000);
+  }
+
+  convertSeconds = (s) => 
+  {  
+      let min = floor(s/60);
+      let sec = s % 60
+      if(min < 10)
+      {
+          min = '0' + min
+      }
+      if(sec < 10)
+      {
+          sec = '0' + sec
+      }
+
+      return(
+          <div>
+           <table>
+              <tbody>							
+              <tr>
+              <th>       
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+          <path d="M15 1H9v2h6V1zm-4 13h2V8h-2v6zm8.03-6.61l1.42-1.42c-.43-.51-.9-.99-1.41-1.41l-1.42 1.42C16.07 4.74 14.12 4 12 4c-4.97 0-9 4.03-9 9s4.02 9 9 9 9-4.03 9-9c0-2.12-.74-4.07-1.97-5.61zM12 20c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>	</th>
+              <th> {min} : </th>
+              <th> {sec} </th>
+             
+              </tr>
+              <tr>
+              </tr> 
+              </tbody>
+              </table>
+          </div>
+
+      )
+  }
+
+  handleClose12 = () => {
+    this.setState({message:false})
+
+  }
   
   componentDidMount() {
     this.loadQuizData();
+    this.TimerFunction();
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -142,15 +210,15 @@ nextQuestionHandler = () => {
 finishHandler = () => {
   
  const values =  {
-        completionTime: ((this.props.functionCountdown._owner.memoizedState.timeData * 60) - (this.props.functionCountdown._owner.memoizedState.counter)).toString(),
-        correctAns: this.props.correctAns,
-        employeeId: this.props.employeeId,
-        guestId: this.props.guestId,
-        resultId: this.props.resultId,
-        score: this.props.score,
-        settingsId: this.props.settingsId,
+        completionTime: ((this.state.timeData * 60) - (this.state.counter)).toString(),
+        correctAns: this.state.correctAns,
+        employeeId: this.state.employeeId,
+        guestId: this.state.guestId,
+        resultId: this.state.resultId,
+        score: this.state.score,
+        settingsId: this.state.settingsId,
         userAns: this.state.alignment.toString()+',',
-        userQnsIds: this.props.userQnsIds
+        userQnsIds: this.state.userQnsIds
       }
       console.log(values)
   Axios.post('http://192.168.200.200:8080/backendapi/employee/'+localStorage.getItem('employeeid')+'/tests/'+this.state.resultId+'/submit', values)
@@ -185,8 +253,6 @@ children = [
   <ToggleButton  key={3} value="C">
   </ToggleButton>,
   <ToggleButton key={4} value="D">
-  </ToggleButton>,
-    <ToggleButton key={5} value="E">
   </ToggleButton>,
 ];
 
@@ -236,13 +302,15 @@ popOverPkay = () =>
       return (
         <div className="result">
           <h3> Thanks for taking the Test, Your test is submitted.</h3>
+          <NavLink to='/employee/DashBoardEmployee' style={{"textDecoration": "none"}}>
+            <Button variant="contained">Back to DashBoard</Button></NavLink>
         </div>
       );
     }
      else {
       return (
         <div className="App">
-          <h3>{this.props.functionCountdown}</h3>
+          <h3>{this.convertSeconds(this.state.counter)}</h3>
           <Table>
             <TableHead>
             <TableRow>
@@ -254,8 +322,6 @@ popOverPkay = () =>
             <TableBody>
               <TableRow>
               <TableCell>{this.state.questionNumber}</TableCell>
-              {/* <TableCell> <img style={{"height": "300px", "width": "300px"}} src= {`data:image/jpeg;base64,${this.state.questions}`} />
-              </TableCell> */}
               <TableCell>
               <PopupState variant="popover" popupId="demo-popup-popover">
                     {popupState => (
@@ -289,7 +355,6 @@ popOverPkay = () =>
          exclusive onChange={(e) => this.handleChange(this.state.currentQuestion, e.target.value)} 
          aria-label="text alignment"
          onClick={this.checkAnswer}
-        //  style={theme}
          >
              {this.children}
             </ToggleButtonGroup><br/>
@@ -298,9 +363,7 @@ popOverPkay = () =>
             <p  style={{"float": "left", "paddingRight": "18px"}}>B</p>
             <p  style={{"float": "left", "paddingRight": "18px"}}>C</p>
             <p  style={{"float": "left", "paddingRight": "18px"}}>D</p>
-            <p  style={{"float": "left", "paddingRight": "18px"}}>E</p>
             </div>
-            {/* </ThemeProvider> */}
          </TableCell>
               </TableRow>
             </TableBody>
@@ -338,6 +401,14 @@ popOverPkay = () =>
           {this.popOverPkay()}
         </DialogActions>
       </Dialog>
+      <Dialog
+            open={this.state.message}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+            >
+            <DialogTitle id="alert-dialog-title">{"1 minute remaining."}</DialogTitle>
+            <Button onClick={this.handleClose12}>Okay</Button>
+            </Dialog>
         </div>
       );
     }

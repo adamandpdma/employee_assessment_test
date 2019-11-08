@@ -20,11 +20,11 @@ import {Route} from 'react-router-dom';
 import {NavLink} from 'react-router-dom';
 import DashBoardEmployee from './DashBoardEmployee';
 import TestDetails from './TestDetails';
-// import TakeTest from '../TakeTest';
+import TakeTest from './TakeTest';
 import Agile from './Agile';
 import ProgrammingAndFramework from './ProgrammingAndFramework';
+import Aptitude from './Aptitude'
 import DevOps from './DevOps';
-import Countdown from './Countdown';
 import EmployeeReviewTest from '../ReviewTest/EmployeeReviewTest'
 import ReviewAllTests from '../ReviewTest/ReviewAllTests'
 import Profile from '../EditProfile/EmployeeProfile'
@@ -33,6 +33,7 @@ import auth from "../../auth"
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import EmployeeEditProfile from '../EditProfile/EmployeeEditProfile';
 import {ProtectedRoute} from "../../Protected.Route";
+import ReviewError from "../ReviewTest/ReviewError"
 
 
 const drawerWidth = 300;
@@ -124,6 +125,7 @@ const ResponsiveDrawerEmployee = (props) => {
     if(localStorage.getItem("employeeid") !== null)
     {
       localStorage.setItem("isAuth", true)
+      localStorage.setItem('timeUp',false)
       console.log(localStorage.getItem("employeeid"))
       console.log('True')
     } else {
@@ -198,6 +200,11 @@ const ResponsiveDrawerEmployee = (props) => {
                style={{color: 'white', textDecoration: 'none'}}
                activeStyle={{color: 'white', textDecoration: 'none'}}><ListItemText primary="DevOps"/></NavLink>
           </ListItem>
+          <ListItem button className={classes.nested}>
+            <NavLink to='/employee/Aptitude'
+               style={{color: 'white', textDecoration: 'none'}}
+               activeStyle={{color: 'white', textDecoration: 'none'}}><ListItemText primary="Aptitude"/></NavLink>
+          </ListItem>
         </List>
       </Collapse>
       <ListItem button>
@@ -219,6 +226,15 @@ const ResponsiveDrawerEmployee = (props) => {
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
+        {/* <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+            className={classes.menuButton}
+          >
+            <MenuIcon />
+          </IconButton> */}
    
         <IconButton
             color="inherit"
@@ -283,12 +299,14 @@ const ResponsiveDrawerEmployee = (props) => {
           <ProtectedRoute path='/employee/DashBoardEmployee' component={DashBoardEmployee}/>
           <ProtectedRoute path='/employee/Agile' component={Agile}/>
           <ProtectedRoute path='/employee/ProgrammingAndFramework' component={ProgrammingAndFramework}/>
+          <ProtectedRoute path='/employee/Aptitude' component={Aptitude}/>
           <ProtectedRoute path='/employee/DevOps' component={DevOps}/>
-          <ProtectedRoute path='/employee/takeTest' component={Countdown}/>
+          <ProtectedRoute path='/employee/takeTest' component={TakeTest}/>
           <ProtectedRoute path='/employee/Test' component={TestDetails}/>
           <ProtectedRoute path='/employee/review' component={EmployeeReviewTest}/>
           <ProtectedRoute path='/employee/reviewAll' component={ReviewAllTests}/>
           <ProtectedRoute path='/employee/editProfile' component={EmployeeEditProfile}/>
+          <ProtectedRoute path='/employee/reviewError' component={ReviewError}/>
    
         </Grid>
       </main>

@@ -14,11 +14,12 @@ const alphanumeric = /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((
 
 const validationSchema = Yup.object({
   Password: Yup.string("")
+  .matches(alphanumeric, "Password must have Capital letter, Number and special Character. Eg.Password1!")
     .min(6, "Password must contain at least 6 characters")
     .required("Enter your password"),
   newPassword: Yup.string("")
-    .matches(alphanumeric, "Password must be alphanumeric Eg.Password1!")
-    .min(6,"Password must contain at least 6 characters")
+  .matches(alphanumeric, "Password must have Capital letter, Number and special Character. Eg.Password1!")
+  .min(6,"Password must contain at least 6 characters")
     .max(12,"Password cannot have more then 12 characters")
     .notOneOf([Yup.ref("Password")],"Cannot be same as Current Password")
     .required("Enter your new password"),
