@@ -97,7 +97,7 @@ class CreateTest extends Component
      console.log(this.state.poolId + "POOL ID")
     if(this.state.testCat === "Non-Technical")
     {
-        axios.get("http://192.168.200.200:8080/backendapi/admin/questionpool")
+        axios.get("http://192.168.200.200:8080/backendapitest/admin/questionpool")
         .then(res => { 
                 this.setState(
                     {
@@ -128,7 +128,7 @@ class CreateTest extends Component
     else
     {
 
-        axios.get("http://192.168.200.200:8080/backendapi/admin/questionpool")
+        axios.get("http://192.168.200.200:8080/backendapitest/admin/questionpool")
         .then(res => { 
                 this.setState(
                     {
@@ -251,7 +251,7 @@ validate = () =>
     }
     console.log(values);
 
-    axios.post("http://192.168.200.200:8080/backendapi/admin/test-detail/create", values)
+    axios.post("http://192.168.200.200:8080/backendapitest/admin/test-detail/create", values)
     .then((res) => this.setState(
         {
             datavalue: res.data

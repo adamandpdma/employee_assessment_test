@@ -56,7 +56,7 @@ export default class TestDetails extends Component {
   componentDidMount() 
   {
   console.log(this.state.category)
-  axios.get('http://192.168.200.200:8080/backendapi/admin/test-detail/type/'+ this.state.category)
+  axios.get('http://192.168.200.200:8080/backendapitest/admin/test-detail/type/'+ this.state.category)
         .then(res => {
             this.setState (
                 {
@@ -80,7 +80,7 @@ export default class TestDetails extends Component {
 
       for (let j = 0; j<i.length; j++) {
        
-        await axios.get('http://192.168.200.200:8080/backendapi/employee/'+localStorage.getItem('employeeid')+'/tests/'+i[j]+'/attempts')
+        await axios.get('http://192.168.200.200:8080/backendapitest/employee/'+localStorage.getItem('employeeid')+'/tests/'+i[j]+'/attempts')
         .then( res => { 
         this.setState({
           
@@ -103,7 +103,7 @@ export default class TestDetails extends Component {
  
     handleClickOpen = (testSubtypeName, timeValue, noOfQnsValue) => {
         
-     axios.get('http://192.168.200.200:8080/backendapi/employee/'+localStorage.getItem('employeeid')+'/tests/'+testSubtypeName.replace(" ", "%20"))
+     axios.get('http://192.168.200.200:8080/backendapitest/employee/'+localStorage.getItem('employeeid')+'/tests/'+testSubtypeName.replace(" ", "%20"))
      .then(res => { 
        console.log(res.data)
      this.setState(

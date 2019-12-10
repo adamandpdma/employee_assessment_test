@@ -19,7 +19,7 @@ class ReviewAllTests extends React.Component {
     }
 
     componentDidMount() {
-        axios.get('http://192.168.200.200:8080/backendapi/employee/'+localStorage.getItem('employeeid')+'/tests/review/all/test-result')   
+        axios.get('http://192.168.200.200:8080/backendapitest/employee/'+localStorage.getItem('employeeid')+'/tests/review/all/test-result')   
         .then(response => {
              this.setState({ 
                  tests: response.data 

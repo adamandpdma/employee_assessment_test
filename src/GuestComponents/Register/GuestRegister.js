@@ -73,7 +73,7 @@ submitValues = ({name, nric, mobile, educationLevel, gpa, graduationYear}) => {
     graduationYear: graduationYear
 }
   
-  axios.post('http://192.168.200.200:8080/backendapi/guest/register',guest)
+  axios.post('http://192.168.200.200:8080/backendapitest/guest/register',guest)
       .then(res =>{
         if(res.data != -1){
         localStorage.setItem("GuestId",res.data)

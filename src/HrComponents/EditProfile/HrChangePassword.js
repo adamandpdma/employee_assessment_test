@@ -52,7 +52,7 @@ class InputForm extends Component {
     console.log(postValue)
 
 
-    axios.post('http://192.168.200.200:8080/backendapi/human-resources/'+hrId+'/profile-password', postData, postValue)
+    axios.post('http://192.168.200.200:8080/backendapitest/human-resources/'+hrId+'/profile-password', postData, postValue)
     .then((res => {
       console.log(res.data)
      { if (res.data === true) {

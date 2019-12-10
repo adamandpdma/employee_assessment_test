@@ -52,7 +52,7 @@ submitValues = ({employeeid, email, employeeName, mobile, department}) => {
     department: department
   }
   
-  axios.post('http://192.168.200.200:8080/backendapi/employee/register',postValues)
+  axios.post('http://192.168.200.200:8080/backendapitest/employee/register',postValues)
       .then(res =>
         { if (res.data === true) {
           return (

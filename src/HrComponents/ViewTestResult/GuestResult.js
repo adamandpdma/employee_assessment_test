@@ -55,7 +55,7 @@ export default class GuestResult extends Component {
 
   componentDidMount() {
     
-    axios.get('http://192.168.200.200:8080/backendapi/human-resources/{hrId}/test-result/guest/'+this.state.guestId)
+    axios.get('http://192.168.200.200:8080/backendapitest/human-resources/{hrId}/test-result/guest/'+this.state.guestId)
       .then(response => {
         this.setState
         ({ 

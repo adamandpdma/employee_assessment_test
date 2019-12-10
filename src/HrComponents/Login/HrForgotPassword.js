@@ -91,7 +91,7 @@ const handleSubmit = (e) =>{
     profileImg: ""
   }
 
-    axios.post('http://192.168.200.200:8080/backendapi/human-resources/forgot-password', postValue)
+    axios.post('http://192.168.200.200:8080/backendapitest/human-resources/forgot-password', postValue)
     .then((res => {
       console.log(res.data)
      { if (res.data === true) {

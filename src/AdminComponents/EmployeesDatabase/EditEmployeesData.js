@@ -65,7 +65,7 @@ export default class EditEmployees extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://192.168.200.200:8080/backendapi/admin/employees/'+this.props.match.params.id)
+    axios.get('http://192.168.200.200:8080/backendapitest/admin/employees/'+this.props.match.params.id)
       .then(response => {
         this.setState({
           employeeId: response.data.employeeId,
@@ -187,7 +187,7 @@ export default class EditEmployees extends Component {
       this.setState({
         isActive: false
       }, () => {
-        axios.put('http://192.168.200.200:8080/backendapi/admin/employees/' + this.props.match.params.id + '/deactivate', employee)
+        axios.put('http://192.168.200.200:8080/backendapitest/admin/employees/' + this.props.match.params.id + '/deactivate', employee)
         .then(res => console.log(res.data));
       })
 
@@ -197,7 +197,7 @@ export default class EditEmployees extends Component {
       this.setState({
         isActive: true
       }, () => {
-        axios.put('http://192.168.200.200:8080/backendapi/admin/employees/' + this.props.match.params.id + '/activate', employee)
+        axios.put('http://192.168.200.200:8080/backendapitest/admin/employees/' + this.props.match.params.id + '/activate', employee)
         .then(res => console.log(res.data));
       })
 

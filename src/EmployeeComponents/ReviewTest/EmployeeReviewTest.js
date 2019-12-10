@@ -39,7 +39,7 @@ class EmployeeReviewTest extends React.Component {
     }
     
     componentDidMount() {
-       axios.get("http://192.168.200.200:8080/backendapi/employee/"+localStorage.getItem('employeeid')+"/tests/" + this.state.testDetailID + "/question-list")   
+       axios.get("http://192.168.200.200:8080/backendapitest/employee/"+localStorage.getItem('employeeid')+"/tests/" + this.state.testDetailID + "/question-list")   
        .then(response => {
             this.setState({ testData: response.data })
             
@@ -51,7 +51,7 @@ class EmployeeReviewTest extends React.Component {
             console.log(error);
           })
           
-          axios.get('http://192.168.200.200:8080/backendapi/employee/tests/review/' + this.state.testDetailID)
+          axios.get('http://192.168.200.200:8080/backendapitest/employee/tests/review/' + this.state.testDetailID)
           .then(response => {
             console.log(response.data)
             if(response.data.userAns === null){

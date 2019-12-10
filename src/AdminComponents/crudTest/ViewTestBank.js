@@ -45,7 +45,7 @@ export default class ViewTestBank extends Component {
     console.log(this.state.domain)
     if(this.state.testCat === "Technical")
     {
-        axios.get("http://192.168.200.200:8080/backendapi/admin/questionpool")
+        axios.get("http://192.168.200.200:8080/backendapitest/admin/questionpool")
         .then(res => {
             this.setState (
                 {
@@ -63,7 +63,7 @@ export default class ViewTestBank extends Component {
     }
     if(this.state.testCat === "Non-Technical")
     {
-        axios.get("http://192.168.200.200:8080/backendapi/admin/questionpool")
+        axios.get("http://192.168.200.200:8080/backendapitest/admin/questionpool")
         .then(res => {
             this.setState(
                 {
@@ -118,7 +118,7 @@ handleClose = () => {
       }
     )
 
-    axios.put('http://192.168.200.200:8080/backendapi/admin/questionpool/set-hidden/'+this.state.settingsIdData)
+    axios.put('http://192.168.200.200:8080/backendapitest/admin/questionpool/set-hidden/'+this.state.settingsIdData)
     .then((res) => console.log(res.data)) 
     .then(this.handleclickopen())
  

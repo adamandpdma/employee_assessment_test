@@ -33,7 +33,11 @@ import auth from "../../auth"
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import EmployeeEditProfile from '../EditProfile/EmployeeEditProfile';
 import {ProtectedRoute} from "../../Protected.Route";
-import ReviewError from "../ReviewTest/ReviewError"
+import ReviewError from "../ReviewTest/ReviewError";
+import AccessTimeIcon from '@material-ui/icons/AccessTime';
+import CreateTimesheet from '.././Timesheet/CreateTimesheet';
+import CreateMC from '.././Timesheet/CreateMC';
+import GenerateRows from '.././Timesheet/GenerateRows'
 
 
 const drawerWidth = 300;
@@ -62,12 +66,7 @@ const useStyles = makeStyles(theme => ({
     
     },
   },
-  // // menuButton: {
-  // //   marginRight: theme.spacing(2),
-  // //   [theme.breakpoints.up('sm')]: {
-  // //     display: 'none',
-  // //   },
-  // },
+
   toolbar:theme.mixins.toolbar,
   drawerPaper: {
     width: drawerWidth,
@@ -97,9 +96,6 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: "#E1E1E1",
     padding: "20px"
   },
-  // Grid: {
-  //   padding: theme.spacing(0)
-  // }
 }));
 const style = {
   right:'2%',
@@ -142,6 +138,13 @@ const ResponsiveDrawerEmployee = (props) => {
   const handleClick = () => {
     setOpen(!open);
   }
+  
+  const [open1, setOpen1] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen1(!open1);
+  }
+
 
   const navigation = () => 
   {
@@ -216,6 +219,42 @@ const ResponsiveDrawerEmployee = (props) => {
         <NavLink to='/employee/reviewAll' 
           style={{color: 'white', textDecoration: 'none'}}
           activeStyle={{color: 'white', textDecoration: 'none'}}><ListItemText primary="REVIEW TEST" /></NavLink>
+      </ListItem>
+
+      <ListItem button onClick ={handleClickOpen}>
+        <ListItemIcon>
+          <AccessTimeIcon style={{"fill": "#BDBDBD", "stroke": "#BDBDBD"}}/>
+      </ListItemIcon>
+      <ListItemText primary="TIMESHEET" />
+      {open1 ? <ExpandLess /> : <ExpandMore />}
+      </ListItem>
+      <Collapse in={open1} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+    <ListItem button className={classes.nested} onClick={navigation}>
+    <NavLink to='/employee/CreateTimesheet' 
+              style={{color: 'white', textDecoration: 'none'}}
+              activeStyle={{color: 'white', textDecoration: 'none'}}><ListItemText primary="Create Timesheet" /></NavLink>
+          </ListItem>  
+          <ListItem button className={classes.nested}>
+           <ListItemText primary="View Timesheet"/>
+          </ListItem>
+        </List>
+      </Collapse>
+      <ListItem button>
+        <ListItemIcon>
+        <svg xmlns="http://www.w3.org/2000/svg" width="23.733" height="23.667" viewBox="0 0 23.733 23.667">
+  <path id="Icon_awesome-pencil-alt" data-name="Icon awesome-pencil-alt" d="M23.081,6.571,20.944,8.7a.558.558,0,0,1-.788,0L15.011,3.57a.554.554,0,0,1,0-.786L17.148.654a2.234,2.234,0,0,1,3.148,0l2.786,2.778A2.211,2.211,0,0,1,23.081,6.571ZM13.175,4.615,1,16.754.019,22.371a1.112,1.112,0,0,0,1.289,1.285l5.632-.985L19.113,10.532a.554.554,0,0,0,0-.786L13.968,4.615a.563.563,0,0,0-.793,0Zm-7.422,11.1a.643.643,0,0,1,0-.915L12.892,7.68a.648.648,0,1,1,.918.915L6.671,15.714A.648.648,0,0,1,5.753,15.714ZM4.08,19.6H6.305V21.28l-2.99.522L1.873,20.365,2.4,17.383H4.08Z" transform="translate(-0.002 -0.005)" fill="#bdbdbd"/>
+</svg>
+        </ListItemIcon>
+   <ListItemText primary="LEAVE APPLICATION" />
+      </ListItem>
+      <ListItem button>
+        <ListItemIcon>
+        <svg xmlns="http://www.w3.org/2000/svg" width="23.733" height="23.667" viewBox="0 0 23.733 23.667">
+  <path id="Icon_awesome-pencil-alt" data-name="Icon awesome-pencil-alt" d="M23.081,6.571,20.944,8.7a.558.558,0,0,1-.788,0L15.011,3.57a.554.554,0,0,1,0-.786L17.148.654a2.234,2.234,0,0,1,3.148,0l2.786,2.778A2.211,2.211,0,0,1,23.081,6.571ZM13.175,4.615,1,16.754.019,22.371a1.112,1.112,0,0,0,1.289,1.285l5.632-.985L19.113,10.532a.554.554,0,0,0,0-.786L13.968,4.615a.563.563,0,0,0-.793,0Zm-7.422,11.1a.643.643,0,0,1,0-.915L12.892,7.68a.648.648,0,1,1,.918.915L6.671,15.714A.648.648,0,0,1,5.753,15.714ZM4.08,19.6H6.305V21.28l-2.99.522L1.873,20.365,2.4,17.383H4.08Z" transform="translate(-0.002 -0.005)" fill="#bdbdbd"/>
+</svg>
+        </ListItemIcon>
+       <ListItemText primary="VIEW REMAINING LEAVE & MC ENTITLEMENT" />
       </ListItem>
       </List>
     </div>
@@ -307,6 +346,10 @@ const ResponsiveDrawerEmployee = (props) => {
           <ProtectedRoute path='/employee/reviewAll' component={ReviewAllTests}/>
           <ProtectedRoute path='/employee/editProfile' component={EmployeeEditProfile}/>
           <ProtectedRoute path='/employee/reviewError' component={ReviewError}/>
+
+          <ProtectedRoute path='/employee/CreateTimesheet' component={CreateTimesheet}/>
+          <ProtectedRoute path='/employee/CreateMC' component={CreateMC}/>
+          <ProtectedRoute path='/employee/GenerateRows' component={GenerateRows}/>
    
         </Grid>
       </main>

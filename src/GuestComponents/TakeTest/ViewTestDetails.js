@@ -57,7 +57,7 @@ const navStyle = {
   componentDidMount() 
   {
   console.log(this.state.category)
-  axios.get('http://192.168.200.200:8080/backendapi/admin/test-detail/category/Non-Technical')
+  axios.get('http://192.168.200.200:8080/backendapitest/admin/test-detail/category/Non-Technical')
         .then(res => {
             this.setState (
                 {
@@ -78,7 +78,7 @@ const navStyle = {
  
     handleClickOpen = (testSubtypeName, timeValue, noOfQnsValue,element) => {
      
-     axios.get('http://192.168.200.200:8080/backendapi/guest/'+localStorage.getItem("GuestId")+'/tests/'+testSubtypeName.replace(" ", "%20"))
+     axios.get('http://192.168.200.200:8080/backendapitest/guest/'+localStorage.getItem("GuestId")+'/tests/'+testSubtypeName.replace(" ", "%20"))
      .then(res => { 
        console.log(res.data)
      this.setState(

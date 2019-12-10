@@ -156,7 +156,7 @@ class TestRows extends React.Component {
             poolType: this.state.category
           }
     console.log(values); 
-    axios.put('http://192.168.200.200:8080/backendapi/admin/questionpool', values)
+    axios.put('http://192.168.200.200:8080/backendapitest/admin/questionpool', values)
     .then(res => {
        console.log(res.data)
        this.setState(
@@ -256,7 +256,7 @@ handleChange = (index, newAlignment) => {
             )
           }  
           else{
-            axios.put("http://192.168.200.200:8080/backendapi/admin/questionpool/create-question/"+this.state.poolId,qnsImg)
+            axios.put("http://192.168.200.200:8080/backendapitest/admin/questionpool/create-question/"+this.state.poolId,qnsImg)
             .then(res => console.log(res.data))
             .then(this.handleClickOpen())
           }

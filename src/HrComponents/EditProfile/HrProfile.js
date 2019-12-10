@@ -120,7 +120,7 @@ class Profile extends Component {
 
     if(KB <= 64)
       {
-        axios.post("http://192.168.200.200:8080/backendapi/human-resources/" +hrId+ "/profile-image", values)
+        axios.post("http://192.168.200.200:8080/backendapitest/human-resources/" +hrId+ "/profile-image", values)
         .then((res => {
           console.log(res.data)
          { if (res.data === true) {
@@ -188,7 +188,7 @@ class Profile extends Component {
 componentDidMount(){
 const hrId = localStorage.getItem('hrid')
 if(hrId != null){
-axios.get("http://192.168.200.200:8080/backendapi/human-resources/" + hrId + "/profile")
+axios.get("http://192.168.200.200:8080/backendapitest/human-resources/" + hrId + "/profile")
 .then(res => {
   this.setState({ details: res.data })
   console.log(this.state.details)

@@ -40,7 +40,7 @@ export default class GuestList extends Component {
   })
 
   componentDidMount() {
-    axios.get('http://192.168.200.200:8080/backendapi/human-resources/{hrId}/guests')
+    axios.get('http://192.168.200.200:8080/backendapitest/human-resources/{hrId}/guests')
       .then(response => {
         this.setState
         ({ 

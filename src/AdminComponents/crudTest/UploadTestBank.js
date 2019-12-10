@@ -77,7 +77,7 @@ class UploadTestBank extends Component
  {
      if(this.state.domain === "Technical")
      {
-        axios.get("http://192.168.200.200:8080/backendapi/admin/test-detail/category/Technical")
+        axios.get("http://192.168.200.200:8080/backendapitest/admin/test-detail/category/Technical")
         .then(res => {
             this.setState(
                 {
@@ -88,7 +88,7 @@ class UploadTestBank extends Component
      }
      else if(this.state.domain === "Non-Technical")
      {
-        axios.get("http://192.168.200.200:8080/backendapi/admin/test-detail/category/Non-Technical")
+        axios.get("http://192.168.200.200:8080/backendapitest/admin/test-detail/category/Non-Technical")
         .then(res => {
             this.setState(
                 {

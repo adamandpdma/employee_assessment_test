@@ -52,7 +52,7 @@ export default class EmployeeResult extends Component {
 
   componentDidMount() {
     
-    axios.get('http://192.168.200.200:8080/backendapi/human-resources/{hrId}/test-result/employee/'+this.state.employeeId)
+    axios.get('http://192.168.200.200:8080/backendapitest/human-resources/{hrId}/test-result/employee/'+this.state.employeeId)
       .then(response => {
         this.setState
         ({ 

@@ -151,7 +151,7 @@ handleClose12 = () => {
   loadQuizData = () => {
 
     console.log(this.state.resultId + "guest enter Id")
-    Axios.get('http://192.168.200.200:8080/backendapi/guest/'+ localStorage.getItem("GuestId")+'/tests/'+this.state.resultId+'/question-list')
+    Axios.get('http://192.168.200.200:8080/backendapitest/guest/'+ localStorage.getItem("GuestId")+'/tests/'+this.state.resultId+'/question-list')
     .then(res => { 
       this.setState(() => {
             return {
@@ -179,7 +179,7 @@ handleClose12 = () => {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.state.currentQuestion !== prevState.currentQuestion) {
-    Axios.get('http://192.168.200.200:8080/backendapi/guest/'+ localStorage.getItem("GuestId")+'/guest/'+this.state.resultId+'/question-list')
+    Axios.get('http://192.168.200.200:8080/backendapitest/guest/'+ localStorage.getItem("GuestId")+'/guest/'+this.state.resultId+'/question-list')
     .then(res => { console.log(res.data)
         this.setState(() => {
             return {
@@ -226,7 +226,7 @@ finishHandler = () => {
         userQnsIds: this.state.userQnsIdss
       }
       console.log(values)
-    Axios.post('http://192.168.200.200:8080/backendapi/guest/'+localStorage.getItem("GuestId")+'/tests/'+this.state.resultId+'/submit', values)
+    Axios.post('http://192.168.200.200:8080/backendapitest/guest/'+localStorage.getItem("GuestId")+'/tests/'+this.state.resultId+'/submit', values)
     .then(res => console.log(res.data))
 
     if (this.state.currentQuestion === this.state.data.length - 1) {

@@ -77,7 +77,7 @@ class EditTest extends Component
 
  componentDidMount() 
  {
-        axios.get('http://192.168.200.200:8080/backendapi/admin/test-detail/id/'+this.state.id)
+        axios.get('http://192.168.200.200:8080/backendapitest/admin/test-detail/id/'+this.state.id)
         .then(testByID => {
           this.setState(
               {
@@ -92,7 +92,7 @@ class EditTest extends Component
                   isHidden: testByID.data.isHidden
               })
               
-        axios.get("http://192.168.200.200:8080/backendapi/admin/questionpool")
+        axios.get("http://192.168.200.200:8080/backendapitest/admin/questionpool")
         .then(res => {
                   this.setState({
                     dataValues: res.data
@@ -185,7 +185,7 @@ class EditTest extends Component
     console.log(values);
 
   
-    axios.post("http://192.168.200.200:8080/backendapi/admin/test-detail/update",values)
+    axios.post("http://192.168.200.200:8080/backendapitest/admin/test-detail/update",values)
     .then((res) => console.log(res.data))
     .then(this.handleClickOpen())
  }
