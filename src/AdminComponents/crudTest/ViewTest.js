@@ -45,7 +45,7 @@ export default class ViewTest extends Component {
     console.log(this.state.domain)
     if(this.state.testCat === "Technical")
     {
-        axios.get('http://192.168.200.200:8080/backendapi/admin/test-detail/category/'+this.state.testCat)
+        axios.get('http://192.168.200.200:8080/backendapitest/admin/test-detail/category/'+this.state.testCat)
         .then(res => {
             this.setState (
                 {
@@ -62,7 +62,7 @@ export default class ViewTest extends Component {
     }
     if(this.state.testCat === "Non-Technical")
     {
-        axios.get('http://192.168.200.200:8080/backendapi/admin/test-detail/category/'+this.state.testCat)
+        axios.get('http://192.168.200.200:8080/backendapitest/admin/test-detail/category/'+this.state.testCat)
         .then(res => {
             this.setState(
                 {
@@ -116,7 +116,7 @@ handleClose = () => {
       }
     )
 
-   axios.post('http://192.168.200.200:8080/backendapi/admin/test-detail/hide/'+this.state.settingsIdData)
+   axios.post('http://192.168.200.200:8080/backendapitest/admin/test-detail/hide/'+this.state.settingsIdData)
    .then((res) => console.log(res.data)) 
    .then(this.handleclickopen)
 
@@ -196,6 +196,13 @@ handleClose = () => {
     
         }
       },
+      {
+        name: "Pass Percentage",
+        options: {
+          filter: false,
+    
+        }
+      },
      
         {
             name: "Action",
@@ -219,9 +226,11 @@ data={this.state.data.concat().reverse().map(currentemp => {
        currentemp.testSubtype,
        currentemp.noOfQns,
        currentemp.timeLimit,
+       currentemp.pass_percent + " " +"%",
        <TableCell><NavLink to={{pathname: '/admin/editTest/'+currentemp.settingsId, 
        aboutprops: currentemp.testCat, 
-       aboutpropsTwo: currentemp.settingsId}} style={Navstyle}>
+       aboutpropsTwo: currentemp.settingsId,
+       }} style={Navstyle}>
             <Button variant="contained"  style={style}>EDIT</Button>
             </NavLink> 
             <Button variant="contained" href="#" onClick = {() => this.deleteTest(currentemp.settingsId,currentemp.testSubtype)}  style={style}>

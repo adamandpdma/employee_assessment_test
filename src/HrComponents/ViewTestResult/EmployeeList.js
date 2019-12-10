@@ -40,7 +40,7 @@ export default class EmployeesList1 extends Component {
   })
 
   componentDidMount() {
-    axios.get('http://192.168.200.200:8080/backendapi/admin/employees')
+    axios.get('http://192.168.200.200:8080/backendapitest/admin/employees')
       .then(response => {
         this.setState
         ({ 
@@ -83,21 +83,21 @@ export default class EmployeesList1 extends Component {
         {
           name: "Employee ID",
           options: {
-            filter: true,
+            filter: false,
           
           }
         },
         {
           name: "Username",   
           options: {
-            filter: true,
+            filter: false,
            
           }
         },
         {
           name: "Email",
           options: {
-            filter: true,
+            filter: false,
            
           }
         },

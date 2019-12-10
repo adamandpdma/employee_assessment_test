@@ -34,7 +34,7 @@ class InputForm extends Component {
     const adminId = localStorage.getItem('adminid')
     const CurrentName = localStorage.getItem('name')
     if(name != CurrentName){
-      axios.post('http://192.168.200.200:8080/backendapi/admin/' + adminId + "/profile-name", postValue)
+      axios.post('http://192.168.200.200:8080/backendapitest/admin/' + adminId + "/profile-name", postValue)
       .then((res => {
         console.log(res.data)
        { if (res.data === true) {

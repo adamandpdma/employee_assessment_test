@@ -55,7 +55,7 @@ export default class GuestResult extends Component {
 
   componentDidMount() {
     
-    axios.get('http://192.168.200.200:8080/backendapi/human-resources/{hrId}/test-result/guest/'+this.state.guestId)
+    axios.get('http://192.168.200.200:8080/backendapitest/human-resources/{hrId}/test-result/guest/'+this.state.guestId)
       .then(response => {
         this.setState
         ({ 
@@ -64,7 +64,8 @@ export default class GuestResult extends Component {
         this.setState(
           {
           score: this.state.guests.map(el => el.score),
-          qnsNo: this.state.guests.map(el => el.userQnsIds)
+          qnsNo: this.state.guests.map(el => el.userQnsIds),
+          passPercentage:this.state.guests.map(el => el.pass_percent)
           }
       ) 
         this.setState(
@@ -73,8 +74,8 @@ export default class GuestResult extends Component {
             }
         )
 
-        for(let i=0, j=0; i<this.state.score.length, j<this.state.qnsNo.length; i++, j++){
-          if(ceil((this.state.score[i]/((this.state.qnsNo[j].split(',').length) - 1))*100) >= 50)
+        for(let i=0, j=0, k=0; i<this.state.score.length, j<this.state.qnsNo.length, k<this.state.passPercentage.length; i++, j++,k++){
+          if(ceil((this.state.score[i]/((this.state.qnsNo[j].split(',').length) - 1))*100) >= this.state.passPercentage[k])
           {
             this.setState({
               pass: "true"
@@ -179,6 +180,12 @@ export default class GuestResult extends Component {
         }
       },
       {
+        name: "Pass Percentage",
+        options: {
+          filter: false,
+        }
+      },
+      {
         name: "Pass/Fail",
         options: {
           filter: true,
@@ -227,6 +234,7 @@ export default class GuestResult extends Component {
               currentemp.score+' / '+((currentemp.userQnsIds.split(',').length) - 1),  
               this.timeCalculation(currentemp.completionTime),
               this.Percentage(currentemp.score, currentemp.userQnsIds) ,
+              currentemp.pass_percent + " "+"%",
               this.state.booleanResults[i]        
             ]})}
 

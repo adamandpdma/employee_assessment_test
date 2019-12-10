@@ -48,10 +48,10 @@ class employeeLogin extends Component {
   
   const empid = employeeid;
   
-    axios.post('http://192.168.200.200:8080/backendapi/employee/' + empid + "/login", postValue)
+    axios.post('http://192.168.200.200:8080/backendapitest/employee/' + empid + "/login", postValue)
         .then(res =>
          { if (res.data === true) {
-          axios.get("http://192.168.200.200:8080/backendapi/employee/" + empid +"/profile/")
+          axios.get("http://192.168.200.200:8080/backendapitest/employee/" + empid +"/profile/")
           .then(res => {
            console.log(res.data)
            localStorage.setItem('name', res.data.name)

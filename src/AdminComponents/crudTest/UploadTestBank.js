@@ -25,7 +25,7 @@ import Select from '@material-ui/core/Select';
   const fieldStyle = {
     width: "250px",
     display: 'flex',
-          flexWrap: 'wrap'
+          flexWrap: 'wrap',
   }
   const buttonStyle = {
       color: "black",
@@ -77,7 +77,7 @@ class UploadTestBank extends Component
  {
      if(this.state.domain === "Technical")
      {
-        axios.get("http://192.168.200.200:8080/backendapi/admin/test-detail/category/Technical")
+        axios.get("http://192.168.200.200:8080/backendapitest/admin/test-detail/category/Technical")
         .then(res => {
             this.setState(
                 {
@@ -88,7 +88,7 @@ class UploadTestBank extends Component
      }
      else if(this.state.domain === "Non-Technical")
      {
-        axios.get("http://192.168.200.200:8080/backendapi/admin/test-detail/category/Non-Technical")
+        axios.get("http://192.168.200.200:8080/backendapitest/admin/test-detail/category/Non-Technical")
         .then(res => {
             this.setState(
                 {
@@ -104,10 +104,14 @@ class UploadTestBank extends Component
      let isError = false;
      const errors ={};
  
-     if(this.state.numberofquestions === 0){
+     if(this.state.numberofquestions <= 0){
          isError = true;
          errors.numberofquestionsError= "Enter a number greater than 0";
      }
+     if(this.state.numberofquestions >30){
+        isError = true;
+        errors.numberofquestionsError= "You can only enter a maximum of 30";
+    }
      if(this.state.category === ''){
          isError = true;
          errors.categoryError= "Select Test Category";
@@ -131,7 +135,7 @@ class UploadTestBank extends Component
      {
         errors.typeoftestError= "";
      }
-     if(this.state.numberofquestions > 0){
+     if(this.state.numberofquestions > 0 && this.state.numberofquestions<30){
 
         errors.numberofquestionsError= "";
     }
@@ -242,7 +246,7 @@ class UploadTestBank extends Component
 
                 <Grid item xs={12}>
                 <form onSubmit={this.onSubmitHandler} style={style}>
-        <InputLabel htmlFor="age-simple">Category</InputLabel>
+        <InputLabel htmlFor="age-simple" >Category</InputLabel>
         <FormControl>
         {this.state.domain === "Technical" && (
         <Select
@@ -253,9 +257,10 @@ class UploadTestBank extends Component
           errorText={this.state.categoryError}
           style={fieldStyle}
         >
-          <option value="Programming">Programming</option>
-          <option value="Agile">Agile</option>
-          <option value="DevOps">DevOps</option>
+          <option value="Programming"style={{cursor: "pointer"}}>Programming</option>
+          <option value="Agile" style={{cursor: "pointer"}}>Agile</option>
+          <option value="DevOps"style={{cursor: "pointer"}}>DevOps</option>
+          <option value="Aptitude"style={{cursor: "pointer"}}>Aptitude</option>
         </Select>)}
         {this.state.domain === "Non-Technical" && (
         <Select
@@ -266,9 +271,9 @@ class UploadTestBank extends Component
           errorText={this.state.categoryError}
           style={fieldStyle}
         >
-          <option value="Logical">Logical</option>
-          <option value="Aptitude">Aptitude</option>
-          <option value="Data Interpretation">Data Interpretation</option>
+          <option value="Logical" style={{cursor: "pointer"}}>Logical</option>
+          <option value="Aptitude" style={{cursor: "pointer"}}>Aptitude</option>
+          <option value="Data Interpretation" style={{cursor: "pointer"}}>Data Interpretation</option>
         </Select>)}
         {this.state.domain === undefined &&( 
         <Select
@@ -279,9 +284,9 @@ class UploadTestBank extends Component
           errorText={this.state.categoryError}
           style={fieldStyle}
         >
-          <option value="Logical"></option>
-          <option value="Aptitude"></option>
-          <option value="Data Interpretation"></option>
+          <option value="Logical" style={{cursor: "pointer"}}></option>
+          <option value="Aptitude" style={{cursor: "pointer"}}></option>
+          <option value="Data Interpretation" style={{cursor: "pointer"}}></option>
         </Select>)}
         <div style={errorColor}>{this.state.categoryError}</div>
       </FormControl>  

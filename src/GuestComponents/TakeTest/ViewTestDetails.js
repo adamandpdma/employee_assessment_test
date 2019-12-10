@@ -57,11 +57,11 @@ const navStyle = {
   componentDidMount() 
   {
   console.log(this.state.category)
-  axios.get('http://192.168.200.200:8080/backendapi/admin/test-detail/category/Non-Technical')
+  axios.get('http://192.168.200.200:8080/backendapitest/admin/test-detail/category/Non-Technical')
         .then(res => {
             this.setState (
                 {
-                    data: res.data
+                    data: res.data,
                 },
              )
              console.log(res.data)
@@ -78,7 +78,7 @@ const navStyle = {
  
     handleClickOpen = (testSubtypeName, timeValue, noOfQnsValue,element) => {
      
-     axios.get('http://192.168.200.200:8080/backendapi/guest/'+localStorage.getItem("GuestId")+'/tests/'+testSubtypeName.replace(" ", "%20"))
+     axios.get('http://192.168.200.200:8080/backendapitest/guest/'+localStorage.getItem("GuestId")+'/tests/'+testSubtypeName.replace(" ", "%20"))
      .then(res => { 
        console.log(res.data)
      this.setState(
@@ -148,7 +148,7 @@ const navStyle = {
               timeLimit, noOfQns,element)} 
                variant="contained" 
                disabled={true}
-               style={{"height": "35px"}}>START</Button>
+               style={{"height": "35px", "backgroundColor": "#F67B7B"}}></Button>
         
         )
     } else {
@@ -156,7 +156,7 @@ const navStyle = {
             <Button  src={Start}  className="btn"  id={id}  
             onClick={(element) => this.handleClickOpen(testSubtype, 
               timeLimit, noOfQns,element)} 
-           variant="contained" style={{"height": "35px"}}>START</Button>
+           variant="contained" style={{"height": "35px", "backgroundColor": "green"}}></Button>
         
         )
     }
@@ -202,8 +202,15 @@ const navStyle = {
            
           }
         },
+        {
+          name: "Pass Percentage",
+          options: {
+            filter: false,
+           
+          }
+        },
       {
-        name: "",
+        name: "Start Test",
         options: {
           filter: false,
     
@@ -216,7 +223,7 @@ const navStyle = {
       <div>
           <Dialog aria-labelledby="customized-dialog-title" open={this.state.open}>
             {/* <button onClick={this.handleClose}>Close</button> */}
-            <CloseIcon style={{"margin-left":"93%", "margin-top":"10px"}} onClick={this.handleClose}></CloseIcon>
+            {/* <CloseIcon style={{"margin-left":"93%", "margin-top":"10px"}} onClick={this.handleClose}></CloseIcon> */}
         <DialogTitle id="customized-dialog-title">
           TERMS AND CONDITIONS
         </DialogTitle>
@@ -229,7 +236,7 @@ const navStyle = {
                     Do not refresh (or press F5) or close the tab/browser.
                 </li>
                 <li>
-                    You have only 2 attempts for this test.
+                    You have only 1 attempt for this test. Accept the terms and conditions and Start the test cannot quit.
                 </li>
                 <li>
                     Test would be automatically submitted once the time is up.
@@ -255,12 +262,12 @@ const navStyle = {
                currentemp.testSubtype,
                currentemp.noOfQns,
                currentemp.timeLimit + "  "+ 'minutes',
-               <TableCell>
-              {this.displayButtons(currentemp.settingsId,
+               currentemp.pass_percent + " "+"%",
+               this.displayButtons(currentemp.settingsId,
               currentemp.testSubtype, 
             currentemp.timeLimit,
-             currentemp.noOfQns)}
-               </TableCell>
+             currentemp.noOfQns)
+            
                      ]})}
 
         columns={columns}

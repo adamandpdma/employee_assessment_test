@@ -118,7 +118,7 @@ class Profile extends Component {
 
       if(KB <= 64)
       {
-        axios.post("http://192.168.200.200:8080/backendapi/employee/"+ empId + "/update-profile-image", values)
+        axios.post("http://192.168.200.200:8080/backendapitest/employee/"+ empId + "/update-profile-image", values)
         .then((res => {
           console.log(res.data)
          { if (res.data === true) {
@@ -188,7 +188,7 @@ const empId = localStorage.getItem('employeeid')
 if(empId != null){
 // const adminId = 42
 // console.log(user_employeeid)
-axios.get("http://192.168.200.200:8080/backendapi/employee/" + empId +"/profile/")
+axios.get("http://192.168.200.200:8080/backendapitest/employee/" + empId +"/profile/")
 .then(res => {
   this.setState({ details: res.data })
   console.log(this.state.details)

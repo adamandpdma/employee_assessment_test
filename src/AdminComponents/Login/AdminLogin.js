@@ -48,11 +48,11 @@ submitValues = ({employeeid,Password,event}) => {
 
 const adminId = employeeid;
 
-  axios.post('http://192.168.200.200:8080/backendapi/admin/' + adminId + "/login", postValue)
+  axios.post('http://192.168.200.200:8080/backendapitest/admin/' + adminId + "/login", postValue)
       .then((res => {
         console.log(res.data)
        { if (res.data === true) {
-        axios.get("http://192.168.200.200:8080/backendapi/admin/" + adminId +"/profile/")
+        axios.get("http://192.168.200.200:8080/backendapitest/admin/" + adminId +"/profile/")
         .then(res => {
          console.log(res.data)
          localStorage.setItem('name', res.data.name)

@@ -24,6 +24,7 @@ import Dashboard from './Dashboard';
 import EmployeesList from '../EmployeesDatabase/EmployeesList';
 import EditEmployeesData from '../EmployeesDatabase/EditEmployeesData'
 import CreateTest from './CreateTest';
+import CreateTestN from './CreateTestN';
 import UploadTestBank from './UploadTestBank';
 import EditTest from './EditTest';
 import ViewTest from './ViewTest';
@@ -205,12 +206,12 @@ const ResponsiveDrawer = (props) => {
     <ListItem button className={classes.nested} onClick={navigation}>
      <NavLink to='/admin/Technical' 
         style={{color: 'white', textDecoration: 'none'}}
-        activeStyle={{color: 'white', textDecoration: 'none'}}><ListItemText primary="Employee User Test" /></NavLink>
+        activeStyle={{color: 'white', textDecoration: 'none'}}><ListItemText primary="Employee" /></NavLink>
           </ListItem>  
           <ListItem button className={classes.nested}>
             <NavLink to='/admin/NonTechnical' 
                style={{color: 'white', textDecoration: 'none'}}
-               activeStyle={{color: 'white', textDecoration: 'none'}} ><ListItemText primary="Guest user Test"/></NavLink>
+               activeStyle={{color: 'white', textDecoration: 'none'}} ><ListItemText primary="Guest"/></NavLink>
           </ListItem>
         </List>
       </Collapse>
@@ -223,7 +224,15 @@ const ResponsiveDrawer = (props) => {
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
-   
+        {/* <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+            className={classes.menuButton}
+          >
+            <MenuIcon />
+          </IconButton> */}
         <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -232,6 +241,11 @@ const ResponsiveDrawer = (props) => {
           >
           <Profile/>  
           </IconButton>
+
+  
+        
+    
+     
 
         <Button
         color="inherit"
@@ -286,6 +300,7 @@ const ResponsiveDrawer = (props) => {
         <Grid>
           <Route path='/admin/Technical' component={Technical}></Route>
           <Route path='/admin/createTest' component={CreateTest}></Route>
+          <Route path='/admin/createTestN' component={CreateTestN}></Route>
           <Route path='/admin/uploadTestBank' component={UploadTestBank}></Route>
           <Route path='/admin/viewTest' component={ViewTest}></Route>
           <Route path='/admin/editTest/:id' component={EditTest}></Route>

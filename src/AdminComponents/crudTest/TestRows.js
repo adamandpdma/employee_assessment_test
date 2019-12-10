@@ -18,6 +18,7 @@ import ImageUpload from './ImageUpload';
 import axios from 'axios';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import {NavLink} from 'react-router-dom';
 import Radio from '@material-ui/core/Radio';
@@ -25,6 +26,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
+let ij = 1
 const ObjectRow = (props) => {
 
 
@@ -33,14 +35,17 @@ const ObjectRow = (props) => {
         <TableCell>
             {props.keyValue}
         </TableCell>
-
+        {/* && props.alignment[props.keyData]) */}
         <TableCell>
          <ImageUpload numberofquestions={props.numberofquestions} alignment={props.alignment[props.keyData]}/>
-         <Button variant="contained" 
-         onClick={(event) => props.QnsImageArray(event)}
-         style={{"fontSize": "10px"}}
-         disabled={props.disable}
-         >DONE</Button>
+         {(props.keyValue === ij  && props.alignment[props.keyData])&& (
+            //
+            <Button variant="contained" 
+            onClick={(event) => props.QnsImageArray(event)}
+            style={{"fontSize": "10px"}}
+            disabled={props.disable}
+            >DONE</Button>
+         )}
         </TableCell>
         
         <TableCell> 
@@ -133,7 +138,9 @@ class TestRows extends React.Component {
             indexImg: 0,
             i: 0,
             disable: true,
-            openEmpty: false
+            openEmpty: false,
+            openImage: false,
+
         }
     }
  
@@ -149,7 +156,7 @@ class TestRows extends React.Component {
             poolType: this.state.category
           }
     console.log(values); 
-    axios.put('http://192.168.200.200:8080/backendapi/admin/questionpool', values)
+    axios.put('http://192.168.200.200:8080/backendapitest/admin/questionpool', values)
     .then(res => {
        console.log(res.data)
        this.setState(
@@ -158,8 +165,25 @@ class TestRows extends React.Component {
            }
        )})
     }    
-   
+   handleOpen = () => {
+     this.setState(
+       {
+        TrueFalse: true
+       }
+     )
+   }
     QnsImageArray = (index, newDisable) => { 
+  
+        if(this.props.location.testtwo === undefined || this.props.location.testtwo === "")
+        {
+          this.setState(
+            {
+              openImage: true
+            }
+          )
+        }
+           else{
+          ij = ij + 1
           const values = {
           correctAns: this.state.alignment[this.state.i],
           poolId: this.state.poolId,
@@ -168,10 +192,23 @@ class TestRows extends React.Component {
       
       qnsImg.push(values)
       console.log(qnsImg)
+  
       this.setState(
         {
           i: this.state.i +1,
           disable: true,
+        }
+      )
+      delete this.props.location.testtwo
+        }
+      
+   
+    }
+    handleCloseImage = () => 
+    {
+      this.setState(
+        {
+          openImage: false
         }
       )
     }
@@ -219,7 +256,7 @@ handleChange = (index, newAlignment) => {
             )
           }  
           else{
-            axios.put("http://192.168.200.200:8080/backendapi/admin/questionpool/create-question/"+this.state.poolId,qnsImg)
+            axios.put("http://192.168.200.200:8080/backendapitest/admin/questionpool/create-question/"+this.state.poolId,qnsImg)
             .then(res => console.log(res.data))
             .then(this.handleClickOpen())
           }
@@ -247,7 +284,8 @@ handleChange = (index, newAlignment) => {
           return(
             <Grid>
          
-          <NavLink to={{pathname: '/admin/Technical', 
+          <NavLink to={{pathname: '/admin/createTest', 
+           domain: 'Technical', 
           poolId: this.state.poolId,
           numberofquestions: this.state.numberofquestions,
           category: this.state.category,
@@ -263,7 +301,8 @@ handleChange = (index, newAlignment) => {
       else{
             return(
                 <Grid>
-             <NavLink to={{pathname: '/admin/NonTechnical', 
+             <NavLink to={{pathname: '/admin/createTestN', 
+             domain: 'Non-Technical', 
              poolId: this.state.poolId, 
              numberofquestions: this.state.numberofquestions,
              category: this.state.category,
@@ -283,6 +322,7 @@ handleChange = (index, newAlignment) => {
   handleClickOpen = () => {
 
     qnsImg =[]
+    ij = 1
 
     this.setState(
         {
@@ -366,8 +406,9 @@ handleChange = (index, newAlignment) => {
                     1) Click on choose file and Choose an Image. <br/>
                     (Image size cannot exceed 64kb).<br/>
                     2) Click on upload Image.<br/>
-                    3) Choose correct Option for the question Image.<br/>
-                    4) Click on Done.<br/><br/>
+                    3) Choose Option for the question Image.<br/>
+                    4) Done Button appears when once the image<br/>
+                    and option is selected, Click on done.<br/><br/>
                   </p>
                {this.rows()}
               </TableBody>
@@ -392,10 +433,39 @@ handleChange = (index, newAlignment) => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"Upload questions, Cannot leave blank!!"}</DialogTitle>
-
+        <DialogTitle id="alert-dialog-title">{"Upload questions, Cannot leave blank!"}</DialogTitle>
+        <DialogContent dividers>
+          <Typography>
+            <ol>
+                <li>
+                 Make sure all done button is clicked. (Done Button appears when once the image and option is selected)
+                </li>
+                <li>
+                Make sure all Images are uploaded (upload Image button should be disabled).
+                </li>
+                <li>
+                Make sure option for each question is clicked.
+                </li>
+            </ol>          
+          </Typography>
+        </DialogContent>
         <DialogActions>
         <Button onClick ={this.handleCloseEmpty}>
+          OKAY
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog
+        open={this.state.openImage}
+        onClose={this.handleCloseImage}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Upload the Image!"}</DialogTitle>
+
+        <DialogActions>
+        <Button onClick ={this.handleCloseImage}>
           OKAY
           </Button>
         </DialogActions>

@@ -14,8 +14,8 @@ const validationSchema = Yup.object({
     .min(6, "Password must contain at least 6 characters")
     .required("Enter your password"),
   newPassword: Yup.string("")
-    .matches(alphanumeric, "Password must be alphanumeric Eg.Password1!")
-    .min(6,"Password must contain at least 6 characters")
+  .matches(alphanumeric, "Password must be more than 8 and a combination of Capital letter, Number and any special character. Eg.Password1!")
+  .min(6,"Password must contain at least 6 characters")
     .max(12,"Password cannot have more then 12 characters")
     .notOneOf([Yup.ref("Password")],"Cannot be same as Current Password")
     .required("Enter your new password"),
@@ -52,7 +52,7 @@ class InputForm extends Component {
     console.log(postValue)
 
 
-    axios.post('http://192.168.200.200:8080/backendapi/human-resources/'+hrId+'/profile-password', postData, postValue)
+    axios.post('http://192.168.200.200:8080/backendapitest/human-resources/'+hrId+'/profile-password', postData, postValue)
     .then((res => {
       console.log(res.data)
      { if (res.data === true) {

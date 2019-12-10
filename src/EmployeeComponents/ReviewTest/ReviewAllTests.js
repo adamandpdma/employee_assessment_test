@@ -13,22 +13,25 @@ class ReviewAllTests extends React.Component {
         super(props)
         this.state = {
         tests: [],
+        count: 1,
+        testSubttypeData: []
         }
     }
 
     componentDidMount() {
-        axios.get("http://192.168.200.200:8080/backendapi/employee/101/tests/review/all/test-result")   
+        axios.get('http://192.168.200.200:8080/backendapitest/employee/'+localStorage.getItem('employeeid')+'/tests/review/all/test-result')   
         .then(response => {
              this.setState({ 
                  tests: response.data 
                 })
                 this.setState({ 
-                    tests: this.state.tests.filter(el => el.testType !== "" && el.testSubtype !== "") 
+                    tests: this.state.tests.filter(el => el.testType !== "" && el.testSubtype !== ""),
+                    testSubttypeData: this.state.tests.map(el => el.testSubtype)
                    })
 
              
            }, () => {
-             console.log(this.state.testDetailID)
+             console.log(this.state.testSubttypeData)
            })
           
            .catch((error) => {
@@ -38,12 +41,32 @@ class ReviewAllTests extends React.Component {
          
        }
 
+       attemptsCount = () => 
+       {
+        // console.log(this.state.tests+"hello sub")
+        //  return(
+        //    <p>
+        //      {this.state.testSubttypeData}
+        //    </p>
+        //  )
+       
+        // for (let i = 0; i < this.state.testSubttypeData.length; i++) 
+        // { for (let j = i + 1 ; j < this.state.testSubttypeData.length; j++) 
+        //   { if (this.state.testSubttypeData[i].equals(this.state.testSubttypeData[j])) 
+        //     { 
+        //      return(
+        //        <p>true</p>
+        //      )
+        //     } } }
+
+       }
+
        render(){
        const options = {
         selectableRows: false,
         filterType: "dropdown",
         selectableRowsOnClick: false,
-        download: false,
+        download: false, 
         print: false,
         viewColumns: false
      
@@ -74,6 +97,13 @@ class ReviewAllTests extends React.Component {
            
           }
         },
+        // {
+        //   name: "Attempts",
+        //   options: {
+        //     filter: false,
+           
+        //   }
+        // },
      
     
   ]
@@ -82,7 +112,7 @@ class ReviewAllTests extends React.Component {
     <MuiThemeProvider theme={getMuiTheme()}>
     <MUIDataTable 
     title={"Review Tests"}
-    data={this.state.tests.map((currentemp, i) => {
+    data={this.state.tests.concat().reverse().map((currentemp, i) => {
         return [
 
            currentemp.testType,
@@ -92,7 +122,8 @@ class ReviewAllTests extends React.Component {
           <Button style={{"text-transform": "none"}} variant= "contained">
          Review
        </Button>
-       </NavLink>
+       </NavLink>,
+        // this.attemptsCount()
 
         ]})}
 

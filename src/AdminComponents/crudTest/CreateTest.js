@@ -70,11 +70,13 @@ class CreateTest extends Component
           numberofquestionsError: '',
           timeLimit:'',
           timelimitError: '',
+          percentage: '',
+          percebtageError: '',
           testBankCategories:[],
           testBankTypeOfTests: [],
           dataCategories: [],
           dataTypeOfTests: [],
-          poolId: [],
+        //   poolId: [],
           selectCategory: false,
           selectTypeoftest: false,
           isHidden: false,
@@ -82,7 +84,9 @@ class CreateTest extends Component
           poolId: this.props.location.poolId,
           numberofquestions: this.props.location.numberofquestions,
           disabled: true,
-          disabledFalse: this.props.location.disabled
+          disabledFalse: this.props.location.disabled,
+          openTwo: false
+
      }
  }
 
@@ -93,7 +97,7 @@ class CreateTest extends Component
      console.log(this.state.poolId + "POOL ID")
     if(this.state.testCat === "Non-Technical")
     {
-        axios.get("http://192.168.200.200:8080/backendapi/admin/questionpool")
+        axios.get("http://192.168.200.200:8080/backendapitest/admin/questionpool")
         .then(res => { 
                 this.setState(
                     {
@@ -124,7 +128,7 @@ class CreateTest extends Component
     else
     {
 
-        axios.get("http://192.168.200.200:8080/backendapi/admin/questionpool")
+        axios.get("http://192.168.200.200:8080/backendapitest/admin/questionpool")
         .then(res => { 
                 this.setState(
                     {
@@ -167,6 +171,14 @@ validate = () =>
         isError = true;
         errors.numberofquestionsError= "Enter a number";
     }
+    if(this.state.percentage === ''){
+        isError = true;
+        errors.percentageError= "Enter a number";
+    }
+    if(this.state.percentage > 100){
+        isError = true;
+        errors.percentageError= "Percentage cannot be greater than 100";
+    }
     if(this.state.noOfQns > this.state.numberofquestions){
         isError = true;
         errors.numberofquestionsError= "Number should be < or =" + this.state.numberofquestions;
@@ -186,6 +198,11 @@ validate = () =>
         errors.timelimitError= " ";
     }
 
+
+    if(this.state.percentage.match("[0-9]") && !(this.state.percentage > 100))
+    {
+        errors.percentageError= " ";
+    }
     if(this.state.timeLimit === ''){
         isError = true;
         errors.timelimitError= "Enter a number";
@@ -223,6 +240,7 @@ validate = () =>
     const values = {
         isHidden: this.state.isHidden,
         noOfQns: this.state.noOfQns,
+        pass_percent: this.state.percentage,
         poolId: this.state.poolId,
         settingsId: this.state.settingsId,
         testCat: this.state.testCat,
@@ -233,8 +251,12 @@ validate = () =>
     }
     console.log(values);
 
-    axios.post("http://192.168.200.200:8080/backendapi/admin/test-detail/create", values)
-    .then((res) => console.log(res.data))
+    axios.post("http://192.168.200.200:8080/backendapitest/admin/test-detail/create", values)
+    .then((res) => this.setState(
+        {
+            datavalue: res.data
+        }
+    ))
     .then(this.handleClickOpen())
     }
  }
@@ -243,6 +265,14 @@ validate = () =>
       this.setState(
           {
            testType: event.target.value
+          }
+      )
+  }
+  percentageOnChangeHandler = (event) =>
+  {
+      this.setState(
+          {
+           percentage: event.target.value
           }
       )
   }
@@ -338,11 +368,22 @@ validate = () =>
 
 
   handleClickOpen = () => {
-    this.setState(
-        {
-            open: true
-        }
-    )
+      if(this.state.datavalue === true)
+      {
+        this.setState(
+            {
+                open: true
+            }
+        )
+      }
+      else{
+        this.setState(
+            {
+                openTwo: true
+            }
+        )
+      }
+   
   }
 
   handleClose = () => {
@@ -362,6 +403,13 @@ validate = () =>
         }
     )
    )
+  }
+
+  handleCloseTwo = () =>{
+    this.setState(
+        {
+            openTwo: false
+        } )
   }
 
     render()
@@ -440,6 +488,23 @@ validate = () =>
                        </TextField>
 
                        <div style={errorColor}>{this.state.timelimitError}</div>
+                      </FormControl>
+                
+                      <InputLabel style={InputLabelStyle}>PASS PERCENTAGE
+                       <p style={{color: "blue"}}> In Percentage</p>
+                       </InputLabel>
+                     
+                      <FormControl>
+                          <TextField 
+                           style={fieldStyle}
+                       variant="outlined"
+                       type="number"
+                       onChange={this.percentageOnChangeHandler}
+                       value={this.state.percentage}
+                       errorText={this.state.percebtageError}>
+                       </TextField>
+
+                       <div style={errorColor}>{this.state.percentageError}</div>
                       </FormControl><br/><br/>
                       <br/>
                       <div>
@@ -451,18 +516,38 @@ validate = () =>
     <Button variant="contained" type='submit' style={{color: "black"}} disabled={this.state.disabledFalse}>
     CREATE TEST</Button>
                           )}
-      <Dialog
-        open={this.state.open}
-        onClose={this.handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">{"You have successfully created Test !!"}</DialogTitle>
+                          {this.state.datavalue=== true && (
+  <Dialog
+  open={true}
+  onClose={this.handleClose}
+  aria-labelledby="alert-dialog-title"
+  aria-describedby="alert-dialog-description"
+>
+  <DialogTitle id="alert-dialog-title">{"You have successfully created Test !!"}</DialogTitle>
 
-        <DialogActions>
-          {this.popOverPkay()}
-        </DialogActions>
-      </Dialog>
+  <DialogActions>
+    {this.popOverPkay()}
+  </DialogActions>
+</Dialog>
+                          )}
+
+{this.state.datavalue === false && (
+<Dialog
+open={true}
+onClose={this.handleCloseTwo}
+aria-labelledby="alert-dialog-title"
+aria-describedby="alert-dialog-description"
+>
+<DialogTitle id="alert-dialog-title">{"Sorry, The subtype already exists! Upload with different subtype"}</DialogTitle>
+
+<DialogActions>
+  {this.popOverPkay()}
+</DialogActions>
+</Dialog>
+)}
+
+                          
+    
     </div>
                        </form>
                 </Grid>
