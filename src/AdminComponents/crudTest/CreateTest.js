@@ -76,7 +76,6 @@ class CreateTest extends Component
           testBankTypeOfTests: [],
           dataCategories: [],
           dataTypeOfTests: [],
-        //   poolId: [],
           selectCategory: false,
           selectTypeoftest: false,
           isHidden: false,

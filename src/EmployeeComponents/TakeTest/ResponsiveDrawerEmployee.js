@@ -38,6 +38,10 @@ import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import CreateTimesheet from '.././Timesheet/CreateTimesheet';
 import CreateMC from '.././Timesheet/CreateMC';
 import GenerateRows from '.././Timesheet/GenerateRows'
+import FillTimesheet from '../Timesheet/FillTimesheet';
+import ViewMCAttachment from '../Timesheet/ViewMCAttachment';
+import Viewtimesheet from '../Timesheet/ViewTimesheet';
+import EditTimeSheet from '../Timesheet/EditTimeSheet';
 
 
 const drawerWidth = 300;
@@ -236,7 +240,7 @@ const ResponsiveDrawerEmployee = (props) => {
               activeStyle={{color: 'white', textDecoration: 'none'}}><ListItemText primary="Create Timesheet" /></NavLink>
           </ListItem>  
           <ListItem button className={classes.nested}>
-           <ListItemText primary="View Timesheet"/>
+      <NavLink to ={{pathname: "/employee/viewTimesheet"}} style={{"textDecoration": "none", "color": "white"}}><ListItemText primary="View Timesheet"/></NavLink>    
           </ListItem>
         </List>
       </Collapse>
@@ -350,6 +354,10 @@ const ResponsiveDrawerEmployee = (props) => {
           <ProtectedRoute path='/employee/CreateTimesheet' component={CreateTimesheet}/>
           <ProtectedRoute path='/employee/CreateMC' component={CreateMC}/>
           <ProtectedRoute path='/employee/GenerateRows' component={GenerateRows}/>
+          <ProtectedRoute path='/employee/fillTimesheet' component={FillTimesheet}/>
+          <ProtectedRoute path='/employee/viewMCAttachment' component={ViewMCAttachment}/>
+          <ProtectedRoute path='/employee/viewTimesheet' component={Viewtimesheet}/>
+          <ProtectedRoute path='/employee/editTimesheet' component={EditTimeSheet}/>
    
         </Grid>
       </main>

@@ -10,6 +10,7 @@ import { Button } from '@material-ui/core';
 import GenerateRows from './GenerateRows'
 import {NavLink} from 'react-router-dom';
 import MCUpload from './MCUpload'
+import { th } from 'date-fns/locale';
 
 export default class MaterialUIPickers extends Component {
 
@@ -17,8 +18,9 @@ export default class MaterialUIPickers extends Component {
   {
     super(props);
     this.state = {
-      selectedDate: new Date('2019-12-09T21:11:54'),
-      selectedDateTwo : new Date('2019-12-09T21:11:54'),
+      selectedDate: '',
+      selectedDateTwo : '',
+      disable: false
     }
   }
 
@@ -37,11 +39,26 @@ export default class MaterialUIPickers extends Component {
       console.log(this.state.selectedDateTwo)
     },)  
   }
-
+ disableFunction = () => 
+ {
+  if(this.state.selectedDate === '' && this.state.selectedDateTwo === '' || this.state.selectedDateTwo === "" || this.state.selectedDate === "")
+  {
+    alert("Select the dates")
+  }
+   if(this.state.selectedDate !== '' && this.state.selectedDateTwo !== '')
+   {
+   this.setState(
+     {
+       disable: true
+     }
+   )
+    }
+ }
 render()
 {
   return (
-    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+    <div>
+  <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <p>From Date</p>
       <Grid container justify="space-around">
         <KeyboardDatePicker
@@ -72,11 +89,21 @@ render()
           }}
         />
       </Grid>
-      <Grid container>
-        <Button style={{"backgroundColor": "#648fcc", "color": "white", "fontSize": "10px"}}
- >Ok</Button>
-      </Grid>
     </MuiPickersUtilsProvider>
+      {(this.props.keyValue === this.props.ij && this.state.selectedDate !== "" && this.state.selectedDateTwo !== "")&& (
+        <NavLink to={{pathname: '/employee/GenerateRows',
+       selectedDate: this.state.selectedDate,
+       selectedDateTwo: this.state.selectedDateTwo}}
+       style={{"textDecoration": "none"}}
+       onClick={() => this.disableFunction()} ><button 
+       style={{"backgroundColor": "#648fcc", 
+       "color": "white", "fontSize": "15px",
+        "padding": "17px",
+       "borderRadius": "10px"}} 
+       disabled={this.state.disable}>Ok</button></NavLink> 
+       )}
+    </div>
+  
   );
 }
 }

@@ -17,7 +17,108 @@ class CreateTimesheet extends Component{
             empName : this.props.location.empName,
             managerEmail : this.props.location.managerEmail,
             managerName : this.props.location.managerName,
-            clientCompany : this.props.location.clientCompany
+            clientCompany : this.props.location.clientCompany,
+            month:  this.props.location.month,
+            year:  this.props.location.year,
+        }
+    }
+    componentDidMount = () => {
+  
+        if(this.props.location.month === "Jan")
+        {
+         this.setState(
+             {
+                 month: "01",
+             }
+         )
+        }
+        if(this.props.location.month === "Feb")
+        {
+         this.setState(
+             {
+                 month: "02",
+             }
+         )
+        }
+        if(this.props.location.month === "Mar")
+        {
+         this.setState(
+             {
+                 month: "03",
+             }
+         )
+        }
+        if(this.props.location.month === "Apr")
+        {
+         this.setState(
+             {
+                 month: "04",
+             }
+         )
+        }
+        if(this.props.location.month === "May")
+        {
+         this.setState(
+             {
+                 month: "05",
+             }
+         )
+        }
+        if(this.props.location.month === "Jun")
+        {
+         this.setState(
+             {
+                 month: "06",
+             }
+         )
+        }
+        if(this.props.location.month === "Jul")
+        {
+         this.setState(
+             {
+                 month: "07",
+             }
+         )
+        }
+        if(this.props.location.month === "Aug")
+        {
+         this.setState(
+             {
+                 month: "08",
+             }
+         )
+        }
+        if(this.props.location.month === "Sep")
+        {
+         this.setState(
+             {
+                 month: "09",
+             }
+         )
+        }
+        if(this.props.location.month === "Oct")
+        {
+         this.setState(
+             {
+                 month: "10",
+             }
+         )
+        }
+        if(this.props.location.month === "Nov")
+        {
+         this.setState(
+             {
+                 month: "11",
+             }
+         )
+        }
+        if(this.props.location.month === "Dec")
+        {
+         this.setState(
+             {
+                 month: "12",
+             }
+         )
         }
     }
     onChangeMCnumber = (event) => {
@@ -52,6 +153,7 @@ class CreateTimesheet extends Component{
         input type = "number"
         variant="outlined"
         margin="normal"
+        required
         onChange={this.onChangeMCnumber}
         fullWidth
       />
@@ -61,6 +163,7 @@ class CreateTimesheet extends Component{
               <p>Number of Days</p>
               <Grid item xs={6}>
         <TextField
+        required
         input type = "number"
         variant="outlined"
         margin="normal"
@@ -78,7 +181,9 @@ class CreateTimesheet extends Component{
                  empName: this.state.empName,
                  managerEmail: this.state.managerEmail,
                  managerName: this.state.managerName,
-                 clientCompany: this.state.clientCompany}}
+                 clientCompany: this.state.clientCompany,
+                 month: this.state.month,
+                 year: this.state.year}}
                  style={{color: 'white', textDecoration: 'none'}}
                  activeStyle={{color: 'white', textDecoration: 'none'}}> 
                  <Button
@@ -90,9 +195,22 @@ class CreateTimesheet extends Component{
             </Container>
             <Container component="main" 
             maxWidth="sm">
+                    <NavLink to = {{
+                 pathname: '/employee/fillTimesheet',
+                 MCcount: this.state.MC,
+                 DaysCount: this.state.days,
+                 empID: this.state.empID,
+                 empName: this.state.empName,
+                 managerEmail: this.state.managerEmail,
+                 managerName: this.state.managerName,
+                 clientCompany: this.state.clientCompany,
+                 month: this.state.month,
+                 year: this.state.year}}
+                 style={{color: 'white', textDecoration: 'none'}}
+                 activeStyle={{color: 'white', textDecoration: 'none'}}> 
             <Button 
                variant="contained"
-               style={{"backgroundColor": "#3868b5", "color": "white", "margin":"20px"}}>SKIP</Button>
+               style={{"backgroundColor": "#3868b5", "color": "white", "margin":"20px"}}>SKIP</Button></NavLink>  
             </Container>
             </div>
         )
