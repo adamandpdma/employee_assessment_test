@@ -5,9 +5,10 @@ import TableBody from '@material-ui/core/TableBody';
 import Table from '@material-ui/core/Table';
 import Button from '@material-ui/core/Button';
 import {NavLink} from 'react-router-dom';
-import { TextField, RadioGroup, Container } from '@material-ui/core';
-import ViewMCAttachment from './ViewMCAttachment';
-
+import { TextField,Container } from '@material-ui/core';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 class FillTimesheet extends Component{
     constructor(props)
@@ -22,6 +23,7 @@ class FillTimesheet extends Component{
             remarks: '',
             mcIds: this.props.location.mcIds,
             i: 0,
+            open: false
         }
     }
     componentDidMount = () => {
@@ -91,8 +93,10 @@ class FillTimesheet extends Component{
        this.state.Calendar[i].push(this.state.alignment[i + 1])
        }
        console.log(this.state.Calendar)
+
  if(this.props.location.mcIds === undefined)
  {
+   
     const values = {
         approved: true,
         companyName: this.props.location.clientCompany,
@@ -108,16 +112,22 @@ class FillTimesheet extends Component{
         officeNo: this.state.officeNo,
         password: "string",
         remarks: this.state.remarks,
-        timesheet: btoa(this.state.Calendar.toString()),
-        // this.state.alignment.splice(1).toString(),
+        timesheet: btoa(this.state.alignment),
         timesheetId: 0,
         year: this.props.location.year
  }
  console.log(values)
+ console.log(this.state.Calendar)
  axios.post("http://192.168.200.200:8080/backendapitest/employee/"+localStorage.getItem('employeeid')+"/timesheets/submit", values)
  .then(res => console.log(res.data))
+ .then(this.setState(
+     {
+         open: true
+     }
+ ))
  }
  else{
+
     const values = {
         approved: true,
         companyName: this.props.location.clientCompany,
@@ -133,20 +143,25 @@ class FillTimesheet extends Component{
         officeNo: this.state.officeNo,
         password: "string",
         remarks: this.state.remarks,
-        timesheet: btoa(this.state.Calendar.toString()),
-        // this.state.alignment.splice(1).toString(),
+        timesheet: btoa(this.state.alignment),
         timesheetId: 0,
         year: this.props.location.year
  }
  console.log(values)
  axios.post("http://192.168.200.200:8080/backendapitest/employee/"+localStorage.getItem('employeeid')+"/timesheets/submit", values)
  .then(res => console.log(res.data))
+ .then(this.setState(
+    {
+        open: true
+    }
+))
  }
 
  }
 
     render()
     {
+        console.log(this.state.Calendar)
         return(
             <div>   
                 <Container   component="main" 
@@ -184,12 +199,13 @@ class FillTimesheet extends Component{
             mcIds:this.state.mcIds,
             month: this.props.location.month,
             year: this.props.location.year,
-            mcIds: this.props.location.mcIds,
+            mcId: this.props.location.mcIds,
             empID: this.props.location.empID,
             empName: this.props.location.empName,
             managerEmail: this.props.location.managerEmail,
             managerName: this.props.location.managerName,
             clientCompany: this.props.location.clientCompany,
+            name: "fillTimesheet"
              }}
             style={{"textDecoration": "none"}}><Button variant="contained" 
             style={{"marginTop": "20px"}}
@@ -265,7 +281,21 @@ class FillTimesheet extends Component{
             )
         })}
              <Button variant="contained" onClick={this.submitTimesheethandler}>SUBMIT</Button>
-                 
+             <Dialog
+             open={this.state.open}
+             aria-labelledby="alert-dialog-title"
+             aria-describedby="alert-dialog-description"
+              >
+              <DialogTitle id="alert-dialog-title">{"Successfully submitted your Timesheet!!"}</DialogTitle>
+
+              <DialogActions>
+              <NavLink to={{ 
+               pathname:'/employee/viewTimesheet'
+             }}
+               style={{color: 'white', textDecoration: 'none'}}> 
+              <Button variant="contained">OKAY</Button></NavLink>
+              </DialogActions>
+              </Dialog>
                  </Container>    
             </div>
            

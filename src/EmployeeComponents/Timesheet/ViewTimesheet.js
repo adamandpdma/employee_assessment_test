@@ -5,7 +5,10 @@ import TableCell from '@material-ui/core/TableCell';
 import Button from '@material-ui/core/Button';
 import {NavLink} from 'react-router-dom';
 import {  MuiThemeProvider } from '@material-ui/core/styles';
-import { getMuiTheme } from "./MuiDatatablesTheme"
+import { getMuiTheme } from "./MuiDatatablesTheme";
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 
 class ViewTimesheet extends React.Component {
@@ -14,7 +17,10 @@ class ViewTimesheet extends React.Component {
         this.state = {
         timesheets: [],
         count: 1,
-        approved: ''
+        approved: '',
+        open: false,
+        timesheetId: 0,
+        openConfirmation: false
         }
     }
 
@@ -22,7 +28,7 @@ class ViewTimesheet extends React.Component {
         axios.get("http://192.168.200.200:8080/backendapitest/employee/"+localStorage.getItem('employeeid')+"/timesheets")
         .then(response => {
              this.setState({ 
-                 timesheets: response.data 
+                 timesheets: response.data.filter(el => el.hidden === false)
                 })       
            })
  
@@ -107,32 +113,79 @@ class ViewTimesheet extends React.Component {
                 )
             }
        }
-       Buttons = (timesheetId) => {
-         axios.get("http://192.168.200.200:8080/backendapitest/employee/"+localStorage.getItem('employeeid')+"/timesheets/"+timesheetId+"")
-         .then(res => 
-             this.setState(
-                 {
-                   approved: res.data.approved
-                 }
-             )
-         )
-         if(this.state.approved === false)
+       Buttons = (approved, timesheetId) => {
+         if(approved === false)
          {
            return(             
               <div>
-                  <Button variant="contained" style={{"width":"120px", "padding": "10px", "margin": "15px"}}>VIEW</Button>      
+                  <NavLink to={{pathname:"/employee/viewSubmittedTimesheet",
+                   timesheetId: timesheetId}}
+                  style={{"textDecoration": "none"}}><Button variant="contained" style={{"width":"120px", "padding": "10px", "margin": "15px"}}>VIEW
+                  </Button></NavLink>
                   <NavLink to={{pathname: '/employee/editTimesheet',
-                   timesheetId: timesheetId}} style={{"textDecoration": "none"}}><Button variant="contained" style={{"width":"120px", "padding": "10px", "margin": "15px"}}>EDIT</Button></NavLink>
-                  <Button variant="contained" style={{"width":"120px", "padding": "10px", "margin": "15px"}}>DELETE</Button> 
+                   timesheetId: timesheetId}} style={{"textDecoration": "none"}}>
+                       <Button variant="contained" style={{"width":"120px", "padding": "10px", "margin": "15px"}}>EDIT</Button></NavLink>
+                  <Button variant="contained" 
+                  style={{"width":"120px", "padding": "10px", "margin": "15px"}}
+                  href="#" onClick = {() => this.deleteTimesheetConfirmation(timesheetId)} >DELETE</Button> 
               </div>
            )
          }
-         if(this.state.approved === true){
+         if(approved === true){
              return(
-                <Button variant="contained" style={{"width":"120px", "padding": "10px", "margin": "15px"}}>VIEW</Button>     
+                <NavLink to={{pathname: "/employee/viewSubmittedTimesheet",
+                timesheetId: timesheetId}}
+                style={{"textDecoration": "none"}}><Button variant="contained" style={{"width":"120px", "padding": "10px", "margin": "15px"}}>
+                    VIEW</Button></NavLink>   
              )
          }
        }
+       deleteTimesheetConfirmation = (timesheetId) => 
+       {
+       this.setState(
+         {
+           open: true,
+           timesheetId: timesheetId
+         }
+       )
+       }
+       handleClose = () => {
+        this.setState(
+            {
+                open: false
+            }
+        )
+    }
+      deleteTimesheet = () => {
+        this.setState(
+          {
+            open: false
+          }
+        )
+       axios.post("http://192.168.200.200:8080/backendapitest/employee/"+localStorage.getItem('employeeid')+"/"+this.state.timesheetId+"/hide")
+       .then((res) => console.log(res.data)) 
+       .then(this.handleclickopen)
+    
+       this.setState(
+           {
+               timesheets: this.state.timesheets.filter(el => el.timesheetId !== this.state.timesheetId) ,
+           }
+       )
+      }
+      handleclickopen = () => {
+        this.setState(
+            {
+                openConfirmation: true
+            }
+        )
+    }
+    handleCloseConfirmation = () => {
+      this.setState(
+          {
+              openConfirmation: false
+          }
+      )
+    }
        render(){
        const options = {
         selectableRows: false,
@@ -187,13 +240,44 @@ class ViewTimesheet extends React.Component {
            this.Month(currentemp.month),
            currentemp.year, 
            <TableCell>
-            {this.Buttons(currentemp.timesheetId)}
+            {this.Buttons(currentemp.approved, currentemp.timesheetId)}
            </TableCell>
         ]})}
 
     columns={columns}
     options={options}
     />
+        <Dialog
+open={this.state.open}
+onClose={this.handleClose}
+aria-labelledby="alert-dialog-title"
+aria-describedby="alert-dialog-description"
+>
+<DialogTitle id="alert-dialog-title">{"Are you sure you want to delete ?"}</DialogTitle>
+
+<DialogActions>
+<Button onClick ={this.handleClose}>
+CANCEL
+</Button>
+<Button onClick ={this.deleteTimesheet}>
+CONFIRM
+</Button>
+</DialogActions>
+</Dialog>
+<Dialog
+open={this.state.openConfirmation}
+aria-labelledby="alert-dialog-title"
+aria-describedby="alert-dialog-description"
+>
+<DialogTitle id="alert-dialog-title">{"Successfully Deleted your Timesheet !"}</DialogTitle>
+
+<DialogActions>
+<Button onClick ={this.handleCloseConfirmation}>
+OKAY
+</Button>
+</DialogActions>
+</Dialog>
+
     </MuiThemeProvider> 
     )
 
@@ -202,7 +286,3 @@ class ViewTimesheet extends React.Component {
 export default ViewTimesheet;
 
 
-
-// <Button variant="contained" style={{"width":"120px", "padding": "10px", "margin": "15px"}}>VIEW</Button>      
-// <Button variant="contained" style={{"width":"120px", "padding": "10px", "margin": "15px"}}>EDIT</Button> 
-// <Button variant="contained" style={{"width":"120px", "padding": "10px", "margin": "15px"}}>DELETE</Button> 

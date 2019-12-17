@@ -42,7 +42,16 @@ import FillTimesheet from '../Timesheet/FillTimesheet';
 import ViewMCAttachment from '../Timesheet/ViewMCAttachment';
 import Viewtimesheet from '../Timesheet/ViewTimesheet';
 import EditTimeSheet from '../Timesheet/EditTimeSheet';
-
+import ApplyLeave from '../LeaveManagement/ApplyLeave';
+import Details from '../LeaveManagement/Details';
+import ViewLeaveApplication from '../LeaveManagement/ViewLeaveApplication';
+import EditLeaveApplication from '../LeaveManagement/EditLeaveApplication';
+import RemainingLeavesHome from '../RemainingLeaves/RemainingLeavesHome'
+import RemainingAnnualLeaves from '../RemainingLeaves/RemainingAnnualLeaves';
+import RemainingMedicalLeaves from '../RemainingLeaves/RemainingMedicalLeaves';
+import ViewSubmittedLeaveApplications from '../LeaveManagement/ViewSubmittedLeaveApplications'
+import ViewSubmittedTimesheet from '../Timesheet/ViewSubmittedTimesheet';
+import EditMC from '../Timesheet/EditMC';
 
 const drawerWidth = 300;
 
@@ -149,6 +158,12 @@ const ResponsiveDrawerEmployee = (props) => {
     setOpen1(!open1);
   }
 
+  const [open2, setOpen2] = React.useState(false);
+
+  const handleClickOpen2 = () => {
+    setOpen2(!open2);
+  }
+
 
   const navigation = () => 
   {
@@ -244,21 +259,35 @@ const ResponsiveDrawerEmployee = (props) => {
           </ListItem>
         </List>
       </Collapse>
-      <ListItem button>
+      <ListItem button onClick={handleClickOpen2}>
         <ListItemIcon>
         <svg xmlns="http://www.w3.org/2000/svg" width="23.733" height="23.667" viewBox="0 0 23.733 23.667">
   <path id="Icon_awesome-pencil-alt" data-name="Icon awesome-pencil-alt" d="M23.081,6.571,20.944,8.7a.558.558,0,0,1-.788,0L15.011,3.57a.554.554,0,0,1,0-.786L17.148.654a2.234,2.234,0,0,1,3.148,0l2.786,2.778A2.211,2.211,0,0,1,23.081,6.571ZM13.175,4.615,1,16.754.019,22.371a1.112,1.112,0,0,0,1.289,1.285l5.632-.985L19.113,10.532a.554.554,0,0,0,0-.786L13.968,4.615a.563.563,0,0,0-.793,0Zm-7.422,11.1a.643.643,0,0,1,0-.915L12.892,7.68a.648.648,0,1,1,.918.915L6.671,15.714A.648.648,0,0,1,5.753,15.714ZM4.08,19.6H6.305V21.28l-2.99.522L1.873,20.365,2.4,17.383H4.08Z" transform="translate(-0.002 -0.005)" fill="#bdbdbd"/>
 </svg>
         </ListItemIcon>
    <ListItemText primary="LEAVE APPLICATION" />
+   {open2 ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
+      <Collapse in={open2} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+    <ListItem button className={classes.nested} onClick={handleClickOpen2}>
+    <NavLink to='/employee/details' 
+              style={{color: 'white', textDecoration: 'none'}}
+              activeStyle={{color: 'white', textDecoration: 'none'}}><ListItemText primary="Apply Leave" /></NavLink>
+          </ListItem>  
+          <ListItem button className={classes.nested}>
+      <NavLink to ={{pathname: "/employee/viewLeaveApplication"}} style={{"textDecoration": "none", "color": "white"}}><ListItemText primary="View Leave applications"/></NavLink>    
+          </ListItem>
+        </List>
+      </Collapse>
       <ListItem button>
         <ListItemIcon>
         <svg xmlns="http://www.w3.org/2000/svg" width="23.733" height="23.667" viewBox="0 0 23.733 23.667">
   <path id="Icon_awesome-pencil-alt" data-name="Icon awesome-pencil-alt" d="M23.081,6.571,20.944,8.7a.558.558,0,0,1-.788,0L15.011,3.57a.554.554,0,0,1,0-.786L17.148.654a2.234,2.234,0,0,1,3.148,0l2.786,2.778A2.211,2.211,0,0,1,23.081,6.571ZM13.175,4.615,1,16.754.019,22.371a1.112,1.112,0,0,0,1.289,1.285l5.632-.985L19.113,10.532a.554.554,0,0,0,0-.786L13.968,4.615a.563.563,0,0,0-.793,0Zm-7.422,11.1a.643.643,0,0,1,0-.915L12.892,7.68a.648.648,0,1,1,.918.915L6.671,15.714A.648.648,0,0,1,5.753,15.714ZM4.08,19.6H6.305V21.28l-2.99.522L1.873,20.365,2.4,17.383H4.08Z" transform="translate(-0.002 -0.005)" fill="#bdbdbd"/>
 </svg>
         </ListItemIcon>
-       <ListItemText primary="VIEW REMAINING LEAVE & MC ENTITLEMENT" />
+       <NavLink to="/employee/remainingLeaves"
+       style={{"textDecoration": "none", "color": "white"}}><ListItemText primary="VIEW REMAINING LEAVE & MC ENTITLEMENT" /></NavLink>
       </ListItem>
       </List>
     </div>
@@ -358,6 +387,16 @@ const ResponsiveDrawerEmployee = (props) => {
           <ProtectedRoute path='/employee/viewMCAttachment' component={ViewMCAttachment}/>
           <ProtectedRoute path='/employee/viewTimesheet' component={Viewtimesheet}/>
           <ProtectedRoute path='/employee/editTimesheet' component={EditTimeSheet}/>
+          <ProtectedRoute path='/employee/applyLeave' component={ApplyLeave}/>
+          <ProtectedRoute path='/employee/details' component={Details}/>
+          <ProtectedRoute path='/employee/viewLeaveApplication' component={ViewLeaveApplication}/>
+          <ProtectedRoute path='/employee/editLeaveApplication' component={EditLeaveApplication}/>
+          <ProtectedRoute path='/employee/remainingLeaves' component={RemainingLeavesHome}/>
+          <ProtectedRoute path='/employee/remainingAnnualLeaves' component={RemainingAnnualLeaves}/>
+          <ProtectedRoute path='/employee/remainingMedicalLeaves' component={RemainingMedicalLeaves}/>
+          <ProtectedRoute path='/employee/viewSubmittedLA' component={ViewSubmittedLeaveApplications}/>
+          <ProtectedRoute path='/employee/viewSubmittedTimesheet' component={ViewSubmittedTimesheet}/>
+          <ProtectedRoute path='/employee/editMC' component={EditMC}/>
    
         </Grid>
       </main>

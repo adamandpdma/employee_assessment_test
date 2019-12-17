@@ -160,19 +160,6 @@ class CreateTimesheet extends Component{
         </Grid>
              </div>
              <div>
-              <p>Number of Days</p>
-              <Grid item xs={6}>
-        <TextField
-        required
-        input type = "number"
-        variant="outlined"
-        margin="normal"
-        onChange={this.onChangeDaysnumber}
-        fullWidth
-      />
-        </Grid>
-             </div>
-             <div>
              <NavLink to = {{
                  pathname: '/employee/GenerateRows',
                  MCcount: this.state.MC,

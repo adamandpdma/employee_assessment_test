@@ -139,6 +139,7 @@ class MCUpload extends React.Component {
       } else {
         $imagePreview = (<div><p className="previewText">Please select an Image for Preview</p><br/></div>);
       }
+
       return (
         //   Image upload Area
         <div className="previewComponent">

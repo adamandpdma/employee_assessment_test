@@ -11,7 +11,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 
-class EditTimesheet extends Component{
+class ViewSubmittedTimesheet extends Component{
     constructor(props)
     {
         super(props);
@@ -73,99 +73,8 @@ class EditTimesheet extends Component{
         })
     }
 
-
-   handleChange = (index, newAlignment) => {
-    const updatedAlignment= [...this.state.alignment];
-    updatedAlignment[index] = newAlignment
-
-    this.setState({
-      alignment: updatedAlignment,
-      disable: false,
-    }, () => {
-      console.log(this.state.alignment)
-      console.log(this.state.Calendar)
-    },)
-   
-  }; 
-
-
-  mobileChangeHandler = (event) => 
-  {
-      this.setState(
-          {
-           mobile: event.target.value
-          }
-      )
-  }
-  homeChangeHandler = (event) => 
-  {
-      this.setState(
-          {
-           homeNo: event.target.value
-          }
-      )
-  }
-  officeChangeHandler = (event) => 
-  {
-      this.setState(
-          {
-           officeNo: event.target.value
-          }
-      )
-  }
-  remarksChangeHandler = (event) => 
-  {
-      this.setState(
-          {
-           remarks: event.target.value
-          }
-      )
-  }
-  
- submitTimesheethandler = () => {
-      
-
-       for(let i=0; i< this.state.Calendar.length; i++)
-       {
-       this.state.Calendar[i].push(this.state.alignment[i + 1])
-       }
-       console.log(this.state.Calendar)
-    const values = {
-        approved: true,
-        companyName: this.state.clientCompany,
-        empName: this.state.empName,
-        employeeId: this.state.empID,
-        hidden: true,
-        homeNo: this.state.homeNo,
-        managerEmail: this.state.managerEmail,
-        managerName: this.state.managerName,
-        mcId: this.state.mcId,
-        mobileNo: this.state.mobile,
-        month: this.state.month,
-        officeNo: this.state.officeNo,
-        password: "string",
-        remarks: this.state.remarks,
-        timesheet: btoa(this.state.alignment),
-        timesheetId: this.state.timesheetId,
-        year: this.state.year
- }
- console.log(values)
- axios.post("http://192.168.200.200:8080/backendapitest/employee/"+localStorage.getItem('employeeid')+"/timesheets/submit", values)
- .then(res => console.log(res.data))
- .then(this.setState(
-    {
-        open: true
-    }
-))
-
- }
-
     render()
     {
-        console.log(this.state.timesheet.mobileNo)
-        console.log("hello")
-        console.log(this.state.timesheet)
-        console.log(this.state.alignment)
     
         return(
             <div>   
@@ -201,8 +110,8 @@ class EditTimesheet extends Component{
          
             <NavLink to={{
             pathname: '/employee/viewMCAttachment',
-            timesheetId: this.props.location.timesheetId,
-            name: "editTimesheet",
+            timesheetId: this.state.timesheetId,
+            name: "viewTimesheet",
             mcId: this.state.mcId.split(',')
              }}
             style={{"textDecoration": "none"}}><Button variant="contained" 
@@ -218,7 +127,6 @@ class EditTimesheet extends Component{
                    margin="normal"
                    fullWidth
                    value={this.state.mobile}
-                   onChange={this.mobileChangeHandler}
                      />
                 </div>
                 <div style={{ "width": "300px"}} >
@@ -229,7 +137,6 @@ class EditTimesheet extends Component{
                    margin="normal"
                    fullWidth
                    value={this.state.homeNo}
-                   onChange={this.homeChangeHandler}
                      />
                 </div>
                 <div style={{"width":"300px"}}> 
@@ -239,7 +146,6 @@ class EditTimesheet extends Component{
                    variant="outlined"
                    margin="normal"
                    value={this.state.officeNo}
-                   onChange={this.officeChangeHandler}
                    fullWidth
                      />
                 </div>
@@ -251,7 +157,6 @@ class EditTimesheet extends Component{
                    margin="normal"
                    multiline={true}
                    value={this.state.remarks}
-                   onChange={this.remarksChangeHandler}
                    fullWidth
                      />
                 </div>
@@ -273,7 +178,6 @@ class EditTimesheet extends Component{
                    value={this.state.alignment[i + 1]} 
                    key={cal[0]}
                    exclusive 
-                   onChange={(e) => this.handleChange(i + 1,e.target.value)} 
                      />
                   </TableCell>
                   </TableBody>
@@ -282,7 +186,6 @@ class EditTimesheet extends Component{
          
             )
         })} 
-             <Button variant="contained" onClick={this.submitTimesheethandler}>SUBMIT</Button>
              <Dialog
              open={this.state.open}
              aria-labelledby="alert-dialog-title"
@@ -304,6 +207,6 @@ class EditTimesheet extends Component{
         )
     }
 }
-export default EditTimesheet;
+export default ViewSubmittedTimesheet;
 
 

@@ -59,7 +59,7 @@ render()
   return (
     <div>
   <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      <p>From Date</p>
+      <b><p>From Date</p></b>
       <Grid container justify="space-around">
         <KeyboardDatePicker
           disableToolbar
@@ -74,7 +74,7 @@ render()
           }}
         />
       </Grid>
-      <p>To Date</p>
+      <b><p>To Date</p></b>
       <Grid container justify="space-around">
         <KeyboardDatePicker
           disableToolbar

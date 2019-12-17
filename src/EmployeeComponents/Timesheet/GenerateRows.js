@@ -36,6 +36,19 @@ const ObjectRow = (props) => {
                onChange={props.reasonHandler}
                />
          </div><br/>
+         <div>
+              <p>Number of Days</p>
+              <Grid item xs={6}>
+        <TextField
+        required
+        input type = "number"
+        variant="outlined"
+        margin="normal"
+        onChange={props.onChangeDaysnumber}
+        fullWidth
+      />
+        </Grid>
+             </div><br/>
          <MCUpload numberofquestions={props.numberofquestions} />
            {(props.keyValue === props.ij)&& (
             <Button variant="contained" 
@@ -59,7 +72,6 @@ constructor(props)
   super(props);
   this.state = {
     MC : this.props.location.MCcount,
-    Days : this.props.location.DaysCount,
     empID : this.props.location.empID,
     empName : this.props.location.empName,
     managerEmail : this.props.location.managerEmail,
@@ -73,9 +85,16 @@ constructor(props)
     ij : 1,
     open: false,
     mcIds: '',
+    days: 0
   }
 }
-
+onChangeDaysnumber = (event) => {
+  this.setState(
+      {
+          days : event.target.value
+      }
+  )
+}
 reasonHandler = (event) => {
   this.setState(
     {
@@ -98,6 +117,7 @@ for (let i = 0; i < this.state.MC; i++) {
         reasonArray = {(event) => this.reasonArray(event)}
         disable = {this.state.disable}
         ij = {this.state.ij}
+        onChangeDaysnumber={this.onChangeDaysnumber}
          />);
 }
 return <TableBody>{rows}</TableBody>;
@@ -136,7 +156,7 @@ reasonArray = () =>
       managerName: this.state.managerName,
       mcId: 0,
       mcImg: this.props.location.testTwo.split(',')[1],
-      noOfDays: parseInt(this.state.Days),
+      noOfDays: parseInt(this.state.days),
       reason: this.state.reason
     }
       
@@ -227,16 +247,6 @@ handleClickOpen = () =>
   />
     </Grid>
          </div>
-         <div>
-          <p>Number of Days</p>
-          <Grid item xs={6}>
-    <TextField
-    input type = "number"
-    variant="outlined"
-    margin="normal"
-    fullWidth
-    value={this.state.Days}
-  /></Grid></div>
         </Container>
         </div>
             <Table>
