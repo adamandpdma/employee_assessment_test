@@ -38,7 +38,8 @@ import AccessTimeIcon from '@material-ui/icons/AccessTime';
 import CreateTimesheet from '.././Timesheet/CreateTimesheet';
 import CreateMC from '.././Timesheet/CreateMC';
 import GenerateRows from '.././Timesheet/GenerateRows'
-
+import AccessResume from '.././Resume/AccessResume'
+import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 
 const drawerWidth = 300;
 
@@ -221,7 +222,7 @@ const ResponsiveDrawerEmployee = (props) => {
           activeStyle={{color: 'white', textDecoration: 'none'}}><ListItemText primary="REVIEW TEST" /></NavLink>
       </ListItem>
 
-      <ListItem button onClick ={handleClickOpen}>
+      {/*<ListItem button onClick ={handleClickOpen}>
         <ListItemIcon>
           <AccessTimeIcon style={{"fill": "#BDBDBD", "stroke": "#BDBDBD"}}/>
       </ListItemIcon>
@@ -255,8 +256,21 @@ const ResponsiveDrawerEmployee = (props) => {
 </svg>
         </ListItemIcon>
        <ListItemText primary="VIEW REMAINING LEAVE & MC ENTITLEMENT" />
+      </ListItem>*/}
+       <ListItem button>
+        
+          <AssignmentIndIcon  style={{fontSize: "210%", marginLeft: "-1%"}} >
+            
+            </AssignmentIndIcon>
+            
+        
+        <NavLink to='/employee/Resume' 
+          style={{color: 'white', textDecoration: 'none', paddingLeft: "11%"}}
+          activeStyle={{color: 'white', textDecoration: 'none'}}><ListItemText primary="RESUME" /></NavLink>
       </ListItem>
-      </List>
+      </List> 
+      
+      
     </div>
   );
 
@@ -346,10 +360,11 @@ const ResponsiveDrawerEmployee = (props) => {
           <ProtectedRoute path='/employee/reviewAll' component={ReviewAllTests}/>
           <ProtectedRoute path='/employee/editProfile' component={EmployeeEditProfile}/>
           <ProtectedRoute path='/employee/reviewError' component={ReviewError}/>
+          <ProtectedRoute path="/employee/Resume" component ={AccessResume}/>
 
-          <ProtectedRoute path='/employee/CreateTimesheet' component={CreateTimesheet}/>
+          {/* <ProtectedRoute path='/employee/CreateTimesheet' component={CreateTimesheet}/>
           <ProtectedRoute path='/employee/CreateMC' component={CreateMC}/>
-          <ProtectedRoute path='/employee/GenerateRows' component={GenerateRows}/>
+          <ProtectedRoute path='/employee/GenerateRows' component={GenerateRows}/> */}
    
         </Grid>
       </main>
