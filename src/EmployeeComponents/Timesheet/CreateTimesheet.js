@@ -14,6 +14,7 @@ import {
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import Axios from 'axios';
 
 const paper={
     color: "#7399F0",
@@ -156,8 +157,6 @@ submitValidation = (event) =>
   
     render()
     {
-      console.log(this.state.selectedDate.toString().split(" ")[1])
-      console.log(this.state.selectedDate.toString().split(" ")[3])
         return(
             <div>
                  <Grid item xs={12}>

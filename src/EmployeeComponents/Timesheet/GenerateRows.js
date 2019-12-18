@@ -196,17 +196,18 @@ onSubmitHandler = (event) =>
   if(!err)
   {
     axios.post("http://192.168.200.200:8080/backendapitest/employee/"+localStorage.getItem('employeeid')+"/timesheets/MC/submit", reason)
-    .then(res => this.setState(
+    .then(res => {this.setState(
       {
         mcIds: res.data
       }
-    ))
+    )})
     .then(this.handleClickOpen)
   }
 }
 
 handleClickOpen = () => 
 {
+  reason=[]
   this.setState(
     {
       open: true

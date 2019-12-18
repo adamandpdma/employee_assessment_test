@@ -21,18 +21,20 @@ class ViewMCAttachment extends Component{
             McId: 0,
             open: false,
             openConfirmation: false,
-            name: "",
-            timesheetId: 0
+            name: this.props.location.name,
+            timesheetId: this.props.location.timesheetId,
+            mcId: this.props.location.mcId
         }
     }
     
-  componentDidMount = () => {
+  componentDidMount = () => 
+            {
     this.setState({
       MC : [],
     })
      this.ImageData()
-   }
-    ImageData = () => 
+            }
+  ImageData = () => 
             {
               console.log(this.props.location.mcId)
               if(this.props.location.mcId === undefined)
@@ -40,7 +42,8 @@ class ViewMCAttachment extends Component{
                 alert("No, MC attached")
                 // window.location='/employee/fillTimesheet'
               }
-              else{
+              else
+              {
                 for(let i=0; i< this.props.location.mcId.length - 1; i ++)
                 {
                     axios.get("http://192.168.200.200:8080/backendapitest/employee/"+localStorage.getItem('employeeid')+"/MCs/"+this.props.location.mcId[i]+"")
@@ -55,11 +58,10 @@ class ViewMCAttachment extends Component{
                     })
                 }
               }
-            }
+             }
  
     ImageLoop = () => 
-    {
-      console.log(this.state)
+              {
         return (
         this.state.MC.map(image => {
           return(
@@ -89,11 +91,12 @@ class ViewMCAttachment extends Component{
                          </div>
                        )}
                      </PopupState> <br/>
-                     {this.props.location.name === "editTimesheet" && (
+                     {this.state.name === "editTimesheet" && (
                        <div>
-                      <NavLink to={{pathname: '/employee/editMC',
-                      timesheetId: this.props.location.timesheetId,
-                      mcId: this.props.location.mcId,
+                      <NavLink 
+                      to={{pathname: '/employee/editMC',
+                      timesheetId: this.state.timesheetId,
+                      mcId: this.state.mcId,
                       MCID: image.mcId}}
                       style={{"textDecoration": "none"}}>
                       <Button variant="contained" style={{"margin": "20px",
@@ -101,40 +104,20 @@ class ViewMCAttachment extends Component{
                        <Button variant="contained" 
                        style={{"margin": "20px",
                       "borderRadius":"25px"}}
-                       href="#" onClick = {() => this.deleteMCConfirmation(image.mcId,this.props.location.timesheetId)} >DELETE</Button>
+                       href="#" onClick = {() => this.deleteMCConfirmation(image.mcId,this.state.timesheetId,this.state.name, this.state.mcId)} >DELETE</Button>
                        </div>
                      )}
-
-                      {this.state.name === "editTimesheet2" && (
-                       <div>
-                      <NavLink to={{pathname: '/employee/editMC',
-                      timesheetId: this.state.timesheetId,
-                      mcId: this.state.McId,
-                      MCID: this.state.McId
-                     }}
-                      style={{"textDecoration": "none"}}>
-                      <Button variant="contained" style={{"margin": "20px",
-                      "borderRadius":"25px"}}>EDIT</Button></NavLink> 
-                       <Button variant="contained" 
-                       style={{"margin": "20px",
-                      "borderRadius":"25px"}}
-                       href="#" onClick = {() => this.deleteMCConfirmation(this.state.McId,this.state.timesheetId)} >DELETE</Button>
-                       </div>
-                     )} 
-                   </div>
-        )
-          
-        })
-        )
-    }
+                   </div>)}))
+                 }
     deleteMCConfirmation = (mcId,timesheetId) => 
     {
     this.setState(
       {
         open: true,
         McId: mcId,
-        name: "editTimesheet2",
-        timesheetId: timesheetId
+        timesheetId: timesheetId,
+        name: this.state.name,
+        mcId: this.state.mcId
       }
     )
     }
@@ -143,9 +126,9 @@ class ViewMCAttachment extends Component{
       this.setState(
         {
           open: false,
-          name: "editTimesheet2",
-          timesheetId: this.state.timesheetId,
-          McId: this.state.McId,
+          name: this.state.name,
+          mcId: this.state.mcId
+          // MC: this.state.MC
         }
       )
     }
@@ -153,9 +136,9 @@ class ViewMCAttachment extends Component{
       this.setState(
         {
           openConfirmation: false,
-          name: "editTimesheet2",
-          timesheetId: this.state.timesheetId,
-          McId: this.state.McId,
+          name: this.state.name,
+          mcId: this.state.mcId
+          // MC: this.state.MC
         }
       )
     }
@@ -164,9 +147,9 @@ class ViewMCAttachment extends Component{
       this.setState(
         {
           openConfirmation: true,
-          name: "editTimesheet2",
-          timesheetId: this.state.timesheetId,
-          McId: this.state.McId,
+          name: this.state.name,
+          mcId: this.state.mcId
+          // MC: this.state.MC
         }
       )
     }
@@ -174,9 +157,9 @@ class ViewMCAttachment extends Component{
       this.setState(
         {
           open: false,
-          name: "editTimesheet2",
-          timesheetId: this.state.timesheetId,
-          McId: this.state.McId,
+          name: this.state.name,
+          mcId: this.state.mcId
+          // MC: this.state.MC
         }
       )
      axios.post("http://192.168.200.200:8080/backendapitest/employee/"+localStorage.getItem('employeeid')+"/MCs/"+this.state.McId+"/hide")
@@ -186,9 +169,8 @@ class ViewMCAttachment extends Component{
      this.setState(
          {
              MC: this.state.MC.filter(el => el.mcId !== this.state.McId) ,
-             name: "editTimesheet2",
-             timesheetId: this.state.timesheetId,
-             McId: this.state.McId,
+             name: this.state.name,
+             mcId: this.state.mcId
          }
      )
     }
@@ -211,7 +193,7 @@ class ViewMCAttachment extends Component{
                   <br/>         
                   <br/>
                   <br/>
-                  {this.props.location.name === "fillTimesheet" && (
+                  {this.state.name === "fillTimesheet" && (
                             <NavLink to={{pathname:'/employee/fillTimesheet',
                             month: this.props.location.month,
                             year: this.props.location.year,
@@ -229,25 +211,16 @@ class ViewMCAttachment extends Component{
                              </NavLink>
                   )}
 
-                        {this.props.location.name === "viewTimesheet" && (
+                        {this.state.name === "viewTimesheet" && (
                        <NavLink to={{pathname:'/employee/viewSubmittedTimesheet',
-                       timesheetId: this.props.location.timesheetId}}
+                       timesheetId: this.state.timesheetId}}
                        style={{"textDecoration": "none"}}
                        onClick={this.onClickContinue}>
                          <Button variant="contained" onClick ={this.onClickContinue}
                           style={{"backgroundColor": "#648fcc", "color": "white", "margin": "10px"}}>BACK</Button>
                          </NavLink>
                   )}
-                   {this.props.location.name === "editTimesheet" && (
-                       <NavLink to={{pathname:'/employee/editTimesheet',
-                       timesheetId: this.props.location.timesheetId}}
-                       style={{"textDecoration": "none"}}
-                       onClick={this.onClickContinue}>
-                         <Button variant="contained" onClick ={this.onClickContinue}
-                          style={{"backgroundColor": "#648fcc", "color": "white", "margin": "10px"}}>BACK</Button>
-                         </NavLink>
-                  )}
-                       {this.state.name === "editTimesheet2" && (
+                   {this.state.name === "editTimesheet" && (
                        <NavLink to={{pathname:'/employee/editTimesheet',
                        timesheetId: this.state.timesheetId}}
                        style={{"textDecoration": "none"}}
@@ -256,6 +229,7 @@ class ViewMCAttachment extends Component{
                           style={{"backgroundColor": "#648fcc", "color": "white", "margin": "10px"}}>BACK</Button>
                          </NavLink>
                   )}
+  
                           <Dialog
                     open={this.state.open}
                     onClose={this.handleClose}
@@ -282,9 +256,14 @@ class ViewMCAttachment extends Component{
                         <DialogTitle id="alert-dialog-title">{"Successfully Deleted your Timesheet !"}</DialogTitle>
 
                         <   DialogActions>
+              <NavLink   to={{pathname: '/employee/editTimesheet',
+             timesheetId: this.state.timesheetId,
+             mcId: this.state.mcId,
+            name: "editTimesheet"}}
+            style={{"textDecoration":"none"}}>
                        <Button onClick ={this.handleCloseConfirmation}>
                         OKAY
-                        </Button>
+                        </Button></NavLink>
                         </DialogActions>
                         </Dialog>
                   </Container>

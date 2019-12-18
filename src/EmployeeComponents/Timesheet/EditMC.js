@@ -263,7 +263,7 @@ class EditMC extends Component{
       >
         <DialogTitle id="alert-dialog-title">{"Successfully edited and submitted your MC!"}</DialogTitle>
         <DialogActions>
-           <NavLink   to={{pathname: '/employee/editTimesheet',
+           <NavLink   to={{pathname: '/employee/viewMCAttachment',
              timesheetId: this.props.location.timesheetId,
              mcId: this.props.location.mcId,
             name: "editTimesheet"}}
@@ -280,12 +280,12 @@ class EditMC extends Component{
             onClick={this.onSubmitHandler}
             >SAVE CHANGES</Button>
              <NavLink 
-             to={{pathname: '/employee/editTimesheet',
+             to={{pathname: '/employee/viewMCAttachment',
              timesheetId: this.props.location.timesheetId,
              mcId: this.props.location.mcId,
-            name: "editTimesheet"}}
-            style={{"textDecoration":"none"}}><Button variant="contained" 
-            style={{"backgroundColor": "#648fcc", "color": "white"}}
+             name: "editTimesheet"}}
+             style={{"textDecoration":"none"}}><Button variant="contained" 
+             style={{"backgroundColor": "#648fcc", "color": "white"}}
             >BACK</Button></NavLink>
          </TableCell>
          </Container>
