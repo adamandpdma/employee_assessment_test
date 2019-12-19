@@ -20,6 +20,7 @@
     "math-ceil": "^1.0.0",
     "math-floor": "^1.0.1",
     "mui-datatables": "^2.11.1",
+    "mvn": "^3.5.0",
     "normalize.css": "^8.0.1",
     "react": "^16.9.0",
     "react-app-polyfill": "^1.0.4",

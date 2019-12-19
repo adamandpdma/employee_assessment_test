@@ -29,6 +29,13 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Profile from '../EditProfile/HrProfile'
 import HrEditProfile from '../EditProfile/HrEditProfile'
 import {ProtectedRoute} from "../../Protected.Route";
+import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
+import EmployeeLists from '../Timesheet/EmployeeLists'
+import ViewTimesheets from '../Timesheet/ViewTimesheets';
+import ViewMCAttachment from '../Timesheet/ViewMCAttachment';
+import ViewSubmittedTimesheet from '../Timesheet/ViewSubmittedTimesheet'
+import ViewSubmittedLeaveApplication from '../LeaveApplication/ViewSubmittedLeaveApplication';
+import ViewLeaveApplication from '../LeaveApplication/ViewLeaveApplication';
 
 
 
@@ -175,7 +182,9 @@ const ResponsiveDrawerGuest = (props) => {
 
 
         </ListItemIcon>
-        <ListItemText primary="VIEW TEST RESULT" />
+        <ListItemText 
+         style={{color: 'white', textDecoration: 'none'}}
+        primary="VIEW TEST RESULT" />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={open} timeout="auto" unmountOnExit>
@@ -189,9 +198,18 @@ const ResponsiveDrawerGuest = (props) => {
      <NavLink to='/hr/GuestList' style={listStyle}
         style={{color: 'white', textDecoration: 'none'}}
         activeStyle={{color: 'white', textDecoration: 'none'}} ><ListItemText primary="Guest Users" /></NavLink>
-          </ListItem>  
+          </ListItem>   
         </List>
       </Collapse>
+
+      <ListItem button className={classes.nested}>
+        < CalendarTodayIcon style={{"fill": "#BDBDBD", "stroke": "#BDBDBD"}}/>
+     <NavLink to='/hr/employeesList' style={listStyle}
+        style={{color: 'white', textDecoration: 'none'}}
+        activeStyle={{color: 'white', textDecoration: 'none'}} ><ListItemText 
+        style={{"marginLeft": "30px"}}
+        primary="VIEW TIMESHEETS AND LEAVE APPLICATIONS" /></NavLink>
+          </ListItem> 
       </List>
     </div>
   );
@@ -277,6 +295,12 @@ const ResponsiveDrawerGuest = (props) => {
           <ProtectedRoute path="/hr/GuestResult" component={GuestResult}/>
           <ProtectedRoute path="/hr/GuestList" component={GuestList}/>
           <ProtectedRoute path="/hr/editProfile" component={HrEditProfile}/>
+          <ProtectedRoute path="/hr/employeesList" component={EmployeeLists}/>
+          <ProtectedRoute path="/hr/timesheetsList" component={ViewTimesheets}/>
+          <ProtectedRoute path='/hr/Timesheet' component={ViewSubmittedTimesheet}/>
+          <ProtectedRoute path='/hr/MCAttachment' component={ViewMCAttachment}/>
+          <ProtectedRoute path='/hr/LeaveApplicationsList' component={ViewLeaveApplication}/>
+          <ProtectedRoute path='/hr/LeaveApplication' component={ViewSubmittedLeaveApplication}/>
         </Grid>
       </main>
     </div>

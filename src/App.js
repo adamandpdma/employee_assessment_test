@@ -18,20 +18,25 @@ import ResponsiveDrawer from './AdminComponents/crudTest/ResponsiveDrawer'
 import EmployeeResponsiveDrawer from './EmployeeComponents/TakeTest/ResponsiveDrawerEmployee'
 import HrResponsiveDrawer from './HrComponents/ViewTestResult/ResponsiveDrawerHr'
 import GuestResponsiveDrawer from './GuestComponents/TakeTest/ResponsiveDrawerGuest'
+import Login from './Manager/Login'
+import ViewTimesheet from './Manager/ViewTimesheet';
+import ViewMCAttachment from './Manager/ViewMCAttachment';
 
 
 const App = () => {
     
     return(
    <div>
-     
-     
-  <Router basename={process.env.REACT_APP_ROUTER_BASE || ''}>
+   <Router basename={process.env.REACT_APP_ROUTER_BASE || ''}>
           <Route exact path = '/' component = {Home} />
           <Route exact path = '/AdminLogin' component = {AdminLogin} />
           <Route path = '/HrLogin' component = {HrLogin} />
           <Route path = '/EmployeeLogin' component = {EmployeeLogin}/>
           <Route path = '/EmployeeRegister' component = {EmployeeRegister}/>
+
+          <Route path = '/timesheet/managerLogin' component = {Login}/>
+          <Route path = '/managerLogin/viewTimesheet' component = {ViewTimesheet}/>
+          <Route path = '/managerLogin/viewMCAttachment' component = {ViewMCAttachment}/>
           
           <Route path = '/GuestLogin' component = {GuestLogin}/>
           <ProtectedRoute path = '/guest' component = {GuestResponsiveDrawer}/>
@@ -39,19 +44,21 @@ const App = () => {
           <ProtectedRoute path = '/employee' component = {EmployeeResponsiveDrawer}/>
           <ProtectedRoute path = '/hr' component = {HrResponsiveDrawer}/>   
           <Route path = '/RegistrationComplete' component = {RegistrationComplete}/>
-       
-          {/* <ProtectedRoute path = '/HrEditProfile' component = {HrEditProfile} />
-          <ProtectedRoute path = '/GuestDashboard' component = {GuestDashboard} />
-          <ProtectedRoute path = '/AdminEditProfile' component = {AdminEditProfile} />
-          <ProtectedRoute path = '/RegistrationComplete' component = {RegistrationComplete}/>
-          <ProtectedRoute path = '/EmployeeEditProfile' component = {EmployeeEditProfile}/> */}
-
-      
-  </Router>
+    </Router>
   </div>
-
 )
   }
 
 
 export default App;
+
+
+
+
+
+      
+          {/* <ProtectedRoute path = '/HrEditProfile' component = {HrEditProfile} />
+          <ProtectedRoute path = '/GuestDashboard' component = {GuestDashboard} />
+          <ProtectedRoute path = '/AdminEditProfile' component = {AdminEditProfile} />
+          <ProtectedRoute path = '/RegistrationComplete' component = {RegistrationComplete}/>
+          <ProtectedRoute path = '/EmployeeEditProfile' component = {EmployeeEditProfile}/> */}
