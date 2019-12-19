@@ -21,6 +21,8 @@ import GuestResponsiveDrawer from './GuestComponents/TakeTest/ResponsiveDrawerGu
 import Login from './Manager/Login'
 import ViewTimesheet from './Manager/ViewTimesheet';
 import ViewMCAttachment from './Manager/ViewMCAttachment';
+import ViewLeaveApplication from './Manager/LeaveManagement/ViewLeaveApplication';
+import LoginLeaveApplication from './Manager/LeaveManagement/Login'
 
 
 const App = () => {
@@ -33,10 +35,15 @@ const App = () => {
           <Route path = '/HrLogin' component = {HrLogin} />
           <Route path = '/EmployeeLogin' component = {EmployeeLogin}/>
           <Route path = '/EmployeeRegister' component = {EmployeeRegister}/>
-
+            
+          {/* TIMESHEET */}
           <Route path = '/timesheet/managerLogin' component = {Login}/>
           <Route path = '/managerLogin/viewTimesheet' component = {ViewTimesheet}/>
           <Route path = '/managerLogin/viewMCAttachment' component = {ViewMCAttachment}/>
+
+          {/* LEAVE MANAGEMENT */}
+          <Route path = '/leaveApplication/managerLogin' component = {LoginLeaveApplication}/>
+          <Route path = '/managerLogin/viewLeaveApplication' component = {ViewLeaveApplication}/>
           
           <Route path = '/GuestLogin' component = {GuestLogin}/>
           <ProtectedRoute path = '/guest' component = {GuestResponsiveDrawer}/>

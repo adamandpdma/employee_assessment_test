@@ -34,7 +34,11 @@ class ViewTimesheet extends Component{
             managerName: '',
             mcId: "",
             timesheetId: 0,
-            open: false
+            open: false,
+            approveStatus: false,
+            comment: '',
+            openApproved: false,
+            openRejected: false,
         }
     }
      
@@ -61,7 +65,7 @@ class ViewTimesheet extends Component{
                   officeNo: res.data.officeNo,
                   remarks: res.data.remarks,
                   mcId: res.data.mcId,
-                  timesheetId: res.data.timesheetId
+                  timesheetId: res.data.timesheetId,
                 })     
         axios.get("http://192.168.200.200:8080/backendapitest/employee/"+this.state.empID+"/timesheets/"+this.state.month+"/"+this.state.year+"")
         .then(response => {
@@ -72,6 +76,75 @@ class ViewTimesheet extends Component{
             )
         })
         })
+    }
+    approveHandler = () => {
+            this.setState(
+                {
+                    approveStatus: true
+                }, () => {
+                    const values = [
+                        this.state.approveStatus,
+                        this.state.comment
+                    ]
+        
+                    axios.post("http://192.168.200.200:8080/backendapitest/manager/timesheets/"+this.props.location.timesheetId+"/approve", values)
+                    .then(res=> console.log(res.data))
+                    .then(this.openApprovedHandler())
+                }
+            )   
+    }
+    openApprovedHandler = () => {
+   
+            this.setState(
+                {
+                    openApproved: true
+                }
+            )
+     
+    }
+    openRejectedHandler = () => {
+     
+            this.setState(
+                {
+                    openRejected: true
+                }
+            )
+    
+    }
+    rejectReason = () => 
+    {
+        this.setState(
+            {
+                open: true
+            }
+        )
+    }
+    commentHandler = (event) => 
+    {
+        this.setState(
+            {
+                comment: event.target.value
+            }
+        )
+    }
+    rejectHandler = () => {
+        console.log(this.state.comment)
+        this.setState(
+            {
+                open: false,
+                approveStatus: false
+            }, () => {
+                const values = [
+                    this.state.approveStatus,
+                    this.state.comment
+                ]
+        
+                axios.post("http://192.168.200.200:8080/backendapitest/manager/timesheets/"+this.props.location.timesheetId+"/approve", values)
+                .then(res=> console.log(res.data))
+                .then(this.openRejectedHandler())
+            }
+        )
+    
     }
     render()
     {
@@ -189,24 +262,66 @@ class ViewTimesheet extends Component{
         })} 
                    <Button variant="contained"
                    style={{"width":"200px", "margin": "30px",
-                   "backgroundColor": "#118f41", "color": "white"}}>APPROVE</Button>
+                   "backgroundColor": "#118f41", "color": "white"}}
+                   onClick={this.approveHandler}>APPROVE</Button>
+
                   <Button variant="contained"
                   style={{"width":"200px", "margin": "30px",
                   "backgroundColor": "#de0220",
-                  "color": "white"}}>REJECT</Button>
+                  "color": "white"}}
+                  onClick={this.rejectReason}>REJECT</Button>
+
              <Dialog
              open={this.state.open}
              aria-labelledby="alert-dialog-title"
              aria-describedby="alert-dialog-description"
               >
-              <DialogTitle id="alert-dialog-title">{"Successfully edited and submitted the Timesheet!!"}</DialogTitle>
+              <DialogTitle id="alert-dialog-title">{"State the reason to reject the timesheet"}</DialogTitle>
 
               <DialogActions>
-              <NavLink to={{ 
-               pathname:'/employee/viewTimesheet'
-             }}
-               style={{color: 'white', textDecoration: 'none'}}> 
-              <Button variant="contained">OKAY</Button></NavLink>
+              <TextField
+                   input type = "text"
+                   variant="outlined"
+                   margin="normal"
+                   multiline={true}
+                   value={this.state.comment}
+                   onChange={this.commentHandler}
+                   fullWidth
+                     /><br/>
+              <Button variant="contained"
+              onClick={this.rejectHandler}>OKAY</Button>
+              </DialogActions>
+              </Dialog>
+
+              <Dialog
+             open={this.state.openApproved}
+             aria-labelledby="alert-dialog-title"
+             aria-describedby="alert-dialog-description"
+              >
+              <DialogTitle id="alert-dialog-title">{"Approved Successfully!"}</DialogTitle>
+
+              <DialogActions>
+               
+               <NavLink to='/'
+               style={{"textDecoration": "none"}}>
+              <Button variant="contained"
+              >OKAY</Button></NavLink>
+              </DialogActions>
+              </Dialog>
+
+              <Dialog
+             open={this.state.openRejected}
+             aria-labelledby="alert-dialog-title"
+             aria-describedby="alert-dialog-description"
+              >
+              <DialogTitle id="alert-dialog-title">{"Rejected Successfully!"}</DialogTitle>
+
+              <DialogActions>
+               
+               <NavLink to='/'
+               style={{"textDecoration": "none"}}>
+              <Button variant="contained"
+              >OKAY</Button></NavLink>
               </DialogActions>
               </Dialog>
                  </Container>    

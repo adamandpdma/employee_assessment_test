@@ -99,6 +99,13 @@ const change = (name, e) => {
     setFieldTouched(name, true, false);
   };
 
+  
+  const inputLabel = React.useRef(null);
+  const [labelWidth, setLabelWidth] = React.useState(0);
+  React.useEffect(() => {
+    setLabelWidth(inputLabel.current.offsetWidth);
+  }, []);
+
 
 
 
@@ -141,10 +148,13 @@ const change = (name, e) => {
               fullWidth
               className={classes.selectbox}
       >
-        <InputLabel >Department</InputLabel>
+        <InputLabel ref={inputLabel} id="demo-simple-select-outlined-label">Department</InputLabel>
+
         <Select
         className= {classes.input}
           open={open}
+          labelWidth={labelWidth}
+          labelId="demo-simple-select-outlined-label"
           onClose={handleClose}
           onOpen={handleOpen}
           value={department}

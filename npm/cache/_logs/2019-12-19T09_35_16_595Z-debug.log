@@ -1,0 +1,37 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'run',
+1 verbose cli   'build' ]
+2 info using npm@6.9.0
+3 info using node@v10.16.2
+4 verbose run-script [ 'prebuild', 'build', 'postbuild' ]
+5 info lifecycle employee_dashboard@0.1.0~prebuild: employee_dashboard@0.1.0
+6 info lifecycle employee_dashboard@0.1.0~build: employee_dashboard@0.1.0
+7 verbose lifecycle employee_dashboard@0.1.0~build: unsafe-perm in lifecycle true
+8 verbose lifecycle employee_dashboard@0.1.0~build: PATH: C:\Program Files\nodejs\node_modules\npm\node_modules\npm-lifecycle\node-gyp-bin;C:\Users\fahema.noorjahan\Desktop\Employee_Dashboard\employee_assesment_test\node_modules\.bin;C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\MySQL\MySQL Utilities 1.6\;C:\Program Files\PuTTY\;C:\Program Files\nodejs\;C:\Users\fahema.noorjahan\Downloads\apache-maven-3.6.3-bin.tar\apache-maven-3.6.3-bin\apache-maven-3.6.3\bin
+9 verbose lifecycle employee_dashboard@0.1.0~build: CWD: C:\Users\fahema.noorjahan\Desktop\Employee_Dashboard\employee_assesment_test
+10 silly lifecycle employee_dashboard@0.1.0~build: Args: [ '/d /s /c', 'react-scripts build' ]
+11 silly lifecycle employee_dashboard@0.1.0~build: Returned: code: 1  signal: null
+12 info lifecycle employee_dashboard@0.1.0~build: Failed to exec build script
+13 verbose stack Error: employee_dashboard@0.1.0 build: `react-scripts build`
+13 verbose stack Exit status 1
+13 verbose stack     at EventEmitter.<anonymous> (C:\Program Files\nodejs\node_modules\npm\node_modules\npm-lifecycle\index.js:301:16)
+13 verbose stack     at EventEmitter.emit (events.js:198:13)
+13 verbose stack     at ChildProcess.<anonymous> (C:\Program Files\nodejs\node_modules\npm\node_modules\npm-lifecycle\lib\spawn.js:55:14)
+13 verbose stack     at ChildProcess.emit (events.js:198:13)
+13 verbose stack     at maybeClose (internal/child_process.js:982:16)
+13 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:259:5)
+14 verbose pkgid employee_dashboard@0.1.0
+15 verbose cwd C:\Users\fahema.noorjahan\Desktop\Employee_Dashboard\employee_assesment_test
+16 verbose Windows_NT 6.1.7601
+17 verbose argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "run" "build"
+18 verbose node v10.16.2
+19 verbose npm  v6.9.0
+20 error code ELIFECYCLE
+21 error errno 1
+22 error employee_dashboard@0.1.0 build: `react-scripts build`
+22 error Exit status 1
+23 error Failed at the employee_dashboard@0.1.0 build script.
+23 error This is probably not a problem with npm. There is likely additional logging output above.
+24 verbose exit [ 1, true ]

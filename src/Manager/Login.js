@@ -10,7 +10,7 @@ class Login extends Component {
     
     state={
         timesheetId: 0,
-        password: '',
+        password: "",
         open: false,
         success: false
     }
@@ -43,7 +43,12 @@ class Login extends Component {
         {
             alert("Please, Enter the credentials!")
         }
-        Axios.post("http://192.168.200.200:8080/backendapitest/manager/timesheets/"+this.state.timesheetId+"/login", this.state.password)
+        const header ={
+            headers: {
+                'content-type': 'application/json;charset=UTF-8'
+            }
+        }
+        Axios.post("http://192.168.200.200:8080/backendapitest/manager/timesheets/"+this.state.timesheetId+"/login", this.state.password, header)
         .then(res => {
             this.viewTimesheet(res.data)
         })
