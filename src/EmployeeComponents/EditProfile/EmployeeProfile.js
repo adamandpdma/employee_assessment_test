@@ -194,6 +194,7 @@ axios.get("http://192.168.200.200:8080/backendapitest/employee/" + empId +"/prof
   console.log(this.state.details)
   localStorage.setItem('name', this.state.details.name)
   localStorage.setItem('profile', this.state.details.profileImg)
+  localStorage.setItem('email', this.state.details.email)
 })
 }
 else{
