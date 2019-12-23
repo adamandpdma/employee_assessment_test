@@ -18,12 +18,17 @@ class FillTimesheet extends Component{
             Calendar : [],
             alignment: '',
             mobile: 0,
+            mobileErorr: '',
             homeNo: 0,
             officeNo:0,
             remarks: '',
             mcIds: this.props.location.mcIds,
             i: 0,
-            open: false
+            open: false,
+            showErorr: "",
+            calValue: 0,
+            openTwo: false,
+            boolean: false
         }
     }
     componentDidMount = () => {
@@ -85,9 +90,41 @@ class FillTimesheet extends Component{
           }
       )
   }
- submitTimesheethandler = () => {
-      
+  validate = () => {
+      console.log(this.state.alignment)
+    let isError = false;
+    const errors ={};
+    if(this.state.mobile === 0){
+        isError = true;
+        errors.mobileErorr= "Enter Mobile No";
+    }
+    this.state.Calendar.map( cal => {
+         if(this.state.alignment[cal[0]] === undefined )
+         {
+            isError = true;
+            errors.showErorr= "Please fill in the fields";
+         }
+    })
+  
+    if(isError){
+        this.setState(
+            {
+                ...this.state,
+                ...errors,
+                openTwo: true
+            });
+    }
 
+    return isError;
+  }
+ submitTimesheethandler = (event) => {
+
+    event.preventDefault();
+
+   const err = this.validate();
+   if(!err)
+   {
+    
        for(let i=0; i< this.state.Calendar.length; i++)
        {
        this.state.Calendar[i].push(this.state.alignment[i + 1])
@@ -119,12 +156,7 @@ class FillTimesheet extends Component{
  console.log(values)
  console.log(this.state.Calendar)
  axios.post("http://192.168.200.200:8080/backendapitest/employee/"+localStorage.getItem('employeeid')+"/timesheets/submit", values)
- .then(res => console.log(res.data))
- .then(this.setState(
-     {
-         open: true
-     }
- ))
+ .then(res => this.booleanCheck(res.data) )
  }
  else{
 
@@ -149,16 +181,33 @@ class FillTimesheet extends Component{
  }
  console.log(values)
  axios.post("http://192.168.200.200:8080/backendapitest/employee/"+localStorage.getItem('employeeid')+"/timesheets/submit", values)
- .then(res => console.log(res.data))
- .then(this.setState(
-    {
-        open: true
+ .then(res => this.booleanCheck(res.data)
+ )
+
+ }
+}
+ }
+handleClose = () => {
+    this.setState(
+        {
+            openTwo: false
+        }
+    )
+}
+booleanCheck = (boolean) => {
+   if(boolean){
+        this.setState(
+            {
+                open: true
+            }
+        )
     }
-))
- }
+else if(!boolean)
+{
+         alert("The timesheet for this month already exists. Either delete the timesheet and create a new one or Edit the timesheet of this month")
+}
 
- }
-
+}
     render()
     {
         console.log(this.state.Calendar)
@@ -221,6 +270,7 @@ class FillTimesheet extends Component{
                    fullWidth
                    onChange={this.mobileChangeHandler}
                      />
+                <div style={{"color": "red"}}>{this.state.mobileErorr}</div>   
                 </div>
                 <div style={{ "width": "300px"}} >
                 <b><p>Home No</p></b>
@@ -273,6 +323,10 @@ class FillTimesheet extends Component{
                    exclusive 
                    onChange={(e) => this.handleChange(cal[0],e.target.value)} 
                      />
+                     {this.state.alignment[cal[0]] === undefined && (
+                        <div style={{"color": "red"}}>{this.state.showErorr}</div>   
+                     )}    
+           
                   </TableCell>
                   </TableBody>
                   </Table>
@@ -294,6 +348,20 @@ class FillTimesheet extends Component{
              }}
                style={{color: 'white', textDecoration: 'none'}}> 
               <Button variant="contained">OKAY</Button></NavLink>
+              </DialogActions>
+              </Dialog>
+              
+              <Dialog
+             open={this.state.openTwo}
+             close={this.handleClose}
+             aria-labelledby="alert-dialog-title"
+             aria-describedby="alert-dialog-description"
+              >
+              <DialogTitle id="alert-dialog-title">{"Enter all the details!!"}</DialogTitle>
+
+              <DialogActions>
+              <Button variant="contained"
+              onClick={this.handleClose}>OKAY</Button>
               </DialogActions>
               </Dialog>
                  </Container>    

@@ -32,6 +32,7 @@ class RemainingMedicalLeaves extends Component
         axios.get("http://192.168.200.200:8080/backendapitest/employee/"+localStorage.getItem('employeeid')+"/entitlement")
         .then(res =>
              {
+                 console.log(res.data)
             this.setState(
                 {
                   remainingML : res.data["Remaining MC Entitlement"],

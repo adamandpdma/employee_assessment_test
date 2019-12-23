@@ -9,6 +9,7 @@ import { Container } from '@material-ui/core';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { isEmptyChildren } from 'formik';
 
 
 class ViewMCAttachment extends Component{
@@ -174,10 +175,11 @@ class ViewMCAttachment extends Component{
          }
      )
     }
-
+    
     render()
     {
       console.log("MC CHECK", this.props.location.mcId)
+      console.log(this.state.MC.length, "HELLO MC")
         return(
         <div>
            <Container   component="main" 
@@ -187,9 +189,9 @@ class ViewMCAttachment extends Component{
             <br/>
             <br/>
               {this.ImageLoop()}
-              {/* {this.props.location.mcId === undefined &&(
+              {this.state.MC.length === 0 && (
                 <p>Sorry, NO Mc attached to the Timesheet.</p>
-              )} */}
+              )}
                   <br/>         
                   <br/>
                   <br/>

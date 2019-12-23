@@ -153,7 +153,7 @@ submitValidation = (event) =>
         return(
             <div>
                  <Grid item xs={12}>
-              <Paper style={paper}>Self-Assessment / <a style={anchor}>Leave Application</a></Paper>   
+              <Paper style={paper}>Employee / <a style={anchor}>Leave Application</a></Paper>   
             </Grid>
 
             <Container     

@@ -208,7 +208,7 @@ render()
     <Grid container justify="space-around">
     <Button 
     variant="contained" 
-    style={{ "backgroundColor": "#648fcc", "color": "white"}}
+    style={{ "backgroundColor": "#648fcc", "color": "white", "margin": "30px"}}
     onClick={this.onSubmitHandler}>
         SUBMIT</Button>
     </Grid>

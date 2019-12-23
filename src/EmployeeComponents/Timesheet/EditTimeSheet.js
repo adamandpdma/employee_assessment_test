@@ -207,7 +207,7 @@ class EditTimesheet extends Component{
              }}
             style={{"textDecoration": "none"}}><Button variant="contained" 
             style={{"marginTop": "20px"}}
-            >View Attachments</Button></NavLink>
+            >Edit Attachments</Button></NavLink>
                 </div>
 
                 <div style={{"width": "300px"}}>

@@ -147,8 +147,10 @@ reasonArray = () =>
     const values = {
       approved: true,
       company: this.state.clientCompany,
-      dateFrom: this.state.fromDate,
-      dateTill: this.state.toDate,
+      dateFrom: this.state.fromDate.toString().split(" ")[2]+ " " +
+      this.state.fromDate.toString().split(" ")[1]+" " +this.state.fromDate.toString().split(" ")[3] ,
+      dateTill: this.state.toDate.toString().split(" ")[2]+ " " +
+      this.state.toDate.toString().split(" ")[1]+" " +this.state.toDate.toString().split(" ")[3],
       empName: this.state.empName,
       employeeId: parseInt(this.state.empID),
       hidden: true,
@@ -162,7 +164,6 @@ reasonArray = () =>
       
     reason.push(values)
     console.log(reason)
-  
     this.setState(
       {
         disable: false,
