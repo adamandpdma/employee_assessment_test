@@ -13,6 +13,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import {NavLink} from 'react-router-dom';
 import DatePicker from './DatePicker'
+import { isEmptyChildren } from 'formik';
 
 
 const ObjectRow = (props) => {
@@ -85,7 +86,9 @@ constructor(props)
     ij : 1,
     open: false,
     mcIds: '',
-    days: 0
+    days: 0,
+    fromDate: '',
+    toDate: ''
   }
 }
 onChangeDaysnumber = (event) => {
@@ -118,32 +121,63 @@ for (let i = 0; i < this.state.MC; i++) {
         disable = {this.state.disable}
         ij = {this.state.ij}
         onChangeDaysnumber={this.onChangeDaysnumber}
+        testTwo={this.props.location.testTwo}
          />);
 }
 return <TableBody>{rows}</TableBody>;
 }
-reasonArray = () => 
-{
-  // if(this.props.location.testTwo === undefined)
-  // {
-  //   alert("Upload an Image !")
-  // }
-  // if(this.state.reason === '')
-  // {
-  //   alert("enter the Reason!")
-  // }
-  // if(this.state.dateFrom === undefined && this.state.toDate === undefined || this.state.dateFrom === undefined || this.state.toDate === undefined   )
-  // {
-  //   alert("choose the date")
+validateTwo = () => {
+
+  let isError = false;
+  const errors ={};
+  if(this.state.fromDate === "" && this.state.toDate === "" && this.state.reason === '' && this.props.location.testTwo === undefined 
+  && this.state.days === 0  )
+  {
+    isError=true
+    alert("Please, Fill in all the details")
+  }
+  // else{
+  //   if(this.props.location.testTwo === undefined || this.props.location.testTwo === "") 
+  //   {
+  //     isError=true
+  //     alert("Upload an Image !")
+  //   }
+  //   if(this.state.reason === '')
+  //   {
+  //     isError=true
+  //     alert("enter the Reason!")
+  //   }
+  //   if(this.state.dateFrom === undefined && this.state.toDate === undefined || this.state.dateFrom === undefined || this.state.toDate === undefined   )
+  //   {
+  //     isError=true
+  //     alert("choose the date")
+  //   }
+ 
+  //   if(this.state.days === 0)
+  //   {
+  //     isError=true
+  //     alert("Enter the number of days")
+  //   }
   // }
 
-  // if(this.state.dateFrom === "" && this.state.toDate === "" && this.state.reason === '' && this.props.location.testTwo === undefined   )
-  // {
-  //   alert("Please, Fill in all the details")
-  // }
-  // if(this.state.reason.match("^[A-z 0-9]+$") && this.props.location.testTwo !== undefined &&
-  //   this.state.dateFrom !== undefined && this.state.toDate !== undefined)
-  // {
+
+  if(isError){
+      this.setState(
+          {
+              ...this.state,
+              ...errors
+          });
+  }
+
+  return isError;
+}
+reasonArray = (event) => 
+{
+    event.preventDefault();
+
+    const err = this.validateTwo();
+    if(!err)
+    {
     const values = {
       approved: true,
       company: this.state.clientCompany,
@@ -170,14 +204,20 @@ reasonArray = () =>
         ij : this.state.ij + 1
       }
     )
-  // }
+  }
 }
 
 validate = () => 
 {
+  console.log(reason, "REASON")
   let isError = false;
   const errors ={};
-
+  if(this.state.fromDate === "" && this.state.toDate === "" && this.state.reason === '' && this.props.location.testTwo === undefined 
+  && this.state.days === 0  )
+  {
+    isError=true
+    alert("Please, Fill in all the details")
+  }
   if(isError){
       this.setState(
           {

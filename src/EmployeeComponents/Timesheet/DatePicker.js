@@ -95,7 +95,9 @@ render()
        selectedDate: this.state.selectedDate,
        selectedDateTwo: this.state.selectedDateTwo}}
        style={{"textDecoration": "none"}}
-       onClick={() => this.disableFunction()} ><button 
+       onClick={() => this.disableFunction()} >
+         
+         <button 
        style={{"backgroundColor": "#648fcc", 
        "color": "white", "fontSize": "15px",
         "padding": "17px",
