@@ -7,6 +7,8 @@ import renderer from 'react-test-renderer';
 import { mount } from 'enzyme';
 import { shallow } from 'enzyme'
 
+// CODE WRITTEN BY - FAHEMA
+
 describe ('<TestRows />', () => {
     it('works', () => {
         const wrap = shallow(

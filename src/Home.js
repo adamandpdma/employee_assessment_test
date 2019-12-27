@@ -137,8 +137,8 @@ const Home = () => {
       </Container>
       <footer style={{"backgroundColor": "black","position":'fixed',"minWidth":"100%","bottom":"0%"}}>
         <center>
-    <h2 style={{"color": "white"}}><CloudIcon  style={{"color": "white"}}/> CloudBoard - Optimum Solutions {date.getFullYear()} <CopyrightIcon style={{"color": "white"}}/>
-    </h2>
+    <i><h2 style={{"color": "white"}}><CloudIcon  style={{"color": "white"}}/> CloudBoard - Optimum Solutions {date.getFullYear()} <CopyrightIcon style={{"color": "white"}}/>
+    </h2></i>
 
       {/* <svg xmlns="http://www.w3.org/2000/svg"  width= 'window.innerWidth' height="72" viewBox="0 0 515.456 72">
       <g id="CloudBoard_" data-name="CloudBoard " transform="translate(-651.984 -1005)">

@@ -7,6 +7,8 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import GenerateRows from './GenerateRows'
 
+// CODE WRITTEN BY - FAHEMA
+
 const imgStyle ={
   width: "350px",
   height: "250px"

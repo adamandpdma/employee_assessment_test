@@ -7,6 +7,8 @@ import {NavLink} from 'react-router-dom'
 import axios from 'axios';
 import RemainingLeavesHome from './RemainingLeavesHome';
 
+// CODE WRITTEN BY - FAHEMA
+
 const paper={
     color: "#7399F0",
     backgroundColor: "#EDEBEB",

@@ -14,6 +14,7 @@ import Typography from '@material-ui/core/Typography';
 import Start from '../../start.png'
 import CloseIcon from '@material-ui/icons/Close';
 
+// CODE WRITTEN BY - FAHEMA
 
 
 const style ={

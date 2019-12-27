@@ -5,6 +5,7 @@ import MUIDataTable from "mui-datatables";
 import Fab from '@material-ui/core/Fab';
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 
+// CODE WRITTEN BY - FAHEMA
 export default class GuestList extends Component {
   constructor(props) {
     super(props);

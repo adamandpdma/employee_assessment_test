@@ -1,6 +1,8 @@
 import React from "react";
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 
+// CODE WRITTEN BY - FAHEMA
+
 export const getMuiTheme = () => createMuiTheme({
     overrides: {
       MUIDataTableBodyCell: {
